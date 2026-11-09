@@ -2,7 +2,7 @@
 # AI4SE learner checklist — read-only. Prints one green ✓ or red ✗ line per check,
 # with a one-line fix hint for each ✗. Exit code 0 only if everything is green.
 #
-#   curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/ai4se-kit/main/check-learner.sh | sh
+#   sh ~/ai4se/ai4se-kit/check-learner.sh
 #
 # Run it from your project folder: GSE-One is usually installed per project.
 # Writes nothing, prints no secret (the model-key store is only tested for existence).
@@ -33,6 +33,9 @@ ver_ge() {
 
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
 DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/opencode"
+AI4SE_HOME="${AI4SE_HOME:-$HOME/ai4se}"
+KIT_DIR="$AI4SE_HOME/ai4se-kit"
+AI4SE_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/ai4se"
 
 printf 'AI4SE learner checklist (folder: %s)\n\n' "$(pwd)"
 
@@ -91,11 +94,31 @@ else
   ko "GSE-One not found (from this folder)" "cd to your project folder and re-run this check; if still red run: $GSE_FIX"
 fi
 
-# 4. tutor agent
-if [ -f "$CONFIG_DIR/agents/tutor.md" ] && grep -q '^mode: subagent' "$CONFIG_DIR/agents/tutor.md"; then
-  ok "@tutor agent installed"
+# 4. tutor: kit clone, launcher, folders list, GSE-One clone, no leftover global @tutor
+KIT_FIX="git clone https://github.com/nicolasguelfi/ai4se-kit $AI4SE_HOME/ai4se-kit && sh $AI4SE_HOME/ai4se-kit/setup-learner.sh"
+if [ -x "$KIT_DIR/tutor" ] && [ -f "$KIT_DIR/.opencode/agents/tutor.md" ]; then
+  ok "tutor kit $(head -n 1 "$KIT_DIR/VERSION" 2>/dev/null || printf '?') — $KIT_DIR"
+elif [ -d "$KIT_DIR/.git" ]; then
+  ko "tutor kit found in $KIT_DIR but incomplete or not executable" "run: sh $KIT_DIR/setup-learner.sh  (still red → $KIT_DIR/tutor update)"
 else
-  ko "@tutor agent not installed" "run: curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/ai4se-kit/main/setup-learner.sh | sh"
+  ko "tutor kit not found in $KIT_DIR" "run: $KIT_FIX"
+fi
+if [ -s "$AI4SE_CONF/tutor-paths" ]; then
+  ok "tutor folders list — $AI4SE_CONF/tutor-paths"
+else
+  ko "tutor folders list missing ($AI4SE_CONF/tutor-paths)" "run: sh $KIT_DIR/setup-learner.sh"
+fi
+gse_clone=""
+[ -d "$AI4SE_HOME/gensem/.git" ] && gse_clone=$(git -C "$AI4SE_HOME/gensem" describe --tags --exact-match 2>/dev/null || printf 'not on a tag')
+if [ "$gse_clone" = "v$GSE_EXPECTED" ]; then
+  ok "GSE-One documentation clone v$GSE_EXPECTED — $AI4SE_HOME/gensem"
+elif [ -n "$gse_clone" ]; then
+  ko "GSE-One documentation clone is '$gse_clone', the course uses v$GSE_EXPECTED" "run: rm -rf $AI4SE_HOME/gensem && sh $KIT_DIR/setup-learner.sh"
+else
+  ko "GSE-One documentation clone missing ($AI4SE_HOME/gensem)" "run: sh $KIT_DIR/setup-learner.sh"
+fi
+if [ -f "$CONFIG_DIR/agents/tutor.md" ]; then
+  ko "old global @tutor agent still installed ($CONFIG_DIR/agents/tutor.md)" "run: sh $KIT_DIR/setup-learner.sh  (it moves it away; the tutor now has its own window)"
 fi
 
 # 5. git + identity

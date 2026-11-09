@@ -1,52 +1,91 @@
 # ai4se-kit — learner kit for the AI4SE course
 
-Two small shell scripts for the learners of the course **"AI for Software Engineering"
-(AI4SE)**, used with [opencode](https://opencode.ai) 2 and the
-[GSE-One](https://github.com/nicolasguelfi/gensem) methodology plugin (v0.90.0).
+Kit for the learners of the course **"AI for Software Engineering" (AI4SE)**, used with
+[opencode](https://opencode.ai) 2 and the [GSE-One](https://github.com/nicolasguelfi/gensem)
+methodology plugin (pinned to **v0.90.0**).
 
-## The two commands
+It contains:
 
-Install the `@tutor` agent (and a default opencode model if you have none):
+- **the tutor** — an AI assistant prepared by the trainer (not the trainer) that runs in its
+  own opencode window, read-only, and helps you when you are stuck or lost;
+- **the syllabus** (`syllabus/`) — the programme of the 12 half-days, one written sheet per
+  half-day (published as the course goes), a GSE-One guide, a glossary, a FAQ and recovery
+  procedures;
+- two scripts: `setup-learner.sh` (installation) and `check-learner.sh` (green/red checklist).
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/ai4se-kit/main/setup-learner.sh | sh
-```
+## Commands
 
-Check that your machine is ready (green ✓ / red ✗ list, with a fix hint for each red line).
-Run it **from your project folder**, because GSE-One is installed per project:
+| When | Command |
+|---|---|
+| Install (day 1) | `git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh` |
+| Open the tutor window (a second terminal) | `~/ai4se/ai4se-kit/tutor` |
+| Let the tutor read a folder outside `~/ai4se` | `~/ai4se/ai4se-kit/tutor add <path>` |
+| List the folders the tutor may read | `~/ai4se/ai4se-kit/tutor paths` |
+| Stop the tutor reading a folder | `~/ai4se/ai4se-kit/tutor remove <path>` |
+| Update the kit (start of each half-day) | `~/ai4se/ai4se-kit/tutor update` |
+| Show versions (kit, GSE-One clone, opencode) | `~/ai4se/ai4se-kit/tutor version` |
+| Check the machine | `sh ~/ai4se/ai4se-kit/check-learner.sh` (from your project folder) |
 
-```sh
-curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/ai4se-kit/main/check-learner.sh | sh
-```
+Stuck during an exercise? → **your tutor window** (the right-hand terminal). After `tutor add`,
+`tutor remove` or `tutor update`, close and reopen the tutor window.
 
-## What each script touches
+## The `~/ai4se` folder
 
-| Script | Reads | Writes |
-|---|---|---|
-| `setup-learner.sh` | the kit files (downloaded from this repository) | `~/.config/opencode/agents/tutor.md` (a different existing copy is first backed up to `tutor.md.bak.<date>`); `~/.config/opencode/opencode.json` **only** if it has no `"model"` key (one key added, backup kept) |
-| `check-learner.sh` | versions of opencode, git, gh, node, npm; `opencode auth list` (connection names only, never a key); the GSE-One `VERSION` file of the project (`.gse/registry`, `.opencode/`) or of the machine install (`~/.gse-one`, `~/.config/opencode/`); `~/.config/opencode/agents/tutor.md`; `git config user.name/email`; `gh auth status` | nothing |
+`~/ai4se` is a plain folder (not a git repository) that holds the course repositories side by
+side — `ai4se-kit`, `gensem` (GSE-One v0.90.0, read by the tutor), your exercise projects… —
+never one repository inside another.
 
-Both scripts are POSIX `sh`, can be run several times, and never print a secret.
-`XDG_CONFIG_HOME` / `XDG_DATA_HOME` are honoured when set.
+## What `setup-learner.sh` does
 
-## The `@tutor` agent
+Safe to run several times. It never reads or writes keys.
 
-An opencode **subagent** prepared by the trainer for this course. It is an AI, not the
-trainer. In opencode, type `@tutor` followed by your question: it looks at where you are
-(`git status`, `git log`, `.gse/status.yaml`), gives the smallest next step, and sends
-you to the trainer for machine, model-key, server, or lost-work problems.
+- creates `~/ai4se` if needed;
+- clones GSE-One at tag `v0.90.0` into `~/ai4se/gensem` (or checks the tag of an existing clone);
+- writes `~/.config/ai4se/tutor-paths` (default content: `~/ai4se`) if it does not exist;
+- moves away the global `~/.config/opencode/agents/tutor.md` installed by the previous kit
+  version (backup `tutor.md.bak.<date>`; there is no `@tutor` any more);
+- sets the default opencode model in `~/.config/opencode/opencode.json` **only** if it has
+  none and the course model is decided (one key added, backup kept).
 
-It is **read-only**: it cannot edit files, and its shell access is limited to
-`git status/log/diff/branch/tag`, `ls`, `cat .gse/*` and version commands.
+## What the tutor can and cannot do
 
-`tutor.md` is built by `setup-learner.sh` from:
+The tutor is the default agent of an opencode session opened in the kit folder by the `tutor`
+launcher, with its own configuration (generated at each launch in
+`~/.config/ai4se/tutor-opencode.json` from `opencode.base.json` and your folders list).
 
-- `agents/tutor.md.tmpl` — frontmatter (mode, permissions) and instructions;
-- `knowledge/schedule.md`, `knowledge/recovery.md`, `knowledge/faq.md` — course
-  knowledge appended to the prompt (the agent does not need to read files outside
-  your project).
+It **can**:
 
-To update the tutor, re-run `setup-learner.sh`.
+- read files in the kit, in the folders listed in `~/.config/ai4se/tutor-paths` (default
+  `~/ai4se`, so also the GSE-One clone) and their sub-folders;
+- find files by name (glob) and search text with `git grep` (tracked files only);
+- run read-only commands: `git status / log / diff / show / grep`, `git branch` and `git tag`
+  (list only), also as `git -C <folder> …` for the listed folders; `ls` on the listed folders;
+  `opencode / node / npm --version`.
+
+It **cannot**:
+
+- edit or create files, run any other command, browse the web, or start sub-agents;
+- read any folder that is not listed (refused: "Permission denied: external_directory" or
+  "Blocked by configuration policy");
+- read secrets, whatever the folder: `.env` and `.env.*` files (`.env.example` stays readable),
+  `*.pem`, `*.key`, `id_rsa*`, `id_ed25519*`, `~/.ssh`, `~/.aws`, `~/.gnupg`, `.netrc`,
+  `*credentials*`, `.git/config`, the opencode configuration and data folders. These are
+  hard **policies** of the configuration: they win over any agent rule.
+
+`git -C <folder>` and `ls <folder>` are accepted only for the listed folders and the kit
+(`ls` alone or with simple options lists the kit folder); `..` in a path is refused.
+
+## Files
+
+| Path | Role |
+|---|---|
+| `tutor` | launcher (POSIX `sh`; needs only `git` and `opencode`) |
+| `.opencode/agents/tutor.md` | the tutor agent: permissions + instructions |
+| `opencode.base.json` | tutor session config: default agent, course model, secret policies |
+| `syllabus/` | course content (CC BY 4.0) |
+| `VERSION` | kit version `YYYY-MM-DD.N` (the tutor uses it to remind you to update) |
+| `~/.config/ai4se/tutor-paths` | your folders list (one per line, `~` allowed, `#` = comment) |
+| `~/.config/ai4se/tutor-model` | optional: a model for the tutor only (`provider/model`) |
 
 ## Feedback
 
@@ -56,7 +95,18 @@ Problems with the course or GSE-One: open an issue on
 
 ## For the trainer
 
-- `AI4SE_MODEL` at the top of `setup-learner.sh` holds the default model
-  (`provider_id/model_id`); while it starts with `TODO` no model is written.
-  It can also be overridden per run: `... | AI4SE_MODEL=provider/model sh`.
-- `AI4SE_KIT_REF` selects the branch or tag the files are downloaded from (default `main`).
+- The course model is the `"model"` line of `opencode.base.json` (`provider/model`). While it
+  starts with `TODO` no model is written anywhere; once set and pushed, `tutor update` gives it
+  to every tutor window, and re-running `setup-learner.sh` sets it as the global default for
+  learners who have none. `AI4SE_MODEL=provider/model sh setup-learner.sh` sets it for one
+  machine (written to `~/.config/ai4se/tutor-model` and, if absent, to `opencode.json`).
+- `tutor config` only generates the tutor configuration and prints its path (debugging).
+- The launcher runs `opencode --standalone`: the opencode background service shared with the
+  work session may otherwise serve the tutor window with its own configuration (not verified).
+- Overrides for tests: `AI4SE_HOME` (default `~/ai4se`), `AI4SE_GENSEM_URL`.
+
+## Licences
+
+- Scripts and configuration: [MIT](LICENSE).
+- Course content in `syllabus/`: [CC BY 4.0](syllabus/LICENSE)
+  (<https://creativecommons.org/licenses/by/4.0/>).

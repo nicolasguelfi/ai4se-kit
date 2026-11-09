@@ -1,0 +1,27 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "tutor",
+  "model": "TODO(NG): reference model",
+  "agent": {
+    "build": { "disable": true },
+    "plan": { "disable": true }
+  },
+  "policies": [
+    { "action": "tool.use", "resource": "grep:*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*.env", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*.env.*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*.env.example", "effect": "allow" },
+    { "action": "tool.use", "resource": "read:*.pem", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*.key", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*id_rsa*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*id_ed25519*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*/.ssh/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*/.aws/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*/.gnupg/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*/.config/opencode/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*/.local/share/opencode/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*/.git/config", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*/.netrc", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*credentials*", "effect": "deny" }
+  ]
+}

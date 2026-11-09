@@ -1,0 +1,303 @@
+#!/bin/sh
+# AI4SE tutor launcher — opens the course tutor in its own opencode session.
+#
+#   ~/ai4se/ai4se-kit/tutor               open the tutor window (extra args go to opencode)
+#   ~/ai4se/ai4se-kit/tutor add <path>    let the tutor read one more folder
+#   ~/ai4se/ai4se-kit/tutor remove <path> stop the tutor reading a folder
+#   ~/ai4se/ai4se-kit/tutor paths         list the folders the tutor may read
+#   ~/ai4se/ai4se-kit/tutor update        update the kit (start of each half-day)
+#   ~/ai4se/ai4se-kit/tutor version       show kit / GSE-One / opencode versions
+#
+# Files (outside the kit, never committed):
+#   ~/.config/ai4se/tutor-paths        one folder per line, '#' = comment (default: ~/ai4se)
+#   ~/.config/ai4se/tutor-model        optional: provider/model for the tutor (else kit default)
+#   ~/.config/ai4se/tutor-opencode.json  generated at each launch (do not edit)
+#   ~/.config/ai4se/tutor-context.md     generated at each launch (do not edit)
+# POSIX sh; needs only git and opencode (no jq, python or node).
+
+set -eu
+
+GSE_TAG="v0.90.0"
+
+die()  { printf 'tutor: %s\n' "$*" >&2; exit 1; }
+warn() { printf 'tutor: warning: %s\n' "$*" >&2; }
+
+# --- locate the kit (the folder of this script, symlinks resolved) ------------
+self=$0
+while [ -h "$self" ]; do
+  link=$(ls -l "$self" | sed 's/.* -> //')
+  case "$link" in /*) self=$link ;; *) self=$(dirname "$self")/$link ;; esac
+done
+KIT=$(cd "$(dirname "$self")" && pwd)
+[ -f "$KIT/opencode.base.json" ] || die "opencode.base.json not found next to this script ($KIT)"
+
+AI4SE_HOME="${AI4SE_HOME:-$HOME/ai4se}"
+CONF_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ai4se"
+PATHS_FILE="$CONF_DIR/tutor-paths"
+MODEL_FILE="$CONF_DIR/tutor-model"
+GEN_JSON="$CONF_DIR/tutor-opencode.json"
+GEN_CTX="$CONF_DIR/tutor-context.md"
+GSE_DIR="$AI4SE_HOME/gensem"
+
+# --- helpers -------------------------------------------------------------------
+# expand a leading ~ ; strip trailing slashes
+expand() {
+  p=$1
+  case "$p" in
+    "~") p=$HOME ;;
+    "~/"*) p=$HOME/${p#"~/"} ;;
+  esac
+  while [ "${#p}" -gt 1 ] && [ "${p%/}" != "$p" ]; do p=${p%/}; done
+  printf '%s\n' "$p"
+}
+
+# JSON string escaping (backslash, double quote); control characters are refused earlier
+jstr() { printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'; }
+
+ensure_paths_file() {
+  [ -f "$PATHS_FILE" ] && return 0
+  mkdir -p "$CONF_DIR"
+  {
+    printf '# Folders the AI4SE tutor may read (one per line, ~ allowed, # = comment).\n'
+    printf '# Change it with: tutor add <path> / tutor remove <path>\n'
+    printf '~/ai4se\n'
+  } > "$PATHS_FILE"
+}
+
+# list the configured folders, ~ expanded, one per line
+list_paths() {
+  ensure_paths_file
+  while IFS= read -r line || [ -n "$line" ]; do
+    line=$(printf '%s' "$line" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+    case "$line" in ""|"#"*) continue ;; esac
+    expand "$line"
+  done < "$PATHS_FILE"
+}
+
+kit_version() { [ -f "$KIT/VERSION" ] && head -n 1 "$KIT/VERSION" || printf 'unknown'; }
+
+gse_check() {
+  if [ -d "$GSE_DIR/.git" ]; then
+    t=$(git -C "$GSE_DIR" describe --tags --exact-match 2>/dev/null || printf 'not on a tag')
+    if [ "$t" = "$GSE_TAG" ]; then
+      printf 'GSE-One clone: %s (%s) — OK\n' "$t" "$GSE_DIR"
+    else
+      printf 'GSE-One clone: %s, the course uses %s (%s)\n' "$t" "$GSE_TAG" "$GSE_DIR"
+      printf '  fix: rm -rf "%s" && sh "%s/setup-learner.sh"\n' "$GSE_DIR" "$KIT"
+    fi
+  else
+    printf 'GSE-One clone: missing (%s)\n  fix: sh "%s/setup-learner.sh"\n' "$GSE_DIR" "$KIT"
+  fi
+}
+
+# model for the tutor: ~/.config/ai4se/tutor-model, else the kit default; TODO = none
+tutor_model() {
+  m=""
+  [ -s "$MODEL_FILE" ] && m=$(head -n 1 "$MODEL_FILE" | tr -d ' \t\r')
+  [ -n "$m" ] || m=$(sed -n 's/^[[:space:]]*"model":[[:space:]]*"\([^"]*\)".*/\1/p' "$KIT/opencode.base.json" | head -n 1)
+  case "$m" in TODO*|"") m="" ;; esac
+  printf '%s' "$m"
+}
+
+# --- generate the tutor's opencode config + context file -----------------------
+# Shell commands are not checked by external_directory, so these hard policies limit
+# `git -C <dir> …` and `ls <dir>` to the listed folders (+ the kit). Quoted, unquoted and ~
+# spellings are accepted; "/.." is refused. Policy wildcards: * = any text (also / and spaces),
+# ? = one character; a pattern ending in " *" also matches without the tail.
+pol() { printf '    { "action": "tool.use", "resource": "shell:%s", "effect": "%s" },\n' "$(jstr "$1")" "$2"; }
+LS_OPTS="-l -a -la -al -lA -A -1 -R -lh -lah"
+
+# folders the shell may touch: listed folders + kit, plus their real path if it differs
+shell_dirs() {
+  { list_paths; printf '%s\n' "$KIT"; } | while IFS= read -r p; do
+    printf '%s\n' "$p"
+    real=$( (cd "$p" 2>/dev/null && pwd -P) || true)
+    if [ -n "$real" ] && [ "$real" != "$p" ]; then printf '%s\n' "$real"; fi
+  done
+}
+
+shell_policies() {
+  pol 'git -C *' deny
+  pol 'ls *' deny
+  pol 'ls' allow
+  for o in $LS_OPTS; do pol "ls $o" allow; done
+  shell_dirs | while IFS= read -r q; do
+    pol "git -C $q *" allow;   pol "git -C $q/*" allow
+    pol "git -C \"$q\" *" allow; pol "git -C \"$q/*" allow
+    pol "git -C '$q' *" allow; pol "git -C '$q/*" allow
+    t=""
+    case "$q" in "$HOME"/*) t="~/${q#"$HOME"/}"
+      pol "git -C $t *" allow; pol "git -C $t/*" allow ;;
+    esac
+    for o in "" $LS_OPTS; do
+      pre="ls ${o:+$o }"
+      pol "$pre$q" allow;      pol "$pre$q/*" allow
+      pol "$pre\"$q\"" allow;  pol "$pre\"$q/*" allow
+      pol "$pre'$q'" allow;    pol "$pre'$q/*" allow
+      if [ -n "$t" ]; then pol "$pre$t" allow; pol "$pre$t/*" allow; fi
+    done
+  done
+  # `ls <listed>/x <other path>`: a second argument after a listed sub-path is refused
+  shell_dirs | while IFS= read -r q; do
+    pol "ls *$q/* ?*" deny
+    pol "ls *\"$q/*\" ?*" deny
+    pol "ls *'$q/*' ?*" deny
+    case "$q" in "$HOME"/*) pol "ls *~/${q#"$HOME"/}/* ?*" deny ;; esac
+  done
+  pol '*/..*' deny
+}
+
+generate() {
+  mkdir -p "$CONF_DIR"
+  tmp="$GEN_JSON.tmp.$$"
+  model=$(tutor_model)
+  {
+    printf '{\n'
+    printf '  "instructions": ["%s"],\n' "$(jstr "$GEN_CTX")"
+    printf '  "permission": {\n    "external_directory": {\n'
+    printf '      "*": "deny"'
+    { list_paths; printf '%s\n' "$CONF_DIR" "$KIT"; } | while IFS= read -r p; do
+      [ -d "$p" ] || warn "folder not found (kept in the list): $p"
+      real=$( (cd "$p" 2>/dev/null && pwd -P) || true)
+      [ "$real" = "$p" ] && real=""
+      printf ',\n      "%s": "allow",\n      "%s/**": "allow"' "$(jstr "$p")" "$(jstr "$p")"
+      if [ -n "$real" ]; then printf ',\n      "%s": "allow",\n      "%s/**": "allow"' "$(jstr "$real")" "$(jstr "$real")"; fi
+    done
+    printf '\n    }\n  },\n'
+    # rest of the base config (minus its opening brace); model line replaced or dropped,
+    # per-folder shell policies inserted at the top of the "policies" list
+    sed '1d' "$KIT/opencode.base.json" | while IFS= read -r line || [ -n "$line" ]; do
+      case "$line" in
+        *'"model":'*)
+          if [ -n "$model" ]; then printf '  "model": "%s",\n' "$(jstr "$model")"; fi
+          ;;
+        *'"policies": ['*)
+          printf '%s\n' "$line"
+          shell_policies
+          ;;
+        *) printf '%s\n' "$line" ;;
+      esac
+    done
+  } > "$tmp"
+  mv "$tmp" "$GEN_JSON"
+
+  {
+    printf '# Tutor context (generated by the tutor launcher at %s — do not edit)\n\n' "$(date '+%Y-%m-%d %H:%M')"
+    printf -- '- Learner home folder: `%s`\n' "$HOME"
+    printf -- '- Course kit (your working directory): `%s` — kit version `%s`\n' "$KIT" "$(kit_version)"
+    printf -- '- GSE-One clone (course version %s): `%s`\n' "$GSE_TAG" "$GSE_DIR"
+    printf -- '- Folders list file: `%s`\n' "$PATHS_FILE"
+    printf -- '- Folders you may read (and their sub-folders):\n'
+    list_paths | while IFS= read -r p; do printf '  - `%s`\n' "$p"; done
+    printf '\nAny other folder is refused on purpose. Secret files (.env, keys, ~/.ssh, credentials,\n'
+    printf 'opencode configuration, .git/config) are always refused.\n'
+  } > "$GEN_CTX"
+}
+
+# --- path validation for `add` -----------------------------------------------
+check_addable() {
+  p=$1
+  case "$p" in *'*'*|*'?'*|*'['*) die "wildcards are not allowed in a folder name: $p" ;; esac
+  if printf '%s' "$p" | LC_ALL=C grep -q '[[:cntrl:]]'; then die "control characters are not allowed in a folder name"; fi
+  if [ "$p" = "/" ]; then die "refused: the whole disk (/)"; fi
+  if [ "$p" = "$HOME" ]; then die "refused: your whole home folder — add a project folder instead"; fi
+  case "$HOME/" in "$p"/*) die "refused: $p contains your home folder" ;; esac
+  for s in /Volumes /Users /home /tmp /private /private/tmp /opt /mnt /media /srv; do
+    if [ "$p" = "$s" ]; then die "refused: $p is too broad — add a project folder inside it"; fi
+  done
+  for s in /bin /sbin /usr /etc /dev /proc /sys /boot /lib /lib64 /var /System /Library \
+           /Applications /private/etc /private/var /cores /root \
+           "$HOME/.ssh" "$HOME/.gnupg" "$HOME/.aws" "$HOME/.config" "$HOME/.local" "$HOME/Library"; do
+    case "$p/" in "$s"/*) die "refused: system or private folder ($s)" ;; esac
+  done
+}
+
+cmd_add() {
+  [ $# -eq 1 ] || die "usage: tutor add <path>"
+  raw=$(expand "$1")
+  [ -d "$raw" ] || die "not a folder: $1"
+  p=$(cd "$raw" && pwd)
+  check_addable "$p"
+  real=$(cd "$raw" && pwd -P)
+  [ "$real" = "$p" ] || check_addable "$real"
+  ensure_paths_file
+  if list_paths | grep -Fxq -- "$p"; then
+    printf 'Already in the list: %s\n' "$p"
+    return 0
+  fi
+  git -C "$p" rev-parse --git-dir >/dev/null 2>&1 \
+    || warn "$p is not a git repository (added anyway; the tutor's git commands will not work there)"
+  case "$p" in "$HOME"/*) entry="~/${p#"$HOME"/}" ;; *) entry=$p ;; esac
+  printf '%s\n' "$entry" >> "$PATHS_FILE"
+  printf 'Added: %s\nClose and reopen the tutor window to use it.\n' "$entry"
+}
+
+cmd_remove() {
+  [ $# -eq 1 ] || die "usage: tutor remove <path>"
+  ensure_paths_file
+  target=$(expand "$1")
+  [ -d "$target" ] && target=$(cd "$target" && pwd)
+  tmp="$PATHS_FILE.tmp.$$"; found=0
+  while IFS= read -r line || [ -n "$line" ]; do
+    t=$(printf '%s' "$line" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+    case "$t" in ""|"#"*) printf '%s\n' "$line"; continue ;; esac
+    if [ "$(expand "$t")" = "$target" ] || [ "$t" = "$1" ]; then found=1; continue; fi
+    printf '%s\n' "$line"
+  done < "$PATHS_FILE" > "$tmp"
+  if [ "$found" -eq 1 ]; then
+    mv "$tmp" "$PATHS_FILE"
+    printf 'Removed: %s\nClose and reopen the tutor window to apply it.\n' "$1"
+  else
+    rm -f "$tmp"
+    die "not in the list: $1 (see: tutor paths)"
+  fi
+}
+
+cmd_paths() {
+  ensure_paths_file
+  printf 'Folders the tutor may read (%s):\n' "$PATHS_FILE"
+  list_paths | while IFS= read -r p; do
+    if [ -d "$p" ]; then printf '  %s\n' "$p"; else printf '  %s   (missing)\n' "$p"; fi
+  done
+  printf 'Always readable too: the kit (%s) and %s\n' "$KIT" "$CONF_DIR"
+}
+
+cmd_update() {
+  old=$(kit_version)
+  git -C "$KIT" pull --ff-only || die "update failed — did you change files in $KIT? Raise your hand."
+  printf 'Kit: %s -> %s\n' "$old" "$(kit_version)"
+  gse_check
+  printf 'Close and reopen the tutor window to use the new version.\n'
+}
+
+cmd_version() {
+  printf 'Kit: %s (%s)\n' "$(kit_version)" "$KIT"
+  d=$(git -C "$KIT" log -1 --format=%cd --date=short 2>/dev/null || true)
+  [ -n "$d" ] && printf '  last update: %s\n' "$d"
+  gse_check
+  if command -v opencode >/dev/null 2>&1; then
+    printf 'opencode: %s\n' "$(opencode --version 2>/dev/null | head -n 1)"
+  else
+    printf 'opencode: not found\n'
+  fi
+}
+
+cmd_open() {
+  command -v opencode >/dev/null 2>&1 || die "opencode not found — install it first (see the installation slide)"
+  generate
+  cd "$KIT"
+  # --standalone: a private server, so this window's config (folders, secret rules) is the one
+  # applied even when the learner's work session already runs the opencode background service.
+  exec env OPENCODE_CONFIG="$GEN_JSON" opencode --standalone "$@"
+}
+
+case "${1:-}" in
+  add)     shift; cmd_add "$@" ;;
+  remove)  shift; cmd_remove "$@" ;;
+  paths)   cmd_paths ;;
+  update)  cmd_update ;;
+  version|--version) cmd_version ;;
+  config)  generate; printf '%s\n' "$GEN_JSON" ;;
+  help|-h|--help) sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//' ;;
+  *)       cmd_open "$@" ;;
+esac
