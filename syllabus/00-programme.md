@@ -40,7 +40,7 @@ files) are the same in every coding agent: what you learn with opencode transfer
 
 - **Practice first.** At most 10 minutes of demo, then you do it. Every exercise follows
   the same sheet: *Goal* / *Steps* / **Done when** (something you can see, e.g.
-  "`npx vitest run` shows 3 passing tests") / *Mid-point check* / **If stuck** / *Debrief*
+  "`npm run test:run` shows 3 passing tests") / *Mid-point check* / **If stuck** / *Debrief*
   (5-10 min, two questions, compare with your neighbour).
 - **Stuck? → your tutor window** (the right-hand terminal). The tutor is an AI assistant
   prepared by the trainer — not the trainer. It runs in its own opencode session, reads
@@ -207,7 +207,7 @@ readable project and precise context; plan before building; build test-first.
 `docs/plan.md`, first `feat/…` branch with tests.
 
 **Commands met.** `git clone` · `git checkout -b mywork j2-start` · `npm ci` ·
-`npx vitest run` · `git status` · `git diff` · `git add` · `git commit` · `git switch -c` ·
+`npm run test:run` · `git status` · `git diff` · `git add` · `git commit` · `git switch -c` ·
 `git restore` · `git log --oneline` · `git branch` · in opencode: Tab, `@file`, `/init`.
 
 **Recovery tag(s).** `j2-start` (start of the day). Restart:
@@ -388,7 +388,7 @@ report critically; get an objective quality signal instead of the agent's word.
 test reports, `review.md`, a CI workflow result.
 
 **Commands met.** `/gse-resume` · `/gse-tests` · `/gse-produce` · `/gse-review` ·
-`npm run lint` / `npx vitest run --coverage` (exact scripts given on the day).
+`npm run lint` / `npm run test:run -- --coverage` (exact scripts given on the day).
 
 **Recovery tag(s).** Announced on the day.
 

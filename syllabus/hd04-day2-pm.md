@@ -32,12 +32,11 @@ At the end of this half-day you can:
 **Re-orientation (5 min) after lunch:** `cd ~/ai4se/calcapp` → `git status` clean, on `mywork`; `npm test` → part 1 tests still green (`q` quits); `npm run dev` → the app renders in the browser; start opencode, read `@docs/plan.md`: which task is next? One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, first features, tests green):
 
 ```bash
-cd ~/ai4se && mv calcapp calcapp-old
-git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
-cd calcapp && git checkout -b mywork j2-part1 && npm ci
+git clone https://github.com/nicolasguelfi/calcapp-starter ~/ai4se/calcapp-restart
+cd ~/ai4se/calcapp-restart && git checkout -b mywork j2-part1 && npm ci
 ```
 
-Copy back `docs/plan.md` and `AGENTS.md` from `calcapp-old`, skip the tasks already done in the tag, continue with the next one. A recovery tag is a safety net, not a failure.
+Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, skip the tasks already done in the tag, continue with the next one. A recovery tag is a safety net, not a failure.
 
 **Same loop, every task:** branch `git switch -c feat/<task-name>` → RED: test only → *you* review → commit `test: …` → GREEN: minimal code, test untouched → commit `feat: …` → mutant check → undo → review the agent's code (checklists below) → merge into `mywork` only when green. Typical order: routing → data → UI; follow your plan's order.
 
@@ -103,7 +102,7 @@ No animations, no CSS library. Keep all tests green.
 - Data kept in React state only — gone at the first refresh (the most common slip).
 - `react-router-dom` imported, or `<a href>` used for navigation (full page reload).
 - Merging a branch whose tests are red into `mywork`.
-- `npm test` left in watch mode inside an agent prompt: the agent waits forever — ask for `npx vitest run`.
+- `npm test` left in watch mode inside an agent prompt: the agent waits forever — ask for `npm run test:run`.
 
 ## AI-assisted code review
 
@@ -185,7 +184,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/g
 4. `git switch -c fix/review`; Tab back to the *build* agent and fix 2-3 HIGH/MEDIUM findings, test first:
    ```text
    Fix RVW-1 from docs/review.md. First write a failing test that exposes
-   it and run npx vitest run (RED), then fix the code (GREEN).
+   it and run npm run test:run (RED), then fix the code (GREEN).
    Change nothing else.
    ```
    Read the diff: did it touch anything else? `npm test` green → commit `fix: RVW-1 …`; in `docs/review.md`: RVW-1 → fixed.
@@ -233,7 +232,7 @@ Run every command in it: do they all work? Add a **Why** section: 3 sentences on
 ```bash
 git switch mywork
 git merge fix/review          # + any finished feat/ branch not merged yet
-npx vitest run                # all green? if not, fix before tagging
+npm run test:run                # all green? if not, fix before tagging
 git tag v0.1
 git log --oneline --graph --decorate -10
 ```

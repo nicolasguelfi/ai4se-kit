@@ -16,7 +16,7 @@ git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 cd calcapp-restart
 git checkout -b mywork j2-part1
 npm ci
-npx vitest run
+npm run test:run
 ```
 
 | Tag | Use it to restart… |

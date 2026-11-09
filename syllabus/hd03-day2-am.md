@@ -58,7 +58,7 @@ git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
 cd calcapp && git checkout -b mywork <tag> && npm ci
 ```
 
-Folder `calcapp` already exists? Clone into `calcapp2`: your work stays safe. Clone inside `~/ai4se` so your tutor window can read it.
+Folder `calcapp` already exists? Clone into `~/ai4se/calcapp-restart` instead: your work stays safe. Always clone inside `~/ai4se` so your tutor window can read it.
 
 ## Git first
 
@@ -108,18 +108,18 @@ git restore .     # back to the checkpoint (uncommitted work is lost)
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
 cd calcapp && git checkout -b mywork j2-start && npm ci
-npx vitest run              # all green?
+npm run test:run              # all green?
 git switch -c feat/hello
 # change one line of README.md, then:
 git status && git diff
 git add README.md && git commit -m "docs: say hello"
 # break a file in src/ on purpose, look at git diff, then:
-git restore <that-file> && npx vitest run
+git restore <that-file> && npm run test:run
 ```
 
 **Done when:** `git log --oneline` shows your commit on `feat/hello`, and `git status` is clean.
 
-**Mid-point (7 min):** `npx vitest run` is green and `git branch` shows `* feat/hello`.
+**Mid-point (7 min):** `npm run test:run` is green and `git branch` shows `* feat/hello`.
 
 **If stuck:** (1) your tutor window; (2) re-clone at `j2-start` in a new folder; (3) raise your hand.
 
@@ -173,7 +173,7 @@ Check with `opencode mcp list`; in a prompt, say `use context7`.
 
 **1. Rules.** *Goal:* a rule of yours changes the agent's answer. *Steps:* `git switch mywork`, then `opencode`; ask "Which test command and folders must you use?"; add to `AGENTS.md`: `Amounts are integers in cents.`; `/new`, then "Propose formatAmount. Code only, no file."; `git diff AGENTS.md`, then commit it. *Done when:* the proposal uses cents and `git log` shows your `AGENTS.md` commit. *Mid-point (2 min):* the agent named the test command.
 
-**2. Context.** *Goal:* compare a vague prompt with a precise one. *Steps:* `/new`, "How are tests organised here?" — note the answer; `/new`, "From @package.json and @AGENTS.md: test command, folder, naming?"; `!npx vitest run` (the `!` runs a shell command; its output joins the conversation); "Summarise the test results in two lines." *Done when:* it quotes the test command and folder from the files. *Mid-point (2 min):* the vague answer is noted.
+**2. Context.** *Goal:* compare a vague prompt with a precise one. *Steps:* `/new`, "How are tests organised here?" — note the answer; `/new`, "From @package.json and @AGENTS.md: test command, folder, naming?"; `!npm run test:run` (the `!` runs a shell command; its output joins the conversation); "Summarise the test results in two lines." *Done when:* it quotes the test command and folder from the files. *Mid-point (2 min):* the vague answer is noted.
 
 **3. Plan.** *Goal:* a reviewed plan, no code. *Steps:* no context7 in `opencode.json`? add it, restart opencode; `opencode mcp list` in a terminal (context7 connected?); Tab → plan: "Plan a /budgets page. Use context7 for React Router 7. Tests first."; read the plan and its todo list, push back once; **do not build** — your real plan comes at 11:00. *Done when:* the plan names files and tests, and a Context7 call appears. *Mid-point (2 min):* context7 shows as connected.
 
@@ -267,23 +267,23 @@ You have a plan; now build it, one task at a time. **Why start with tests?** The
 
 **The mutant test trick.** After GREEN, sabotage your own code and run the tests. One fails → the test is real, undo the sabotage. None fails → the test proves nothing, fix the test. Example: `amount.toFixed(2)` → `amount.toFixed(0)` turns "€25.50" into "€26": the test must go red. Ten seconds of sabotage saves hours of false confidence.
 
-**Testing rules in `AGENTS.md`** (check them before coding; missing? add, then commit `docs: testing rules`): write the test file BEFORE the implementation file; Vitest + React Testing Library, tests in `tests/`; use `fireEvent` from `@testing-library/react`; import from `react-router` (NOT `react-router-dom`); never install Jest, never skip, weaken or delete a test; run tests with `npx vitest run` (never watch mode).
+**Testing rules in `AGENTS.md`** (check them before coding; missing? add, then commit `docs: testing rules`): write the test file BEFORE the implementation file; Vitest + React Testing Library, tests in `tests/`; use `fireEvent` from `@testing-library/react`; import from `react-router` (NOT `react-router-dom`); never install Jest, never skip, weaken or delete a test; run tests with `npm run test:run` (never watch mode).
 
 **Two prompts per task** (build agent):
 
 ```text
 @docs/plan.md Task 1 only. Write the failing test first, in tests/.
-Do NOT write the implementation. Run npx vitest run and show the failure.
+Do NOT write the implementation. Run npm run test:run and show the failure.
 ```
 
 then, once you have reviewed the test:
 
 ```text
 Implement the minimal code that makes tests/<file>.test.tsx pass.
-Do not modify the test file. Run npx vitest run.
+Do not modify the test file. Run npm run test:run.
 ```
 
-In prompts, ask for `npx vitest run`: `npm test` watches forever and the agent would wait.
+In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent would wait.
 
 ### Exercise — Task 1 of YOUR plan (11:45 → 12:10, 25 min)
 
@@ -308,7 +308,7 @@ Write a failing Vitest test in tests/components/ExpenseItem.test.tsx.
 ExpenseItem receives an `expense` prop (id, amount, description,
 category, date, createdAt) and an `onDelete` handler. It must show
 the description and the amount in euros: "Lunch" and "€25.50"
-for 25.50. Do NOT write the component. Run npx vitest run.
+for 25.50. Do NOT write the component. Run npm run test:run.
 ```
 
 GREEN: "Implement the minimal ExpenseItem (default export) that passes tests/components/ExpenseItem.test.tsx. Do not modify the test." *B — ExpenseForm:*
@@ -319,7 +319,7 @@ Render ExpenseForm, fill the labelled inputs amount (4.50),
 description (Coffee), category (Food), date (2026-03-01), click
 "Add Expense", and assert onSubmit was called with that data,
 amount as a number. Use getByLabelText / getByRole.
-Do NOT write the component. Run npx vitest run.
+Do NOT write the component. Run npm run test:run.
 ```
 
 Review: correct import paths? accessible queries? the behaviour *you* want? GREEN: same prompt as A. Mutant: remove the `parseFloat` on the amount.
@@ -327,12 +327,11 @@ Review: correct import paths? accessible queries? the behaviour *you* want? GREE
 **If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup:
 
 ```bash
-cd ~/ai4se && mv calcapp calcapp-old        # keep your old work aside
-git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
-cd calcapp && git checkout -b mywork j2-start && npm ci
+git clone https://github.com/nicolasguelfi/calcapp-starter ~/ai4se/calcapp-restart
+cd ~/ai4se/calcapp-restart && git checkout -b mywork j2-start && npm ci
 ```
 
-Copy back `docs/plan.md` and `AGENTS.md` from `calcapp-old`, commit them, restart at step 1.
+Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, commit them, restart at step 1. Your old work stays in `~/ai4se/calcapp`; from now on, run opencode in `calcapp-restart`.
 
 **Ahead?** Task 2 of your plan, same loop.
 
@@ -344,7 +343,7 @@ Before lunch: `git status` must say "nothing to commit".
 
 - The agent writes test and code in one go: refuse, `git restore` the code, ask for the test only.
 - The agent "fixes" the failing test instead of the code: `git diff -- tests/` must be empty after GREEN.
-- `npm test` stays open in watch mode: press `q` to quit, or use `npx vitest run`.
+- `npm test` stays open in watch mode: press `q` to quit, or use `npm run test:run`.
 - Importing from `react-router-dom`: the starter uses `react-router` 7.
 
 ### Links
