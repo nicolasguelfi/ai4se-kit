@@ -188,6 +188,17 @@ Most answers to question 3 are "no" — and the reasons (no tests, code never re
 
 **Tomorrow — day 2:** CalcApp, a shared starter project; git first (status, diff, commit, branch); you drive the agent with your plan; AI code review with HIGH / MEDIUM / LOW. Same tools, different discipline. No homework — keep your key sheet.
 
+### Back to this morning (cycles 01-03)
+
+| This afternoon | This morning's idea | Cycle |
+|---|---|---|
+| You had to explain your app again | The model has no memory | CCSET01 |
+| The agent did more than you asked | Autonomy needs a human in the loop | CCSET02 |
+| It works — would you ship it? | VibeCoding is not engineering | CCSET02 |
+| Your key, its permissions, what you pasted | Practical rules, the AI Act | CCSET03 |
+
+Tomorrow: the same kind of app, engineered — by hand, on CalcApp.
+
 ### Links
 
 GSE-One: `§ P14 — Knowledge Transfer (Coaching)`. Glossary: commit, localStorage, prototype.

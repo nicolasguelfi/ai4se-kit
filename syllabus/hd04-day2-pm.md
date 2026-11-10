@@ -159,6 +159,17 @@ RVW-3 [LOW]    rename amount → amountEur          → REFUSED
 
 A written refusal is a decision, not laziness — and someone else can review it.
 
+### How GSE-One solves it (CCSET08, concept only)
+
+*The problem:* AI review is fast but uneven: it misses some problems, invents others, and nobody decides what to do with its findings.
+
+- `/gse-review` numbers each finding (RVW-…) and ranks it HIGH, MEDIUM or LOW: the scale you use today.
+- Several specialised reviewers read the same change: code, architecture, security, tests, requirements, devil's advocate.
+- `/gse-fix` fixes the findings you keep; you refuse the others with a reason.
+- `/gse-deliver` will not merge over an open HIGH finding without your explicit decision.
+
+*Concept only — you use GSE-One from day 3.*
+
 ### Links
 
 GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/gse-fix`; the spec writes commands with a colon, the Claude Code form; in opencode type them with a dash); `§ 6.5 — Test Review Layering` (RVW-NNN ids, HIGH / MEDIUM / LOW); `§ P16 — Adversarial Self-Review and User Pushback`. Glossary: code review, finding, RVW, severity, triage, diff.

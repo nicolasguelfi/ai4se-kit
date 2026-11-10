@@ -131,6 +131,17 @@ git restore <that-file> && npm run test:run
 - `git restore` on a file you never committed: there is nothing to go back to — commit first.
 - Working on `main` or `mywork` directly instead of a `feat/…` branch.
 
+### How GSE-One solves it (CCSET04, concept only)
+
+*The problem:* an agent edits many files at once. Without git, a bad change is hard to see and harder to undo.
+
+- One branch per task: the agent never works directly on `main`.
+- Before a risky operation, a safety tag `gse-backup/…` marks where to go back.
+- A guardrail blocks a commit straight on `main`.
+- Commit messages follow one convention, so the history tells the story.
+
+*Concept only — you use GSE-One from day 3.*
+
 ### Links
 
 GSE-One: `~/ai4se/gensem/gse-one-spec.md § P12 — Version Control Isolation`; `§ 10.1 — Branch Model`; `§ 10.5 — Commit Message Convention` (GSE-One uses its own `gse(<scope>):` prefix); `§ 10.6 — Safety and Recovery`. Glossary: repository, commit, branch, remote, staging area, diff, tag.
@@ -189,6 +200,17 @@ Check with `opencode mcp list`; in a prompt, say `use context7`.
 - Asking the *plan* agent to "do it": it cannot edit files — Tab to *build*.
 - Context7 not connected: the JSON is not at the project root, or opencode was not restarted.
 
+### How GSE-One solves it (CCSET05, concept only)
+
+*The problem:* the agent only knows what is in its context. Re-explaining your project at every session wastes time and tokens.
+
+- GSE-One is itself a standing prompt: its orchestrator is an `AGENTS.md` loaded at every session.
+- Each activity is a command (`/gse-plan`, `/gse-tests`, …) that loads only what it needs.
+- Specialised agents bring one point of view each: architect, code reviewer, security auditor, test strategist…
+- The project state lives in files: the context is rebuilt from them, not from the chat.
+
+*Concept only — you use GSE-One from day 3.*
+
 ### Links
 
 GSE-One: `§ 1.1 — Coding Agents and Plugin Architecture` (where `AGENTS.md` fits). Glossary: AGENTS.md, context window, `@file`, plan agent, build agent, todo list, MCP, Context7.
@@ -207,6 +229,17 @@ From a vision to `docs/plan.md`: elicit requirements with the plan agent, split 
 
 ```markdown
 # CalcApp v0.1 - plan
+
+### How GSE-One solves it (CCSET06, concept only)
+
+*The problem:* a vague request gives a vague result. Without a written plan of small, testable tasks, the agent decides the scope for you.
+
+- `/gse-reqs` starts with a conversation, then writes requirements with testable acceptance criteria (Given / When / Then).
+- `/gse-plan` turns them into a sprint of tasks, each sized in complexity points, within a budget.
+- The plan is a Gate: nothing is built before you validate it.
+- Ideas that do not fit go to the backlog, not into the code.
+
+*Concept only — you use GSE-One from day 3.*
 
 ## T1 - Expense type with validation        [next]
 Accept: a test rejects amount <= 0; a valid expense passes
@@ -345,6 +378,16 @@ Before lunch: `git status` must say "nothing to commit".
 - The agent "fixes" the failing test instead of the code: `git diff -- tests/` must be empty after GREEN.
 - `npm test` stays open in watch mode: press `q` to quit, or use `npm run test:run`.
 - Importing from `react-router-dom`: the starter uses `react-router` 7.
+
+### How GSE-One solves it (CCSET07, concept only)
+
+*The problem:* an agent can write code that looks right, and tests that prove nothing.
+
+- `/gse-tests` sets a test strategy from the requirements before any code: which levels, which cases.
+- `/gse-produce` builds each task on its own branch and runs the tests; the results are kept as evidence.
+- Delivery is blocked while a requirement's tests have not been run and passed.
+
+*Concept only — you use GSE-One from day 3.*
 
 ### Links
 

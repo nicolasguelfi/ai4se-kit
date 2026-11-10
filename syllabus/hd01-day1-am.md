@@ -40,6 +40,18 @@ How we work this week:
 - **Daily buffer.** The last slot of each day is kept free: catch up, ask, finish the exercise.
 - **Hands-up quiz** at the end of each day. No grades — it tells us what to revisit.
 
+**Every topic is a cycle.** The week is built of 16 cycles, CCSET01 to CCSET16. Each runs the same four steps: *theory* (the problem, and the solutions known in research and in practice) → *how GSE-One solves it* (one slide, concept only) → *exercise* (on a sheet: goal, steps, done when, if stuck) → *debrief*. On days 1-2 you work by hand with opencode; from day 3 you use GSE-One.
+
+| Day | Cycles |
+|---|---|
+| 1 (by hand) | 01 Generative AI · 02 VibeCoding → VibeEngineering · 03 Tools, AI Act |
+| 2 (by hand) | 04 Git · 05 Driving an agent · 06 Planning · 07 Tests · 08 Review, delivery |
+| 3 (GSE-One) | 09 SE concepts, your GenSEM · 10 Requirements elicitation · 11 Non-functional requirements · 12 Verification & validation |
+| 4 (GSE-One) | 13 Measuring quality · 14 Delivery, capitalisation · 15 Framing a project |
+| 5 (GSE-One) | 16 Deployment |
+
+Days 5-6: your mini-project uses all sixteen. The exercise of this morning's cycles 01-03 is this afternoon's FreeSelfApp.
+
 ### Links
 
 Glossary: tutor window, recovery tag, GitHub issue. Course overview: `syllabus/00-programme.md`.
@@ -121,6 +133,17 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 1.1 — Coding Agents and Plugin Arc
 
 Question asked in the room: "Your session crashed. What does the agent still know?" — Only what is on disk.
 
+### How GSE-One solves it (CCSET01, concept only)
+
+*The problem:* the model has no memory: every new session starts from zero, and a long session overflows the context window.
+
+- The project memory is written in files, in the `.gse/` folder: status, plan, decisions, backlog.
+- Every new session reads them back and continues where you stopped.
+- A profile (`profile.yaml`) tells the agent who you are and how to talk to you.
+- These files are committed with the code: the memory travels with the project, not with the chat.
+
+*Concept only — you use GSE-One from day 3.*
+
 ### Links
 
 GSE-One: `§ P3 — Artefacts Are Everything`; `§ 12.4 — Status State File`. Glossary: session, AGENTS.md, `.gse/`.
@@ -193,6 +216,17 @@ The bridge question: **speed AND quality?** Kent Beck drew the line: "vibe codin
 
 Tomorrow (day 2) you redo the work with discipline on CalcApp v0.1 and compare: quality, confidence, speed, trade-off.
 
+### How GSE-One solves it (CCSET02, concept only)
+
+*The problem:* vibe coding hands every decision to the agent: insecure code, hallucinated packages, technical debt, found out too late.
+
+- Each decision is classified: **Auto** (the agent acts), **Inform** (it acts and tells you) or **Gate** (it stops and waits for you).
+- Risky decisions are always Gates: the agent shows the options and their consequences, you choose.
+- Guardrails block dangerous actions before they happen.
+- The six VibeEngineering principles become the steps of one lifecycle: requirements, design, tests, production, review, delivery.
+
+*Concept only — you use GSE-One from day 3.*
+
 ### Links
 
 GSE-One: `§ 1.2 — Agile Software Engineering Foundations`; `§ P16 — Adversarial Self-Review and User Pushback`. Glossary: VibeCoding, VibeEngineering, TDD, acceptance criterion.
@@ -242,6 +276,16 @@ Plan first, build second, review the diff before you commit. The help of the cou
 
 - Using a real client file "just to test" — use made-up data.
 - Accepting every permission request without reading it.
+
+### How GSE-One solves it (CCSET03, concept only)
+
+*The problem:* every coding agent has its own settings and commands, and the rules you set in one are lost in the next.
+
+- GSE-One is a plugin: the same rules, commands and specialised agents for opencode, Claude Code, Cursor, Codex CLI and Gemini CLI.
+- In opencode, its rules live in `AGENTS.md` and its commands start with `/gse-`.
+- Its guardrails act before the agent does: a commit straight on `main` is blocked, a force push is intercepted.
+
+*You install it this afternoon (hd02, step 5). You use it from day 3.*
 
 ### Links
 
