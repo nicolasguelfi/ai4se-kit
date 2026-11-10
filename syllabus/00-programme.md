@@ -38,7 +38,10 @@ files) are the same in every coding agent: what you learn with opencode transfer
 
 ## How the week works
 
-- **Practice first.** At most 10 minutes of demo, then you do it. Every exercise follows
+- **Every topic is a cycle** (16 cycles, CCSET01 to CCSET16): theory (the problem, and the
+  solutions known in research and in practice) → *how GSE-One solves it* (one slide, concept
+  only) → exercise → debrief. Days 1-2 by hand with opencode; GSE-One from day 3 afternoon.
+- **Practice right after the theory.** At most 10 minutes of demo, then you do it. Every exercise follows
   the same sheet: *Goal* / *Steps* / **Done when** (something you can see, e.g.
   "`npm run test:run` shows 3 passing tests") / *Mid-point check* / **If stuck** / *Debrief*
   (5-10 min, two questions, compare with your neighbour).
@@ -265,180 +268,137 @@ tag `v0.1` in `~/ai4se/calcapp`.
 
 ---
 
-## HD05 — Day 3 morning (Thu 03/12): discover GSE-One, why a method
+## HD05 — Day 3 morning (Thu 03/12): software engineering concepts, requirements, qualities, verification
 
-*Provisional — refined before the day.*
-
-**Timing.** 09:00-12:15 (break around 10:30).
+**Timing.** 09:00-12:30 (break 11:00). Lunch 12:30-13:30.
 
 | Time | Session |
 |---|---|
-| 09:00 | Welcome, `tutor update`, day 2 recap; CalcApp pushed to your GitHub |
-| 09:15 | **Practice P1 — Discover GSE-One** (60 min): `/gse-go` on CalcApp, before any theory |
-| 10:15 | P1 debrief: map what you saw to the method's concepts |
-| 10:45 | **Theory, light**: why a method, principles, lifecycle, Gates, modes, the orientation page |
-| 11:30 | **Practice P2 — Explore `.gse/`** |
+| 09:00 | Welcome, `tutor update`, recall of days 1-2; CalcApp pushed to your GitHub |
+| 09:15 | **CCSET09 — Software engineering concepts, defining your GenSEM** (60 min): why a method, evidence, risks, the landscape of methods; how GSE-One solves it; the Gate grid and the orientation page |
+| 10:15 | **CCSET10 — Requirements elicitation** (45 min) |
+| 11:15 | **CCSET11 — Non-functional requirements** (45 min) |
+| 12:00 | **CCSET12 — Verification and validation** (30 min) |
 
-**Goals.** Experience the whole GSE-One flow once before naming its parts; understand
-why a method is needed with an AI agent; read GSE-One's state files.
+**Goals.** Understand why a method matters with a coding agent and what it must define;
+elicit and write testable requirements; make qualities measurable; tell verification from
+validation and design test cases.
 
 **Key notions.**
-- Why a method: AI makes coding faster but not the whole lifecycle; evidence of the gap between perceived and measured productivity.
-- GSE-One = a plugin that turns the agent into an orchestrator of 24 activities.
-- The 16 principles (P1-P16), introduced through what you saw in P1.
-- Lifecycle: LC00 onboarding → LC01 discovery & planning → LC02 development → LC03 capitalization.
-- HUG: the agent profiles you (expertise, language, involvement) and adapts.
-- Decision tiers Auto / Inform / Gate; the 3-question grid before approving a Gate.
-- Modes Full / Lightweight / Micro: CalcApp runs in **Full** mode.
-- The orientation page (printed): front "where am I?", back "when the agent goes off track".
+- The centre of gravity moves from writing code to deciding, checking and maintaining it; perceived vs measured productivity.
+- A GenSEM defines a lifecycle, artefacts, roles, decision rules, quality gates and learning.
+- Elicitation techniques (interview, observation, workshop, questionnaire, scenarios, prototype); user stories (INVEST); Given/When/Then acceptance criteria; ambiguity.
+- Non-functional requirements: ISO/IEC 25010:2023 quality model; scale, meter, goal; quality scenarios; trade-offs.
+- Verification vs validation; test levels; test pyramid; equivalence classes and boundaries; the oracle problem.
+- For each topic, the solution GSE-One chose (concept only): principles, lifecycle, modes Full / Lightweight / Micro, Gates and the 3-question grid.
 
-**Activities.**
-- P1 (free discovery): `/gse-go` in CalcApp, answer the HUG questions, choose **Full**
-  at the mode Gate, follow the agent; note what surprises you.
-- P2: open `.gse/` — find yourself in `profile.yaml`, read `status.yaml`, `backlog.yaml`,
-  run `/gse-health` and `/gse-status`; which terms do you not understand?
+**Activities.** No exercise this morning: the exercises of these four cycles are this afternoon (HD06) and tomorrow morning (HD07).
 
-**Artefacts produced.** `.gse/` in CalcApp (config, profile, status, backlog), first
-decisions in `.gse/decisions.md`, CalcApp repository on GitHub.
+**Artefacts produced.** CalcApp repository on GitHub. The printed orientation page ([orientation.md](orientation.md)).
 
-**Commands met.** `/gse-go` · `/gse-hug` · `/gse-status` · `/gse-health` · `gh repo create` (or equivalent) · `git push`.
+**Commands met.** `gh repo create` · `git push`.
 
-**Recovery tag(s).** `p3-start` (CalcApp ready for GSE-One). Later tags are announced on the day: `git fetch --tags && git tag`.
-
-**Sheet.** [`hd05-day3-am.md`](hd05-day3-am.md) (coming with phase 2).
+**Sheet.** [`hd05-day3-am.md`](hd05-day3-am.md).
 
 ---
 
-## HD06 — Day 3 afternoon (Thu 03/12): plan the sprint, decisions, requirements and design
+## HD06 — Day 3 afternoon (Thu 03/12): first use of GSE-One — discover, plan, requirements and design
 
-*Provisional — refined before the day.*
-
-**Timing.** 13:15-17:00 (break around 14:45).
+**Timing.** 13:30-17:00 (break 15:15).
 
 | Time | Session |
 |---|---|
-| 13:15 | **Practice P3 — Sprint planning**: COLLECT → ASSESS → PLAN |
-| 14:00 | **Practice P4 — Classify decisions**: Auto / Inform / Gate, provoke a guardrail |
-| 15:00 | **Practice P5 — Requirements & design**: REQS → DESIGN → PREVIEW |
-| 16:15 | Debrief, push to GitHub, hands-up quiz |
-| 16:45 | Buffer |
+| 13:30 | **E11 — Discover GSE-One on your CalcApp** (60 min): install it in the project, `/gse-go`, profile, **Full** mode at the Gate, `.gse/`, a guardrail refusal |
+| 14:30 | **E12 — Plan the sprint with GSE-One** (45 min): collect → assess → plan, validate at the Gate |
+| 15:30 | **E13 — Requirements and design** (75 min): `/gse-reqs`, `/gse-design`, `/gse-preview`, traceability |
+| 16:45 | Push to GitHub, `/gse-pause`, hands-up quiz |
 
-**Goals.** Turn the backlog into a budgeted sprint plan; recognise which decisions are
-yours; write testable requirements and a traced design.
+**Goals.** Use GSE-One on a real project; pass Gates with the grid (at least one change or
+refusal per activity); obtain a validated plan, requirements and design, traced together.
 
 **Key notions.**
-- Sprint = a complexity-budgeted cycle (points), not a calendar period.
-- Backlog and TASK items; `plan.yaml` as a living plan.
-- Risk dimensions behind a decision; consequence horizons (now / 3 months / 1 year).
-- Guardrails Soft / Hard / Emergency (e.g. no commit on `main`).
-- REQ with Given/When/Then acceptance criteria; FR vs NFR.
-- DES and DEC artefacts; traceability REQ → DES → TST → code.
-- Preview: see before building (static description or scaffold).
-- Gate discipline: at least one modification or refusal per activity.
+- `.gse/` holds the project state: profile, status, backlog, plan.
+- Gate discipline; guardrails (no commit on `main`).
+- Sprint = a cycle sized by a complexity budget; `plan.yaml` as a living plan.
+- REQ with Given/When/Then acceptance criteria, functional and non-functional; design decisions; preview; traceability REQ → design → task.
 
-**Activities.**
-- P3: run the discovery pipeline; read `.gse/plan.yaml`; validate the plan at the Gate.
-- P4: classify CalcApp scenarios as Auto / Inform / Gate; try to commit on `main` and
-  observe the guardrail; write consequences for one Gate decision.
-- P5: `/gse-reqs` (answer in plain language), `/gse-design` (validate at the Gate),
-  `/gse-preview`; check the traceability chain with `/gse-status`.
+**Artefacts produced.** `.gse/` in CalcApp, `.gse/plan.yaml`, `docs/sprints/sprint-01/reqs.md`,
+`design.md`, `preview.md`, decisions in `.gse/decisions.md`.
 
-**Artefacts produced.** `.gse/plan.yaml`, sprint branch, `docs/sprints/sprint-01/reqs.md`,
-`design.md`, `preview.md`, `DEC-` entries in `.gse/decisions.md`.
+**Commands met.** `/gse-go` · `/gse-status` · `/gse-plan` · `/gse-reqs` · `/gse-design` ·
+`/gse-preview` · `/gse-pause` · `git push`.
 
-**Commands met.** `/gse-collect` · `/gse-assess` · `/gse-plan` · `/gse-reqs` ·
-`/gse-design` · `/gse-preview` · `/gse-backlog` · `/gse-pause` (end of day) · `git push`.
+**Recovery tag(s).** `p3-start` (CalcApp ready for GSE-One), `p5-start` (CalcApp with an approved plan).
 
-**Recovery tag(s).** Announced on the day (CalcApp with an approved plan / with requirements).
-
-**Sheet.** [`hd06-day3-pm.md`](hd06-day3-pm.md) (coming with phase 2).
+**Sheet.** [`hd06-day3-pm.md`](hd06-day3-pm.md).
 
 ---
 
 ## HD07 — Day 4 morning (Fri 04/12): tests, production, review; measure quality
 
-*Provisional — refined before the day.*
-
-**Timing.** 09:00-12:15 (break around 10:45).
+**Timing.** 09:00-12:15 (break 10:45).
 
 | Time | Session |
 |---|---|
 | 09:00 | Welcome, `tutor update`, `/gse-resume` |
-| 09:15 | **Practice P6 — Produce, test, review**: TESTS → PRODUCE → REVIEW (with the break) |
-| 11:30 | Review triage debrief |
-| 11:45 | **Measure quality** (30 min): lint, metrics, CI |
+| 09:15 | **E14 — Test strategy, production, review** (CCSET12 in practice): your strategy first, then `/gse-tests` → `/gse-produce` (80 min, then 30 min after the break) |
+| 11:30 | Debrief: what you fix first, what you refuse |
+| 11:45 | **CCSET13 — Measuring quality** (30 min): lint, coverage, CI; exercise E15 |
 
-**Goals.** Let the method drive test strategy, production and review; read a review
-report critically; get an objective quality signal instead of the agent's word.
+**Goals.** Let the method drive test strategy, production and review, checked against your
+own strategy; read a review report critically; get an objective quality signal instead of
+the agent's word.
 
 **Key notions.**
-- Test strategy before code; test pyramid (unit, integration, end-to-end).
-- Verification ("built right") vs validation ("the right thing").
-- PRODUCE works on a feature branch in its own worktree and runs the tests.
-- Test evidence: results recorded per task.
-- Review findings RVW-NNN with severity HIGH / MEDIUM / LOW; devil's advocate (the agent challenges its own work).
-- Lint, coverage and complexity metrics; CI runs them on every push.
+- Test strategy before code, derived from the requirements; test evidence.
+- PRODUCE works on a feature branch and runs the tests.
+- Review findings RVW-… ranked HIGH / MEDIUM / LOW; at least one reasoned refusal.
+- Lint, coverage and its limits, CI on every push; the health of the project.
 
-**Activities.**
-- P6: `/gse-tests` → `/gse-produce` → `/gse-review`; read the 3 most critical findings in
-  `review.md`; decide which you would fix first and why (and which you refuse).
-- Measure quality: run the linter and the tests with coverage; read a CI run on GitHub.
-
-**Artefacts produced.** `test-strategy.md`, tests and code on a feature branch,
-test reports, `review.md`, a CI workflow result.
+**Artefacts produced.** Test strategy, tests and code on a feature branch, test reports,
+`review.md`, a CI run on GitHub.
 
 **Commands met.** `/gse-resume` · `/gse-tests` · `/gse-produce` · `/gse-review` ·
-`npm run lint` / `npm run test:run -- --coverage` (exact scripts given on the day).
+`/gse-health` · `npm run lint` · `npm run test:coverage`.
 
-**Recovery tag(s).** Announced on the day.
+**Recovery tag(s).** `p6-start`.
 
 **Sheet.** [`hd07-day4-am.md`](hd07-day4-am.md) (coming with phase 2).
 
 ---
 
-## HD08 — Day 4 afternoon (Fri 04/12): close the cycle; launch the mini-project
+## HD08 — Day 4 afternoon (Fri 04/12): deliver and capitalise; frame your mini-project
 
-*Provisional — refined before the day.*
-
-**Timing.** 13:15-17:00 (break around 14:45).
+**Timing.** 13:15-17:00 (break 14:45).
 
 | Time | Session |
 |---|---|
-| 13:15 | **Practice P7 — Complete cycle**: FIX → DELIVER → COMPOUND → HEALTH |
-| 14:30 | Session continuity and side work: pause/resume, backlog, ad-hoc task, learn |
-| 15:00 | **Mini-project launch**: your one-page project sheet |
-| 15:45 | `/gse-go` on your mini-project — **Lightweight** mode |
-| 16:30 | Push, debrief, hands-up quiz |
+| 13:15 | **CCSET14 — Delivery, maintenance, capitalisation**: theory, then **E16 — Full cycle and continuity** (fix, deliver, compound, health, pause/resume) |
+| 14:30 | Debrief |
+| 15:00 | **CCSET15 — Framing a project**: theory, then **E17 — Your project card** |
+| 15:45 | **E18 — Start your mini-project** in **Lightweight** mode; the trainer validates each card ("green" or "reduce") |
+| 16:30 | Push both repositories, debrief, hands-up quiz |
 | 16:45 | Buffer |
 
-**Goals.** Deliver a GSE-One sprint end to end; capitalise what you learned; frame a
-small professional project that you can finish and demo in a day and a half.
+**Goals.** Deliver a GSE-One sprint end to end; capitalise what you learned; frame a small
+project that you can finish and demo in a day and a half.
 
 **Key notions.**
-- `[FIX]` is added only when the review has HIGH or MEDIUM findings.
-- DELIVER: merge, tag, changelog; no delivery over an open HIGH without your decision.
-- Backup tags `gse-backup/…` created before risky git operations.
-- Sprint freeze: a delivered sprint is closed; new work opens the next sprint.
-- COMPOUND: three axes — project learnings, methodology feedback, competencies.
-- Health score (0-10) and its dimensions.
-- Mini-project = one user, one problem, 2-4 requirements; one page: scope, milestones, demo.
-- Lightweight mode: PLAN → REQS → PRODUCE → DELIVER.
+- Delivery: merge strategy (a Gate), tag, changelog; no delivery over an open HIGH without your decision.
+- Backup tags `gse-backup/…`; pause and resume; the backlog for later ideas.
+- Capitalisation: project learnings, methodology feedback, competencies.
+- Mini-project = one user, one problem, 2-4 requirements, a first sprint of 8-10 points; one page: scope, milestones, demo.
+- Lightweight mode: plan → requirements → production → delivery.
 
-**Activities.**
-- P7: `/gse-fix`, `/gse-deliver` (choose the merge strategy at the Gate), `/gse-compound`,
-  `/gse-health` (compare with P2).
-- Mini-project: fill in the project sheet; create the repository; `/gse-go`, choose
-  **Lightweight**; keep extra ideas in the backlog.
+**Artefacts produced.** Delivered sprint on CalcApp (tag, release notes, capitalisation),
+mini-project repository with `.gse/` and its project card (`docs/project.md`).
 
-**Artefacts produced.** Delivered sprint on CalcApp (tag, `release.md`, `compound.md`),
-mini-project repository with `.gse/` and its project sheet.
+**Commands met.** `/gse-fix` · `/gse-deliver` · `/gse-compound` · `/gse-health` ·
+`/gse-backlog` · `/gse-pause` · `/gse-resume` · `/gse-learn` · `/gse-go` ·
+`~/ai4se/ai4se-kit/tutor add <path>` (if the mini-project is outside `~/ai4se`).
 
-**Commands met.** `/gse-fix` · `/gse-deliver` · `/gse-compound` · `/gse-integrate` ·
-`/gse-health` · `/gse-pause` · `/gse-resume` · `/gse-backlog` · `/gse-task` · `/gse-learn` ·
-`/gse-go` · `~/ai4se/ai4se-kit/tutor add <path>` (if the mini-project is outside `~/ai4se`).
-
-**Recovery tag(s).** CalcApp: announced on the day. Mini-project: `gse-backup/…` tags
-and `/gse-pause` checkpoints (see [recovery](recovery.md)).
+**Recovery tag(s).** CalcApp: `p7-start`. Mini-project: `gse-backup/…` tags and `/gse-pause`
+checkpoints (see [recovery](recovery.md)).
 
 **Sheet.** [`hd08-day4-pm.md`](hd08-day4-pm.md) (coming with phase 2).
 
