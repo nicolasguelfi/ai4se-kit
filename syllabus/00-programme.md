@@ -340,7 +340,7 @@ refusal per activity); obtain a validated plan, requirements and design, traced 
 
 | Time | Session |
 |---|---|
-| 09:00 | Welcome, `tutor update`, `/gse-resume` |
+| 09:00 | Welcome, `tutor update`, `/gse-resume`, the quality kit (CI + coverage) from the starter tag `quality-kit` |
 | 09:15 | **E14 — Test strategy, production, review** (CCSET12 in practice): your strategy first, then `/gse-tests` → `/gse-produce` (80 min, then 30 min after the break) |
 | 11:30 | Debrief: what you fix first, what you refuse |
 | 11:45 | **CCSET13 — Measuring quality** (30 min): lint, coverage, CI; exercise E15 |
@@ -363,7 +363,7 @@ the agent's word.
 
 **Recovery tag(s).** `p6-start`.
 
-**Sheet.** [`hd07-day4-am.md`](hd07-day4-am.md) (coming with phase 2).
+**Sheet.** [`hd07-day4-am.md`](hd07-day4-am.md).
 
 ---
 
@@ -400,7 +400,7 @@ mini-project repository with `.gse/` and its project card (`docs/project.md`).
 **Recovery tag(s).** CalcApp: `p7-start`. Mini-project: `gse-backup/…` tags and `/gse-pause`
 checkpoints (see [recovery](recovery.md)).
 
-**Sheet.** [`hd08-day4-pm.md`](hd08-day4-pm.md) (coming with phase 2).
+**Sheet.** [`hd08-day4-pm.md`](hd08-day4-pm.md).
 
 ---
 
