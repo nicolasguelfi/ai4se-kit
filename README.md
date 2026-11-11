@@ -2,7 +2,7 @@
 
 Kit for the learners of the course **"AI for Software Engineering" (AI4SE)**, used with
 [opencode](https://opencode.ai) 2 and the [GSE-One](https://github.com/nicolasguelfi/gensem)
-methodology plugin (pinned to **v0.90.0**).
+methodology plugin (pinned to **v0.90.1**).
 
 It contains:
 
@@ -32,7 +32,7 @@ Stuck during an exercise? → **your tutor window** (the right-hand terminal). A
 ## The `~/ai4se` folder
 
 `~/ai4se` is a plain folder (not a git repository) that holds the course repositories side by
-side — `ai4se-kit`, `gensem` (GSE-One v0.90.0, read by the tutor), your exercise projects… —
+side — `ai4se-kit`, `gensem` (GSE-One v0.90.1, read by the tutor), your exercise projects… —
 never one repository inside another.
 
 ## What `setup-learner.sh` does
@@ -40,7 +40,7 @@ never one repository inside another.
 Safe to run several times. It never reads or writes keys.
 
 - creates `~/ai4se` if needed;
-- clones GSE-One at tag `v0.90.0` into `~/ai4se/gensem` (or checks the tag of an existing clone);
+- clones GSE-One at tag `v0.90.1` into `~/ai4se/gensem` (or checks the tag of an existing clone);
 - writes `~/.config/ai4se/tutor-paths` (default content: `~/ai4se`) if it does not exist;
 - moves away the global `~/.config/opencode/agents/tutor.md` installed by the previous kit
   version (backup `tutor.md.bak.<date>`; there is no `@tutor` any more);

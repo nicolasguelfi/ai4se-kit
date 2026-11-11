@@ -30,10 +30,10 @@ GSE-One is installed **per project**: the same command as on day 1, run inside y
 
 ```bash
 cd ~/ai4se/calcapp && git switch -c chore/gse-one main
-curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/gensem/v0.90.0/install.sh \
-  | GSE_PLATFORM=opencode GSE_VERSION=v0.90.0 sh
+curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/gensem/v0.90.1/install.sh \
+  | GSE_PLATFORM=opencode GSE_VERSION=v0.90.1 sh
 cat .gse/registry      # prints .opencode
-git add . && git commit -m "chore: install GSE-One v0.90.0"
+git add . && git commit -m "chore: install GSE-One v0.90.1"
 git switch main && git merge --no-ff --no-edit chore/gse-one
 ```
 

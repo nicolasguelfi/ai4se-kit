@@ -1,7 +1,7 @@
-# Where to find what in GSE-One (v0.90.0)
+# Where to find what in GSE-One (v0.90.1)
 
 GSE-One is the methodology plugin used from day 3. Its full source is cloned on your
-machine at tag **v0.90.0** in **`~/ai4se/gensem`** (done by `setup-learner.sh`). It is a
+machine at tag **v0.90.1** in **`~/ai4se/gensem`** (done by `setup-learner.sh`). It is a
 reference: read it, never edit it — your projects use the installed copy, not this clone.
 
 > **Command spelling.** The documents use the Claude Code form `/gse:go`. In **opencode**
@@ -216,5 +216,5 @@ tool with that line as offset; in your terminal, open the file at that line).
 
 **Rules for the tutor.** Search with a precise pattern, read at most the one or two
 sections found, cite them ("spec § 9.2 — Levels"), and say when the course or the spec
-does not cover the question. The clone is pinned to v0.90.0: it describes the version
+does not cover the question. The clone is pinned to v0.90.1: it describes the version
 installed in the learners' projects.

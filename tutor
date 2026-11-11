@@ -17,7 +17,7 @@
 
 set -eu
 
-GSE_TAG="v0.90.0"
+GSE_TAG="v0.90.1"
 
 die()  { printf 'tutor: %s\n' "$*" >&2; exit 1; }
 warn() { printf 'tutor: warning: %s\n' "$*" >&2; }

@@ -108,7 +108,7 @@ GitHub account. *HD02.*
 
 **git** — The version control system used from day 2 as a safety net. *HD03.*
 
-**GSE-One** — "Generative Software Engineering One": the methodology plugin (v0.90.0 in
+**GSE-One** — "Generative Software Engineering One": the methodology plugin (v0.90.1 in
 the course) that turns the coding agent into an orchestrator of a structured lifecycle
 with 24 commands. *HD04 (bridge), HD05.*
 

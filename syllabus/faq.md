@@ -1,6 +1,6 @@
 # FAQ — the most frequent problems
 
-Collected from edition 1 and updated for edition 2 (opencode 2, GSE-One v0.90.0, tutor
+Collected from edition 1 and updated for edition 2 (opencode 2, GSE-One v0.90.1, tutor
 window). When stuck, the order is always: **your tutor window → the recovery tag → raise
 your hand.** See also [recovery](recovery.md) and the [glossary](glossary.md).
 

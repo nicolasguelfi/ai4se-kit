@@ -229,7 +229,7 @@ Always in this order:
 GSE-One commands in opencode are written with a dash: `/gse-go`, `/gse-status`,
 `/gse-pause`, `/gse-resume`, `/gse-plan`, `/gse-reqs`, `/gse-produce`, `/gse-review`,
 `/gse-deliver`… (the colon form `/gse:go` is Claude Code, not this course). The course
-pins GSE-One **v0.90.0**. Typical pointers: lost in the lifecycle → `/gse-status`; must
+pins GSE-One **v0.90.1**. Typical pointers: lost in the lifecycle → `/gse-status`; must
 stop or change machine → `/gse-pause`, later `/gse-resume`; a Gate (a decision the agent
 asks them to approve) they do not understand → choose **Discuss** rather than approve;
 the agent goes off track → the recovery recipe in `syllabus/recovery.md`.

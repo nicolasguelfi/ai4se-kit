@@ -5,7 +5,7 @@
 #
 # Safe to run several times (idempotent). It:
 #   - creates ~/ai4se (a plain folder holding the course repositories side by side);
-#   - clones GSE-One v0.90.0 into ~/ai4se/gensem (read by the tutor), or checks the existing clone;
+#   - clones GSE-One v0.90.1 into ~/ai4se/gensem (read by the tutor), or checks the existing clone;
 #   - writes ~/.config/ai4se/tutor-paths (folders the tutor may read; default ~/ai4se) if absent;
 #   - writes ~/.config/ai4se/tutor-model only if AI4SE_MODEL is given on the command line;
 #   - adds a default "model" to ~/.config/opencode/opencode.json only if it has none
@@ -18,7 +18,7 @@
 
 set -eu
 
-GSE_TAG="v0.90.0"
+GSE_TAG="v0.90.1"
 
 say()  { printf '%s\n' "$*"; }
 step() { printf '  - %s\n' "$*"; }

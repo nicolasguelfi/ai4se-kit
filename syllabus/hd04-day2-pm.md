@@ -279,7 +279,7 @@ Same loop, same severities — and GSE-One will not deliver over an open HIGH wi
 
 **Debrief — the day (10 min):** Which step of the loop did you skip or rush? What did it cost you? Which step would you hand to a tool — and which must stay yours? Compare with your neighbour, then 2-3 answers for the room.
 
-**Next: day 3 (Thursday 3 December 2026).** GSE-One drives the loop you ran by hand today; start with `/gse-go` inside your project; CalcApp continues (recovery tag `p3-start`); your work goes to GitHub, pushed every evening. Keep your laptop as it is: opencode, model key, GSE-One v0.90.0, the course kit.
+**Next: day 3 (Thursday 3 December 2026).** GSE-One drives the loop you ran by hand today; start with `/gse-go` inside your project; CalcApp continues (recovery tag `p3-start`); your work goes to GitHub, pushed every evening. Keep your laptop as it is: opencode, model key, GSE-One v0.90.1, the course kit.
 
 **Buffer (17:00 → 17:30):** finish the exercise you missed (its sheet is in this syllabus), questions to the trainer, your tutor window for anything about today's steps, feedback as an issue on `nicolasguelfi/gensem` with label `ai4se-ed2` (public — no confidential data). Before leaving: `git status` clean, `git tag` shows `v0.1`, and `git branch -v` shows `main` and `mywork` on the same commit.
 
