@@ -237,14 +237,14 @@ GSE-One: `§ 1.2 — Agile Software Engineering Foundations`; `§ P16 — Advers
 
 **Autonomy spectrum**: passive assistance (responds when invoked) → proactive copiloting (suggests, you decide) → task-level delegation (you describe, AI executes) → autonomous agents (AI plans, executes, tests, iterates) → multi-agent orchestration. *The agentic turn*: opencode (plan, build, subagents), Claude Code (subagents, background tasks), GitHub Copilot (issue → pull request), Cursor (IDE, CLI and cloud agents). It plans, edits, runs; you frame and review.
 
-**opencode, our tool**: a terminal agent, open source (MIT), any model provider (this week: your capped key), two built-in agents *plan* and *build* (Tab to switch), project rules in `AGENTS.md` (`/init` drafts it), permissions and MCP servers in `opencode.json`. A first session, as shown on the slide:
+**opencode, our tool**: a terminal agent, open source (MIT), any model provider (this week: your capped key), two built-in agents *plan* and *build* (Shift+Tab to switch), project rules in `AGENTS.md` (`/init` drafts it), permissions and MCP servers in `opencode.json`. A first session, as shown on the slide:
 
 ```
 $ cd ~/ai4se/my-project       # always start in a dedicated project folder
 $ opencode                    # the agent works in this folder
 > /init                       # reads the code, writes AGENTS.md
-[Tab] -> plan                 # read-only: propose a plan first
-[Tab] -> build                # now it may edit and run commands
+[Shift+Tab] -> plan           # read-only: propose a plan first
+[Shift+Tab] -> build          # now it may edit and run commands
 > explain @src/export.js      # @file adds a file to the context
 > /gse-status                 # GSE-One commands start with /gse-
 ```

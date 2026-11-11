@@ -29,13 +29,15 @@ At the end of this half-day you can:
 GSE-One is installed **per project**: the same command as on day 1, run inside your CalcApp folder this time.
 
 ```bash
-cd ~/ai4se/calcapp && git switch mywork
+cd ~/ai4se/calcapp && git switch -c chore/gse-one main
 curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/gensem/v0.90.0/install.sh \
   | GSE_PLATFORM=opencode GSE_VERSION=v0.90.0 sh
 cat .gse/registry      # prints .opencode
+git add . && git commit -m "chore: install GSE-One v0.90.0"
+git switch main && git merge --no-ff --no-edit chore/gse-one
 ```
 
-Commit the new files: they are part of your project. `/gse-go` is the single entry point: it profiles you (expertise, language, how much you want to be involved), proposes a mode at a Gate, and chooses the next activity. Its state lives in `.gse/`: `profile.yaml` (you), `status.yaml` (where the project is), `backlog.yaml` (the work items), `plan.yaml` (the current sprint).
+The new files are part of your project: committed on a branch, merged into `main` (since yesterday evening `main` holds your v0.1, and it only receives merges). `/gse-go` is the single entry point: it profiles you (expertise, language, how much you want to be involved), proposes a mode at a Gate, and chooses the next activity. Its state lives in `.gse/`: `profile.yaml` (you), `status.yaml` (where the project is), `backlog.yaml` (the work items), `plan.yaml` (the current sprint).
 
 ### Exercise — Discover GSE-One on Your CalcApp (13:30 · 50 min)
 
@@ -45,13 +47,13 @@ Commit the new files: they are part of your project. `/gse-go` is the single ent
 
 **Steps:**
 
-1. `cd ~/ai4se/calcapp`, `git switch mywork`; install GSE-One in this folder (same command as day 1, installation step 5).
+1. `cd ~/ai4se/calcapp` (since yesterday `main` holds your v0.1); install GSE-One on a branch merged into `main` (commands just before this sheet; same install command as day 1, installation step 5).
 2. Start `opencode`, type `/gse-go`, answer the profile questions in plain language.
 3. At the mode Gate choose Full; apply the 3-question grid and write your answers in the tracking sheet.
 4. Open `.gse/profile.yaml` (do you recognise yourself?) and `.gse/status.yaml`, then run `/gse-status`.
-5. Ask the agent to commit straight on `main`. Watch the guardrail refuse, and note it.
+5. Ask the agent to commit straight on `main`. Look for its Gate: the agent refuses by itself, explains the protect-main guardrail and offers safe paths (a branch, …). Pick one, and note the Gate. (The hook would block the commit only if the agent tried anyway.)
 
-**Done when:** `/gse-status` shows the project in Full mode, and one guardrail refusal is noted in the tracking sheet.
+**Done when:** `/gse-status` shows the project in Full mode, and the guardrail Gate (refusal + safe options) is noted in the tracking sheet.
 
 **Mid-point:** 14:00 — the profile questions are done.
 
@@ -62,7 +64,7 @@ Commit the new files: they are part of your project. `/gse-go` is the single ent
 ### Frequent errors
 
 - `/gse-go` is not recognised → opencode was started before the install, or in another folder: quit, `cd ~/ai4se/calcapp`, restart `opencode`.
-- The agent works on `main` → refuse; the guardrail blocks a commit on `main` anyway. Work on `mywork` and the task branches GSE-One creates.
+- The agent proposes to commit on `main` → refuse. GSE-One itself refuses at a Gate and offers safe paths (a branch, …); its hook blocks the commit only if the agent tries anyway. Work on the task branches GSE-One creates: `main` only receives their merges.
 - You accept every Gate without reading → apply the grid; a Gate you always accept is not a Gate.
 
 ### Links

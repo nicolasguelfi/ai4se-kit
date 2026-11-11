@@ -63,7 +63,7 @@ files) are the same in every coding agent: what you learn with opencode transfer
 
 | Tool | Role in the course |
 |---|---|
-| **opencode 2** | the terminal coding agent used in every exercise (*plan* and *build* agents, Tab switches) |
+| **opencode 2** | the terminal coding agent used in every exercise (*plan* and *build* agents, Shift+Tab switches) |
 | **A capped model key** | handed out on paper on day 1; one per learner, with a spending cap; never paste it anywhere |
 | **GSE-One v0.90.0** (pinned) | the methodology plugin (days 3-6); commands in opencode are `/gse-go`, `/gse-status`, … |
 | **git + GitHub** (`gh`) | safety net from day 2; your work is pushed to GitHub from day 3, every evening |
@@ -193,8 +193,8 @@ readable project and precise context; plan before building; build test-first.
 - Working tree, staging area, commit; one branch per feature/task; `git restore` to undo.
 - AI-readable project structure; `AGENTS.md` = the project's standing instructions for the agent.
 - Context and `@file` mentions: give the agent exactly what it needs.
-- *plan* agent (reads, proposes) vs *build* agent (edits) — switch with Tab.
-- MCP and Context7 in `opencode.json`: up-to-date library docs for the agent.
+- *plan* agent (reads, proposes) vs *build* agent (edits) — switch with Shift+Tab.
+- MCP and Context7 (`opencode mcp add`, written to `opencode.json`): up-to-date library docs for the agent.
 - Atomic tasks with testable acceptance criteria; the plan is yours, not the agent's.
 - TDD with an AI: red (failing test), green (make it pass), mutant test (break the code: does a test catch it?).
 
@@ -211,7 +211,7 @@ readable project and precise context; plan before building; build test-first.
 
 **Commands met.** `git clone` · `git checkout -b mywork j2-start` · `npm ci` ·
 `npm run test:run` · `git status` · `git diff` · `git add` · `git commit` · `git switch -c` ·
-`git restore` · `git log --oneline` · `git branch` · in opencode: Tab, `@file`, `/init`.
+`git restore` · `git log --oneline` · `git branch` · in opencode: Shift+Tab, `@file`, `/init`.
 
 **Recovery tag(s).** `j2-start` (start of the day). Restart:
 `git clone https://github.com/nicolasguelfi/calcapp-starter calcapp && cd calcapp && git checkout -b mywork <tag> && npm ci`.
@@ -251,7 +251,7 @@ critically; ship a tagged version; see which GSE-One commands automate the loop 
 - Build part 2 (75 min): next tasks of your plan, one branch each, test first.
 - Review exercise (60 min): AI review of `git diff j2-start`, triage, fix the chosen
   findings on a `fix/review` branch, update the README.
-- Ship (15 min): merge into `mywork`, all tests green, `git tag v0.1`.
+- Ship (15 min): merge into `mywork`, all tests green, `git tag v0.1`, then `main` takes `mywork` (GSE-One's reference from day 3).
 - Bridge (30 min): the same loop, driven by GSE-One from day 3; hands-up quiz.
 
 **Artefacts produced.** More `feat/…` branches, `fix/review` branch, updated `README.md`,

@@ -26,6 +26,9 @@ npm run test:run
 | `j2-v0.1` | HD04 end: v0.1 ready for delivery, bridge to GSE-One |
 | `p3-start` | HD05 (day 3 morning): CalcApp ready for GSE-One |
 
+From `p3-start` on (day 3), GSE-One takes `main` as the reference: restart on `main`, not
+on `mywork` — `git switch -C main p3-start` instead of `git checkout -b mywork <tag>`.
+
 More tags are added for later days: `git fetch --tags && git tag` lists them; the
 half-day sheet says which one to use. Keep your old folder: nothing is deleted, you can
 compare later. The tutor window already sees the new folder if it is under `~/ai4se`.

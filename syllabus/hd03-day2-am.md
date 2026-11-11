@@ -160,25 +160,32 @@ Give the agent what a new colleague would need. *You hire a talented junior: no 
 
 **`@file` — point, don't hope.** `@` is a fuzzy file search; the file joins the conversation. Vague: "Make the home page nicer." Precise: "Read @src/pages/Home.tsx and @tests/App.test.tsx. Add the subtitle "Track your expenses" to Home, test first. Do not touch other files." **What NOT to put in context**: secrets (`.env`, your model key, passwords — never paste, never `@`); generated folders (`node_modules/`, `dist/` stay in `.gitignore`); whole logs (paste the 10 lines that matter); old tasks (one task, one session: `/new`). Less but relevant beats more.
 
-**Plan agent, then build agent (Tab switches; opencode shows which is active).** *plan* thinks: reads, analyses, proposes, can ask you questions, does not edit your files. *build* does: all tools enabled, edits files, runs commands, follows the plan you approved. Workflow: Tab → plan, describe the whole feature and its constraints → review (files, order, tests included?) → push back ("tests first", "split this step") → Tab → build, "implement step 1 only" → `git diff`, tests, commit, then the next step. Plan first when the task touches 2+ files or needs a where/how decision; a typo? just build.
+**Plan agent, then build agent (Shift+Tab switches; opencode shows which is active).** *plan* thinks: reads, analyses, proposes, can ask you questions, does not edit your files. *build* does: all tools enabled, edits files, runs commands, follows the plan you approved. Workflow: Shift+Tab → plan, describe the whole feature and its constraints → review (files, order, tests included?) → push back ("tests first", "split this step") → Shift+Tab → build, "implement step 1 only" → `git diff`, tests, commit, then the next step. Plan first when the task touches 2+ files or needs a where/how decision; a typo? just build.
 
 **The todo list.** On multi-step work the agent writes a todo list and ticks items as it goes: see where it is, stop it as soon as it drifts (Esc), check nothing was skipped before you commit. Ticked is not done — **done = tests green + diff reviewed**.
 
-**MCP and Context7.** MCP (Model Context Protocol) is an open standard: each server exposes tools the agent calls when needed (docs, database, browser), declared under `mcp` in `opencode.json`. Every tool takes context space: enable few. Context7 gives live documentation instead of stale memory — the model learned old APIs and React Router 7 moves fast. Add to `opencode.json` at the project root:
+**MCP and Context7.** MCP (Model Context Protocol) is an open standard: each server exposes tools the agent calls when needed (docs, database, browser), declared under `mcp.servers` in `opencode.json`. Every tool takes context space: enable few. Context7 gives live documentation instead of stale memory — the model learned old APIs and React Router 7 moves fast. Add it with one command in the project folder (no hand-written JSON):
+
+```bash
+opencode mcp add context7 --url https://mcp.context7.com/mcp
+```
+
+It writes `opencode.json` at the project root:
 
 ```json
 {
-  "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp"
+    "servers": {
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp"
+      }
     }
   }
 }
 ```
 
-Check with `opencode mcp list`; in a prompt, say `use context7`.
+Check: restart opencode, the sidebar shows context7 *Connected*; in a prompt, say `use context7`.
 
 ### Exercise — Try it ×3 (5 min each, after a 3-min demo)
 
@@ -186,19 +193,19 @@ Check with `opencode mcp list`; in a prompt, say `use context7`.
 
 **2. Context.** *Goal:* compare a vague prompt with a precise one. *Steps:* `/new`, "How are tests organised here?" — note the answer; `/new`, "From @package.json and @AGENTS.md: test command, folder, naming?"; `!npm run test:run` (the `!` runs a shell command; its output joins the conversation); "Summarise the test results in two lines." *Done when:* it quotes the test command and folder from the files. *Mid-point (2 min):* the vague answer is noted.
 
-**3. Plan.** *Goal:* a reviewed plan, no code. *Steps:* no context7 in `opencode.json`? add it, restart opencode; `opencode mcp list` in a terminal (context7 connected?); Tab → plan: "Plan a /budgets page. Use context7 for React Router 7. Tests first."; read the plan and its todo list, push back once; **do not build** — your real plan comes at 11:00. *Done when:* the plan names files and tests, and a Context7 call appears. *Mid-point (2 min):* context7 shows as connected.
+**3. Plan.** *Goal:* a reviewed plan, no code. *Steps:* no context7 yet? `opencode mcp add context7 --url https://mcp.context7.com/mcp`; restart opencode (the sidebar shows context7 *Connected*?); Shift+Tab → plan: "Plan a /budgets page. Use context7 for React Router 7. Tests first."; read the plan and its todo list, push back once; **do not build** — your real plan comes at 11:00. *Done when:* the plan names files and tests, and a Context7 call appears. *Mid-point (2 min):* context7 shows as connected.
 
 **If stuck (all three):** your tutor window, then raise your hand.
 
 **Debrief (5 min):** What changed in the answers once `AGENTS.md` and `@files` were there? What did the plan agent ask you — and what did you push back on? Compare plans with your neighbour: same files? same tests? why not?
 
-**To remember:** structure + `AGENTS.md` = your standing prompt; context is finite (`@` the right files, no secrets, `/new` per task); Tab: plan first, build second; todo ticked ≠ done; MCP adds tools, Context7 adds live docs.
+**To remember:** structure + `AGENTS.md` = your standing prompt; context is finite (`@` the right files, no secrets, `/new` per task); Shift+Tab: plan first, build second; todo ticked ≠ done; MCP adds tools, Context7 adds live docs.
 
 ### Frequent errors
 
 - Editing `AGENTS.md` and expecting the current session to change: start a new one (`/new`).
-- Asking the *plan* agent to "do it": it cannot edit files — Tab to *build*.
-- Context7 not connected: the JSON is not at the project root, or opencode was not restarted.
+- Asking the *plan* agent to "do it": it cannot edit files — Shift+Tab to *build*.
+- Context7 not connected: `opencode mcp add` was run outside the project folder, or opencode was not restarted. A hand-written `"mcp": {"context7": …}` (without `servers`) is the old format: opencode 2 ignores it.
 
 ### How GSE-One solves it (CCSET05, concept only)
 
@@ -230,17 +237,6 @@ From a vision to `docs/plan.md`: elicit requirements with the plan agent, split 
 ```markdown
 # CalcApp v0.1 - plan
 
-### How GSE-One solves it (CCSET06, concept only)
-
-*The problem:* a vague request gives a vague result. Without a written plan of small, testable tasks, the agent decides the scope for you.
-
-- `/gse-reqs` starts with a conversation, then writes requirements with testable acceptance criteria (Given / When / Then).
-- `/gse-plan` turns them into a sprint of tasks, each sized in complexity points, within a budget.
-- The plan is a Gate: nothing is built before you validate it.
-- Ideas that do not fit go to the backlog, not into the code.
-
-*Concept only — you use GSE-One from day 3.*
-
 ## T1 - Expense type with validation        [next]
 Accept: a test rejects amount <= 0; a valid expense passes
 Branch: feat/expense-type
@@ -257,7 +253,7 @@ Branch: feat/expense-storage
 **Steps:**
 
 1. 2 minutes on paper: 2-3 features you would want as a user.
-2. `git switch mywork`, `opencode`, Tab → plan. Adapt and paste the elicitation prompt, answer its questions:
+2. `git switch mywork`, `opencode`, Shift+Tab → plan. Adapt and paste the elicitation prompt, answer its questions:
    ```text
    I'm building CalcApp v0.1, a personal budget tracker (see @AGENTS.md).
    v0.1: add an expense (amount, category, date), list expenses with a
@@ -268,10 +264,12 @@ Branch: feat/expense-storage
    ```
    Read critically. Ask back: errors? fixed or free categories? currency?
 3. "Split into 5-8 atomic tasks, tests first, with acceptance criteria." Push back at least once: too big? not testable?
-4. Tab → build: "Write docs/plan.md in the slide format."
+4. Shift+Tab → build: "Write docs/plan.md in the slide format."
 5. Edit it, mark T1 `[next]`, `git add` it, `git diff --staged`, `git commit -m "docs: v0.1 plan"`.
 
 **Done when:** `git log --oneline` on `mywork` shows "docs: v0.1 plan"; `docs/plan.md` has 5-8 tasks, one `[next]`.
+
+**Check:** is anything missing for the app to work end to end (wiring, entry point, assembly of the parts)? If so, add that task.
 
 **Mid-point (11:15):** your user stories have testable acceptance criteria; you are splitting them.
 
@@ -283,6 +281,17 @@ Branch: feat/expense-storage
 
 - `git diff` shows nothing for the new plan: git diff ignores untracked files — `git add` first, then `git diff --staged`.
 - Tasks like "build the UI": not testable, not atomic — split until each has one acceptance test.
+
+### How GSE-One solves it (CCSET06, concept only)
+
+*The problem:* a vague request gives a vague result. Without a written plan of small, testable tasks, the agent decides the scope for you.
+
+- `/gse-reqs` starts with a conversation, then writes requirements with testable acceptance criteria (Given / When / Then).
+- `/gse-plan` turns them into a sprint of tasks, each sized in complexity points, within a budget.
+- The plan is a Gate: nothing is built before you validate it.
+- Ideas that do not fit go to the backlog, not into the code.
+
+*Concept only — you use GSE-One from day 3.*
 
 ### Links
 

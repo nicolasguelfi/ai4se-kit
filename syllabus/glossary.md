@@ -36,7 +36,7 @@ planned) or in a sprint. `/gse-backlog`, file `.gse/backlog.yaml`. *HD06.*
 task, never commit directly on `main`. *HD03.*
 
 **Build agent / Plan agent** — opencode's two default agents: *plan* reads and proposes
-without editing; *build* edits files and runs commands. Switch with Tab. *HD03.*
+without editing; *build* edits files and runs commands. Switch with Shift+Tab. *HD03.*
 
 **Checkpoint** — A snapshot of where you are in GSE-One (sprint, activity, pending work),
 saved by `/gse-pause` in `.gse/checkpoints/` and reloaded by `/gse-resume`. *HD08.*
@@ -60,7 +60,7 @@ A low-confidence claim on a critical point becomes a Gate. *HD07.*
 files, tool results, history. It is limited and costs tokens. *HD01, HD03.*
 
 **Context7** — An MCP server that gives the agent up-to-date library documentation;
-declared in `opencode.json`. *HD03.*
+added with `opencode mcp add`, under `mcp.servers` in `opencode.json`. *HD03.*
 
 **DEC-NNN (decision)** — A recorded decision with context, options, choice and
 consequences, kept in `.gse/decisions.md`. *HD06.*

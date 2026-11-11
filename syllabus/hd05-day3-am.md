@@ -34,7 +34,7 @@ Days 1-2 were done by hand: you vibe coded FreeSelfApp, then engineered CalcApp 
 Your CalcApp goes to your own GitHub repository, pushed every evening:
 
 ```bash
-cd ~/ai4se/calcapp && git switch mywork
+cd ~/ai4se/calcapp && git switch main
 gh repo create calcapp --public --source=. --remote=mine
 git push mine --all && git push mine --tags
 gh repo view --web
