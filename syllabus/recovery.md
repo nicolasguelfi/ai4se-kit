@@ -24,7 +24,7 @@ npm run test:run
 | `j2-start` | HD03 (day 2 morning): git first, steering opencode, technical plan |
 | `j2-part1` | HD04 (day 2 afternoon): CalcApp v0.1, part 2 |
 | `j2-v0.1` | HD04 end: v0.1 ready for delivery, bridge to GSE-One |
-| `p3-start` | HD05 (day 3 morning): CalcApp ready for GSE-One |
+| `p3-start` | HD05-HD06 (day 3 morning, then E11-E12 in the afternoon): CalcApp v0.1, ready for GSE-One |
 | `p5-start` | HD06 (day 3 afternoon, E13): GSE-One installed, sprint plan approved, before requirements and design |
 | `p6-start` | HD07 (day 4 morning, E14): requirements, design and preview validated, quality kit in; start of tests |
 | `p7-start` | HD08 (day 4 afternoon, E16): sprint produced and reviewed (`review.md`); start of fix and delivery |
