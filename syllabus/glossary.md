@@ -56,6 +56,10 @@ learnings, Axe 2 feedback on the method, Axe 3 your competencies. *HD08.*
 **Confidence level** — The tag GSE-One puts on a claim: Verified, High, Moderate or Low.
 A low-confidence claim on a critical point becomes a Gate. *HD07.*
 
+**Container / image** — An *image* is a frozen package of the app with everything it needs
+to run (system, runtime, built code); a *container* is one running copy of an image,
+isolated and disposable. Built from a Dockerfile. *HD09.*
+
 **Context (context window)** — Everything the model sees in one request: your prompt,
 files, tool results, history. It is limited and costs tokens. *HD01, HD03.*
 
@@ -67,6 +71,9 @@ consequences, kept in `.gse/decisions.md`. *HD06.*
 
 **Deliver** — `/gse-deliver`: merge the reviewed work, tag a release, write release notes,
 clean up branches; it closes the sprint. *HD08, HD11.*
+
+**Demo tag** — `demo`: the git tag on the frozen version you present in the gallery
+(day 6, 12:00). *HD11, HD12.*
 
 **Deployment** — Making the app run on a server with a public address. In the course:
 a Dockerfile in the starter, guided waves of 5 learners. *HD09.*
@@ -81,10 +88,14 @@ hallucinated libraries, unverified claims, missing alternatives (P16). *HD07.*
 before committing and what an AI review should look at. *HD03, HD04.*
 
 **Dockerfile** — A recipe to build a container image of the app (install, build, run).
-The CalcApp starter ships a tested one. *HD09.*
+The CalcApp starter ships a tested one; `/gse-deploy` writes one only if it is missing. *HD09.*
 
 **Empty stub** — Code that looks finished but does nothing (placeholder, `TODO`, fake
 data). Hunted on day 6 before the demo. *HD11.*
+
+**Environment variable** — A named value a program reads from its environment when it
+starts (`PORT`, an API key): how the same image gets a different configuration on each
+machine. *HD09.*
 
 **FR / NFR** — Functional requirement (what the system does) / non-functional requirement
 (a quality: performance, accessibility, security…). *HD06.*
@@ -98,6 +109,9 @@ GSE-One's *sprint freeze*. *HD11.*
 **Full / Lightweight / Micro (modes)** — GSE-One's three ceremony levels. Full: the whole
 lifecycle (CalcApp). Lightweight: PLAN → REQS → PRODUCE → DELIVER (mini-project). Micro:
 throw-away scripts (not used). Chosen at a Gate after `/gse-go`. *HD05, HD08.*
+
+**Gallery** — The day-6 demos: half of the room presents at their laptop (5-7 minutes,
+imposed structure), the other half visits with a 3-question grid; then swap. *HD12.*
 
 **Gate** — A decision the agent may not take for you: it shows options and consequences
 and waits. Before approving, ask: Do I understand it? What do I lose if it is wrong?
@@ -119,6 +133,9 @@ commit on `main` is blocked. *HD06.*
 **Hallucination** — A confident but false output: an invented function, library, API or
 fact. Check before trusting. *HD01, HD07.*
 
+**Health check** — An address the platform calls regularly to know a container is alive.
+Healthy does not mean the right version is live. *HD09.*
+
 **Health score** — GSE-One's 0-10 quality indicator (8 dimensions in Full mode, 3 in
 Lightweight). `/gse-health`. *HD05, HD08.*
 
@@ -129,16 +146,29 @@ claim. *HD04, HD07.*
 **HUG** — GSE-One's profiling activity (`/gse-hug`, run by `/gse-go` the first time): your
 expertise, language, verbosity, decision involvement… so the agent adapts. *HD05.*
 
+**Integrity check (minimal)** — In Lightweight mode, the check `/gse-deliver` runs before
+merging (devil's advocate, at most 5 findings); a HIGH finding stops the merge until you
+decide. *HD08, HD11.*
+
 **Issue (GitHub)** — A ticket on a repository. Course feedback: issues on
 `nicolasguelfi/gensem` with label `ai4se-ed2` — public, never confidential. *HD01.*
 
+**Known limits** — The README section that lists what does not work yet, written at the
+day-6 freeze. *HD11.*
+
 **LC00-LC03** — GSE-One's lifecycle phases: LC00 onboarding, LC01 discovery & planning,
 LC02 development sprint, LC03 capitalization. *HD05.*
+
+**Licence** — The terms under which code may be used, changed and shared (MIT,
+Apache-2.0, GPL…): your repository's and your dependencies'. *HD11.*
 
 **LLM (large language model)** — A model trained to predict the next token of text; the
 engine inside every coding agent. *HD01.*
 
 **Lint** — Static checks of code style and likely bugs, run by a tool (e.g. ESLint). *HD07.*
+
+**Logs** — What a program wrote while it ran. *Build log*: while the image is built;
+*runtime log*: while the container runs. Read for the first error. *HD09, HD10.*
 
 **MCP (Model Context Protocol)** — A standard to plug external tools and data sources into
 an agent. *HD01, HD03.*
@@ -146,12 +176,18 @@ an agent. *HD01, HD03.*
 **Merge** — Bringing the commits of one branch into another. In GSE-One, a merge into
 `main` is a Gate. *HD04, HD08.*
 
+**Milestone** — A fixed time with a result you can check: the project card (day 4), plan
+and requirements validated (day 5, 16:30), first delivery (day 6, 11:30). *HD08, HD10.*
+
 **Mini-project** — Your own small professional project (one user, one problem, 2-4
 requirements), framed on one page, run in Lightweight mode, delivered and demonstrated
 on day 6. *HD08-HD12.*
 
 **Model key** — Your personal, capped credential to call the model provider. It is a
 secret: stored by `opencode auth login`, never in a file, prompt or issue. *HD02.*
+
+**Monday-morning plan** — The first concrete thing you will do differently at work, when,
+and how you will know it worked. *HD12.*
 
 **Mutant test** — Deliberately break the code: if no test fails, your tests do not protect
 that behaviour. *HD03.*
@@ -169,6 +205,9 @@ agent goes off track" (the 6 steps in recovery.md). *HD05.*
 **Permissions** — What the agent may do without asking (edit, run commands, access
 folders). Give the least needed. *HD01, HD03.*
 
+**Personal data** — Any information about an identifiable person (name, e-mail, health…).
+Keep the fewest, say why and for how long (GDPR); demo with made-up data. *HD11.*
+
 **Plan (`docs/plan.md`, `plan.yaml`)** — Day 2: your hand-written list of 5-8 atomic tasks.
 Days 3-6: GSE-One's living sprint plan in `.gse/plan.yaml` (`/gse-plan`). *HD03, HD06.*
 
@@ -180,6 +219,10 @@ Classification, P12 Version Control, P16 Adversarial Review). *HD05.*
 
 **Produce** — `/gse-produce`: implement a task on its own feature branch and worktree,
 then run the tests. *HD07.*
+
+**Project card** — The page that frames the mini-project (day 4, `docs/project.md`), then
+the top of its README: pitch, how to run it, live address, known limits (day 6).
+*HD08, HD11.*
 
 **Prompt** — What you send to the model. Never put keys, passwords, personal or client
 data in a prompt. *HD01.*
@@ -193,8 +236,15 @@ data in a prompt. *HD01.*
 **Review** — Critical reading of a change. Day 2: AI review of your diff, triaged by hand.
 GSE-One: `/gse-review`, several perspectives, findings in `review.md`. *HD04, HD07.*
 
+**Rollback** — Going back to the last version that worked (a tag, the previous image) when
+a deployment breaks: roll back first, debug after. *HD09.*
+
 **RVW-NNN (review finding)** — One finding of a GSE-One review, with a perspective and a
 severity. *HD07.*
+
+**Secret** — A key, password or token. Never in the code or in git (`.env` ignored,
+`.env.example` committed); a leaked secret is revoked, not just deleted. *HD02, HD09,
+HD11.*
 
 **Spike** — A short throw-away experiment to answer a technical question
 (`/gse-task --spike`, max 3 points); produces a DEC, the code is not kept. *HD08.*

@@ -37,4 +37,5 @@ Lightweight mode (your mini-project) keeps plan → requirements → production 
 - *A command does nothing* → check you are in the project folder (`pwd`), then `cat .gse/registry` prints `.opencode`.
 - *The agent wants to commit on `main`* → refuse: one branch per task; the guardrail blocks it anyway.
 - *You are 15 minutes late on an exercise* → restart from the exercise's recovery tag (on the slide).
+- *You are late on your mini-project (days 5-6, no recovery tag)* → `/gse-status`, move what will not fit to the backlog (`/gse-backlog`), then your tutor window.
 - *You do not know what to do next* → `/gse-status`, then your tutor window.

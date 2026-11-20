@@ -97,3 +97,19 @@ the GSE-One clone in `~/ai4se/gensem` answers which question. Never read the spe
 ## 16. I found a mistake in a slide, a sheet or GSE-One
 Open an issue on `nicolasguelfi/gensem` with the label `ai4se-ed2` (one issue per
 problem). The repository is public: no key, password, client code or personal data.
+
+## 17. My mini-project is late (days 5-6)
+There is no recovery tag for your own project. `/gse-status` shows what is left; move what
+will not fit before the next milestone to the backlog (`/gse-backlog`) — day 5 16:30 plan
+and requirements, day 6 11:30 first delivery. A small product that works is the goal.
+Then your tutor window, then raise your hand.
+
+## 18. Two models give different requirements (exercise E21)
+Expected. Compare the structure, not the words: how many requirements, how many testable,
+which non-functional requirement is missing, which questions were asked, what it cost.
+Keep the better version, and say why in the tracking sheet.
+
+## 19. My app breaks during the gallery demo
+Show the version you froze: `git switch --detach demo`, then start the app. If it still
+fails, show the requirements, the tests and the release notes: the process is what is
+judged. Afterwards, `git switch main`.

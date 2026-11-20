@@ -404,142 +404,142 @@ checkpoints (see [recovery](recovery.md)).
 
 ---
 
-## HD09 — Day 5 morning (Thu 10/12): mini-project sprint; deployment waves
+## HD09 — Day 5 morning (Thu 10/12): deployment; your mini-project sprint starts
 
-*Provisional — refined before the day.*
-
-**Timing.** 09:00-12:15.
+**Timing.** 09:00-12:15 (break 10:45-11:00). Lunch 12:15-13:15.
 
 | Time | Session |
 |---|---|
-| 09:00 | Welcome, `tutor update`, `/gse-resume` on the mini-project |
-| 09:15 | How deployment works: container (Dockerfile), server, your application id |
-| 09:45 | **Mini-project sprint**: plan and requirements |
-| 09:45 → | **Deployment waves** of 5 learners, in parallel with the sprint |
+| 09:00 | Welcome, `tutor update`, `/gse-resume` on your mini-project |
+| 09:15 | **CCSET16 — Deployment** (30 min): from code to a service; how GSE-One deploys; how we deploy in this course |
+| 09:45 | **E20 — Your mini-project sprint**: the plan, then the requirements, compared on two models (**E21**) |
+| 11:00 | The sprint goes on; **E19 — Deploy CalcApp**, waves 1 (11:00) and 2 (11:40), with the trainer |
 
-**Goals.** Make steady progress on your own project with the method; deploy CalcApp
-(or your mini-project) once, guided, to understand the path from code to a live URL.
+**Goals.** Understand the path from code to a live service and what can go wrong on it;
+start your own sprint in Lightweight mode; compare two models with a grid rather than by feel.
 
 **Key notions.**
-- A Dockerfile describes how to build and run the app in a container (the CalcApp starter ships a tested one).
-- Deployment is done in waves of 5 to avoid overloading the server; the trainer guides each wave.
-- Credentials never go into the repository, a prompt or an issue.
-- Requirements first: no production without at least one requirement with acceptance criteria.
+- Code → build → image → container → address; build once, deploy the same image everywhere.
+- Dockerfile = the recipe of the image (the CalcApp starter ships a tested one; GSE-One writes one only if it is missing).
+- Configuration in environment variables; secrets never in git (`.env` ignored, `.env.example` committed); a leaked key is revoked.
+- Build log vs runtime log; health check; healthy is not the right version; roll back first, debug after.
+- Lightweight sprint: plan → requirements → production → delivery, 8-10 points, extra ideas in the backlog.
+- Two models, one grid: number of requirements, testability, forgotten non-functional requirement, questions asked, cost — the structure, not the words.
 
-**Activities.**
-- Sprint: `/gse-plan`, `/gse-reqs` on the mini-project; commit and push.
-- Deployment: when your wave is called, follow the deployment sheet with the trainer.
+**Activities.** E20 (plan and requirements, from 09:45); E21 (the same `/gse-reqs` on
+two models, 60 min with the plan); E19 when your wave is called (steps given with the
+sheet once the deployment server is chosen).
 
-**Artefacts produced.** Mini-project plan and `reqs.md`; a deployed application.
+**Artefacts produced.** Mini-project `.gse/plan.yaml` and `docs/sprints/sprint-01/reqs.md`;
+your comparison grid; CalcApp online (wave of the morning or of the afternoon).
 
-**Commands met.** `/gse-resume` · `/gse-plan` · `/gse-reqs` · `/gse-status` · deployment commands given on the sheet.
+**Commands met.** `/gse-resume` · `/gse-plan` · `/gse-reqs` · `/gse-backlog` · `/models` (opencode) ·
+`/gse-deploy` (E19) · `git push --all origin`.
 
-**Recovery tag(s).** CalcApp deployable tag announced on the day; mini-project: `gse-backup/…` and checkpoints.
+**Recovery tag(s).** None for the mini-project: it is your own. Stuck → tutor window
+(`tutor add <path>` if the project is outside `~/ai4se`), the back of the orientation page, the trainer.
 
-**Sheet.** [`hd09-day5-am.md`](hd09-day5-am.md) (coming with phase 3).
+**Sheet.** [`hd09-day5-am.md`](hd09-day5-am.md).
 
 ---
 
-## HD10 — Day 5 afternoon (Thu 10/12): mini-project sprint; milestone at 16:30
+## HD10 — Day 5 afternoon (Thu 10/12): the sprint goes on; milestone at 16:30
 
-*Provisional — refined before the day.*
-
-**Timing.** 13:15-17:00.
+**Timing.** 13:15-17:00 (break 15:00-15:15).
 
 | Time | Session |
 |---|---|
-| 13:15 | Mini-project sprint continues; remaining deployment waves |
-| 16:30 | **Milestone**: requirements and plan validated with the trainer |
-| 16:45 | Push, `/gse-pause`, buffer |
+| 13:15 | The sprint goes on (E20); deployment waves 3 (13:15) and 4 (14:00) |
+| 15:15 | The sprint goes on; **milestone**: the trainer validates plans and requirements, one by one |
+| 16:30 | Debrief: the milestone; the deployment (what got stuck, which log you read) |
+| 16:45 | Buffer: push, `/gse-pause` |
 
-**Goals.** Have a validated plan and requirements and the first tasks produced, so that
-day 6 is about finishing, not starting.
+**Goals.** A validated plan and validated requirements, the first tasks produced, and
+everything that will not fit by tomorrow 11:30 moved to the backlog.
 
 **Key notions.**
-- Cut scope early: what will not be done by Friday 11:30 goes to the backlog.
-- Each task on its own branch, tests run by PRODUCE.
-- Lightweight DELIVER still runs a minimal integrity check (HIGH findings block the merge).
+- Milestone check: 8-10 points; each task traced to a requirement; 2-5 requirements with Given/When/Then; one measurable non-functional requirement; out of scope in the backlog.
+- Each task on its own branch; PRODUCE runs the tests (Lightweight generates a minimal test strategy).
+- Cut scope early: "delivered by 11:30 tomorrow? If not, cut now."
 
-**Activities.** `/gse-produce` on the first tasks; milestone review with the trainer at 16:30.
+**Activities.** `/gse-produce` task by task; milestone validation with the trainer between
+15:15 and 16:30; debrief at 16:30.
 
 **Artefacts produced.** Validated `reqs.md` and plan; first produced tasks with tests; pushed repository.
 
-**Commands met.** `/gse-produce` · `/gse-status` · `/gse-backlog` · `/gse-pause` · `git push`.
+**Commands met.** `/gse-produce` · `/gse-status` · `/gse-backlog` · `/gse-pause` · `git push --all origin`.
 
-**Recovery tag(s).** `gse-backup/…` tags and checkpoints.
+**Recovery tag(s).** None for the mini-project; GSE-One backup tags `gse-backup/…` and
+`/gse-pause` checkpoints (see [recovery](recovery.md)).
 
-**Sheet.** [`hd10-day5-pm.md`](hd10-day5-pm.md) (coming with phase 3).
+**Sheet.** [`hd10-day5-pm.md`](hd10-day5-pm.md).
 
 ---
 
-## HD11 — Day 6 morning (Fri 11/12): finish, deliver, freeze; applied ethics
+## HD11 — Day 6 morning (Fri 11/12): finish, deliver, freeze; audit your project
 
-*Provisional — refined before the day.*
-
-**Timing.** 09:00-12:45.
+**Timing.** 09:00-12:45 (break 10:30-10:45). Lunch 12:45-13:45.
 
 | Time | Session |
 |---|---|
 | 09:00 | Welcome, `tutor update`, `/gse-resume` |
-| 09:15 | Finish the sprint |
-| 11:30 | **First delivery** (`/gse-deliver`) |
-| 12:00 | **Freeze** — no new features; hunt for empty stubs |
-| 12:15 | **Applied ethics on your own project**: AI Act, licences, security |
+| 09:15 | Finish the sprint (E20) |
+| 11:30 | **E22 — Deliver** (`/gse-deliver`), then **freeze** at 12:00: hunt the empty shells, README project card and known limits, tag `demo` |
+| 12:15 | **E23 — Audit your project** (cycle CCSET03 applied): AI Act, licences, secrets, personal data |
 
-**Goals.** Deliver something that really works; check honestly what is real and what is
-a placeholder; look at your own project through ethics, law and security.
+**Goals.** Deliver something that really works; say honestly what is real and what is a
+placeholder; look at your own project through law, licences, security and data.
 
 **Key notions.**
-- Freeze: after noon only fixes, no new features.
-- Empty stubs: buttons or functions that look done but do nothing (placeholders, `TODO`, `PREVIEW:` markers).
-- AI Act risk categories applied to your project; licences of the code and dependencies you used; secrets and data exposure.
+- Lightweight delivery: a minimal integrity check (devil's advocate, at most 5 findings); a HIGH finding stops the merge until you decide.
+- Freeze: after 12:00 no new feature. Empty shells: `NotImplemented`, `TODO`, buttons that do nothing.
+- README project card: pitch, how to run it, live address, known limits.
+- AI Act risk level and transparency; licences of your code and dependencies; no secret in the git history; personal data kept to the minimum.
 
-**Activities.** Finish and deliver; stub hunt (click every button, read every `TODO`);
-a short ethics/licence/security checklist on your own project.
+**Activities.** Finish and deliver; freeze and stub hunt; README; tag `demo`; the four-point
+audit written as a README section "Ethics and compliance".
 
-**Artefacts produced.** Delivered and tagged mini-project; your ethics/security checklist notes.
+**Artefacts produced.** Delivered mini-project on `main`; tag `demo` on GitHub; README with
+project card, known limits, and "Ethics and compliance".
 
-**Commands met.** `/gse-deliver` · `/gse-status` · `/gse-health` · `git tag` · `git push`.
+**Commands met.** `/gse-status` · `/gse-deliver` · `git grep` · `git tag demo` ·
+`git push origin main demo` · `git log --all --oneline -- .env` · `npm view <package> license` / `pip show <package>`.
 
-**Recovery tag(s).** The delivery tag of 11:30 is your demo fallback.
+**Recovery tag(s).** The delivery of 11:30 and the tag `demo` are your demo fallback.
 
-**Sheet.** [`hd11-day6-am.md`](hd11-day6-am.md) (coming with phase 3).
+**Sheet.** [`hd11-day6-am.md`](hd11-day6-am.md).
 
 ---
 
 ## HD12 — Day 6 afternoon (Fri 11/12): gallery demos, lessons learned, closing
 
-*Provisional — refined before the day.*
-
-**Timing.** 13:45-17:00.
+**Timing.** 13:45-17:00 (break 15:30-15:45).
 
 | Time | Session |
 |---|---|
-| 13:45 | Prepare your demo (imposed structure) |
+| 13:45 | Prepare your demo (E24); the trainer checks the final repositories |
 | 14:00 | **Gallery, rotation 1** — half of the group presents at their laptop, the other half visits |
 | 14:45 | **Gallery, rotation 2** — roles swap |
-| 15:30 | Break |
-| 15:45 | Lessons learned (group) |
+| 15:45 | **E25 — Lessons learned** in groups: keep, change, drop |
 | 16:15 | Your "Monday morning" plan |
-| 16:35 | Final questionnaire |
-| 16:50 | Certificates, closing |
+| 16:35 | Final questionnaire (link given in class) |
+| 16:50 | Certificates, resources |
 
-**Goals.** Show what you built and how; hear what others learned; leave with a concrete
+**Goals.** Show what you built and how; test the projects of others; leave with a concrete
 plan for using AI agents with discipline at work.
 
 **Key notions.**
-- Demo in 5-7 minutes with an imposed structure: the problem, a live demo, the evidence
-  (requirements, tests, review), one lesson.
-- Lessons learned: what you would keep, change, drop.
-- "Monday morning": the first concrete thing you will do differently at work.
+- Demo in 5-7 minutes with an imposed structure: the problem, the product live, one GSE-One moment, one lesson, questions.
+- Visitor grid: does it solve the problem (try it)? one requirement and its test? one limit or risk?
+- Lessons learned: what you keep, change, drop. "Monday morning": one action, when, first step, how you will know it worked.
 
 **Activities.** Two gallery rotations; group lessons learned; individual plan; final
 questionnaire (the course's main feedback channel, together with the `ai4se-ed2` issues).
 
-**Artefacts produced.** Your demo; your "Monday morning" plan; certificate of attendance.
+**Artefacts produced.** Your demo; your visitor notes; your "Monday morning" plan; certificate of attendance.
 
-**Commands met.** None new.
+**Commands met.** `git switch --detach demo` (demo from the frozen version).
 
-**Recovery tag(s).** Demo from your delivery tag if the latest version misbehaves.
+**Recovery tag(s).** Demo from your `demo` tag if the latest version misbehaves.
 
-**Sheet.** [`hd12-day6-pm.md`](hd12-day6-pm.md) (coming with phase 3).
+**Sheet.** [`hd12-day6-pm.md`](hd12-day6-pm.md).
