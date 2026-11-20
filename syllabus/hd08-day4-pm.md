@@ -84,7 +84,8 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 10.4 — Merge Strategy (Gate Decisi
 
 *The problem:* a full method on a one-day project costs more than it gives; no method lets the scope explode.
 
-- The Lightweight mode keeps the same cycle with fewer steps and Gates: plan → requirements → production → delivery.
+- The Lightweight mode runs a shorter cycle with fewer Gates: plan → requirements → production → delivery — no review, fix or capitalisation step.
+- Its net: `/gse-deliver` runs a minimal integrity check (devil's advocate, at most 5 findings); a HIGH finding stops the merge until you decide.
 - The sprint has a complexity budget: what does not fit goes to the backlog.
 - `/gse-go --adopt` brings an existing project under GSE-One without starting again.
 

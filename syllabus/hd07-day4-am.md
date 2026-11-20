@@ -85,6 +85,8 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 6.1 — Test Strategy Framework`; `�
 
 **Continuous integration** (Fowler, 2006): the same checks, on a clean machine, at every push — install, lint, tests with coverage, build, green or red. Red means: stop and fix before anything else is merged.
 
+**Real case: green tests, red build.** In our rehearsal of this exercise, `npm run test:run` was green and the 7-reviewer `/gse-review` had passed, yet the CI went red at the build step: `tsc -b` (the first half of `npm run build`) found a type error — `tests/policy/lint.test.ts` cannot find module `node:child_process`. Vitest runs the tests without type-checking, and the reviewers read the code without compiling it; only the build looked at the types. Coverage that evening: 99 % of statements. The CI caught what the review missed (GSE-One fixed it later as finding RVW-033). The lesson: **each check sees a different thing — green tests ≠ green build.** Before you say "done", run `npm run build`, and read the CI.
+
 ### How GSE-One solves it (CCSET13, concept only)
 
 *The problem:* the agent says "done"; nothing says how healthy the project is.
@@ -110,7 +112,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 6.1 — Test Strategy Framework`; `�
 
 **If stuck:** No CI run? The kit is not pushed: `git push mine --all`. Then your tutor window → raise your hand.
 
-**Debrief:** What does coverage not tell you? Hint: a file no test loads is not even listed.
+**Debrief:** What does coverage not tell you? Hint: a file no test loads is not even listed. And are green tests a green build? (Each check sees a different thing.)
 
 ### Links
 

@@ -65,7 +65,7 @@ The new files are part of your project: committed on a branch, merged into `main
 
 - `/gse-go` is not recognised → opencode was started before the install, or in another folder: quit, `cd ~/ai4se/calcapp`, restart `opencode`.
 - The agent proposes to commit on `main` → refuse. GSE-One itself refuses at a Gate and offers safe paths (a branch, …); its hook blocks the commit only if the agent tries anyway. Work on the task branches GSE-One creates: `main` only receives their merges.
-- You accept every Gate without reading → apply the grid; a Gate you always accept is not a Gate.
+- You accept every Gate without reading → apply the grid; a Gate you always accept is not a Gate. GSE-One's coach notices it too (see the real case after E12).
 
 ### Links
 
@@ -94,7 +94,17 @@ The cycle of day 2 (CCSET06), now with the method. A sprint is a cycle sized by 
 
 **If stuck:** Your tutor window → restart from the tag `p3-start` → raise your hand.
 
-**Debrief:** What did GSE-One's plan see that your `docs/plan.md` missed — and the other way round?
+**Debrief:** What did GSE-One's plan see that your `docs/plan.md` missed — and the other way round? How many Gates did you accept as proposed? (After a run of them, the coach asks you to pick Discuss once.)
+
+### Real case — when the coach says "Discuss once"
+
+In our rehearsal of this afternoon, the plan, requirements, design and preview Gates were all accepted with the recommended option. GSE-One's **coach** (a sub-agent that watches how you and the agent work together) then wrote:
+
+> "Your coach again (medium, dismissible): you've now taken the recommended option 4 times in a row — past the point where it suggests a deliberate challenge. At the next checkpoint, pick 'Discuss' once … One genuine pushback re-calibrates the loop — it isn't a sign anything was wrong."
+
+- *Why it matters:* four Gates passed and no decision taken — the plan, the requirements, the design and the preview were the agent's, not yours. Accepting every recommendation is rubber-stamping: a Gate you always accept is not a Gate.
+- *What to do:* at the next Gate, ask the 3 questions of the grid, then choose **Discuss**, or change one thing (split, reorder or remove a task; add a requirement). In the rehearsal this gave two real changes: the CI task went back to the backlog, and a measurable non-functional requirement was added (1,000 expenses listed in under 200 ms).
+- *Where to see it:* `.gse/status.yaml`, counter `consecutive_acceptances`. For a beginner the coach speaks from 3 in a row; one real pushback resets it to 0. It is a nudge, never a block.
 
 ### Links
 

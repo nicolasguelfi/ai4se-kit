@@ -388,7 +388,7 @@ project that you can finish and demo in a day and a half.
 - Backup tags `gse-backup/…`; pause and resume; the backlog for later ideas.
 - Capitalisation: project learnings, methodology feedback, competencies.
 - Mini-project = one user, one problem, 2-4 requirements, a first sprint of 8-10 points; one page: scope, milestones, demo.
-- Lightweight mode: plan → requirements → production → delivery.
+- Lightweight mode: plan → requirements → production → delivery; no review or fix step — delivery runs a minimal integrity check instead.
 
 **Artefacts produced.** Delivered sprint on CalcApp (tag, release notes, capitalisation),
 mini-project repository with `.gse/` and its project card (`docs/project.md`).
