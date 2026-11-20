@@ -25,13 +25,23 @@ npm run test:run
 | `j2-part1` | HD04 (day 2 afternoon): CalcApp v0.1, part 2 |
 | `j2-v0.1` | HD04 end: v0.1 ready for delivery, bridge to GSE-One |
 | `p3-start` | HD05 (day 3 morning): CalcApp ready for GSE-One |
+| `p5-start` | HD06 (day 3 afternoon, E13): GSE-One installed, sprint plan approved, before requirements and design |
+| `p6-start` | HD07 (day 4 morning, E14): requirements, design and preview validated, quality kit in; start of tests |
+| `p7-start` | HD08 (day 4 afternoon, E16): sprint produced and reviewed (`review.md`); start of fix and delivery |
 
 From `p3-start` on (day 3), GSE-One takes `main` as the reference: restart on `main`, not
 on `mywork` — `git switch -C main p3-start` instead of `git checkout -b mywork <tag>`.
+Exception, `p7-start`: the sprint work sits on the sprint branch, so restart with
+`git switch -C gse/sprint-01/integration p7-start` then `git branch -f main p6-start`
+(`/gse-deliver` then merges the sprint into `main`).
 
-More tags are added for later days: `git fetch --tags && git tag` lists them; the
-half-day sheet says which one to use. Keep your old folder: nothing is deleted, you can
-compare later. The tutor window already sees the new folder if it is under `~/ai4se`.
+The tags `p5-start`, `p6-start` and `p7-start` carry no learner profile. Before `/gse-go`
+(or `/gse-resume`), copy your own from your old folder: `cp ../calcapp/.gse/profile.yaml .gse/`.
+Otherwise GSE-One asks you the profile questions again.
+
+The half-day sheet says which tag to use; `git fetch --tags && git tag` lists them all.
+Keep your old folder: nothing is deleted, you can compare later. The tutor window already
+sees the new folder if it is under `~/ai4se`.
 
 ## GSE-One: stopping and resuming
 
