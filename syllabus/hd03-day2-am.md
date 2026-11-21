@@ -189,7 +189,7 @@ Check: restart opencode, the sidebar shows context7 *Connected*; in a prompt, sa
 
 ### Exercise — Try it ×3 (5 min each, after a 3-min demo)
 
-**1. Rules.** *Goal:* a rule of yours changes the agent's answer. *Steps:* `git switch mywork`, then `opencode`; ask "Which test command and folders must you use?"; add to `AGENTS.md`: `Amounts are integers in cents.`; `/new`, then "Propose formatAmount. Code only, no file."; `git diff AGENTS.md`, then commit it. *Done when:* the proposal uses cents and `git log` shows your `AGENTS.md` commit. *Mid-point (2 min):* the agent named the test command.
+**1. Rules.** *Goal:* a rule of yours changes the agent's answer. *Steps:* `git switch mywork`, then `opencode`; ask "Which test command and folders must you use?"; add to `AGENTS.md`: `Amounts are in euros, 2 decimals: €25.50.`; `/new`, then "Propose formatAmount. Code only, no file."; `git diff AGENTS.md`, then commit it. *Done when:* the proposal shows 25.5 as €25.50 and `git log` shows your `AGENTS.md` commit. *Mid-point (2 min):* the agent named the test command.
 
 **2. Context.** *Goal:* compare a vague prompt with a precise one. *Steps:* `/new`, "How are tests organised here?" — note the answer; `/new`, "From @package.json and @AGENTS.md: test command, folder, naming?"; `!npm run test:run` (the `!` runs a shell command; its output joins the conversation); "Summarise the test results in two lines." *Done when:* it quotes the test command and folder from the files. *Mid-point (2 min):* the vague answer is noted.
 
