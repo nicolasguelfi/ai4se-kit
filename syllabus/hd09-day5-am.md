@@ -82,7 +82,13 @@ HEALTHCHECK CMD wget -q -O /dev/null http://127.0.0.1:3000/
 
 ### How we deploy in this course
 
-*To be written once the deployment server is chosen.* This section will give your identifier on the server, the configuration file you copy (never committed), the order of the waves of 5, and how you read your logs.
+- **Your repository.** Your own CalcApp repository becomes `origin` (`mine` until now; the starter becomes `starter`). Push `main`: the server builds what is on GitHub, not what is on your laptop.
+- **Your identifier.** `l` + your number in the tracking sheet, e.g. `l07`. Your app lives at `https://calcapp-l07.<course domain>` — never your name: the address is public.
+- **The course file.** The trainer gives you `.env.training` at the deployment table; copy it into CalcApp as `.env`. Git ignores it: never commit it.
+- **The command.** `/gse-deploy`, role Learner: it checks the file and your remote, builds the image, starts the container, gets the HTTPS certificate and calls the app until it answers (1-3 min). Run it again after a fix: it reuses your app.
+- **Your logs.** `/gse-deploy --logs` shows the last 100 lines of your running app (`--lines 300` for more). A build that fails leaves no running app: run `npm run test:run && npm run build` on your laptop, the server runs the same steps.
+- **The waves.** 5 learners at the deployment table: 11:00, 11:40, 13:15, 14:00; the others go on with their sprint.
+- **The token.** The course file holds a token that reaches every app on the server: deploy only your own. After the course the token is revoked and every app removed.
 
 ### Links
 
@@ -175,13 +181,18 @@ Waves of 5 learners deploy CalcApp with the trainer, at the deployment table, wh
 
 **Steps:**
 
-1. Steps: to be written once the deployment server is chosen. Wait for your wave; the trainer guides it.
+1. Before your wave, in `~/ai4se/calcapp` on `main`: make your own repository the one that gets deployed (`git remote rename origin starter`, then `git remote rename mine origin`), then `git push origin main`. The server builds what is on GitHub, not what is on your laptop.
+2. At the deployment table, the trainer gives you the course file `.env.training`. Copy it into CalcApp as `.env`, open it and set `DEPLOY_USER=` to your learner identifier (`l` + your number in the tracking sheet, e.g. `l07`) — never your name: the address is public. `git status` must not list `.env`.
+3. In opencode: `/gse-deploy`, choose Learner. It checks `.env` and your remote, then builds and starts CalcApp (1-3 min). A warning about uncommitted `.gse/` files only: accept it.
+4. Open the address it gives (`https://calcapp-<identifier>.<course domain>`) and do one calculation.
+5. `/gse-deploy --logs`: find your own visit in the log, then the other lines — who else is calling your app?
+6. Write your address in the tracking sheet.
 
-**Done when:** CalcApp answers at its address.
+**Done when:** CalcApp answers at its HTTPS address, you found your own visit in its logs, and the address is in the tracking sheet.
 
-**If stuck:** The trainer, at the deployment table.
+**If stuck:** The build failed? Run `npm run test:run && npm run build` on your laptop: the server runs the same steps. Fix, push, run `/gse-deploy` again (it reuses your app). A 503 page: the container is starting, wait one minute. Then the trainer, at the deployment table.
 
-**Debrief:** At 16:30, debrief of cycle 16: what got stuck, and where you read your logs.
+**Debrief:** At 16:30, debrief of cycle 16: what got stuck, where you read your logs, and what the robots in your log were looking for.
 
 ## References
 
