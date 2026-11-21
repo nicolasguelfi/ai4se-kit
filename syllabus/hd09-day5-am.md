@@ -83,7 +83,7 @@ HEALTHCHECK CMD wget -q -O /dev/null http://127.0.0.1:3000/
 ### How we deploy in this course
 
 - **Your repository.** Your own CalcApp repository becomes `origin` (`mine` until now; the starter becomes `starter`). Push `main`: the server builds what is on GitHub, not what is on your laptop.
-- **Your identifier.** `l` + your number in the tracking sheet, e.g. `l07`. Your app lives at `https://calcapp-l07.<course domain>` — never your name: the address is public.
+- **Your identifier.** `v` + your number in the tracking sheet, e.g. `v07`. Your app lives at `https://calcapp-v07.<course domain>` — never your name: the address is public.
 - **The course file.** The trainer gives you `.env.training` at the deployment table; copy it into CalcApp as `.env`. Git ignores it: never commit it.
 - **The command.** `/gse-deploy`, role Learner: it checks the file and your remote, builds the image, starts the container, gets the HTTPS certificate and calls the app until it answers (1-3 min). Run it again after a fix: it reuses your app.
 - **Your logs.** `/gse-deploy --logs` shows the last 100 lines of your running app (`--lines 300` for more). A build that fails leaves no running app: run `npm run test:run && npm run build` on your laptop, the server runs the same steps.
@@ -182,7 +182,7 @@ Waves of 5 learners deploy CalcApp with the trainer, at the deployment table, wh
 **Steps:**
 
 1. Before your wave, in `~/ai4se/calcapp` on `main`: make your own repository the one that gets deployed (`git remote rename origin starter`, then `git remote rename mine origin`), then `git push origin main`. The server builds what is on GitHub, not what is on your laptop.
-2. At the deployment table, the trainer gives you the course file `.env.training`. Copy it into CalcApp as `.env`, open it and set `DEPLOY_USER=` to your learner identifier (`l` + your number in the tracking sheet, e.g. `l07`) — never your name: the address is public. `git status` must not list `.env`.
+2. At the deployment table, the trainer gives you the course file `.env.training`. Copy it into CalcApp as `.env`, open it and set `DEPLOY_USER=` to your learner identifier (`v` + your number in the tracking sheet, e.g. `v07`) — never your name: the address is public. `git status` must not list `.env`.
 3. In opencode: `/gse-deploy`, choose Learner. It checks `.env` and your remote, then builds and starts CalcApp (1-3 min). A warning about uncommitted `.gse/` files only: accept it.
 4. Open the address it gives (`https://calcapp-<identifier>.<course domain>`) and do one calculation.
 5. `/gse-deploy --logs`: find your own visit in the log, then the other lines — who else is calling your app?
