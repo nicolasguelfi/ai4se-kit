@@ -483,8 +483,8 @@ everything that will not fit by tomorrow 11:30 moved to the backlog.
 | Time | Session |
 |---|---|
 | 09:00 | Welcome, `tutor update`, `/gse-resume` |
-| 09:15 | Finish the sprint (E20) |
-| 11:30 | **E22 — Deliver** (`/gse-deliver`), then **freeze** at 12:00: hunt the empty shells, README project card and known limits, tag `demo` |
+| 09:15 | Finish the sprint (E20); from 11:00, its last task: hunt the empty shells, README project card and known limits |
+| 11:30 | **E22 — Deliver** (`/gse-deliver`), tag `demo`; **freeze** at 12:00: rehearse your demo |
 | 12:15 | **E23 — Audit your project** (cycle CCSET03 applied): AI Act, licences, secrets, personal data |
 
 **Goals.** Deliver something that really works; say honestly what is real and what is a
@@ -492,18 +492,20 @@ placeholder; look at your own project through law, licences, security and data.
 
 **Key notions.**
 - Lightweight delivery: a minimal integrity check (devil's advocate, at most 5 findings); a HIGH finding stops the merge until you decide.
-- Freeze: after 12:00 no new feature. Empty shells: `NotImplemented`, `TODO`, buttons that do nothing.
+- README = last task of the sprint (from 11:00), through GSE-One. Empty shells: `NotImplemented`, `TODO`, buttons that do nothing.
+- Freeze: after 12:00 nothing more is committed; rehearse the demo. The delivered sprint is closed: `/gse-task` opens the next one (also after the course).
 - README project card: pitch, how to run it, live address, known limits.
 - AI Act risk level and transparency; licences of your code and dependencies; no secret in the git history; personal data kept to the minimum.
 
-**Activities.** Finish and deliver; freeze and stub hunt; README; tag `demo`; the four-point
-audit written as a README section "Ethics and compliance".
+**Activities.** Finish the sprint, its last task the stub hunt and the README; deliver; tag `demo`;
+freeze and rehearse; the four-point audit written as a README section "Ethics and compliance"
+(first task of a new sprint).
 
 **Artefacts produced.** Delivered mini-project on `main`; tag `demo` on GitHub; README with
 project card, known limits, and "Ethics and compliance".
 
-**Commands met.** `/gse-status` · `/gse-deliver` · `git grep` · `git tag demo` ·
-`git push origin main demo` · `git log --all --oneline -- .env` · `npm view <package> license` / `pip show <package>`.
+**Commands met.** `/gse-status` · `/gse-deliver` · `/gse-task` · `git grep` · `git tag demo main` ·
+`git push origin demo` · `git log --all --oneline -- .env` · `npm view <package> license` / `pip show <package>`.
 
 **Recovery tag(s).** The delivery of 11:30 and the tag `demo` are your demo fallback.
 

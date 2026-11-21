@@ -8,8 +8,8 @@
 | 09:00 | 15 | Welcome: `tutor update`, `/gse-resume` |
 | 09:15 | 75 | Finish the sprint (E20) |
 | 10:30 | 15 | Break |
-| 10:45 | 45 | Finish the sprint |
-| 11:30 | 45 | E22 — Deliver (11:30), then freeze (12:00) |
+| 10:45 | 45 | Finish the sprint; from 11:00, its last task: empty shells and README (E22, step 1) |
+| 11:30 | 45 | E22 — Deliver and tag `demo` (11:30), then freeze: rehearse your demo (12:00) |
 | 12:15 | 30 | E23 — Audit your project (cycle CCSET03 applied) |
 | 12:45 | 60 | Lunch |
 
@@ -26,17 +26,19 @@ At the end of this half-day you can:
 
 ### Key ideas
 
-**Today.** 09:15 finish the sprint (E20) · 11:30 deliver, then freeze at 12:00 (E22) · 12:15 audit your project: AI Act, licences, secrets, data (E23) · 13:45 prepare your demo; gallery in two rotations, 14:00 and 14:45 (E24) · 15:45 lessons learned; your Monday-morning plan (E25) · 16:35 final questionnaire, certificates, resources. First: `~/ai4se/ai4se-kit/tutor update` in the tutor window, then `/gse-resume` in your project.
+**Today.** 09:15 finish the sprint (E20); from 11:00, its last task: empty shells, README · 11:30 deliver, tag `demo`; 12:00 freeze: rehearse your demo (E22) · 12:15 audit your project: AI Act, licences, secrets, data (E23) · 13:45 prepare your demo; gallery in two rotations, 14:00 and 14:45 (E24) · 15:45 lessons learned; your Monday-morning plan (E25) · 16:35 final questionnaire, certificates, resources. First: `~/ai4se/ai4se-kit/tutor update` in the tutor window, then `/gse-resume` in your project.
 
-**Until 11:30: finish, do not start.** Finish the task in progress; start a new one only if it fits. `/gse-status`: what is left? Move what will not make it to the backlog. Every task's tests green before the delivery. Note the moments you will show this afternoon: a Gate you changed, a finding, a refusal. A small thing that works beats a big one that does not run.
+**Until 11:30: finish, do not start.** Finish the task in progress; start a new one only if it fits. **From 11:00, the last task**: hunt the empty shells, write the README project card (sheet E22). `/gse-status`: what is left? Move what will not make it to the backlog. Every task's tests green before the delivery. Note the moments you will show this afternoon: a Gate you changed, a finding, a refusal. A small thing that works beats a big one that does not run.
 
 ## Deliver, then freeze (E22)
 
 ### Key ideas
 
-**Freeze** (12:00): no new feature, only fixes and honesty. An *empty shell* looks finished but does nothing — a button with no action, a function that raises `NotImplemented`, a `TODO`, fake data. Find them before a visitor does: remove them, or list them as known limits.
+**The last task of the sprint** (from 11:00), done through GSE-One like any task, on its task branch. An *empty shell* looks finished but does nothing — a button with no action, a function that raises `NotImplemented`, a `TODO`, fake data. Find them before a visitor does: remove them, or list them as known limits. Then `/gse-deliver` at 11:30 delivers everything, README included.
 
-**README: your project card.** What a visitor reads first — and what the trainer checks at 13:45:
+**Freeze** (12:00): nothing more is committed to the app; rehearse your demo. Once delivered, the sprint is closed: a limit found now is said in the demo and becomes the first task of the next sprint (`/gse-task` opens it — this is also how you keep developing after the course).
+
+**README: your project card.** The last task of your sprint, from 11:00. What a visitor reads first — and what the trainer checks at 13:45:
 
 ```markdown
 # <Project name>
@@ -65,25 +67,25 @@ Saying your limits yourself is part of the delivery.
 
 **Steps:**
 
-1. 11:30, `/gse-deliver`: its integrity check lists at most 5 findings; a HIGH one stops the merge until you decide (fix it, or accept the risk as a recorded decision). Choose the merge strategy at the Gate.
-2. Push the delivery: `git push origin main --tags`.
-3. 12:00, freeze: no new feature from now on. Hunt the empty shells: `git grep -n -E "NotImplemented|TODO|FIXME"`; launch the app and click every button, run every step of your demo.
-4. On a branch (`git switch -c docs/demo`), the README: the project card (a one-sentence pitch, how to launch it, the live address — CalcApp's if your project is not deployed) and a section "Known limits". Commit.
-5. Bring it to `main` and mark the demo version: `git switch main`, `git merge --no-ff docs/demo`, `git tag demo`, `git push origin main demo`.
+1. From 11:00, the last task of your sprint, through GSE-One like any other (on its task branch): hunt the empty shells (`git grep -n -E "NotImplemented|TODO|FIXME"`, click every button, run your demo); write the README project card (pitch, how to run it, live address — CalcApp's if not deployed, "Known limits", an "Ethics and compliance" placeholder for E23).
+2. 11:30, `/gse-deliver`: its integrity check lists at most 5 findings; a HIGH one stops the merge until you decide (fix it, or accept the risk as a recorded decision). Choose the merge strategy at the Gate.
+3. Push the delivery, then mark it as the demo version (a tag, not a commit): `git push origin main --tags`, `git tag demo main`, `git push origin demo`.
+4. 12:00, freeze: nothing more is committed to the app. Rehearse your demo, step by step.
+5. A limit found after the delivery? Say it yourself in the demo; it becomes the first task of the next sprint.
 
-**Done when:** The tag `demo` is on GitHub, and the README shows the project card and the known limits.
+**Done when:** The tag `demo` is on GitHub, on the delivered commit, and its README shows the project card and the known limits.
 
-**Mid-point:** 12:00 — the delivery is on `main` and pushed; the freeze starts.
+**Mid-point:** 12:00 — the delivery is on `main`, tagged `demo` and pushed; the freeze starts.
 
 **If stuck:** A HIGH finding blocks the merge? Small: fix it now. Otherwise accept the risk at the Gate and list it in the known limits. Then your tutor window → raise your hand.
 
-**Debrief:** How many empty shells did you find? Which limit would you rather say yourself than have a visitor find?
+**Debrief:** How many empty shells did you find? Which limit would you rather say yourself than have a visitor find? After the course: the delivered sprint is closed; `/gse-task` (or `/gse-plan`) opens the next one — new task branches, a new `/gse-deliver`.
 
 ### Frequent errors
 
 - Adding "one last feature" after 12:00 → it is the one that breaks the demo; write it in the backlog.
-- Committing the README straight on `main` → the guardrail refuses it; use the `docs/demo` branch, then merge.
-- Forgetting to push the tag → `git push origin main demo`; check the tag on GitHub.
+- Writing the README after `/gse-deliver` → the sprint is closed; it would need a new sprint. Write it before 11:30, as the last task.
+- Forgetting to push the tag → `git push origin demo`; check the tag on GitHub.
 
 ### Links
 
@@ -100,7 +102,7 @@ GSE-One: `§ 13.2 — Lightweight Mode` (minimal integrity check at delivery); `
 - **Secrets**: never in git. A leaked key is revoked, not just deleted (hd09, CCSET16).
 - **Personal data** (GDPR, Regulation (EU) 2016/679): keep the fewest, say why and for how long; demo with made-up data.
 
-**Your README: ethics and compliance.** Four short answers; "not sure, because…" is a valid answer. On a branch, merged into `main` as at 12:00; then push.
+**Your README: ethics and compliance.** Four short answers; "not sure, because…" is a valid answer. The first task of a new sprint: `/gse-task`, then `/gse-deliver`; then push.
 
 ```markdown
 ## Ethics and compliance
@@ -122,7 +124,7 @@ GSE-One: `§ 13.2 — Lightweight Mode` (minimal integrity check at delivery); `
 2. Licences: a `LICENSE` file in your repository? The licence of each direct dependency (`npm view <package> license`, `pip show <package>`): does one forbid your use?
 3. Secrets: `git log --all --oneline -- .env` prints nothing; `git grep -n -i -E "api.?key|secret|password|token"` shows no real value. A leaked key is revoked, not just deleted.
 4. Personal data: which ones does your app keep (names, e-mails, health…), where, why, for how long? Keep the fewest; demo with made-up data.
-5. Write the four answers in a README section "Ethics and compliance", on a branch merged into `main` as at 12:00; push.
+5. Write the four answers in the README section "Ethics and compliance", as the first task of a new sprint: `/gse-task` opens it, `/gse-deliver` delivers it; push.
 
 **Done when:** The README of `main`, on GitHub, has a section "Ethics and compliance" with your four answers.
 

@@ -72,8 +72,8 @@ consequences, kept in `.gse/decisions.md`. *HD06.*
 **Deliver** — `/gse-deliver`: merge the reviewed work, tag a release, write release notes,
 clean up branches; it closes the sprint. *HD08, HD11.*
 
-**Demo tag** — `demo`: the git tag on the frozen version you present in the gallery
-(day 6, 12:00). *HD11, HD12.*
+**Demo tag** — `demo`: the git tag on the delivered commit you present in the gallery
+(day 6, 11:30; a tag, not a commit). *HD11, HD12.*
 
 **Deployment** — Making the app run on a server with a public address. In the course:
 a Dockerfile in the starter, guided waves of 5 learners. *HD09.*
@@ -103,8 +103,8 @@ machine. *HD09.*
 **FreeSelfApp** — The day-1 workshop: a small personal web app built by prompting only,
 to feel vibe coding first-hand. *HD02.*
 
-**Freeze** — On day 6 at noon: no new features, only fixes. Not to be confused with
-GSE-One's *sprint freeze*. *HD11.*
+**Freeze** — On day 6 at noon: nothing more is committed to the app; only rehearse the demo.
+Not to be confused with GSE-One's *sprint freeze*. *HD11.*
 
 **Full / Lightweight / Micro (modes)** — GSE-One's three ceremony levels. Full: the whole
 lifecycle (CalcApp). Lightweight: PLAN → REQS → PRODUCE → DELIVER (mini-project). Micro:
@@ -153,8 +153,8 @@ decide. *HD08, HD11.*
 **Issue (GitHub)** — A ticket on a repository. Course feedback: issues on
 `nicolasguelfi/gensem` with label `ai4se-ed2` — public, never confidential. *HD01.*
 
-**Known limits** — The README section that lists what does not work yet, written at the
-day-6 freeze. *HD11.*
+**Known limits** — The README section that lists what does not work yet, written in the
+last task of the sprint (day 6, from 11:00). *HD11.*
 
 **LC00-LC03** — GSE-One's lifecycle phases: LC00 onboarding, LC01 discovery & planning,
 LC02 development sprint, LC03 capitalization. *HD05.*
