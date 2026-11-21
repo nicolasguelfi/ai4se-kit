@@ -103,7 +103,7 @@ machine. *HD09.*
 **FreeSelfApp** — The day-1 workshop: a small personal web app built by prompting only,
 to feel vibe coding first-hand. *HD02.*
 
-**Freeze** — On day 6 at noon: nothing more is committed to the app; only rehearse the demo.
+**Freeze** — On day 6 at noon: no more change to the app's code; only rehearse the demo.
 Not to be confused with GSE-One's *sprint freeze*. *HD11.*
 
 **Full / Lightweight / Micro (modes)** — GSE-One's three ceremony levels. Full: the whole

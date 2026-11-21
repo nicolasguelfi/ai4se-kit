@@ -36,7 +36,7 @@ At the end of this half-day you can:
 
 **The last task of the sprint** (from 11:00), done through GSE-One like any task, on its task branch. An *empty shell* looks finished but does nothing — a button with no action, a function that raises `NotImplemented`, a `TODO`, fake data. Find them before a visitor does: remove them, or list them as known limits. Then `/gse-deliver` at 11:30 delivers everything, README included.
 
-**Freeze** (12:00): nothing more is committed to the app; rehearse your demo. Once delivered, the sprint is closed: a limit found now is said in the demo and becomes the first task of the next sprint (`/gse-task` opens it — this is also how you keep developing after the course).
+**Freeze** (12:00): no more change to the app's code; rehearse your demo. Once delivered, the sprint is closed: a limit found now is said in the demo and becomes the first task of the next sprint (`/gse-task` opens it — this is also how you keep developing after the course).
 
 **README: your project card.** The last task of your sprint, from 11:00. What a visitor reads first — and what the trainer checks at 13:45:
 
@@ -70,7 +70,7 @@ Saying your limits yourself is part of the delivery.
 1. From 11:00, the last task of your sprint, through GSE-One like any other (on its task branch): hunt the empty shells (`git grep -n -E "NotImplemented|TODO|FIXME"`, click every button, run your demo); write the README project card (pitch, how to run it, live address — CalcApp's if not deployed, "Known limits", an "Ethics and compliance" placeholder for E23).
 2. 11:30, `/gse-deliver`: its integrity check lists at most 5 findings; a HIGH one stops the merge until you decide (fix it, or accept the risk as a recorded decision). Choose the merge strategy at the Gate.
 3. Push the delivery, then mark it as the demo version (a tag, not a commit): `git push origin main --tags`, `git tag demo main`, `git push origin demo`.
-4. 12:00, freeze: nothing more is committed to the app. Rehearse your demo, step by step.
+4. 12:00, freeze: no more change to the app's code. Rehearse your demo, step by step.
 5. A limit found after the delivery? Say it yourself in the demo; it becomes the first task of the next sprint.
 
 **Done when:** The tag `demo` is on GitHub, on the delivered commit, and its README shows the project card and the known limits.

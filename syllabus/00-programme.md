@@ -493,7 +493,7 @@ placeholder; look at your own project through law, licences, security and data.
 **Key notions.**
 - Lightweight delivery: a minimal integrity check (devil's advocate, at most 5 findings); a HIGH finding stops the merge until you decide.
 - README = last task of the sprint (from 11:00), through GSE-One. Empty shells: `NotImplemented`, `TODO`, buttons that do nothing.
-- Freeze: after 12:00 nothing more is committed; rehearse the demo. The delivered sprint is closed: `/gse-task` opens the next one (also after the course).
+- Freeze: after 12:00 no more change to the app's code (only the README, E23); rehearse the demo. The delivered sprint is closed: `/gse-task` opens the next one (also after the course).
 - README project card: pitch, how to run it, live address, known limits.
 - AI Act risk level and transparency; licences of your code and dependencies; no secret in the git history; personal data kept to the minimum.
 
