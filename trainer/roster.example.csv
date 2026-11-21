@@ -1,0 +1,11 @@
+# AI4SE advisor board — roster (EXAMPLE). Copy it OUTSIDE any repository (it holds names), then fill it.
+# One line per repository: a learner with CalcApp and a mini-project has two lines with the same id.
+#   id       the learner's course identifier (v + number, as in the tracking sheet)
+#   name     for the trainer only; shown on the private page
+#   repo     GitHub address (https://github.com/owner/name or owner/name) or a local folder
+#   project  optional label (default: the repository name)
+#   url      optional live address; read from .gse/deploy.json when it is committed
+id,name,repo,project,url
+v01,Example Learner,example-account/calcapp,calcapp,
+v01,Example Learner,example-account/my-mini-project,mini-project,
+v02,Another Example,https://github.com/another-account/calcapp,calcapp,https://calcapp-v02.example.org

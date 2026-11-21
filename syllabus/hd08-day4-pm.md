@@ -116,8 +116,8 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 10.4 — Merge Strategy (Gate Decisi
 
 **Steps:**
 
-1. Create the project folder, `git init`, and its GitHub repository (private allowed).
-2. Install GSE-One in the folder; run `/gse-go` and choose Lightweight mode.
+1. Create the project folder, `git init`, and its GitHub repository. Private? Invite the trainer to read it: on GitHub, Settings → Collaborators → add `nicolasguelfi`.
+2. Install GSE-One in the folder; run `/gse-go` and choose Lightweight mode. Commit the `.gse/` folder (never list it in `.gitignore`): it is your project's memory, and what the trainer reads.
 3. Put every extra idea in the backlog, not in the plan.
 4. Folder outside `~/ai4se`? Run `~/ai4se/ai4se-kit/tutor add <path>`.
 5. Show your card to the trainer: "green" or "reduce".
@@ -126,7 +126,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 10.4 — Merge Strategy (Gate Decisi
 
 **If stuck:** Your tutor window → raise your hand.
 
-**Debrief:** Push both repositories (CalcApp and your project); hands-up quiz.
+**Debrief:** Push both repositories (CalcApp and your project) — from now on, before each break; hands-up quiz.
 
 ### Frequent errors
 

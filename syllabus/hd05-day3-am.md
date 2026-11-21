@@ -31,7 +31,7 @@ At the end of this half-day you can:
 
 Days 1-2 were done by hand: you vibe coded FreeSelfApp, then engineered CalcApp v0.1 with a written plan, tests first, one branch per task, an AI review you triaged, and a tagged delivery. It worked — at a cost: re-explaining the project to the agent, keeping the plan up to date, remembering every check, and no trace of your decisions. Today asks why a method helps, then gives you one that carries this discipline for you.
 
-Your CalcApp goes to your own GitHub repository, pushed every evening:
+Your CalcApp goes to your own GitHub repository, pushed before each break and every evening:
 
 ```bash
 cd ~/ai4se/calcapp && git switch main

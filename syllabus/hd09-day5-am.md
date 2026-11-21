@@ -98,7 +98,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.8 — Deployment`; the activity `~
 
 ### Key ideas
 
-**Your sprint, in Lightweight mode:** plan (`/gse-plan`) → requirements (`/gse-reqs`) → production (`/gse-produce`) → delivery (`/gse-deliver`). There is no tests, review, fix or capitalisation step: a small test strategy is generated at production, and delivery runs a **minimal integrity check** (devil's advocate, at most 5 findings; a HIGH one stops the merge until you decide). 8 to 10 complexity points; every extra idea goes to `/gse-backlog`. The 3-question grid at every Gate; push every evening. Milestones: day 5 16:30 plan and requirements validated · day 6 11:30 first delivery · 12:00 freeze.
+**Your sprint, in Lightweight mode:** plan (`/gse-plan`) → requirements (`/gse-reqs`) → production (`/gse-produce`) → delivery (`/gse-deliver`). There is no tests, review, fix or capitalisation step: a small test strategy is generated at production, and delivery runs a **minimal integrity check** (devil's advocate, at most 5 findings; a HIGH one stops the merge until you decide). 8 to 10 complexity points; every extra idea goes to `/gse-backlog`. The 3-question grid at every Gate; push before each break and every evening. Milestones: day 5 16:30 plan and requirements validated · day 6 11:30 first delivery · 12:00 freeze.
 
 **Two models, one grid.** The same `/gse-reqs` on the course model (A: `openrouter/deepseek/deepseek-v4.1-flash`) and on the backup model (B: `openrouter/minimax/minimax-m3.1-flash`, chosen in opencode with `/models`), with the same answers, then:
 

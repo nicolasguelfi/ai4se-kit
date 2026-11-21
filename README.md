@@ -83,6 +83,7 @@ It **cannot**:
 | `.opencode/agents/tutor.md` | the tutor agent: permissions + instructions |
 | `opencode.base.json` | tutor session config: default agent, course model, secret policies |
 | `syllabus/` | course content (CC BY 4.0) |
+| `trainer/` | trainer-only tools (the advisor board); not used by learners |
 | `VERSION` | kit version `YYYY-MM-DD.N` (the tutor uses it to remind you to update) |
 | `~/.config/ai4se/tutor-paths` | your folders list (one per line, `~` allowed, `#` = comment) |
 | `~/.config/ai4se/tutor-model` | optional: a model for the tutor only (`provider/model`) |

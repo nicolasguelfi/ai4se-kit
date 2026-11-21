@@ -66,7 +66,7 @@ files) are the same in every coding agent: what you learn with opencode transfer
 | **opencode 2** | the terminal coding agent used in every exercise (*plan* and *build* agents, Shift+Tab switches) |
 | **A capped model key** | handed out on paper on day 1; one per learner, with a spending cap; never paste it anywhere |
 | **GSE-One v0.91.2** (pinned) | the methodology plugin (days 3-6); commands in opencode are `/gse-go`, `/gse-status`, … |
-| **git + GitHub** (`gh`) | safety net from day 2; your work is pushed to GitHub from day 3, every evening |
+| **git + GitHub** (`gh`) | safety net from day 2; your work is pushed to GitHub from day 3, before each break and every evening |
 | **Node.js / npm** | runs CalcApp and its tests (Vitest) |
 | **The course kit** | `~/ai4se/ai4se-kit`: tutor window, this syllabus, `check-learner.sh` |
 
