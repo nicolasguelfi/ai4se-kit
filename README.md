@@ -9,8 +9,8 @@ It contains:
 - **the tutor** — an AI assistant prepared by the trainer (not the trainer) that runs in its
   own opencode window, read-only, and helps you when you are stuck or lost;
 - **the syllabus** (`syllabus/`) — the programme of the 12 half-days, one written sheet per
-  half-day (published as the course goes), a GSE-One guide, a glossary, a FAQ and recovery
-  procedures;
+  half-day (published as the course goes), a GSE-One guide, a glossary, a FAQ, recovery
+  procedures and a mini guide for an editor next to opencode (`syllabus/ide-guide.md`, VSCodium);
 - two scripts: `setup-learner.sh` (installation) and `check-learner.sh` (green/red checklist).
 
 ## Commands
