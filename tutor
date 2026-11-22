@@ -9,7 +9,7 @@
 #   ~/ai4se/ai4se-kit/tutor version       show kit / GSE-One / opencode versions
 #
 # Files (outside the kit, never committed):
-#   ~/.config/ai4se/tutor-paths        one folder per line, '#' = comment (default: ~/ai4se)
+#   ~/.config/ai4se/tutor-paths        one folder per line, '#' = comment (default: the course folder)
 #   ~/.config/ai4se/tutor-model        optional: provider/model for the tutor (else kit default)
 #   ~/.config/ai4se/tutor-opencode.json  generated at each launch (do not edit)
 #   ~/.config/ai4se/tutor-context.md     generated at each launch (do not edit)
@@ -31,7 +31,14 @@ done
 KIT=$(cd "$(dirname "$self")" && pwd)
 [ -f "$KIT/opencode.base.json" ] || die "opencode.base.json not found next to this script ($KIT)"
 
-AI4SE_HOME="${AI4SE_HOME:-$HOME/ai4se}"
+# course folder = the folder holding the kit (kit cloned straight into the home
+# folder or at / -> ~/ai4se, as before)
+_parent=$(dirname "$KIT")
+if [ -n "${AI4SE_HOME:-}" ]; then :
+elif [ "$_parent" = "$HOME" ] || [ "$_parent" = "/" ]; then AI4SE_HOME="$HOME/ai4se"
+else AI4SE_HOME=$_parent
+fi
+case "$AI4SE_HOME" in "$HOME"/*) HOME_SHOWN="~/${AI4SE_HOME#"$HOME"/}" ;; *) HOME_SHOWN=$AI4SE_HOME ;; esac
 CONF_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/ai4se"
 PATHS_FILE="$CONF_DIR/tutor-paths"
 MODEL_FILE="$CONF_DIR/tutor-model"
@@ -60,7 +67,7 @@ ensure_paths_file() {
   {
     printf '# Folders the AI4SE tutor may read (one per line, ~ allowed, # = comment).\n'
     printf '# Change it with: tutor add <path> / tutor remove <path>\n'
-    printf '~/ai4se\n'
+    printf '%s\n' "$HOME_SHOWN"
   } > "$PATHS_FILE"
 }
 

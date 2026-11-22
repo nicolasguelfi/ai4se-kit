@@ -33,8 +33,14 @@ ver_ge() {
 
 CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/opencode"
 DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/opencode"
-AI4SE_HOME="${AI4SE_HOME:-$HOME/ai4se}"
-KIT_DIR="$AI4SE_HOME/ai4se-kit"
+# the kit = the folder of this script when run from the kit; the course folder holds it
+_self=$(cd "$(dirname "$0")" 2>/dev/null && pwd)
+if [ -n "${AI4SE_HOME:-}" ]; then KIT_DIR="$AI4SE_HOME/ai4se-kit"
+elif [ -n "$_self" ] && [ -f "$_self/tutor" ] && [ -f "$_self/opencode.base.json" ]; then
+  KIT_DIR=$_self; AI4SE_HOME=$(dirname "$KIT_DIR")
+  if [ "$AI4SE_HOME" = "$HOME" ] || [ "$AI4SE_HOME" = "/" ]; then AI4SE_HOME="$HOME/ai4se"; fi
+else AI4SE_HOME="$HOME/ai4se"; KIT_DIR="$AI4SE_HOME/ai4se-kit"
+fi
 AI4SE_CONF="${XDG_CONFIG_HOME:-$HOME/.config}/ai4se"
 
 printf 'AI4SE learner checklist (folder: %s)\n\n' "$(pwd)"

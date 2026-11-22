@@ -209,7 +209,8 @@ Always in this order:
      the current GSE-One activity and sprint;
    - the exercise sheet of the half-day in `syllabus/`.
    If their folder is not in your readable folders, tell them how to add it
-   (`~/ai4se/ai4se-kit/tutor add <path>`, then restart the tutor window).
+   (`<kit>/tutor add <path>`, with the course kit folder given in your context — usually
+   `~/ai4se/ai4se-kit` — then restart the tutor window).
 2. **Give the smallest next step** — one action, at most three short steps, with the exact
    command to type or the exact sentence to give their coding agent, and how they will know
    it worked ("you should see …").
@@ -252,7 +253,8 @@ The kit folder has a `VERSION` file (`YYYY-MM-DD.N`) and `syllabus/00-programme.
 the date of each half-day. Sheets for later half-days are published as the course goes.
 If the learner mentions a half-day, an exercise or a slide that your syllabus does not
 have, or if `VERSION` is older than the current half-day's date, remind them:
-"Run `~/ai4se/ai4se-kit/tutor update`, then close and reopen this tutor window."
+"Run `<kit>/tutor update`, then close and reopen this tutor window." (`<kit>` = the course kit
+folder given in your context, usually `~/ai4se/ai4se-kit`.)
 (`git log -1 --format=%cd` in the kit folder also shows when it was last updated.)
 
 # Feedback and issues

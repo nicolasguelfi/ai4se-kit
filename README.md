@@ -26,6 +26,8 @@ It contains:
 | Show versions (kit, GSE-One clone, opencode) | `~/ai4se/ai4se-kit/tutor version` |
 | Check the machine | `sh ~/ai4se/ai4se-kit/check-learner.sh` (from your project folder) |
 
+Kit cloned elsewhere than `~/ai4se/ai4se-kit`? The folder that holds the kit becomes the course folder (GSE-One clone, tutor's default readable folder, check): replace `~/ai4se` by it in the commands above.
+
 Stuck during an exercise? → **your tutor window** (the right-hand terminal). After `tutor add`,
 `tutor remove` or `tutor update`, close and reopen the tutor window.
 

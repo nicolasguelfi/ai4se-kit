@@ -4,16 +4,17 @@
 #   git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh
 #
 # Safe to run several times (idempotent). It:
-#   - creates ~/ai4se (a plain folder holding the course repositories side by side);
-#   - clones GSE-One v0.92.1 into ~/ai4se/gensem (read by the tutor), or checks the existing clone;
-#   - writes ~/.config/ai4se/tutor-paths (folders the tutor may read; default ~/ai4se) if absent;
+#   - uses as course folder the folder that holds the kit (~/ai4se with the command above;
+#     anywhere else works too), creating it if needed;
+#   - clones GSE-One v0.92.1 into <course folder>/gensem (read by the tutor), or checks the existing clone;
+#   - writes ~/.config/ai4se/tutor-paths (folders the tutor may read; default the course folder) if absent;
 #   - writes ~/.config/ai4se/tutor-model only if AI4SE_MODEL is given on the command line;
 #   - adds a default "model" to ~/.config/opencode/opencode.json only if it has none
 #     and the course model is known (one key added, backup kept);
 #   - moves away the global ~/.config/opencode/agents/tutor.md of the old kit (backup kept).
 # Never reads or writes keys / credentials.
 #
-# Overrides (trainer / tests): AI4SE_MODEL=provider/model, AI4SE_HOME (default ~/ai4se),
+# Overrides (trainer / tests): AI4SE_MODEL=provider/model, AI4SE_HOME (default: the folder holding the kit),
 # AI4SE_GENSEM_URL (default https://github.com/nicolasguelfi/gensem).
 
 set -eu
@@ -29,7 +30,14 @@ KIT=$(cd "$(dirname "$0")" && pwd)
 [ -f "$KIT/tutor" ] && [ -f "$KIT/opencode.base.json" ] \
   || die "run this script from the cloned kit: sh ~/ai4se/ai4se-kit/setup-learner.sh"
 
-AI4SE_HOME="${AI4SE_HOME:-$HOME/ai4se}"
+# course folder = the folder holding the kit (kit cloned straight into the home
+# folder or at / -> ~/ai4se, as before)
+_parent=$(dirname "$KIT")
+if [ -n "${AI4SE_HOME:-}" ]; then :
+elif [ "$_parent" = "$HOME" ] || [ "$_parent" = "/" ]; then AI4SE_HOME="$HOME/ai4se"
+else AI4SE_HOME=$_parent
+fi
+case "$AI4SE_HOME" in "$HOME"/*) HOME_SHOWN="~/${AI4SE_HOME#"$HOME"/}" ;; *) HOME_SHOWN=$AI4SE_HOME ;; esac
 GSE_URL="${AI4SE_GENSEM_URL:-https://github.com/nicolasguelfi/gensem}"
 GSE_DIR="$AI4SE_HOME/gensem"
 XDG="${XDG_CONFIG_HOME:-$HOME/.config}"
@@ -79,9 +87,9 @@ else
   {
     printf '# Folders the AI4SE tutor may read (one per line, ~ allowed, # = comment).\n'
     printf '# Change it with: tutor add <path> / tutor remove <path>\n'
-    printf '~/ai4se\n'
+    printf '%s\n' "$HOME_SHOWN"
   } > "$PATHS_FILE"
-  step "tutor folders list written: $PATHS_FILE (~/ai4se)"
+  step "tutor folders list written: $PATHS_FILE ($HOME_SHOWN)"
 fi
 
 # --- 4. old global @tutor subagent (kit 2026-11-09 and before) ----------------
@@ -128,8 +136,10 @@ else
 fi
 
 case "$KIT" in "$HOME"/*) SHOWN="~/${KIT#"$HOME"/}" ;; *) SHOWN=$KIT ;; esac
+# a folder name with a space: quote it, keeping ~ outside the quotes so the shell expands it
+case "$SHOWN" in "~/"*" "*) SHOWN="~/\"${SHOWN#"~/"}\"" ;; *" "*) SHOWN="\"$SHOWN\"" ;; esac
 say ""
 say "Done. Next steps:"
 say "  1. Open a SECOND terminal (your tutor window) and run:  $SHOWN/tutor"
 say "  2. Check your machine:  sh $SHOWN/check-learner.sh"
-say "  A project outside ~/ai4se? Let the tutor read it:  $SHOWN/tutor add <path>"
+say "  A project outside $HOME_SHOWN? Let the tutor read it:  $SHOWN/tutor add <path>"
