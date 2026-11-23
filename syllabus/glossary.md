@@ -22,6 +22,10 @@ category of the system. Applied to your own project on day 6. *HD01, HD11.*
 **Artefact** — Any project deliverable: code, requirements, design, tests, docs, notes.
 In GSE-One, "artefacts are everything" (P3): what is not written down does not exist. *HD05.*
 
+**ATDD (acceptance-test-driven development)** — Each requirement's acceptance criteria
+(Given / When / Then) become tests written and seen failing before the code; the step is a
+feature, not a tiny behaviour. GSE-One's default for code tasks (`testing.strategy`). *HD03, HD07.*
+
 **Auto / Inform / Gate** — GSE-One's three decision tiers: the agent decides silently
 (Auto), decides and tells you in one line (Inform), or must wait for your validation (Gate).
 *HD05, HD06.*
@@ -218,7 +222,7 @@ minimal scaffold). *HD06.*
 Classification, P12 Version Control, P16 Adversarial Review). *HD05.*
 
 **Produce** — `/gse-produce`: implement a task on its own feature branch and worktree,
-then run the tests. *HD07.*
+starting from its failing acceptance test (setting `testing.strategy`), then run the tests. *HD07.*
 
 **Project card** — The page that frames the mini-project (day 4, `docs/project.md`), then
 the top of its README: pitch, how to run it, live address, known limits (day 6).
@@ -262,8 +266,9 @@ with its recovery tags. *HD03.*
 
 **TASK-NNN** — One work item of the GSE-One backlog, tracked from idea to delivery. *HD06.*
 
-**TDD (test-driven development)** — Write a failing test first (red), make it pass (green),
-then clean up. With an AI: you decide the test, the agent writes the code. *HD03.*
+**TDD (test-driven development)** — Write a failing unit test first (red), make it pass (green),
+then clean up, in many tiny steps. With an AI: you decide or review the test, the agent writes the code.
+GSE-One applies the same idea at the level of acceptance tests: see ATDD. *HD03.*
 
 **Token** — The unit of text a model reads and writes; every token sent and received
 costs money. *HD01.*

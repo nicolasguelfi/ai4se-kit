@@ -112,9 +112,9 @@ In opencode each activity is the command `/gse-<name>`.
 | `/gse-design` | `design.md` | Architecture, components, interfaces, shared state; decisions logged. |
 | `/gse-preview` | `preview.md` | Shows what will be built before building it (description or scaffold). |
 | `/gse-tests` | `tests.md` | Test strategy, test environment, tests, test campaigns and evidence. |
-| `/gse-produce` | `produce.md` | Implements a task on a feature branch in its own worktree, then runs the tests. |
+| `/gse-produce` | `produce.md` | Implements a task on a feature branch in its own worktree: for a code task, the acceptance test first (run red, committed), then the code; then runs the tests. |
 | `/gse-review` | `review.md` | Multi-perspective review of the sprint's branch diff, incl. devil's advocate; findings RVW-NNN. |
-| `/gse-fix` | `fix.md` | Fixes review findings on a fix branch, traced to the findings. |
+| `/gse-fix` | `fix.md` | Fixes review findings on a fix branch, traced to the findings; a code defect starts with a failing regression test. |
 | `/gse-deliver` | `deliver.md` | Merges, tags, writes release notes, cleans branches; closes (freezes) the sprint. |
 | `/gse-deploy` | `deploy.md` | Deploys the project to a server (Solo / Instructor / Learner roles). |
 | `/gse-compound` | `compound.md` | End-of-sprint capitalization on 3 axes: project, methodology, competencies. |

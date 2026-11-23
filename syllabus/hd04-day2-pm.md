@@ -270,12 +270,12 @@ Today you ran the loop by hand. From day 3, GSE-One drives the same loop:
 | Today, by hand | GSE-One (day 3) |
 |---|---|
 | Plan → tasks in `docs/plan.md` | `/gse-plan` |
-| Test first, one branch per task | `/gse-tests` + `/gse-produce` |
+| Test first (from the acceptance criteria), one branch per task | `/gse-produce` (acceptance test first; `/gse-tests` plans the tests in Full mode) |
 | Review, triage HIGH / MEDIUM / LOW | `/gse-review` |
-| Fix on a branch, test first | `/gse-fix` |
+| Fix on a branch, regression test first | `/gse-fix` |
 | Merge + tag `v0.1` | `/gse-deliver` |
 
-Same loop, same severities — and GSE-One will not deliver over an open HIGH without your explicit decision.
+Same loop, same severities — and GSE-One will not deliver over an open HIGH without your explicit decision. GSE-One shows you each failing acceptance test before it writes the code: read it, that is your golden rule; say stop to change it (a beginner profile is asked to confirm it).
 
 **Debrief — the day (10 min):** Which step of the loop did you skip or rush? What did it cost you? Which step would you hand to a tool — and which must stay yours? Compare with your neighbour, then 2-3 answers for the room.
 

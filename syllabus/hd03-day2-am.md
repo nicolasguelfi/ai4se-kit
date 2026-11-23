@@ -303,7 +303,7 @@ GSE-One: `§ 3.5 — Discovery & Planning` (`/gse-plan`); `§ 3.6 — Engineerin
 
 You have a plan; now build it, one task at a time. **Why start with tests?** The number-one risk with a coding agent is *losing control*: code arrives fast, but does it work? Clicking through the app is not a proof; a test answers in milliseconds, yes or no. **You** set the specification (the test); the **agent** writes the implementation. Tests = control; no tests = hope.
 
-**TDD in one picture:** RED — write a test that fails; GREEN — the minimal code that passes; REFACTOR — clean up, tests stay green. A failing test *before* the code is the expected start, not a problem. Live demo (≤ 10 min, build agent): ask for the test only → read it → `npm test` → RED (the component does not exist) → ask for the minimal code, do not touch the test → GREEN → break the code on purpose, a test must fail → two commits, `test: …` first, then `feat: …`. Demo feature: ExpenseItem shows "Lunch" and "€25.50".
+**TDD in one picture:** RED — write a test that fails; GREEN — the minimal code that passes; REFACTOR — clean up, tests stay green. A failing test *before* the code is the expected start, not a problem. Live demo (≤ 10 min, build agent): ask for the test only → read it → `npm test` → RED (the component does not exist) → ask for the minimal code, do not touch the test → GREEN → break the code on purpose, a test must fail → two commits, `test: …` first, then `feat: …`. Demo feature: ExpenseItem shows "Lunch" and "€25.50". Here the failing test comes from the task's acceptance criteria: this is *acceptance-test-driven development* (ATDD) at the scale of one task. Textbook TDD (Beck) goes further: many tiny steps driven by unit tests, and a refactor step after each green.
 
 **The golden rule:** RED — you + agent: the agent drafts the test, *you review it: it is your spec*; GREEN — agent: minimal code, the test is not touched; REFACTOR — you decide, tests stay green. **Never let the agent write the test and the code without your review in between** — otherwise the test mirrors what the agent meant to write and proves nothing.
 
@@ -392,15 +392,15 @@ Before lunch: `git status` must say "nothing to commit".
 
 *The problem:* an agent can write code that looks right, and tests that prove nothing.
 
-- `/gse-tests` sets a test strategy from the requirements before any code: which levels, which cases.
-- `/gse-produce` builds each task on its own branch and runs the tests; the results are kept as evidence.
+- `/gse-tests` sets a test strategy from the requirements before any code: which levels, which cases, one acceptance (validation) test per Given/When/Then criterion.
+- `/gse-produce` builds each code task on its own branch the way you did today: first the acceptance test, run and seen failing, committed; then the code until it passes. The test results are kept as evidence.
 - Delivery is blocked while a requirement's tests have not been run and passed.
 
 *Concept only — you use GSE-One from day 3.*
 
 ### Links
 
-GSE-One: `§ 3.6 — Engineering` (`/gse-tests`, `/gse-produce`); `§ 9.3.1 — Test-Specific Guardrails`. Glossary: TDD, RED/GREEN/REFACTOR, mutant test, spec, Vitest. Continues in hd04 § CalcApp v0.1 part 2.
+GSE-One: `§ 3.6 — Engineering` (`/gse-tests`, `/gse-produce`); `§ 9.3.1 — Test-Specific Guardrails`. Glossary: TDD, ATDD, RED/GREEN/REFACTOR, mutant test, spec, Vitest. Continues in hd04 § CalcApp v0.1 part 2.
 
 ## Hands-up quiz (morning part)
 

@@ -41,7 +41,7 @@ git commit -m "ci: lint, tests with coverage, build" && git push mine --all
 
 ### Key ideas
 
-Yesterday's cycle CCSET12 (hd05): verification and validation, test levels, test cases from equivalence classes and boundaries, the oracle problem. This morning you apply it before the agent does: five lines of strategy on paper, then `/gse-tests` (strategy derived from the requirements), `/gse-produce` (code and tests on a feature branch, tests run, evidence kept), `/gse-review` (several reviewers, findings RVW-… ranked HIGH / MEDIUM / LOW). As on day 2, you are the judge: at least one reasoned refusal.
+Yesterday's cycle CCSET12 (hd05): verification and validation, test levels, test cases from equivalence classes and boundaries, the oracle problem. This morning you apply it before the agent does: five lines of strategy on paper, then `/gse-tests` (strategy derived from the requirements), `/gse-produce` (on a feature branch: the acceptance test first, run red and committed, then the code and its unit tests; tests run, evidence kept), `/gse-review` (several reviewers, findings RVW-… ranked HIGH / MEDIUM / LOW). As on day 2, you are the judge: at least one reasoned refusal.
 
 ### Exercise — Test Strategy, Production, Review (09:25 · 80 min + 11:00 · 30 min)
 
@@ -53,7 +53,7 @@ Yesterday's cycle CCSET12 (hd05): verification and validation, test levels, test
 
 1. On paper, 5 lines: your test strategy for the next requirement — which levels, which edge cases.
 2. `/gse-tests`: compare with your strategy; accept or refuse at least one point.
-3. `/gse-produce`: the tests run; how many pass?
+3. `/gse-produce`: read the failing acceptance test it shows you before the code (commit `gse(…/test)`) — is it your requirement? Then: how many tests pass?
 4. Part 2 (11:00): `/gse-review`; read the 3 most severe findings in `review.md`.
 5. Do you agree with the triage? Refuse at least one finding, with a written reason.
 

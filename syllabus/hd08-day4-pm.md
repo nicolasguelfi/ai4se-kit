@@ -37,7 +37,7 @@ At the end of this half-day you can:
 
 *The problem:* delivery is rushed, nobody knows what was shipped, and the lessons vanish with the session.
 
-- `/gse-fix` fixes the findings you keep, test first, each on its branch.
+- `/gse-fix` fixes the findings you keep, each on its branch, starting with a failing regression test that reproduces the defect.
 - `/gse-deliver`: the merge strategy is a Gate; a tag, a change log; no delivery over an open HIGH finding or untested requirement without your decision.
 - `/gse-compound` captures lessons on three axes: the project, the method, your competencies.
 - `/gse-pause` and `/gse-resume` keep the thread between sessions; `/gse-backlog` keeps ideas for later.
@@ -50,7 +50,7 @@ At the end of this half-day you can:
 
 **Steps:**
 
-1. `/gse-fix` on 2 findings, test first.
+1. `/gse-fix` on 2 findings, regression test first.
 2. `/gse-deliver`: choose the merge strategy at the Gate and justify it.
 3. `/gse-compound`: read the lessons captured, add your own.
 4. `/gse-health`: compare with this morning.

@@ -123,7 +123,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.8 — Deployment`; the activity `~
 1. `/gse-plan`: a sprint of 8 to 10 complexity points; its last task, day 6 from 11:00, the empty-shell hunt and the README (sheet E22). What does not fit goes to the backlog (`/gse-backlog`).
 2. `/gse-reqs`: 2 to 5 requirements with Given / When / Then criteria, at least one of them a measurable non-functional requirement (sheet E21: you run it on two models).
 3. Show your plan and requirements to the trainer: day 5, 15:15-16:30, one by one.
-4. `/gse-produce`, task by task: each task on its branch, its tests run. Lightweight has no `/gse-tests` step: a minimal test strategy is generated for you.
+4. `/gse-produce`, task by task: each task on its branch, its acceptance test first (taken from the Given/When/Then of `reqs.md`, seen failing), then the code, its tests run. Lightweight has no `/gse-tests` step: a minimal test strategy is generated for you.
 5. At every Gate, the 3-question grid: at least one change or one refusal per activity, in the tracking sheet.
 6. Every evening: `/gse-pause`, then `git push --all origin`.
 7. Day 6, 11:30: first delivery with `/gse-deliver` (sheet E22).

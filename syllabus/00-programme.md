@@ -244,8 +244,8 @@ critically; ship a tagged version; see which GSE-One commands automate the loop 
 - At least one argued refusal: you do not apply every finding.
 - README 80/20: the 20 % of documentation that answers 80 % of the questions.
 - A tag marks a version you can always return to.
-- The manual loop plan → tasks → TDD → review → delivery maps to `/gse-plan`,
-  `/gse-tests` + `/gse-produce`, `/gse-review`, `/gse-fix`, `/gse-deliver`.
+- The manual loop plan → tasks → test first → review → delivery maps to `/gse-plan`,
+  `/gse-produce` (acceptance test first; `/gse-tests` in Full mode), `/gse-review`, `/gse-fix`, `/gse-deliver`.
 
 **Activities.**
 - Build part 2 (75 min): next tasks of your plan, one branch each, test first.
