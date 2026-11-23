@@ -212,7 +212,7 @@ The bridge question: **speed AND quality?** Kent Beck drew the line: "vibe codin
 3. **Architectural intent** — design decisions (patterns, components, boundaries) before generation; written down once, they reach the AI at every session, so it builds inside your architecture instead of inventing one.
 4. **Iterative refinement** — planned iterations with scope, acceptance criteria and review gates; each cycle delivers a validated increment, not "everything at once".
 5. **Human review at boundaries** — architectural decisions, security-critical code, integration points, validation results: quality control at critical checkpoints, not on every line.
-6. **Context engineering** — systematically managing what the agent sees: structured project rules, memory, tool configurations (MCP servers) — "the agent sees what you curate".
+6. **Context engineering** — an agent's context goes beyond the prompt: you shape it through project rules, memory and the tools you give the agent (for example, through MCP servers).
 
 **The spectrum**: naive VibeCoding (no requirements, tests or review — personal prototypes only); guided (informal requirements, manual evaluation — internal tools); structured (written requirements, some tests, review of critical paths — team projects); VibeEngineering (full requirements, test-driven generation, architecture, CI/CD, systematic review — production).
 
