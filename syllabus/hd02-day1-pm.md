@@ -1,7 +1,7 @@
 # HD02 — Day 1 afternoon: setup in the room, FreeSelfApp, debrief
 
 *AI for Software Engineering (AI4SE), edition 2 — Thursday 26 November 2026, 13:15-17:00.*
-*Content licensed CC BY 4.0. Slide deck: "Hands-on Setup & First Prototype" (opencode 2 + GSE-One v0.93.0).*
+*Content licensed CC BY 4.0. Slide deck: "Hands-on Setup & First Prototype" (opencode 2 + GSE-One v0.93.2).*
 
 Everything happens in the room: no installation was expected before the course, and there is no homework.
 
@@ -61,13 +61,13 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    ```bash
    git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh
    ```
-   The setup clones GSE-One v0.93.0 into `~/ai4se/gensem` (for reading, not an installation), writes the list of folders your tutor window may read (`~/.config/ai4se/tutor-paths`, `~/ai4se` by default) and sets the default model for the workshops. It never touches your key. *Done when* it ends with no red error line.
+   The setup clones GSE-One v0.93.2 into `~/ai4se/gensem` (for reading, not an installation), writes the list of folders your tutor window may read (`~/.config/ai4se/tutor-paths`, `~/ai4se` by default) and sets the default model for the workshops. It never touches your key. *Done when* it ends with no red error line.
    **Another folder?** You may clone the kit elsewhere, for example `~/dev/ai4se6d/ai4se-kit`: the setup, the tutor and the check then use the folder that holds the kit (`~/dev/ai4se6d`) as your course folder. In every command of the course, replace `~/ai4se` by that folder, and create your projects in it. Avoid a folder synced by Dropbox, iCloud (Desktop and Documents on many Macs) or OneDrive.
-5. **GSE-One v0.93.0** (~10 min) — needs opencode 2 (step 1). It installs into a test folder:
+5. **GSE-One v0.93.2** (~10 min) — needs opencode 2 (step 1). It installs into a test folder:
    ```bash
    mkdir -p ~/ai4se/gse-check && cd ~/ai4se/gse-check
-   curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/gensem/v0.93.0/install.sh \
-     | GSE_PLATFORM=opencode GSE_VERSION=v0.93.0 sh
+   curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/gensem/v0.93.2/install.sh \
+     | GSE_PLATFORM=opencode GSE_VERSION=v0.93.2 sh
    ```
    *Done when* `cat .gse/registry` prints `.opencode`.
 6. **GitHub login and git identity** (~15 min). No account? `github.com/signup` (a personal one is fine).

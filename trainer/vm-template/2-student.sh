@@ -15,7 +15,7 @@
 set -euo pipefail
 
 KIT_URL="https://github.com/nicolasguelfi/ai4se-kit"
-GSE_TAG="v0.93.0"
+GSE_TAG="v0.93.2"
 
 say()  { printf '\n== %s\n' "$*"; }
 step() { printf '  - %s\n' "$*"; }
