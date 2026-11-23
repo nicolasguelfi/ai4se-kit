@@ -1,0 +1,83 @@
+#cloud-config
+timezone: Europe/Luxembourg
+keyboard:
+  layout: fr
+  variant: mac
+users:
+  - name: student
+    gecos: Student
+    shell: /bin/bash
+    groups: [sudo, adm]
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    passwd: '@PASSWORD_HASH@'
+    ssh_authorized_keys:
+      - @SSH_KEY@
+ssh_pwauth: false
+growpart: {mode: auto, devices: ['/']}
+package_update: true
+package_upgrade: true
+packages:
+  - ubuntu-desktop-minimal
+  - xrdp
+  - curl
+  - wget
+  - gpg
+write_files:
+  - path: /etc/polkit-1/rules.d/02-allow-colord.rules
+    content: |
+      polkit.addRule(function(action, subject) {
+        if ((action.id == "org.freedesktop.color-manager.create-device" ||
+             action.id == "org.freedesktop.color-manager.create-profile" ||
+             action.id == "org.freedesktop.color-manager.delete-device" ||
+             action.id == "org.freedesktop.color-manager.delete-profile" ||
+             action.id == "org.freedesktop.color-manager.modify-device" ||
+             action.id == "org.freedesktop.color-manager.modify-profile") &&
+            subject.isInGroup("sudo")) { return polkit.Result.YES; }
+      });
+  - path: /etc/skel/.xsessionrc
+    content: |
+      export GNOME_SHELL_SESSION_MODE=ubuntu
+      export XDG_CURRENT_DESKTOP=ubuntu:GNOME
+      export XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+  # xrdp's Xorg session starts with a US layout whatever GNOME shows. Force the Mac AZERTY once the
+  # desktop is up (autostart), NOT in .xsessionrc: setxkbmap there gave a black RDP screen (2026-11-23).
+  - path: /etc/skel/.config/autostart/keyboard-fr-mac.desktop
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Name=Keyboard fr-mac for RDP
+      Exec=sh -c "sleep 3; setxkbmap -layout fr -variant mac"
+      X-GNOME-Autostart-Phase=Applications
+      NoDisplay=true
+  - path: /usr/local/bin/ai4se-first-login
+    permissions: '0755'
+    content: |
+      #!/bin/sh
+      # keyboards: Mac AZERTY first, then the lab layouts (ch, fr, us); run once at first desktop login
+      gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr+mac'), ('xkb', 'ch'), ('xkb', 'fr'), ('xkb', 'us')]"
+      gsettings set org.gnome.desktop.input-sources xkb-options "[]"
+      rm -f "$HOME/.config/autostart/ai4se-first-login.desktop"
+  - path: /etc/skel/.config/autostart/ai4se-first-login.desktop
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Name=AI4SE first login
+      Exec=/usr/local/bin/ai4se-first-login
+      X-GNOME-Autostart-Phase=Applications
+runcmd:
+  - cp /etc/skel/.xsessionrc /home/student/.xsessionrc
+  - mkdir -p /home/student/.config/autostart && cp /etc/skel/.config/autostart/ai4se-first-login.desktop /etc/skel/.config/autostart/keyboard-fr-mac.desktop /home/student/.config/autostart/
+  - chown -R student:student /home/student
+  - adduser xrdp ssl-cert
+  - apt-get -y purge gnome-initial-setup || true
+  - install -d -m 755 /etc/apt/keyrings
+  - wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/packages.microsoft.gpg
+  - echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list
+  - apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install code docker.io
+  - systemctl enable xrdp
+  - systemctl set-default graphical.target
+power_state:
+  mode: reboot
+  message: first boot finished
+  timeout: 60
