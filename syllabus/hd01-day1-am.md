@@ -247,7 +247,7 @@ GSE-One: `§ 1.2 — Agile Software Engineering Foundations`; `§ P16 — Advers
 $ cd ~/ai4se/my-project       # always start in a dedicated project folder
 $ opencode                    # the agent works in this folder
 > /init                       # reads the code, writes AGENTS.md
-[Shift+Tab] -> plan           # read-only: propose a plan first
+[Shift+Tab] -> plan           # explores, does not edit your files
 [Shift+Tab] -> build          # now it may edit and run commands
 > explain @src/export.js      # @file adds a file to the context
 > /gse-status                 # GSE-One commands start with /gse-

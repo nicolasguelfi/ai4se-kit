@@ -128,7 +128,7 @@ Not tests OR review: you need both — today you do both.
 
 **What AI review sees and misses.** *Catches well — breadth:* missing error handling, null/undefined risks, type slips and dead code, hook dependency mistakes, known security anti-patterns. *Misses — depth, that is you:* does it do what the user needs? is this the right place in the design? effects across distant files, subtle authorisation rules, should this code exist at all? **AI = breadth, you = depth.** Neither alone is enough.
 
-**Weak vs effective prompts.** Weak: "Review this code." Effective: the *plan* agent (Shift+Tab — read-only), one file, one concern, the context:
+**Weak vs effective prompts.** Weak: "Review this code." Effective: the *plan* agent (Shift+Tab — no file edits), one file, one concern, the context:
 
 ```text
 @src/pages/AddExpense.tsx Review edge cases and error handling.
@@ -183,7 +183,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/g
 **Steps:**
 
 1. `git switch mywork` → `git diff j2-start --stat`.
-2. Shift+Tab → *plan* agent (read-only). First put the diff into the conversation (`!` runs a shell command): `!git diff j2-start`. Then:
+2. Shift+Tab → *plan* agent (no file edits). First put the diff into the conversation (`!` runs a shell command): `!git diff j2-start`. Then:
    ```text
    Review this diff of CalcApp v0.1 against @docs/plan.md. Focus: bugs and
    runtime errors, missing error handling, user input reaching storage
