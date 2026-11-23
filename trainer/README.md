@@ -36,3 +36,8 @@ GitHub account an invited collaborator can also write: the tool itself never wri
 
 **Limits.** It sees only what was pushed: ask for a push before each break. Figures are what the learner's
 GSE-One state declares. Needs PyYAML for the full view (`pip install pyyaml`).
+
+## Course VM template (Ubuntu)
+
+Scripts and guide (in French) to finalise the Ubuntu VM template before creating one
+instance per learner: [`vm-template/README.md`](vm-template/README.md).
