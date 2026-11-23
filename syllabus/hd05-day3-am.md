@@ -186,7 +186,7 @@ GSE-One: `§ 3.6 — Engineering` (`/gse-reqs`, `/gse-design`); `§ 11 — Decis
 - Validation tests trace to the requirements, verification tests to the design.
 - `/gse-produce` writes each code task's acceptance (validation) test first and runs it red before the code: the requirement, not the code, decides what is checked.
 - Test runs leave evidence; delivery is blocked while a requirement's tests have not passed.
-- `/gse-review` is the static side: several reviewers, findings ranked HIGH / MEDIUM / LOW.
+- `/gse-review` is the static side: several read-only reviewers launched together, all their reports awaited, findings ranked HIGH / MEDIUM / LOW.
 
 *Tomorrow morning: exercise E14 (hd07).*
 

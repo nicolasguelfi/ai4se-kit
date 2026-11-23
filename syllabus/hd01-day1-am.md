@@ -239,7 +239,7 @@ GSE-One: `§ 1.2 — Agile Software Engineering Foundations`; `§ P16 — Advers
 
 ### Key ideas
 
-**Autonomy spectrum**: passive assistance (responds when invoked) → proactive copiloting (suggests, you decide) → task-level delegation (you describe, AI executes) → autonomous agents (AI plans, executes, tests, iterates) → multi-agent orchestration. *The agentic turn*: opencode (plan, build, subagents), Claude Code (subagents, background tasks), GitHub Copilot (issue → pull request), Cursor (IDE, CLI and cloud agents). It plans, edits, runs; you frame and review.
+**Autonomy spectrum**: passive assistance (responds when invoked) → proactive copiloting (suggests, you decide) → task-level delegation (you describe, AI executes) → autonomous agents (AI plans, executes, tests, iterates) → multi-agent orchestration. *The agentic turn*: opencode (plan, build, background subagents), Claude Code (subagents, background tasks), GitHub Copilot (issue → pull request), Cursor (IDE, CLI and cloud agents). It plans, edits, runs; you frame and review.
 
 **opencode, our tool**: a terminal agent, open source (MIT), any model provider (this week: your capped key), two built-in agents *plan* and *build* (Shift+Tab to switch), project rules in `AGENTS.md` (`/init` drafts it), permissions and MCP servers in `opencode.json`. A first session, as shown on the slide:
 
