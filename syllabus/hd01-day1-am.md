@@ -209,7 +209,7 @@ The bridge question: **speed AND quality?** Kent Beck drew the line: "vibe codin
 
 1. **Requirements before prompts** — functional and non-functional requirements are explicitly defined *before* engaging the AI agent (the client's order before the kitchen starts).
 2. **Test-driven generation** — tests defined BEFORE implementation; tests define the *contract*, the AI generates code that must pass (taste at every step).
-3. **Architectural intent** — design decisions (patterns, components, boundaries) before generation; context files communicate them to the AI (the slide cites `.cursorrules` and `CLAUDE.md`; in opencode this file is `AGENTS.md`).
+3. **Architectural intent** — design decisions (patterns, components, boundaries) before generation; written down once, they reach the AI at every session, so it builds inside your architecture instead of inventing one.
 4. **Iterative refinement** — planned iterations with scope, acceptance criteria and review gates; each cycle delivers a validated increment, not "everything at once".
 5. **Human review at boundaries** — architectural decisions, security-critical code, integration points, validation results: quality control at critical checkpoints, not on every line.
 6. **Context engineering** — systematically managing what the agent sees: structured project rules, memory, tool configurations (MCP servers) — "the agent sees what you curate".
