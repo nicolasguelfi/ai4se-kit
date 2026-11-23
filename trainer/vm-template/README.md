@@ -115,3 +115,11 @@ Les diapositives et le mini guide `syllabus/ide-guide.md` parlent de VSCodium su
 personnelles. Dans la VM, VS Code est déjà installé : avec les réglages de `1-system.sh`, son IA
 est coupée de la même façon (`chat.disableAIFeatures`). Dites simplement aux participants :
 « sur la VM, c'est VS Code, son IA est déjà coupée ».
+
+## Répéter sur un Mac (VM locale)
+
+Pour répéter le modèle sur un Mac Apple Silicon, sans serveur : `bash local-vm/setup-mac-vm.sh`
+(`--dry-run` pour voir ce qu'il ferait, `--with-tailscale` pour l'accès depuis vos autres appareils).
+Il installe ce qui manque (Homebrew, VirtualBox, Tailscale en option), refuse un dossier de VM dans
+Dropbox ou iCloud (`~/VMs` par défaut), puis lance `local-vm/create-local-vm.sh` (≈ 25 min).
+Connexion ensuite avec Windows App : `localhost:3390`, utilisateur `student`, session Xorg.
