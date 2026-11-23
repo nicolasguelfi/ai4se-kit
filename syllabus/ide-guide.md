@@ -25,8 +25,9 @@ Why:
 | System | Command |
 |---|---|
 | macOS | `brew install --cask vscodium` |
-| Windows | `winget install VSCodium.VSCodium` |
-| Linux | `flatpak install flathub com.vscodium.codium` or `snap install codium` |
+| Windows (also with WSL: install the Windows build, open your WSL files through `\\wsl$`) | `winget install VSCodium.VSCodium` |
+| Ubuntu | `sudo snap install codium --classic` |
+| Other Linux | `flatpak install flathub com.vscodium.codium` (install flatpak first) |
 
 Then, once: **Settings** (macOS `Cmd+,`, Windows/Linux `Ctrl+,`) → search **`disable AI features`**
 → tick it. In `settings.json` this is `"chat.disableAIFeatures": true` (checked in VSCodium 1.112).
