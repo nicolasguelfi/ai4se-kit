@@ -377,6 +377,34 @@ use `git` or a shared folder instead.
 | Leave the terminal or the SSH session | `Ctrl + D` |
 | Bigger / smaller text | `Ctrl + Shift + +` / `Ctrl + -` |
 
+**Paste from the Mac fails in the Terminal, or shows `^[[200~ … ~`?** xrdp does not serve the clipboard
+formats GNOME Terminal asks for (`text/plain;charset=utf-8`, `COMPOUND_TEXT`; seen in the xrdp log,
+2026-11-23), so the paste arrives as typed keys. Ways round it: paste into the Text Editor first (`Ctrl + V`),
+copy again there, then `Ctrl + Shift + V` in the Terminal; or `xclip -selection clipboard -o` (after
+`sudo apt install -y xclip`); or work from the **Mac's** Terminal over SSH, where `⌘ + V` works:
+`ssh -i /Volumes/Mac_Data/VMs/ai4se-ubuntu/vmkey -p 2222 student@127.0.0.1` (this Mac only: the key lives in the VM folder).
+
+### opencode (in the VM's Terminal)
+
+opencode takes over the Terminal: inside it, **`Ctrl + C` quits opencode** — it does not copy.
+
+| Action | Shortcut |
+|---|---|
+| Copy text | select it with the mouse: it is copied at once (opencode default on Linux, `terminal.copy: select`) |
+| Copy a whole agent message | `Ctrl + X`, then `Y` |
+| Copy with the Terminal's own selection | hold `Shift` while selecting with the mouse, then `Ctrl + Shift + C` |
+| Stop the agent, stay in opencode | `Esc` |
+| Quit opencode | `Ctrl + C` (careful) |
+| Resume the last session (from the project folder) | `opencode -c` |
+| Resume a given session | `opencode -s <session id>` |
+| Pick a session from the list (inside opencode) | `/sessions`, or `Ctrl + X` then `L` |
+| Recent sessions and projects | `Ctrl + O` |
+| New session | `Ctrl + X`, then `N` |
+
+If selecting copies nothing, opencode may need a clipboard tool on Linux: `sudo apt install -y xclip`, then
+restart opencode; the `Shift` + mouse way does not depend on opencode. (Checked against opencode 2.4.1:
+`opencode --help` and its keybind and config documentation; the clipboard path through xrdp was not tested.)
+
 ### Common applications (inside the VM)
 
 | Action | Shortcut (Mac and Windows) |
