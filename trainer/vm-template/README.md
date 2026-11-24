@@ -123,3 +123,9 @@ Pour répéter le modèle sur un Mac Apple Silicon, sans serveur : `bash local-v
 Il installe ce qui manque (Homebrew, VirtualBox, Tailscale en option), refuse un dossier de VM dans
 Dropbox ou iCloud (`~/VMs` par défaut), puis lance `local-vm/create-local-vm.sh` (≈ 25 min).
 Connexion ensuite avec Windows App : `localhost:3390`, utilisateur `student`, session Xorg.
+
+Au quotidien, `bash local-vm/vm.sh` règle les situations courantes sans réfléchir : `status`, `start`,
+`stop`, `restart`, `fix-rdp` (écran gris ou noir dans Windows App), `diag` (diagnostic complet à coller à
+Claude), `ssh`, et les instantanés : `snap [nom]`, `snaps`, `restore <nom>`, `snap-delete <nom>`.
+Prenez un instantané après chaque étape réussie (`bash local-vm/vm.sh snap apres-etape-4`) : VirtualBox
+sur Mac Apple Silicon reste fragile, et une restauration prend une minute.

@@ -58,6 +58,10 @@ write_files:
       # keyboards: Mac AZERTY first, then the lab layouts (ch, fr, us); run once at first desktop login
       gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr+mac'), ('xkb', 'ch'), ('xkb', 'fr'), ('xkb', 'us')]"
       gsettings set org.gnome.desktop.input-sources xkb-options "[]"
+      # no screen lock, no idle blanking: through xrdp a locked GNOME shows a grey screen (2026-11-24)
+      gsettings set org.gnome.desktop.screensaver lock-enabled false
+      gsettings set org.gnome.desktop.session idle-delay 0
+      gsettings set org.gnome.desktop.lockdown disable-lock-screen true
       rm -f "$HOME/.config/autostart/ai4se-first-login.desktop"
   - path: /etc/skel/.config/autostart/ai4se-first-login.desktop
     content: |

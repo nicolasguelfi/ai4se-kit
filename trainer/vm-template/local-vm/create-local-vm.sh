@@ -3,6 +3,7 @@
 # reachable by RDP, to rehearse the course VM template (trainer/vm-template/README.md).
 # On a new Mac (Homebrew, VirtualBox, optional Tailscale, VM folder outside Dropbox): run
 # setup-mac-vm.sh next to this file instead — it installs what is missing, then calls this script.
+# Day to day (start, stop, restart, grey RDP screen, diagnosis, snapshots): vm.sh next to this file.
 #
 #   bash create-local-vm.sh                 create and boot the VM (≈ 25 min the first time)
 #   bash create-local-vm.sh --status        is the first-boot setup finished?
