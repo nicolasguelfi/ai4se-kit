@@ -72,7 +72,7 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    ```bash
    git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh
    ```
-   The setup clones GSE-One v0.93.4 into `~/ai4se/gensem` (for reading, not an installation), writes the list of folders your tutor window may read (`~/.config/ai4se/tutor-paths`, `~/ai4se` by default) and sets the default model for the workshops. It never touches your key. *Done when* it ends with no red error line.
+   The setup clones GSE-One v0.93.4 into `~/ai4se/gensem` (for reading, not an installation), writes the list of folders your tutor window may read (`~/.config/ai4se/tutor-paths`, `~/ai4se` by default) and sets the default model for the workshops. It never touches your key. *Done when* it ends with « Done. » — then go on with step 5 (the check of step 7 shows red lines until steps 5-6 are done).
    **Another folder?** You may clone the kit elsewhere, for example `~/dev/ai4se6d/ai4se-kit`: the setup, the tutor and the check then use the folder that holds the kit (`~/dev/ai4se6d`) as your course folder. In every command of the course, replace `~/ai4se` by that folder, and create your projects in it. Avoid a folder synced by Dropbox, iCloud (Desktop and Documents on many Macs) or OneDrive.
 5. **GSE-One v0.93.4** (~10 min) — needs opencode 2 (step 1). It installs into a test folder:
    ```bash

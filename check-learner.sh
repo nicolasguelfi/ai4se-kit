@@ -97,7 +97,7 @@ if [ "$gse_ver" = "$GSE_EXPECTED" ]; then
 elif [ -n "$gse_ver" ]; then
   ko "GSE-One v$gse_ver found in $gse_where, the course uses v$GSE_EXPECTED" "in your project folder run: $GSE_FIX"
 else
-  ko "GSE-One not found (from this folder)" "cd to your project folder and re-run this check; if still red run: $GSE_FIX"
+  ko "GSE-One not found (from this folder)" "normal before installation step 5; otherwise cd to your project folder and re-run this check; if still red run: $GSE_FIX"
 fi
 
 # 4. tutor: kit clone, launcher, folders list, GSE-One clone, no leftover global @tutor
@@ -133,7 +133,7 @@ if has git; then
   if [ -n "$name" ] && [ -n "$email" ]; then
     ok "git $(vnum "$(git --version)") — identity set"
   else
-    ko "git identity not set" "run: git config --global user.name \"First Last\" && git config --global user.email \"you@example.com\""
+    ko "git identity not set" "normal before installation step 6; otherwise run: git config --global user.name \"First Last\" && git config --global user.email \"you@example.com\""
   fi
 else
   ko "git is not installed" "install git (macOS: xcode-select --install; Linux: your package manager; Windows: git-scm.com)"
@@ -144,10 +144,10 @@ if has gh; then
   if gh auth status >/dev/null 2>&1; then
     ok "GitHub CLI logged in"
   else
-    ko "GitHub CLI not logged in" "run: gh auth login  (GitHub.com, HTTPS, login with a web browser)"
+    ko "GitHub CLI not logged in" "normal before installation step 6; otherwise run: gh auth login  (GitHub.com, HTTPS, login with a web browser)"
   fi
 else
-  ko "GitHub CLI (gh) is not installed" "install it from https://cli.github.com, then run: gh auth login"
+  ko "GitHub CLI (gh) is not installed" "normal before installation step 6; see step 6 (sudo apt install gh / brew install gh), then run: gh auth login"
 fi
 
 # 7. node + npm (CalcApp)

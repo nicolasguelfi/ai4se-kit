@@ -139,7 +139,6 @@ case "$KIT" in "$HOME"/*) SHOWN="~/${KIT#"$HOME"/}" ;; *) SHOWN=$KIT ;; esac
 # a folder name with a space: quote it, keeping ~ outside the quotes so the shell expands it
 case "$SHOWN" in "~/"*" "*) SHOWN="~/\"${SHOWN#"~/"}\"" ;; *" "*) SHOWN="\"$SHOWN\"" ;; esac
 say ""
-say "Done. Next steps:"
-say "  1. Open a SECOND terminal (your tutor window) and run:  $SHOWN/tutor"
-say "  2. Check your machine:  sh $SHOWN/check-learner.sh"
-say "  A project outside $HOME_SHOWN? Let the tutor read it:  $SHOWN/tutor add <path>"
+say "Done. Go on with step 5 of the installation (GSE-One)."
+say "  The check (step 7) and the tutor window (step 8) come after steps 5-6."
+say "  Later, a project outside $HOME_SHOWN? Let the tutor read it:  $SHOWN/tutor add <path>"
