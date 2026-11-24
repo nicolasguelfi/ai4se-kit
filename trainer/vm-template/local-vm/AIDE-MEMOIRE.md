@@ -197,3 +197,73 @@ Plusieurs VM : préfixer par le nom, par exemple :
 ```bash
 VM_NAME=<autre-vm> vm status
 ```
+
+## 5. Raccourcis clavier dans la VM (Ubuntu, via Windows App)
+
+**À retenir d'abord.** Dans la VM, c'est **Ctrl** qui copie, colle, enregistre — comme sous Windows,
+même sur un Mac. La touche **⌘ Cmd** du Mac y devient la touche **Super** (la touche Windows) : `Cmd + C`
+ne copie donc pas dans la VM. Dans le **Terminal** d'Ubuntu, il faut en plus **Maj** : `Ctrl + Maj + C` /
+`Ctrl + Maj + V` (car `Ctrl + C` y interrompt la commande en cours).
+
+### Copier / coller
+
+| Où | Copier | Coller |
+|---|---|---|
+| Dans une application de la VM (Firefox, éditeur, VS Code…) | `Ctrl + C` | `Ctrl + V` |
+| Dans le Terminal de la VM | `Ctrl + Maj + C` | `Ctrl + Maj + V` |
+| Du Mac vers la VM | `⌘ + C` sur le Mac | `Ctrl + V` dans la VM (`Ctrl + Maj + V` dans son Terminal) |
+| De la VM vers le Mac | `Ctrl + C` dans la VM (`Ctrl + Maj + C` dans son Terminal) | `⌘ + V` sur le Mac |
+| Du PC Windows vers la VM, et retour | `Ctrl + C` | `Ctrl + V` (`Ctrl + Maj + V` dans le Terminal de la VM) |
+| Copie rapide, dans la VM seulement | sélectionner le texte à la souris | clic du milieu (molette) |
+
+Le copier-coller entre l'ordinateur et la VM passe par Windows App : s'il ne marche pas, vérifier dans
+Windows App → clic droit sur le PC → Modifier → **Presse-papiers** coché, puis se reconnecter.
+Le texte passe bien ; pour des fichiers, passer plutôt par `git` ou un dossier partagé.
+
+### Bureau Ubuntu (GNOME)
+
+| Action | Mac | Windows |
+|---|---|---|
+| Vue d'ensemble, chercher une application | `⌘` | `Win` |
+| Liste des applications | `⌘ + A` | `Win + A` |
+| Ouvrir un Terminal | `Ctrl + Alt + T` | `Ctrl + Alt + T` |
+| Passer d'une fenêtre à l'autre (dans la VM) | `Alt + Tab` (⌥ + Tab) | `Alt + Tab` |
+| Agrandir / restaurer la fenêtre | `⌘ + ↑` / `⌘ + ↓` | `Win + ↑` / `Win + ↓` |
+| Fenêtre sur la moitié gauche / droite | `⌘ + ←` / `⌘ + →` | `Win + ←` / `Win + →` |
+| Fermer la fenêtre | `Alt + F4` (⌥ + fn + F4) | `Alt + F4` |
+| Changer de disposition de clavier | `⌘ + Espace` | `Win + Espace` |
+| Capture d'écran (dans la VM) | `Maj + Impr` si la touche existe ; sinon menu en haut à droite | `Maj + Impr` |
+
+### Terminal (dans la VM)
+
+| Action | Raccourci (Mac et Windows) |
+|---|---|
+| Interrompre la commande en cours | `Ctrl + C` |
+| Nouvel onglet / nouvelle fenêtre | `Ctrl + Maj + T` / `Ctrl + Maj + N` |
+| Compléter un nom de fichier ou de commande | `Tab` (deux fois : toutes les possibilités) |
+| Rappeler les commandes précédentes | `↑` / `↓` |
+| Chercher dans l'historique | `Ctrl + R` |
+| Début / fin de ligne | `Ctrl + A` / `Ctrl + E` |
+| Effacer l'écran | `Ctrl + L` |
+| Quitter le terminal ou la session SSH | `Ctrl + D` |
+| Agrandir / réduire le texte | `Ctrl + Maj + +` / `Ctrl + -` |
+
+### Applications courantes (dans la VM)
+
+| Action | Raccourci (Mac et Windows) |
+|---|---|
+| Enregistrer / annuler / rétablir | `Ctrl + S` / `Ctrl + Z` / `Ctrl + Maj + Z` |
+| Chercher dans la page ou le fichier | `Ctrl + F` |
+| Fichiers : taper un chemin / afficher les fichiers cachés | `Ctrl + L` / `Ctrl + H` |
+| VS Code : palette de commandes / terminal intégré | `Ctrl + Maj + P` / ``Ctrl + ` `` |
+
+### Fenêtre Windows App (côté Mac)
+
+| Action | Raccourci |
+|---|---|
+| Plein écran / sortir du plein écran | `Ctrl + ⌘ + F` |
+| Revenir à une application du Mac | `⌘ + Tab` (géré par macOS, pas par la VM) |
+
+Caractères spéciaux avec le clavier Mac AZERTY (`| \ { } [ ] ~`) : en principe les **mêmes touches que
+sur le Mac**, avec ⌥ Option (la VM utilise la disposition « French (Macintosh) »). Si un caractère ne sort
+pas comme prévu : `vm keyboard` depuis le Mac, puis réessayer.
