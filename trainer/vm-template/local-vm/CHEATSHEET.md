@@ -302,6 +302,11 @@ NAME="after-step-4"
 vm restore "$NAME"
 ```
 
+**`npm ci` in CalcApp prints warnings** (inside the VM): `npm warn deprecated …`, « N moderate severity
+vulnerabilities » and « npm warn install-scripts … esbuild … not yet covered by allowScripts » are harmless —
+`npm run test:run` and `npm run build` work (checked 2026-11-24). Do not run `npm audit fix` during the course (it
+rewrites `package-lock.json`). Only if an esbuild error appears: `npm install-scripts approve esbuild`, then `npm ci`.
+
 **VirtualBox says the VM is « inaccessible »**: import the latest backup (section 3), or ask Claude.
 
 **Unknown problem — diagnosis to paste to Claude**

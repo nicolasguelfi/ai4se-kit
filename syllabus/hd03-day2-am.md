@@ -61,6 +61,16 @@ cd calcapp && git checkout -b mywork "$TAG" && npm ci
 
 Folder `calcapp` already exists? Clone into `~/ai4se/calcapp-restart` instead: your work stays safe. Always clone inside `~/ai4se` so your tutor window can read it.
 
+**`npm ci` warnings are normal.** `npm warn deprecated …` and « N moderate severity vulnerabilities » come with the starter's dependencies: do **not** run `npm audit fix` during the course (it rewrites `package-lock.json`). « npm warn install-scripts … esbuild … not yet covered by allowScripts » is harmless too: the tests and the build work. Only if an esbuild error appears one day, run:
+
+```bash
+npm install-scripts approve esbuild
+```
+
+```bash
+npm ci
+```
+
 ## Git first
 
 ### Key ideas
@@ -132,6 +142,7 @@ git restore "$BROKEN" && npm run test:run
 - Git asks who you are: `git config --global user.name "Your Name"`, then `user.email` (hd02 § Installation in the room, step 6).
 - `git restore` on a file you never committed: there is nothing to go back to — commit first.
 - Working on `main` or `mywork` directly instead of a `feat/…` branch.
+- Worrying about `npm ci` warnings (deprecated, moderate vulnerabilities, install-scripts esbuild): harmless — see above; no `npm audit fix`.
 
 ### How GSE-One solves it (CCSET04, concept only)
 
