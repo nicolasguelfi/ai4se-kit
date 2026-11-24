@@ -1,7 +1,8 @@
 # Cheat sheet — the rehearsal VM across several Macs
 
 Each command is alone in its block: copy, paste into the **Mac's** Terminal (never inside the VM), Enter.
-Replace the names between `<…>`. Full help: `vm --help`.
+Every command runs as written. When a value is yours to choose (a snapshot name, an archive), a first
+command sets it in a shell variable — change the value in that line, then run the next one. Full help: `vm --help`.
 
 Under each command, two lines say **what state the VM must be in** and **what to do with the Windows App
 window**. General rule: **no command needs a logoff inside Ubuntu**, nor quitting the Windows App
@@ -84,14 +85,18 @@ vm ssh
 
 ## 2. Protect your work
 
-**Snapshot (name of your choice)**
+**Snapshot (set its name first — change `after-step-4` to yours)**
 
 - VM: running or stopped
 - Windows App: may stay open, **no logoff needed**; the VM freezes a few seconds then resumes — do not type meanwhile
 - VM running: the snapshot also keeps the open windows and the memory; for a « clean » state, save your files first. It is stored inside the VM folder (`Snapshots/`), never next to vm.sh
 
 ```bash
-vm snap <name>
+NAME="after-step-4"
+```
+
+```bash
+vm snap "$NAME"
 ```
 
 **List the snapshots**
@@ -103,22 +108,30 @@ vm snap <name>
 vm snaps
 ```
 
-**Go back to a snapshot**
+**Go back to a snapshot** (look up its name with `vm snaps`, set it, then restore)
 
 - VM: any state (the command powers it off, asks for confirmation, then restarts it)
 - Windows App: the connection cuts; everything done since the snapshot is lost; reconnect afterwards
 
 ```bash
-vm restore <name>
+NAME="after-step-4"
 ```
 
-**Delete a snapshot**
+```bash
+vm restore "$NAME"
+```
+
+**Delete a snapshot** (name from `vm snaps`)
 
 - VM: any state
 - Windows App: nothing to do
 
 ```bash
-vm snap-delete <name>
+NAME="after-step-4"
+```
+
+```bash
+vm snap-delete "$NAME"
 ```
 
 **Full backup (≈ 7 min) into `~/VMs/backups/ai4se-ubuntu/`**
@@ -145,7 +158,7 @@ vm backup
 vm backup
 ```
 
-Transfer `~/VMs/backups/ai4se-ubuntu/ai4se-ubuntu-<date>.tar.gz` by AirDrop or external disk (not Dropbox).
+Transfer the newest `ai4se-ubuntu-….tar.gz` of `~/VMs/backups/ai4se-ubuntu/` (the name printed by `vm backup`) by AirDrop or external disk (not Dropbox).
 
 ### On the other Mac
 
@@ -187,13 +200,17 @@ VBoxManage unregistervm ai4se-ubuntu
 mv ~/VMs/ai4se-ubuntu ~/VMs/ai4se-ubuntu-old
 ```
 
-**Import (replace `<date>` with the archive's)**
+**Import the most recent archive** (the first line finds it, the second imports it)
 
 - VM: no `ai4se-ubuntu` VM registered on this Mac; VirtualBox installed
 - Windows App: no window yet: connect once the command is done (it starts the VM)
 
 ```bash
-vm import ~/VMs/backups/ai4se-ubuntu/ai4se-ubuntu-<date>.tar.gz
+ARCHIVE=$(ls -t ~/VMs/backups/ai4se-ubuntu/*.tar.gz | head -n 1) && echo "$ARCHIVE"
+```
+
+```bash
+vm import "$ARCHIVE"
 ```
 
 **Check the state**
@@ -270,13 +287,17 @@ vm status
 vm ssh
 ```
 
-**A step broke everything inside the VM**
+**A step broke everything inside the VM** (set the last good snapshot's name from `vm snaps`)
 
 - VM: any state
 - Windows App: the connection cuts; what was done since the snapshot is lost
 
 ```bash
-vm restore <last-good-snapshot>
+NAME="after-step-4"
+```
+
+```bash
+vm restore "$NAME"
 ```
 
 **VirtualBox says the VM is « inaccessible »**: import the latest backup (section 3), or ask Claude.
@@ -290,10 +311,20 @@ vm restore <last-good-snapshot>
 vm diag
 ```
 
-Several VMs: prefix with the name, for example:
+Several VMs: set the VM's name once in the terminal (change `other-vm` to yours), then every `vm` command targets it:
 
 ```bash
-VM_NAME=<other-vm> vm status
+export VM_NAME="other-vm"
+```
+
+```bash
+vm status
+```
+
+Back to the default VM:
+
+```bash
+unset VM_NAME
 ```
 
 ## 5. Keyboard shortcuts inside the VM (Ubuntu, through Windows App)
