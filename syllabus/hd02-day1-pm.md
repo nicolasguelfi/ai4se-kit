@@ -220,7 +220,7 @@ Most answers to question 3 are "no" — and the reasons (no tests, code never re
 
 | This afternoon | This morning's idea | Cycle |
 |---|---|---|
-| You had to explain your app again | The model has no memory | CCSET01 |
+| It filled what you did not say with its own guesses | An LLM predicts the most likely continuation | CCSET01 |
 | The agent did more than you asked | Autonomy needs a human in the loop | CCSET02 |
 | It works — would you ship it? | VibeCoding is not engineering | CCSET02 |
 | Your key, its permissions, what you pasted | Practical rules, the AI Act | CCSET03 |
