@@ -2,7 +2,7 @@
 
 Not used by learners. `setup-learner.sh` and the tutor never read this folder.
 
-**User manual for the trainer as advisor (French):** [`MANUEL-CONSEILLER.md`](MANUEL-CONSEILLER.md).
+**User manual for the trainer as advisor:** [`ADVISOR-MANUAL.md`](ADVISOR-MANUAL.md).
 
 ## advisor.py — the advisor board
 
