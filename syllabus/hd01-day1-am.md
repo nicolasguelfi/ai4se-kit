@@ -131,7 +131,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 1.1 — Coding Agents and Plugin Arc
 
 **Continuity lives in files**: `AGENTS.md` (project rules, read at each session), `docs/plan.md` (your plan, task by task), `.gse/` (GSE-One state: where the project is) and the **git history** (what changed, when, and why). This is why day 2 starts with git and `AGENTS.md`, and why GSE-One keeps its state in `.gse/`.
 
-**While the agent works**: read its plan before you approve; prepare the next check (which test, what to look at); don't type over it — one instruction at a time; review the diff (`git diff`) before you commit.
+**While the agent works**: read its plan before you approve; prepare the next check (which test, what to look at); don't type over it — one instruction at a time; check the changes (`git diff --stat`, then `git diff`) before you commit.
 
 > If it is not in a file or in git, the next session does not know it.
 
@@ -253,7 +253,7 @@ $ opencode                    # the agent works in this folder
 > /gse-status                 # GSE-One commands start with /gse-
 ```
 
-Plan first, build second, review the diff before you commit. The help of the course is not inside this session: it is your **tutor window**, a second terminal (hd02 § Installation in the room). The slide's `opencode.json` example (model, `permission` ask/allow, an MCP server) is an *example only*: the course kit sets your reference model and permissions stay at opencode defaults.
+Plan first, build second, check the changes before you commit. The help of the course is not inside this session: it is your **tutor window**, a second terminal (hd02 § Installation in the room). The slide's `opencode.json` example (model, `permission` ask/allow, an MCP server) is an *example only*: the course kit sets your reference model and permissions stay at opencode defaults.
 
 **Others.** Claude Code (Anthropic; `CLAUDE.md` is the twin of `AGENTS.md`, plan mode the twin of the plan agent; Claude models only). Cursor (AI-native editor, agent and plan modes). GitHub Copilot (IDE agent, cloud agent: issue → pull request). Codex CLI (OpenAI, open source, reads `AGENTS.md`). Gemini CLI (Google; succeeded by Antigravity CLI, May 2026). *Same ideas, new names — learn the concept, not the menu.* **Local LLMs** (Ollama, LM Studio): privacy, offline, fixed cost, fine for small jobs; but weaker on multi-file plans, less reliable tool calls, big hardware, you maintain it. This week: cloud model, capped key; at work: local when data must stay. **MCP (Model Context Protocol)**: an open protocol to plug tools and data into any agent; thousands of servers in a public registry; supported by all five agents; *trust*: a local server runs code on your machine. **Why opencode?** Open source, any provider (one capped key), concepts transfer, terminal-first (files, git, npm, tests), and GSE-One runs on 5 agents so the method goes with you. Keep an editor such as VSCodium open next to it to read code — with its AI switched off (see the IDE guide).
 
@@ -274,7 +274,7 @@ Plan first, build second, review the diff before you commit. The help of the cou
 | 2 Dec 2027 | High-risk, stand-alone (Annex III) — was 2 Aug 2026 |
 | 2 Aug 2028 | High-risk in products (Annex I) — was 2 Aug 2027 |
 
-**Rules for this week.** *Never in a prompt*: secrets (keys — yours too —, passwords, `.env`), personal data (names, e-mails, health), NDA code (anonymise first). Remember: a prompt leaves your machine. *What the agent may do*: one project folder, never your home; it asks before any shell command; never `--bypass` on a real machine; review every diff before commit. **The AI proposes. You answer for what goes out.**
+**Rules for this week.** *Never in a prompt*: secrets (keys — yours too —, passwords, `.env`), personal data (names, e-mails, health), NDA code (anonymise first). Remember: a prompt leaves your machine. *What the agent may do*: one project folder, never your home; it asks before any shell command; never `--bypass` on a real machine; check every change before commit — which files, do the tests pass, then read the risky parts (security, data, configuration); reading every line does not scale. **The AI proposes. You answer for what goes out.**
 
 ### Frequent errors
 

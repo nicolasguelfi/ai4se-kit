@@ -83,10 +83,11 @@ Coding without version control is a long game with no save button — and git ma
 
 **Where your changes live — the four areas of git**, from editor to GitHub: the *working directory* (your files on disk) → `git add` → the *staging area* (ready to commit) → `git commit` → the *local repository* (committed history) ⇄ `git push` / `git pull` ⇄ the *remote repository* (GitHub). Photography analogy: scene → pose the subjects → click the shutter → upload to the cloud. `git add` chooses what goes into the next snapshot — `git commit` takes it.
 
-**Six commands for today:**
+**Seven commands for today:**
 
 ```bash
 git status                  # what changed? run it all the time
+git diff --stat             # how many lines, in which files? as expected?
 git diff                    # the exact lines: your review tool
 git add src/App.tsx         # stage what you have reviewed (one file, e.g.)
 git commit -m "feat: ..."   # snapshot with a message
@@ -94,9 +95,9 @@ git log --oneline           # the timeline
 git restore src/App.tsx     # throw an unwanted change away (one file, e.g.)
 ```
 
-After the agent worked: never `git add .` without reading the diff.
+After the agent worked: never `git add .` without checking the diff.
 
-**Pattern 1 — review before stage:** `git status` (which files did the agent touch?) → `git diff` (read every change) → `git add src/App.tsx` (only what you approve) → `git diff --staged` (last look) → `git commit` (a message that says what and why). Never skip step 2: the diff is your review.
+**Pattern 1 — review before stage:** `git status` (which files did the agent touch?) → `git diff --stat` (how many lines, in which files? as expected?) → `git diff` (read what is small or risky — today's tasks are small: read all of it) → `git add src/App.tsx` (only what you approve) → `git diff --staged` (last look) → `git commit` (a message that says what and why). You own every change: check its scope, read what matters.
 
 **Pattern 2 — checkpoint commits** ("save the game before the boss fight"), before a big refactor, an approach you doubt, a multi-file change:
 
@@ -110,6 +111,8 @@ git restore .     # back to the checkpoint (uncommitted work is lost)
 **Pattern 3 — one branch per task:** `git switch -c feat/add-history` (name it after your task) — works? merge it back; doesn't? delete it: nothing is lost.
 
 **Names that tell the story.** Commits: `type(scope): what changed`, e.g. `feat(expenses): reject negative amounts`, `fix(list): round the monthly total`, `test(form): cover the empty category`, with a trailer `Assisted-by: opencode`. Types: feat, fix, test, refactor, docs, chore. Branches: `mywork` (your main line today), `feat/add-history` (one task of your plan), `fix/rounding` (one bug), `experiment/new-layout` (may be thrown away).
+
+**What you clone: CalcApp at `j2-start`.** A title-only page on route `/`, one green test, `AGENTS.md`, and `docs/plan-example.md` (7 tasks, the fallback plan). React 19 + TypeScript, Vite, Vitest, dependencies locked by `package-lock.json`. Tonight, v0.1: add, list and total expenses.
 
 ### Exercise — Git on CalcApp (15 min)
 
@@ -138,6 +141,17 @@ git restore "$BROKEN" && npm run test:run
 **If stuck:** (1) your tutor window; (2) re-clone at `j2-start` in a new folder; (3) raise your hand.
 
 **Debrief (5 min):** What did `git diff` show when you broke the file — and after `git restore`? The agent just edited 5 files: which command do you run first, and why? Compare `git log --oneline` with your neighbour: same history?
+
+**Too big to read every line?** Size your review to the change:
+
+| The change | What you do | When in the course |
+|---|---|---|
+| A few lines, one task | read the whole `git diff` | today, the CalcApp tasks |
+| Tens of files | scope with `git diff --stat`, tests green, test files untouched, read the risky parts | day 2, tasks with tests (11:30) |
+| Hundreds of files | AI review against the plan, triage HIGH / MEDIUM / LOW, read and fix the HIGH ones | day 2, review (14:30) |
+| Thousands of files | automatic checks (tests, lint, types), several agents review, you review the plan, the tests and the risky zones | days 3-6, GSE-One |
+
+*Risky parts:* security (authentication, secrets, input reaching storage or queries), data (formats, migrations, deletion), money and business rules, configuration and dependencies (`package.json`, the lock file, CI), any change to the tests. Keep changes small: one task, one branch — then reading stays possible.
 
 ### Frequent errors
 
