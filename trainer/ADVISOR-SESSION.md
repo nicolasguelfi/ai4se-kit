@@ -12,7 +12,7 @@ open their next sprint (`/gse-plan`): accept into the sprint, keep in the pool, 
    edit — not even in the local clones (`.advisor-cache/`, push disabled). Read with `git show`,
    `git log`, `git diff` on `refs/remotes/origin/*`.
 2. **Your only output to a learner is an advisor ticket**, created with
-   `python3 <kit>/trainer/advisor_tickets.py create`, and **only after the trainer said yes to that
+   `advisor_tickets.py create` (step 5), and **only after the trainer said yes to that
    ticket**. Show it first with `--dry-run`.
 3. **Ask the trainer only by a short multiple-choice question** (one question, the problem restated
    simply, the advantages and drawbacks of each option, your recommendation). For several tickets or
@@ -23,7 +23,18 @@ open their next sprint (`/gse-plan`): accept into the sprint, keep in the pool, 
 
 ## Steps
 
-1. **Refresh the board** — `python3 <kit>/trainer/advisor.py --roster <roster>` (fetches what was pushed,
+0. **Set the two paths in the terminal, once per terminal** — every command below uses them. The session file
+   `CLAUDE.md` (or `AGENTS.md`, `GEMINI.md`) next to the roster gives these two lines with the trainer's real
+   paths; run those. The defaults are:
+
+   ```bash
+   KIT="$HOME/ai4se/ai4se-kit"
+   ROSTER="$HOME/ai4se-advisor/roster.csv"
+   ```
+
+   Check: `ls "$KIT/trainer/advisor.py" "$ROSTER"` lists both files.
+
+1. **Refresh the board** — `python3 "$KIT/trainer/advisor.py" --roster "$ROSTER"` (fetches what was pushed,
    writes `advisor.html` next to the roster). Read its alerts. Ask the trainer which learner and project
    to inspect (QCM), or propose the rows that need attention first.
 2. **Inspect, read-only** — in the cache clone: `.gse/config.yaml` (mode), `.gse/plan.yaml` (sprint, steps
@@ -41,9 +52,19 @@ open their next sprint (`/gse-plan`): accept into the sprint, keep in the pool, 
 4. **Ask the trainer** — the proposals with their pros and cons and your recommendation; the trainer
    keeps, edits or drops each one.
 5. **Create** — for each ticket the trainer kept: write the body to a temporary file outside any
-   repository, run `create --dry-run`, then `create`; report each issue URL.
-6. **Follow up** — `python3 <kit>/trainer/advisor_tickets.py list --roster <roster>` shows every advisor
+   repository, set the ticket's three values, then the dry run, then the real one; report each issue URL.
+   The values below are an example; replace them with the ticket's own:
+
+   ```bash
+   REPO="learner-account/calcapp"
+   TITLE="Add a test for division by zero"
+   BODY="$HOME/ai4se-advisor/ticket-1.md"
+   python3 "$KIT/trainer/advisor_tickets.py" create --repo "$REPO" --title "$TITLE" --body-file "$BODY" --dry-run
+   python3 "$KIT/trainer/advisor_tickets.py" create --repo "$REPO" --title "$TITLE" --body-file "$BODY"
+   ```
+6. **Follow up** — `python3 "$KIT/trainer/advisor_tickets.py" list --roster "$ROSTER"` shows every advisor
    ticket and the learner's decision (GSE-One comments on the issue when the next sprint opens; a
    declined ticket is closed with its reason, an accepted one when its task is delivered).
 
-`<kit>` is the folder of the course kit (`~/ai4se/ai4se-kit` by default).
+**Commands are always runnable as written**: never a placeholder in angle brackets inside a command; a value
+that changes is a shell variable defined by a command just before (step 0, step 5).

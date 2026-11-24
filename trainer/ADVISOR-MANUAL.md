@@ -120,13 +120,17 @@ absent, a decision not recorded, a sprint too big).
 Create a ticket **by hand**, without an agent — write the text to a file, then a dry run:
 
 ```bash
-python3 ~/ai4se/ai4se-kit/trainer/advisor_tickets.py create --repo <account/repo> --title "<title>" --body-file <file.md> --dry-run
+REPO="learner-account/calcapp"
+TITLE="Add a test for division by zero"
+BODY="$HOME/ai4se-advisor/ticket-1.md"
+python3 ~/ai4se/ai4se-kit/trainer/advisor_tickets.py create --repo "$REPO" --title "$TITLE" --body-file "$BODY" --dry-run
 ```
 
-Then for real:
+The first three lines are an example: put the learner's repository, your title and your file. Then for real, in
+the same terminal:
 
 ```bash
-python3 ~/ai4se/ai4se-kit/trainer/advisor_tickets.py create --repo <account/repo> --title "<title>" --body-file <file.md>
+python3 ~/ai4se/ai4se-kit/trainer/advisor_tickets.py create --repo "$REPO" --title "$TITLE" --body-file "$BODY"
 ```
 
 ## 4. Following the decisions
@@ -140,7 +144,8 @@ python3 ~/ai4se/ai4se-kit/trainer/advisor_tickets.py list --roster ~/ai4se-advis
 One repository:
 
 ```bash
-python3 ~/ai4se/ai4se-kit/trainer/advisor_tickets.py list --repo <account/repo>
+REPO="learner-account/calcapp"
+python3 ~/ai4se/ai4se-kit/trainer/advisor_tickets.py list --repo "$REPO"
 ```
 
 Reading it: « not studied yet » = the learner has not opened a new sprint yet; a comment « Accepted / Kept /

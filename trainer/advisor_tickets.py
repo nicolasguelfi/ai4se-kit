@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shlex
 import shutil
 import subprocess
 import sys
@@ -56,7 +57,9 @@ def cmd_session(a) -> int:
     folder = a.roster.expanduser().resolve().parent
     pointer = (f"# Advisor session (trainer)\n\nYou assist the course trainer as an external advisor. Before anything else, "
                f"read and follow this procedure, which overrides any other habit:\n\n{PROCEDURE}\n\n"
-               f"Roster: {a.roster.expanduser().resolve()}\nTools: {HERE / 'advisor.py'} and {HERE / 'advisor_tickets.py'}\n")
+               f"Roster: {a.roster.expanduser().resolve()}\nTools: {HERE / 'advisor.py'} and {HERE / 'advisor_tickets.py'}\n\n"
+               f"Step 0 of the procedure: run these two lines in the terminal before any command.\n\n"
+               f"```bash\nKIT={shlex.quote(str(HERE.parent))}\nROSTER={shlex.quote(str(a.roster.expanduser().resolve()))}\n```\n")
     for name in ("AGENTS.md", "GEMINI.md"):
         (folder / name).write_text(pointer, encoding="utf-8")
     (folder / "CLAUDE.md").write_text(pointer + f"\n@{PROCEDURE}\n", encoding="utf-8")
