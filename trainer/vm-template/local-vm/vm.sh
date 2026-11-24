@@ -168,7 +168,8 @@ case "$cmd" in
     name="${1:-snap-$(date +%Y%m%d-%H%M)}"
     say "Snapshot « $name »"
     [ "$(state)" = running ] && step "the VM pauses a few seconds, then resumes (no --live: it crashed the VM on 2026-11-23)"
-    VBoxManage snapshot "$VM_NAME" take "$name" --description "taken by vm.sh on $(date '+%Y-%m-%d %H:%M')" && step "done" ;;
+    VBoxManage snapshot "$VM_NAME" take "$name" --description "taken by vm.sh on $(date '+%Y-%m-%d %H:%M')" \
+      && step "done — stored inside the VM folder: $(dirname "$CFG")/Snapshots (list: bash vm.sh snaps; never move these files by hand)" ;;
   snaps)   say "Snapshots of $VM_NAME"; VBoxManage snapshot "$VM_NAME" list 2>/dev/null || step "none yet (bash vm.sh snap)" ;;
   restore)
     [ $# -ge 1 ] || die "which snapshot? bash vm.sh snaps, then bash vm.sh restore <name>"
