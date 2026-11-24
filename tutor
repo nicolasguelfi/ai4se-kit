@@ -2,8 +2,8 @@
 # AI4SE tutor launcher — opens the course tutor in its own opencode session.
 #
 #   ~/ai4se/ai4se-kit/tutor               open the tutor window (extra args go to opencode)
-#   ~/ai4se/ai4se-kit/tutor add <path>    let the tutor read one more folder
-#   ~/ai4se/ai4se-kit/tutor remove <path> stop the tutor reading a folder
+#   ~/ai4se/ai4se-kit/tutor add ~/path/to/your-project    let the tutor read one more folder
+#   ~/ai4se/ai4se-kit/tutor remove ~/path/to/your-project stop the tutor reading a folder
 #   ~/ai4se/ai4se-kit/tutor paths         list the folders the tutor may read
 #   ~/ai4se/ai4se-kit/tutor update        update the kit (start of each half-day)
 #   ~/ai4se/ai4se-kit/tutor version       show kit / GSE-One / opencode versions
@@ -66,7 +66,7 @@ ensure_paths_file() {
   mkdir -p "$CONF_DIR"
   {
     printf '# Folders the AI4SE tutor may read (one per line, ~ allowed, # = comment).\n'
-    printf '# Change it with: tutor add <path> / tutor remove <path>\n'
+    printf '# Change it with: tutor add ~/path/to/your-project / tutor remove ~/path/to/your-project\n'
     printf '%s\n' "$HOME_SHOWN"
   } > "$PATHS_FILE"
 }
@@ -220,7 +220,7 @@ check_addable() {
 }
 
 cmd_add() {
-  [ $# -eq 1 ] || die "usage: tutor add <path>"
+  [ $# -eq 1 ] || die "usage: tutor add ~/path/to/your-project"
   raw=$(expand "$1")
   [ -d "$raw" ] || die "not a folder: $1"
   p=$(cd "$raw" && pwd)
@@ -240,7 +240,7 @@ cmd_add() {
 }
 
 cmd_remove() {
-  [ $# -eq 1 ] || die "usage: tutor remove <path>"
+  [ $# -eq 1 ] || die "usage: tutor remove ~/path/to/your-project"
   ensure_paths_file
   target=$(expand "$1")
   [ -d "$target" ] && target=$(cd "$target" && pwd)

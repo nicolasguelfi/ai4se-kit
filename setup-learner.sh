@@ -86,7 +86,7 @@ if [ -f "$PATHS_FILE" ]; then
 else
   {
     printf '# Folders the AI4SE tutor may read (one per line, ~ allowed, # = comment).\n'
-    printf '# Change it with: tutor add <path> / tutor remove <path>\n'
+    printf '# Change it with: tutor add ~/path/to/your-project / tutor remove ~/path/to/your-project\n'
     printf '%s\n' "$HOME_SHOWN"
   } > "$PATHS_FILE"
   step "tutor folders list written: $PATHS_FILE ($HOME_SHOWN)"
@@ -141,4 +141,4 @@ case "$SHOWN" in "~/"*" "*) SHOWN="~/\"${SHOWN#"~/"}\"" ;; *" "*) SHOWN="\"$SHOW
 say ""
 say "Done. Go on with step 5 of the installation (GSE-One)."
 say "  The check (step 7) and the tutor window (step 8) come after steps 5-6."
-say "  Later, a project outside $HOME_SHOWN? Let the tutor read it:  $SHOWN/tutor add <path>"
+say "  Later, a project outside $HOME_SHOWN? Let the tutor read it:  $SHOWN/tutor add ~/path/to/your-project"

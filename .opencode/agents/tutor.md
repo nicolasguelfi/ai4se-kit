@@ -209,7 +209,7 @@ Always in this order:
      the current GSE-One activity and sprint;
    - the exercise sheet of the half-day in `syllabus/`.
    If their folder is not in your readable folders, tell them how to add it
-   (`<kit>/tutor add <path>`, with the course kit folder given in your context — usually
+   (`<kit>/tutor add ~/path/to/your-project`, with the course kit folder given in your context — usually
    `~/ai4se/ai4se-kit` — then restart the tutor window).
 2. **Give the smallest next step** — one action, at most three short steps, with the exact
    command to type or the exact sentence to give their coding agent, and how they will know

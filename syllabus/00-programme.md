@@ -82,7 +82,7 @@ sibling repositories, none nested in another:
 | `~/ai4se/gensem` | GSE-One source at tag v0.93.4: spec, design, activities (read-only reference) |
 | `~/ai4se/freeselfapp` | your day-1 vibe-coded prototype |
 | `~/ai4se/calcapp` | CalcApp, from the starter to the GSE-One sprints, with its tags (`v0.1`, …) |
-| your mini-project | your own project (may live elsewhere: add it with `~/ai4se/ai4se-kit/tutor add <path>`) |
+| your mini-project | your own project (may live elsewhere: add it with `~/ai4se/ai4se-kit/tutor add ~/path/to/your-project`) |
 | `.gse/` in each GSE-One project | the method's state: profile, plan, backlog, decisions, checkpoints |
 
 You can keep and reuse all of it after the course; you will only need your own model key.
@@ -215,7 +215,7 @@ readable project and precise context; plan before building; build test-first.
 `git restore` · `git log --oneline` · `git branch` · in opencode: Shift+Tab, `@file`, `/init`.
 
 **Recovery tag(s).** `j2-start` (start of the day). Restart:
-`git clone https://github.com/nicolasguelfi/calcapp-starter calcapp && cd calcapp && git checkout -b mywork <tag> && npm ci`.
+`git clone https://github.com/nicolasguelfi/calcapp-starter calcapp && cd calcapp && git checkout -b mywork j2-start && npm ci`.
 If your plan does not work out, the starter has a fallback example: `docs/plan-example.md`.
 
 **Sheet.** [`hd03-day2-am.md`](hd03-day2-am.md) (available).
@@ -396,7 +396,7 @@ mini-project repository with `.gse/` and its project card (`docs/project.md`).
 
 **Commands met.** `/gse-fix` · `/gse-deliver` · `/gse-compound` · `/gse-health` ·
 `/gse-backlog` · `/gse-pause` · `/gse-resume` · `/gse-learn` · `/gse-go` ·
-`~/ai4se/ai4se-kit/tutor add <path>` (if the mini-project is outside `~/ai4se`).
+`~/ai4se/ai4se-kit/tutor add ~/path/to/your-project` (if the mini-project is outside `~/ai4se`).
 
 **Recovery tag(s).** CalcApp: `p7-start`. Mini-project: `gse-backup/…` tags and `/gse-pause`
 checkpoints (see [recovery](recovery.md)).
@@ -438,7 +438,7 @@ your comparison grid; CalcApp online (wave of the morning or of the afternoon).
 `/gse-deploy` (E19) · `git push --all origin`.
 
 **Recovery tag(s).** None for the mini-project: it is your own. Stuck → tutor window
-(`tutor add <path>` if the project is outside `~/ai4se`), the back of the orientation page, the trainer.
+(`tutor add ~/path/to/your-project` if the project is outside `~/ai4se`), the back of the orientation page, the trainer.
 
 **Sheet.** [`hd09-day5-am.md`](hd09-day5-am.md).
 
@@ -506,7 +506,7 @@ freeze and rehearse; the four-point audit written as a README section "Ethics an
 project card, known limits, and "Ethics and compliance".
 
 **Commands met.** `/gse-status` · `/gse-deliver` · `/gse-task` · `git grep` · `git tag demo main` ·
-`git push origin demo` · `git log --all --oneline -- .env` · `npm view <package> license` / `pip show <package>`.
+`git push origin demo` · `git log --all --oneline -- .env` · `npm view react license` / `pip show <package>`.
 
 **Recovery tag(s).** The delivery of 11:30 and the tag `demo` are your demo fallback.
 

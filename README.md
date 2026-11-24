@@ -19,9 +19,9 @@ It contains:
 |---|---|
 | Install (day 1) | `git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh` |
 | Open the tutor window (a second terminal) | `~/ai4se/ai4se-kit/tutor` |
-| Let the tutor read a folder outside `~/ai4se` | `~/ai4se/ai4se-kit/tutor add <path>` |
+| Let the tutor read a folder outside `~/ai4se` | `~/ai4se/ai4se-kit/tutor add ~/path/to/your-project` |
 | List the folders the tutor may read | `~/ai4se/ai4se-kit/tutor paths` |
-| Stop the tutor reading a folder | `~/ai4se/ai4se-kit/tutor remove <path>` |
+| Stop the tutor reading a folder | `~/ai4se/ai4se-kit/tutor remove ~/path/to/your-project` |
 | Update the kit (start of each half-day) | `~/ai4se/ai4se-kit/tutor update` |
 | Show versions (kit, GSE-One clone, opencode) | `~/ai4se/ai4se-kit/tutor version` |
 | Check the machine | `sh ~/ai4se/ai4se-kit/check-learner.sh` (from your project folder) |
@@ -45,7 +45,7 @@ Safe to run several times. It never reads or writes keys.
 - clones GSE-One at tag `v0.93.4` into `~/ai4se/gensem` (or checks the tag of an existing clone);
 - writes `~/.config/ai4se/tutor-paths` (default content: `~/ai4se`) if it does not exist;
 - moves away the global `~/.config/opencode/agents/tutor.md` installed by the previous kit
-  version (backup `tutor.md.bak.<date>`; there is no `@tutor` any more);
+  version (backup `tutor.md.bak.*`; there is no `@tutor` any more);
 - sets the default opencode model in `~/.config/opencode/opencode.json` **only** if it has
   none and the course model is decided (one key added, backup kept).
 

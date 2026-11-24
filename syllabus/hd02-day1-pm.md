@@ -127,7 +127,7 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
 | node missing, or older than v20 | Redo step 2 |
 | `libatomic.so.1: cannot open shared object file` | `sudo apt-get install -y libatomic1` (Ubuntu / WSL), then `node --version` |
 | `gh auth login` prints `update.go … mount namespace` lines | Harmless (Firefox snap): wait, no Ctrl+C — or type the code at `github.com/login/device` in any browser |
-| The tutor window says a folder is not allowed | Your project is outside `~/ai4se`: move it there, or `~/ai4se/ai4se-kit/tutor add <path>` (list: `~/ai4se/ai4se-kit/tutor paths`) |
+| The tutor window says a folder is not allowed | Your project is outside `~/ai4se`: move it there, or `~/ai4se/ai4se-kit/tutor add ~/path/to/your-project` (list: `~/ai4se/ai4se-kit/tutor paths`) |
 
 ### Links
 

@@ -38,7 +38,7 @@ cd ~/ai4se/calcapp-restart && git checkout -b mywork j2-part1 && npm ci
 
 Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, skip the tasks already done in the tag, continue with the next one. A recovery tag is a safety net, not a failure.
 
-**Same loop, every task:** branch `git switch -c feat/<task-name>` → RED: test only → *you* review → commit `test: …` → GREEN: minimal code, test untouched → commit `feat: …` → mutant check → undo → review the agent's code (checklists below) → merge into `mywork` only when green. Typical order: routing → data → UI; follow your plan's order.
+**Same loop, every task:** branch `git switch -c feat/routing` (named after the task) → RED: test only → *you* review → commit `test: …` → GREEN: minimal code, test untouched → commit `feat: …` → mutant check → undo → review the agent's code (checklists below) → merge into `mywork` only when green. Typical order: routing → data → UI; follow your plan's order.
 
 **Task — routing and navigation.** Two pages: `/` → Dashboard (expenses + total), `/add` → Add Expense (the form).
 
@@ -83,7 +83,7 @@ No animations, no CSS library. Keep all tests green.
 
 **Goal:** deliver your plan's next tasks (routing, data, UI), one branch each, test first.
 
-**Steps:** one task = one branch `feat/<task-name>`; RED → review → commit `test: …`; GREEN → review checklist → commit `feat: …`; merge into `mywork` when green, next task. Your plan's wording is unclear? Use the prompts above.
+**Steps:** one task = one branch, `feat/` + the task's name (e.g. `feat/routing`); RED → review → commit `test: …`; GREEN → review checklist → commit `feat: …`; merge into `mywork` when green, next task. Your plan's wording is unclear? Use the prompts above.
 
 **Done when:** `npm test` shows 4+ passing tests; the app has two pages; an added expense survives a browser refresh.
 

@@ -33,12 +33,13 @@ At the end of this half-day you can:
 
 ```bash
 ~/ai4se/ai4se-kit/tutor update     # in the tutor window
-cd <your-project>
+PROJECT=~/ai4se/my-project         # your project's folder
+cd "$PROJECT"
 opencode
 /gse-resume                        # in opencode
 ```
 
-Project outside `~/ai4se`? Once: `~/ai4se/ai4se-kit/tutor add <path>` — so your tutor window can read it. `/gse-resume` should say: Lightweight mode, card validated, next step the plan.
+Project outside `~/ai4se`? Once: `~/ai4se/ai4se-kit/tutor add ~/path/to/your-project` — so your tutor window can read it. `/gse-resume` should say: Lightweight mode, card validated, next step the plan.
 
 ## CCSET16 — Deployment
 
@@ -132,7 +133,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.8 — Deployment`; the activity `~
 
 **Mid-point:** Day 5, 12:15 — the plan is validated and the requirements are written.
 
-**If stuck:** Your tutor window (project outside `~/ai4se`? `~/ai4se/ai4se-kit/tutor add <path>`) → the back of your orientation page, "when the agent drifts" → raise your hand. No recovery tag: the project is yours.
+**If stuck:** Your tutor window (project outside `~/ai4se`? `~/ai4se/ai4se-kit/tutor add ~/path/to/your-project`) → the back of your orientation page, "when the agent drifts" → raise your hand. No recovery tag: the project is yours.
 
 **Debrief:** Day 5, 16:30: what did you move to the backlog to hold the 11:30 delivery? Which Gate did you change, and why?
 
@@ -144,7 +145,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.8 — Deployment`; the activity `~
 
 **Steps:**
 
-1. After `/gse-plan`, copy your project next to it, for the second model: `cp -R . ../<project>-model-b`.
+1. After `/gse-plan`, copy your project next to it, for the second model: `cp -R . "../$(basename "$PWD")-model-b"`.
 2. Model A, in your project — the course model `openrouter/deepseek/deepseek-v4.1-flash`: run `/gse-reqs` and write down your answers to its questions.
 3. Model B, in the copy: start `opencode`, type `/models`, pick `openrouter/minimax/minimax-m3.1-flash`, then `/gse-reqs` with the same answers.
 4. Fill the grid for each model: number of requirements, testable ones (Given / When / Then), the non-functional requirement it forgot, the questions it asked, the cost (sidebar: tokens, $ spent).

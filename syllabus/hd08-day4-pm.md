@@ -131,7 +131,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 10.4 — Merge Strategy (Gate Decisi
 ### Frequent errors
 
 - A project for "everyone" with ten features → one user, one problem, 2-4 requirements; the rest in the backlog.
-- The mini-project folder outside `~/ai4se` → the tutor window cannot read it: `~/ai4se/ai4se-kit/tutor add <path>`.
+- The mini-project folder outside `~/ai4se` → the tutor window cannot read it: `~/ai4se/ai4se-kit/tutor add ~/path/to/your-project`.
 - Client code pushed to a public repository → create the repository private.
 
 ### Links

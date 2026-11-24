@@ -30,7 +30,7 @@ npm run test:run
 | `p7-start` | HD08 (day 4 afternoon, E16): sprint produced and reviewed (`review.md`); start of fix and delivery |
 
 From `p3-start` on (day 3), GSE-One takes `main` as the reference: restart on `main`, not
-on `mywork` — `git switch -C main p3-start` instead of `git checkout -b mywork <tag>`.
+on `mywork` — `git switch -C main p3-start` instead of `git checkout -b mywork j2-start`.
 Exception, `p7-start`: the sprint work sits on the sprint branch, so restart with
 `git switch -C gse/sprint-01/integration p7-start` then `git branch -f main p6-start`
 (`/gse-deliver` then merges the sprint into `main`).
@@ -59,9 +59,10 @@ Before risky git operations (merges, branch deletions) GSE-One creates tags name
 `gse-backup/…` (for example `gse-backup/sprint-01-pre-main-merge`).
 
 - List them: `git tag -l 'gse-backup/*'`
-- Look at one without changing anything: `git log --oneline -5 <tag>`
+- Pick one from the list: `TAG=gse-backup/sprint-01-pre-main-merge` (change it to the one you want)
+- Look at it without changing anything: `git log --oneline -5 "$TAG"`
 - Restore safely **on a new branch** (your current branch is untouched):
-  `git switch -c recover-1 <tag>`
+  `git switch -c recover-1 "$TAG"`
 
 Never use `git reset --hard` or delete branches to "clean up": call the trainer instead.
 Reference: spec § 10.6 — Safety and Recovery.
@@ -79,7 +80,7 @@ This is the back of the printed orientation page. Stop at the first step that so
 4. **`/gse-pause` then `/gse-resume`** — saves state and reloads it cleanly; this also
    resets a confused conversation (start a new opencode session in between if needed).
 5. **Restore a backup tag** — `git tag -l 'gse-backup/*'`, then
-   `git switch -c recover-1 <tag>` (see above).
+   `TAG=` the one you pick, then `git switch -c recover-1 "$TAG"` (see above).
 6. **Call the trainer** — raise your hand; do not type more commands meanwhile.
 
 You can ask your tutor window at any step: it reads your `git status`, `git log` and

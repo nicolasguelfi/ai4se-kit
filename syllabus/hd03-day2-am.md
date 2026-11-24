@@ -55,7 +55,8 @@ Yesterday: GenAI basics (what an LLM can and cannot do), VibeCoding vs VibeEngin
 ```bash
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
-cd calcapp && git checkout -b mywork <tag> && npm ci
+TAG=j2-start                  # the tag your half-day sheet names
+cd calcapp && git checkout -b mywork "$TAG" && npm ci
 ```
 
 Folder `calcapp` already exists? Clone into `~/ai4se/calcapp-restart` instead: your work stays safe. Always clone inside `~/ai4se` so your tutor window can read it.
@@ -75,28 +76,28 @@ Coding without version control is a long game with no save button — and git ma
 ```bash
 git status                  # what changed? run it all the time
 git diff                    # the exact lines: your review tool
-git add <file>              # stage what you have reviewed
+git add src/App.tsx         # stage what you have reviewed (one file, e.g.)
 git commit -m "feat: ..."   # snapshot with a message
 git log --oneline           # the timeline
-git restore <file>          # throw an unwanted change away
+git restore src/App.tsx     # throw an unwanted change away (one file, e.g.)
 ```
 
 After the agent worked: never `git add .` without reading the diff.
 
-**Pattern 1 — review before stage:** `git status` (which files did the agent touch?) → `git diff` (read every change) → `git add <file>` (only what you approve) → `git diff --staged` (last look) → `git commit` (a message that says what and why). Never skip step 2: the diff is your review.
+**Pattern 1 — review before stage:** `git status` (which files did the agent touch?) → `git diff` (read every change) → `git add src/App.tsx` (only what you approve) → `git diff --staged` (last look) → `git commit` (a message that says what and why). Never skip step 2: the diff is your review.
 
 **Pattern 2 — checkpoint commits** ("save the game before the boss fight"), before a big refactor, an approach you doubt, a multi-file change:
 
 ```bash
-git add <files> && git commit -m "chore: checkpoint before refactor"
+git add -A && git commit -m "chore: checkpoint before refactor"
 # ... let the agent work ...
 git diff          # happy? test and commit.   not happy?
 git restore .     # back to the checkpoint (uncommitted work is lost)
 ```
 
-**Pattern 3 — one branch per task:** `git switch -c feat/<task>` — works? merge it back; doesn't? delete it: nothing is lost.
+**Pattern 3 — one branch per task:** `git switch -c feat/add-history` (name it after your task) — works? merge it back; doesn't? delete it: nothing is lost.
 
-**Names that tell the story.** Commits: `type(scope): what changed`, e.g. `feat(expenses): reject negative amounts`, `fix(list): round the monthly total`, `test(form): cover the empty category`, with a trailer `Assisted-by: opencode`. Types: feat, fix, test, refactor, docs, chore. Branches: `mywork` (your main line today), `feat/<task>` (one task of your plan), `fix/<bug>`, `experiment/<idea>` (may be thrown away).
+**Names that tell the story.** Commits: `type(scope): what changed`, e.g. `feat(expenses): reject negative amounts`, `fix(list): round the monthly total`, `test(form): cover the empty category`, with a trailer `Assisted-by: opencode`. Types: feat, fix, test, refactor, docs, chore. Branches: `mywork` (your main line today), `feat/add-history` (one task of your plan), `fix/rounding` (one bug), `experiment/new-layout` (may be thrown away).
 
 ### Exercise — Git on CalcApp (15 min)
 
@@ -113,8 +114,9 @@ git switch -c feat/hello
 # change one line of README.md, then:
 git status && git diff
 git add README.md && git commit -m "docs: say hello"
-# break a file in src/ on purpose, look at git diff, then:
-git restore <that-file> && npm run test:run
+# break a file in src/ on purpose, look at git diff, then (BROKEN = that file):
+BROKEN=src/App.tsx
+git restore "$BROKEN" && npm run test:run
 ```
 
 **Done when:** `git log --oneline` shows your commit on `feat/hello`, and `git status` is clean.
@@ -321,7 +323,7 @@ Do NOT write the implementation. Run npm run test:run and show the failure.
 then, once you have reviewed the test:
 
 ```text
-Implement the minimal code that makes tests/<file>.test.tsx pass.
+Implement the minimal code that makes the new test in tests/ pass.
 Do not modify the test file. Run npm run test:run.
 ```
 
@@ -333,11 +335,11 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
 
 **Steps:**
 
-1. `git switch -c feat/<task-1-name>`
+1. `git switch -c feat/task-1` (or a name after your task)
 2. RED prompt → **read the test** → commit `test: …`
 3. GREEN prompt → `npm test` green → commit `feat: …`
 4. Mutant check, then undo the sabotage.
-5. `git switch mywork` → `git merge feat/<task-1-name>`. `mywork` is your main line since this morning: every finished task is merged into it.
+5. `git switch mywork` → `git merge feat/task-1` (the same name as in step 1). `mywork` is your main line since this morning: every finished task is merged into it.
 
 **Done when:** `npm test` shows your new test passing, and `git log --oneline` shows `test:` before `feat:`.
 

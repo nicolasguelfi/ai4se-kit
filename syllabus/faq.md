@@ -47,8 +47,8 @@ Still stuck → your tutor window, then the recovery tag, then raise your hand.
 
 ## 8. Git confusion
 - Before every commit: `git status` then `git diff` — know what you commit.
-- One branch per feature/task: `git switch -c feat/<short-name>`; never commit on `main`.
-- Undo uncommitted changes to one file: `git restore <file>` (it is final — ask if unsure).
+- One branch per feature/task: `git switch -c feat/add-history` (named after the task); never commit on `main`.
+- Undo uncommitted changes to one file: `git restore src/App.tsx` (the file to undo; it is final — ask if unsure).
 - New file not in `git diff`? Untracked files are ignored: `git add` it, then `git diff --staged`.
 - Lost? `git log --oneline -5` and `git branch` show where you are.
 
@@ -69,7 +69,7 @@ anywhere, not even in the tutor window).
 - It can read the folders listed in its context — by default everything under `~/ai4se`.
   See the list: `~/ai4se/ai4se-kit/tutor paths`.
 - Your project is elsewhere (e.g. a professional mini-project)? Add it:
-  `~/ai4se/ai4se-kit/tutor add <path>`.
+  `~/ai4se/ai4se-kit/tutor add ~/path/to/your-project`.
 - It never reads secrets (`.env` files, keys, `~/.ssh`, cloud or opencode credentials) and
   never changes a file: it tells you what to type, you type it in your work terminal.
 - It is an AI prepared by the trainer, not the trainer: it can be wrong, and it tells you
@@ -81,7 +81,7 @@ Update the kit — do it at the start of every half-day:
 
 ## 13. "Permission denied" or "Blocked by configuration policy" in the tutor window
 That is intended: the folder is outside the tutor's list, or the file is a secret.
-For a folder you want it to see, use `tutor add <path>`. Never try to work around the
+For a folder you want it to see, use `tutor add ~/path/to/your-project`. Never try to work around the
 secret rules — show the error (not the secret) to the trainer if it blocks you.
 
 ## 14. Is my machine ready?
