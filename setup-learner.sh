@@ -135,6 +135,39 @@ else
   step "model $MODEL added to $OC_JSON (backup: $OC_JSON.bak.$STAMP)"
 fi
 
+# --- 6. work-session settings (opencode.learner.json) ---------------------------
+# Added to ~/.config/opencode/opencode.json without overwriting anything the learner set: secrets the
+# agent may not read, risky shell commands that ask first, public sharing off (NG, 2026-11-24).
+if ! command -v python3 >/dev/null 2>&1; then
+  step "work-session settings: python3 missing — skipped (see syllabus/opencode-guide.md, Settings)"
+else
+  mkdir -p "$OC_DIR"
+  [ -f "$OC_JSON" ] && cp "$OC_JSON" "$OC_JSON.bak.$STAMP"
+  if msg=$(python3 - "$KIT/opencode.learner.json" "$OC_JSON" <<'PY'
+import json, sys, os
+src, dst = sys.argv[1], sys.argv[2]
+add = json.load(open(src))
+cur = json.load(open(dst)) if os.path.exists(dst) and os.path.getsize(dst) else {"$schema": add["$schema"]}
+n = 0
+def merge(a, b):
+    global n
+    for k, v in b.items():
+        if k not in a:
+            a[k] = v; n += 1
+        elif isinstance(a[k], dict) and isinstance(v, dict):
+            merge(a[k], v)
+merge(cur, add)
+json.dump(cur, open(dst, "w"), indent=2); open(dst, "a").write("\n")
+print(n)
+PY
+  ); then
+    step "work-session settings: $msg added to $OC_JSON (secrets unreadable, risky commands ask, sharing off)"
+  else
+    [ -f "$OC_JSON.bak.$STAMP" ] && cp "$OC_JSON.bak.$STAMP" "$OC_JSON"
+    step "work-session settings: $OC_JSON could not be read as JSON — left unchanged (fix it, then re-run)"
+  fi
+fi
+
 case "$KIT" in "$HOME"/*) SHOWN="~/${KIT#"$HOME"/}" ;; *) SHOWN=$KIT ;; esac
 # a folder name with a space: quote it, keeping ~ outside the quotes so the shell expands it
 case "$SHOWN" in "~/"*" "*) SHOWN="~/\"${SHOWN#"~/"}\"" ;; *" "*) SHOWN="\"$SHOWN\"" ;; esac

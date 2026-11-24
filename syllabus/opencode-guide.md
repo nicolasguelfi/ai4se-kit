@@ -124,7 +124,31 @@ Version:
 opencode --version
 ```
 
-## 7. Habits that keep you in control
+## 7. Settings the course gives you
+
+`setup-learner.sh` (installation step 4) adds these settings to your opencode configuration
+(`~/.config/opencode/opencode.json`), **without changing the ones you already have** (a backup copy is kept):
+
+| Setting | Effect |
+|---|---|
+| Secrets unreadable | the agent may not read `.env` files (except `.env.example`), keys (`*.pem`, `*.key`, `~/.ssh`, `~/.aws`, `~/.gnupg`), opencode's own configuration, `.git/config`, `.netrc`, `*credentials*` — neither with its read tool nor with a shell command |
+| Risky commands ask first | before `git push`, `sudo`, `rm -rf` / `rm -r`, global installs (`npm install -g`, `pip install`), downloads (`curl`, `wget`), opencode asks you — read the command, then allow or refuse |
+| No public sharing | sharing a conversation at a public address is off (`"share": "disabled"`): a session holds your code and paths |
+
+Everything else runs without asking, so the agent (and GSE-One) can work at a normal pace. The full list
+is in the kit: `~/ai4se/ai4se-kit/opencode.learner.json`. Check that the settings are there:
+
+```bash
+sh ~/ai4se/ai4se-kit/check-learner.sh
+```
+
+Missing (for example after reinstalling opencode)? Run the setup again — it only adds what is missing:
+
+```bash
+sh ~/ai4se/ai4se-kit/setup-learner.sh
+```
+
+## 8. Habits that keep you in control
 
 - **Read before you accept**: after the agent works, `!git diff` (or the editor's Source Control, see
   [ide-guide](ide-guide.md)) — then commit only what you understood.
@@ -134,7 +158,7 @@ opencode --version
 - **Never paste your key** into a request, a file, a screenshot or an issue.
 - **The model of the course** is set by the kit; change it only when an exercise asks (Ctrl+X, then M).
 
-## 8. When something goes wrong
+## 9. When something goes wrong
 
 | You see… | Do this |
 |---|---|

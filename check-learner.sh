@@ -74,6 +74,15 @@ else
   ko "no model provider configured for opencode" "run: opencode auth login  (paste the key the trainer sent you by Teams or e-mail — never in a file or another chat)"
 fi
 
+# 2b. work-session settings from the kit (opencode.learner.json, written by setup-learner.sh)
+OC_CONF="$CONFIG_DIR/opencode.json"
+if [ -f "$OC_CONF" ] && grep -q '"share"[[:space:]]*:[[:space:]]*"disabled"' "$OC_CONF" \
+   && grep -q '"\*\.env"[[:space:]]*:[[:space:]]*"deny"' "$OC_CONF"; then
+  ok "opencode work-session settings (secrets unreadable, risky commands ask, sharing off)"
+else
+  ko "opencode work-session settings missing in $OC_CONF" "run: sh ~/ai4se/ai4se-kit/setup-learner.sh  (it adds them without changing your own settings)"
+fi
+
 # 3. GSE-One pinned version (project install first, then machine install)
 gse_ver=""; gse_where=""
 if [ -s .gse/registry ]; then

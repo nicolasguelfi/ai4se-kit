@@ -84,6 +84,7 @@ It **cannot**:
 | `tutor` | launcher (POSIX `sh`; needs only `git` and `opencode`) |
 | `.opencode/agents/tutor.md` | the tutor agent: permissions + instructions |
 | `opencode.base.json` | tutor session config: default agent, course model, secret policies |
+| `opencode.learner.json` | work-session settings added by `setup-learner.sh` to `~/.config/opencode/opencode.json` (never overwriting yours): secrets unreadable, risky shell commands ask, sharing off |
 | `syllabus/` | course content (CC BY 4.0) |
 | `trainer/` | trainer-only tools (the advisor board); not used by learners |
 | `VERSION` | kit version `YYYY-MM-DD.N` (the tutor uses it to remind you to update) |

@@ -70,7 +70,15 @@ TypeScript, JavaScript, Markdown preview and the git diff view are already built
 | YAML (`redhat.vscode-yaml`) | readable `.gse/*.yaml` files and CI workflows |
 | Error Lens (`usernamehw.errorlens`) | TypeScript errors written at the end of the faulty line |
 
-Install them, one command at a time (macOS or Ubuntu, VSCodium). On Windows, or without a terminal:
+All five in one line (macOS or Ubuntu, VSCodium):
+
+```bash
+for e in dbaeumer.vscode-eslint vitest.explorer mhutchie.git-graph redhat.vscode-yaml usernamehw.errorlens; do codium --install-extension "$e"; done
+```
+
+In the course VM, the same line with `code` instead of `codium` (or `codium` if you installed VSCodium there).
+
+Or one command at a time (macOS or Ubuntu, VSCodium). On Windows, or without a terminal:
 **Extensions** panel (`Ctrl+Shift+X`, macOS `Cmd+Shift+X`) → type the name → **Install**.
 
 
