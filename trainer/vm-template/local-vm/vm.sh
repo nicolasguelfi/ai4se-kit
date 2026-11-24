@@ -19,11 +19,13 @@
 #   bash vm.sh restore <name>         power off, restore that snapshot, start again
 #   bash vm.sh snap-delete <name>     delete a snapshot (asks first)
 #   bash vm.sh backup [folder]        full copy of the VM in ONE .tar.gz (disk, settings, ALL snapshots, SSH key),
-#                                     default folder ~/VMs; survives a broken VirtualBox; copy it to another Mac.
+#                                     default folder ~/VMs/backups/<vm>; survives a broken VirtualBox; copy it to
+#                                     another Mac.
 #                                     Stops the VM meanwhile (.ova export fails for Apple Silicon VMs, VBox 7.1.4)
 #   bash vm.sh import <file.tar.gz>   on any Mac: unpack a backup into ~/VMs, register it in VirtualBox, set the
 #                                     Tailscale access for this Mac, start the VM
 #
+# Several VMs: each one lives in its own folder ~/VMs/<name>/; pick one with VM_NAME=<name> bash vm.sh …
 # Settings (environment): VM_NAME=ai4se-ubuntu, VM_BASE=~/VMs (import target). The VM folder and its SSH key
 # are found from VirtualBox. Snapshots protect against what happens INSIDE the VM; backup also protects
 # against VirtualBox losing the VM (snapshots live in the VM's own folder and configuration).
@@ -182,7 +184,7 @@ case "$cmd" in
     [ "$a" = y ] || [ "$a" = Y ] || { step "cancelled"; exit 0; }
     VBoxManage snapshot "$VM_NAME" delete "$1" && step "deleted" ;;
   backup)
-    dir="${1:-$HOME/VMs}"; case "$dir" in /*) ;; *) dir="$PWD/$dir" ;; esac
+    dir="${1:-$HOME/VMs/backups/$VM_NAME}"; case "$dir" in /*) ;; *) dir="$PWD/$dir" ;; esac
     no_sync "$dir"; mkdir -p "$dir" || die "cannot create $dir"
     vmdir=$(dirname "$CFG"); out="$dir/$VM_NAME-$(date +%Y%m%d-%H%M).tar.gz"
     case "$out" in "$vmdir"/*) die "choose a folder outside the VM's own folder ($vmdir)" ;; esac
