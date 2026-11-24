@@ -207,7 +207,7 @@ Same sheet as part 1 (step 5). The point of part 2 is to *notice*: which feature
 
 Most answers to question 3 are "no" — and the reasons (no tests, code never read, no idea what it does with data) are exactly the VibeEngineering principles of tomorrow.
 
-**Tomorrow — day 2:** CalcApp, a shared starter project; git first (status, diff, commit, branch); you drive the agent with your plan; AI code review with HIGH / MEDIUM / LOW. Same tools, different discipline. No homework — keep your key sheet.
+**Tomorrow — day 2:** CalcApp, a shared starter project; git first (status, diff, commit, branch); you drive the agent with your plan; AI code review with HIGH / MEDIUM / LOW. Same tools, different discipline. No homework — keep your key.
 
 ### Back to this morning (cycles 01-03)
 

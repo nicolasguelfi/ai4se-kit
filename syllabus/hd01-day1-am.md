@@ -163,7 +163,7 @@ GSE-One: `§ P3 — Artefacts Are Everything`; `§ 12.4 — Status State File`. 
 - *Mistral, European* — Mistral Large 4 (Oct 2026) · Medium 3.5 · Small 4 — EU-based provider; its models, Large 4 included, have open weights.
 - *Chinese models* — DeepSeek V4 (Apr 2026), Qwen (Alibaba), Kimi (Moonshot)… Often open-weight and cheap per token; check where your data is processed.
 
-Same agent, different model ⇒ different quality, speed, price and data location. opencode is provider-agnostic, so the choice is one configuration line. This week: the **reference model** `deepseek-v4.1-flash` (DeepSeek V4.1 Flash, through OpenRouter), and a backup, `minimax-m3.1-flash`; your key sheet names them too.
+Same agent, different model ⇒ different quality, speed, price and data location. opencode is provider-agnostic, so the choice is one configuration line. This week: the **reference model** `deepseek-v4.1-flash` (DeepSeek V4.1 Flash, through OpenRouter), and a backup, `minimax-m3.1-flash`; the trainer's message with your key names them too.
 
 **What your key gives you**: one **capped budget** — $30, about **600 million tokens** sent with the reference model (≈ $0.05 per million tokens sent; ≈ 400 million on the backup), that is about 300 long agent sessions of 2 million tokens; with a frontier model such as GPT-6.2 Sol ($2 per million) the same key would send about 15 million tokens, 7-8 long sessions. When it is spent, calls stop — one reference model, and a **secret** — never in a prompt, a commit or an issue.
 
