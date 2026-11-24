@@ -37,6 +37,30 @@ GitHub account an invited collaborator can also write: the tool itself never wri
 **Limits.** It sees only what was pushed: ask for a push before each break. Figures are what the learner's
 GSE-One state declares. Needs PyYAML for the full view (`pip install pyyaml`).
 
+## advisor_tickets.py — advice the learner decides on (GSE-One 0.93.4+)
+
+You advise, the learner decides. You never write in a learner's repository: your advice is a GitHub issue
+labelled `gse-advisor` on it. GSE-One shows those issues to the learner when they open their next sprint
+(`/gse-plan`) — accept into the sprint, keep in the pool, or decline with a reason — and writes the decision
+back on the issue (declined: closed; accepted: closed when the task is delivered).
+
+```bash
+python3 ~/ai4se/ai4se-kit/trainer/advisor_tickets.py session --roster ~/somewhere-private/roster.csv
+cd ~/somewhere-private && claude          # or opencode, codex, gemini: the session files work for any agent
+```
+
+The session files (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, written next to the roster) point your coding agent
+to [`ADVISOR-SESSION.md`](ADVISOR-SESSION.md): refresh the board, inspect a project read-only, propose at most
+three tickets per project, ask you, and create only the ones you accept. By hand:
+
+```bash
+python3 advisor_tickets.py create --repo owner/calcapp --title "Reject titles made only of spaces" --body-file advice.md --dry-run
+python3 advisor_tickets.py list --roster ~/somewhere-private/roster.csv     # every ticket and the learner's decision
+```
+
+The clones of the board have their push URL disabled, so a session cannot push to a learner's repository
+even where you are an invited collaborator.
+
 ## Course VM template (Ubuntu)
 
 Scripts and guide (in French) to finalise the Ubuntu VM template before creating one

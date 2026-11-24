@@ -107,7 +107,7 @@ In opencode each activity is the command `/gse-<name>`.
 | `/gse-backlog` | `backlog.md` | View and manage the unified list of work items (pool vs sprint). |
 | `/gse-collect` | `collect.md` | Inventories existing artefacts (this project, other sources). |
 | `/gse-assess` | `assess.md` | Gap analysis: what is covered, partial, missing with respect to the goals. |
-| `/gse-plan` | `plan.md` | Builds or adjusts the sprint plan (`.gse/plan.yaml`): tasks, budget, sprint branch. |
+| `/gse-plan` | `plan.md` | Builds or adjusts the sprint plan (`.gse/plan.yaml`): tasks, budget, sprint branch. When a sprint opens, first shows your advisor's tickets (GitHub issues labelled `gse-advisor`): you accept, keep or decline each one. |
 | `/gse-reqs` | `reqs.md` | Elicits and writes functional and non-functional requirements with acceptance criteria. |
 | `/gse-design` | `design.md` | Architecture, components, interfaces, shared state; decisions logged. |
 | `/gse-preview` | `preview.md` | Shows what will be built before building it (description or scaffold). |

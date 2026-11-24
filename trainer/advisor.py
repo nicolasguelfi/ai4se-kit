@@ -76,7 +76,9 @@ def sync(entry: dict, cache: Path, fetch: bool) -> tuple[Path | None, str, str]:
         rc, out = run(["git", "clone", "--quiet", "--no-checkout", url, str(dest)], timeout=180)
         if rc:
             return None, "", "cannot read the repository (private and not invited, or wrong address)"
-    elif fetch:
+    if dest.exists():  # read-only by construction: an invited collaborator could push, the clone cannot
+        run(["git", "remote", "set-url", "--push", "origin", "DISABLED-advisor-clones-are-read-only"], dest, timeout=10)
+    if dest.exists() and fetch:
         rc, out = run(["git", "fetch", "--quiet", "--prune", "--tags", "origin"], dest, timeout=120)
         if rc:
             return dest, "refs/remotes/origin", "fetch failed — showing the last state read"

@@ -10,6 +10,10 @@ GSE-One commands are written in their opencode form (`/gse-go`).
 **Acceptance criteria** — Observable conditions, often written Given / When / Then, that say
 when a requirement is met; they become validation tests. *HD03, HD06.*
 
+**Advisor ticket** — Advice the trainer (or another external expert) leaves on your project as a
+GitHub issue labelled `gse-advisor`, without touching your files. When you open your next sprint,
+`/gse-plan` shows them: you accept, keep in the pool, or decline with a reason; the decision is yours. *HD06.*
+
 **Agent (coding agent)** — A program that loops: the model proposes an action, a tool runs it
 (read a file, edit, run a command), the result goes back to the model. opencode is one. *HD01.*
 
