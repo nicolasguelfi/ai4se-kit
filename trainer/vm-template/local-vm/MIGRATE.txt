@@ -1,0 +1,55 @@
+Move the rehearsal VM from one Mac to another (any Mac to any Mac)
+=====================================================================
+
+Each command runs as written. Paste them one at a time in the Terminal of the Mac named above it.
+Needs the `vm` shortcut on both Macs (CHEATSHEET.md, section 0). Golden rule: one active copy at a time.
+
+
+ON THE MAC YOU LEAVE
+--------------------
+
+# 1. Stop the VM (it then stays off after the backup: no second active copy)
+vm stop
+
+# 2. Full backup: disk, settings, all snapshots, SSH key (about 7 min).
+#    The file name is printed at the end: ~/VMs/backups/ai4se-ubuntu/ai4se-ubuntu-YYYYMMDD-HHMM.tar.gz
+vm backup
+
+# 3. Copy that file to the other Mac by AirDrop or an external disk (not Dropbox).
+#    Do not start the VM on this Mac again while you work on the other one.
+
+
+ON THE OTHER MAC
+----------------
+
+# 4. File the received archive (AirDrop puts it in ~/Downloads; adapt the path if you copied it elsewhere)
+mkdir -p ~/VMs/backups/ai4se-ubuntu && mv ~/Downloads/ai4se-ubuntu-*.tar.gz ~/VMs/backups/ai4se-ubuntu/
+
+# 5. If this Mac already has an ai4se-ubuntu VM: stop it, remove it from VirtualBox, move its files aside.
+#    (No VM here yet? These three commands fail harmlessly: skip them.)
+vm stop
+VBoxManage unregistervm ai4se-ubuntu
+mv ~/VMs/ai4se-ubuntu ~/VMs/ai4se-ubuntu-old-$(date +%Y%m%d-%H%M)
+
+# 6. Pick the newest archive and check its name before importing
+ARCHIVE=$(ls -t ~/VMs/backups/ai4se-ubuntu/*.tar.gz | head -n 1) && echo "$ARCHIVE"
+
+# 7. Import: unpacks into ~/VMs, registers the VM, sets Tailscale access for this Mac, starts it
+vm import "$ARCHIVE"
+
+# 8. Check: SSH OK, xrdp active; the snapshots came along
+vm status
+vm snaps
+
+# 9. Connect with Windows App: PC localhost:3390, user student, password student, session Xorg.
+#    Grey screen: vm fix-rdp   ·   m types ";": vm keyboard
+
+
+LATER, ON THE OTHER MAC
+-----------------------
+
+# 10. Once the imported VM works, free the space of the old one (about 14 GB; check the name first)
+ls -d ~/VMs/ai4se-ubuntu-old-*
+#     then move that folder to the Trash in the Finder (Cmd+Shift+G, ~/VMs).
+
+# To go back the other way, run the same sequence with the two Macs swapped.

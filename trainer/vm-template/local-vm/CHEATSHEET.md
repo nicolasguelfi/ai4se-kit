@@ -145,6 +145,8 @@ vm backup
 
 ## 3. Moving to another Mac
 
+The whole sequence as one plain-text file: `MIGRATE.txt`, next to this file.
+
 **Golden rule:** one active copy at a time. Before leaving a Mac, always `vm backup`.
 
 ### On the Mac you leave
