@@ -44,7 +44,7 @@ say "1. System update and base tools"
 apt-get update -q
 if [ "${SKIP_UPGRADE:-0}" != "1" ]; then $APT upgrade; fi
 $APT install git curl wget ca-certificates gnupg build-essential python3 python3-venv \
-  python3-pip jq sqlite3 tree unzip xdg-utils
+  python3-pip jq sqlite3 tree unzip xdg-utils libatomic1   # libatomic1: Node from nvm needs it
 step "base tools installed"
 
 # --- 2. GitHub CLI --------------------------------------------------------------

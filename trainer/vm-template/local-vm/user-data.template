@@ -23,6 +23,7 @@ packages:
   - curl
   - wget
   - gpg
+  - libatomic1   # Node from nvm (installation step 2) fails without it on a minimal Ubuntu
 write_files:
   - path: /etc/polkit-1/rules.d/02-allow-colord.rules
     content: |

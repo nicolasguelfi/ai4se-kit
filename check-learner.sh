@@ -54,7 +54,7 @@ if has opencode; then
     ko "opencode ${v:-?} is too old (need $OPENCODE_MIN or newer)" "update opencode (see the installation slide), then re-run the GSE-One installer"
   fi
 else
-  ko "opencode is not installed" "install opencode (see the installation slide), then open a new terminal"
+  ko "opencode is not installed" "install opencode (see the installation slide), then reload the terminal: exec $SHELL"
 fi
 
 # 2. model provider configured — existence only, the key itself is never printed.
@@ -156,10 +156,10 @@ if has node; then
   if [ -n "$v" ] && ver_ge "$v" "$NODE_MIN"; then
     ok "node $v"
   else
-    ko "node ${v:-?} is too old (need $NODE_MIN or newer)" "install the current LTS from https://nodejs.org, then open a new terminal"
+    ko "node ${v:-?} is too old (need $NODE_MIN or newer)" "install the current LTS (installation step 2), then reload the terminal: exec $SHELL"
   fi
 else
-  ko "node is not installed" "install the current LTS from https://nodejs.org, then open a new terminal"
+  ko "node is not installed" "install the current LTS (installation step 2), then reload the terminal: exec $SHELL"
 fi
 if has npm; then
   ok "npm $(vnum "$(npm --version 2>/dev/null)")"

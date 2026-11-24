@@ -46,13 +46,17 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    brew install anomalyco/tap/opencode-v2   # macOS, alternative
    npm install -g @opencode/cli             # if you already use Node
    ```
-   Open a **new** terminal, then `opencode --version`. *Done when* it prints `2.x.y` (e.g. 2.2.6).
+   Then `opencode --version`; only if it says « command not found », reload the terminal with `exec $SHELL` and retry. *Done when* it prints `2.x.y` (e.g. 2.2.6).
 2. **Node.js LTS** (~5 min) — needed tomorrow to run CalcApp (npm). Already ≥ 20? Skip.
    ```bash
-   brew install node        # macOS, or:
+   # Windows (WSL) | Ubuntu — nvm
+   sudo apt-get install -y libatomic1   # nvm's Node needs it on a minimal Ubuntu
    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash
-   # open a NEW terminal, then:
-   nvm install --lts         # skip if you used brew
+   . "$HOME/.nvm/nvm.sh"                # load nvm in this terminal (no new terminal needed)
+   nvm install --lts
+   # macOS
+   brew install node
+   # check — every system
    node --version && npm --version
    ```
    *Done when* node shows v20 or more and npm a version.
@@ -101,12 +105,13 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
 
 | You see… | Do this |
 |---|---|
-| "command not found" | Open a new terminal (the PATH is not reloaded) |
+| "command not found" | Reload the terminal: `exec $SHELL` (the PATH is not reloaded) |
 | Downloads hang (SSL, timeout) | Proxy: try another network, or raise your hand |
 | "401", "invalid API key" | Wrong key or provider: redo step 3 |
 | git asks for a password | Not logged in: redo step 6 |
 | GSE-One installed before opencode 2 | Install opencode 2, then redo step 5 |
-| node missing, or older than v20 | Redo step 2, then open a new terminal |
+| node missing, or older than v20 | Redo step 2 |
+| `libatomic.so.1: cannot open shared object file` | `sudo apt-get install -y libatomic1` (Ubuntu / WSL), then `node --version` |
 | The tutor window says a folder is not allowed | Your project is outside `~/ai4se`: move it there, or `~/ai4se/ai4se-kit/tutor add <path>` (list: `~/ai4se/ai4se-kit/tutor paths`) |
 
 ### Links
