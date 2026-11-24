@@ -506,7 +506,7 @@ freeze and rehearse; the four-point audit written as a README section "Ethics an
 project card, known limits, and "Ethics and compliance".
 
 **Commands met.** `/gse-status` · `/gse-deliver` · `/gse-task` · `git grep` · `git tag demo main` ·
-`git push origin demo` · `git log --all --oneline -- .env` · `npm view react license` / `pip show <package>`.
+`git push origin demo` · `git log --all --oneline -- .env` · `npm view react license` / `pip show requests`.
 
 **Recovery tag(s).** The delivery of 11:30 and the tag `demo` are your demo fallback.
 

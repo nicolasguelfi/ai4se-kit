@@ -121,7 +121,7 @@ GSE-One: `§ 13.2 — Lightweight Mode` (minimal integrity check at delivery); `
 **Steps:**
 
 1. AI Act: does your app use AI? If so, which risk level (day 1: unacceptable, high, low or minimal)? Does the user know they deal with an AI, or with AI-made content (transparency)?
-2. Licences: a `LICENSE` file in your repository? The licence of each direct dependency (`npm view <package> license`, `pip show <package>`): does one forbid your use?
+2. Licences: a `LICENSE` file in your repository? The licence of each direct dependency (e.g. `npm view react license`, `pip show requests`): does one forbid your use?
 3. Secrets: `git log --all --oneline -- .env` prints nothing; `git grep -n -i -E "api.?key|secret|password|token"` shows no real value. A leaked key is revoked, not just deleted.
 4. Personal data: which ones does your app keep (names, e-mails, health…), where, why, for how long? Keep the fewest; demo with made-up data.
 5. Write the four answers in the README section "Ethics and compliance", as the first task of a new sprint: `/gse-task` opens it, `/gse-deliver` delivers it; push.
