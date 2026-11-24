@@ -7,7 +7,7 @@
 # Run it from your project folder: GSE-One is usually installed per project.
 # Writes nothing, prints no secret (the model-key store is only tested for existence).
 
-GSE_EXPECTED="0.93.3"
+GSE_EXPECTED="0.93.4"
 OPENCODE_MIN="2.0.0"
 NODE_MIN="20.19.0"   # Vite 7 needs Node 20.19+ (or 22.12+)
 
