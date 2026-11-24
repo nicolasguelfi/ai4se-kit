@@ -57,6 +57,77 @@ is at `\\wsl$\Ubuntu\home\` + your Linux user name + `\ai4se\calcapp`.
 
 Without a terminal, on any system: **File → Open Folder…** → `~/ai4se/calcapp` (or your mini-project).
 
+### Extensions for CalcApp (optional, ~2 min)
+
+Five extensions make CalcApp easier to read. None has AI; all come from Open VSX, VSCodium's catalogue.
+TypeScript, JavaScript, Markdown preview and the git diff view are already built in.
+
+| Extension | What you get |
+|---|---|
+| ESLint (`dbaeumer.vscode-eslint`) | the lint problems of `npm run lint`, underlined in the code |
+| Vitest (`vitest.explorer`) | the tests in a side panel: see which pass, open the failing one |
+| Git Graph (`mhutchie.git-graph`) | branches, commits and tags as a graph (day 2 git, recovery tags, GSE-One branches) |
+| YAML (`redhat.vscode-yaml`) | readable `.gse/*.yaml` files and CI workflows |
+| Error Lens (`usernamehw.errorlens`) | TypeScript errors written at the end of the faulty line |
+
+Install them, one command at a time (macOS or Ubuntu, VSCodium). On Windows, or without a terminal:
+**Extensions** panel (`Ctrl+Shift+X`, macOS `Cmd+Shift+X`) → type the name → **Install**.
+
+
+```bash
+codium --install-extension dbaeumer.vscode-eslint
+```
+
+```bash
+codium --install-extension vitest.explorer
+```
+
+```bash
+codium --install-extension mhutchie.git-graph
+```
+
+```bash
+codium --install-extension redhat.vscode-yaml
+```
+
+```bash
+codium --install-extension usernamehw.errorlens
+```
+
+In the course VM (VS Code), the same with `code`:
+
+```bash
+code --install-extension dbaeumer.vscode-eslint
+```
+
+```bash
+code --install-extension vitest.explorer
+```
+
+```bash
+code --install-extension mhutchie.git-graph
+```
+
+```bash
+code --install-extension redhat.vscode-yaml
+```
+
+```bash
+code --install-extension usernamehw.errorlens
+```
+
+Check what is installed:
+
+```bash
+codium --list-extensions
+```
+
+Then, once: **Settings** → search **`redhat.telemetry`** → untick it (the YAML extension asks to send usage data).
+
+**Do not install:** any AI extension (Copilot, Continue, Cline, Kilo Code, Codeium, Tabnine, …) — see § 1;
+GitLens (it brings AI features); a formatter that rewrites files on save (Prettier « format on save »):
+CalcApp has no formatter, and rewriting the agent's files would hide its real changes in the diff.
+
 ## 3. Read the code
 
 ![VSCodium: the Explorer on the left, a source file on the right](img/ide-1-explorer.png)
