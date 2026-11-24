@@ -60,6 +60,8 @@ Fill it in (one line per repository; a learner with CalcApp and a mini-project h
 open -e ~/ai4se-advisor/roster.csv
 ```
 
+Where the addresses come from: learners send them by Teams direct message or e-mail (nicolas.guelfi@ros.lu) — CalcApp on day 3 morning (hd05), the mini-project on day 4 afternoon (hd08, exercise E18); the same channel carries their OpenRouter keys to them.
+
 Columns: `id` (v01, v02… as in the tracking sheet), `name` (for you only), `repo` (`account/repo` or GitHub
 address), `project` (optional), `url` (live application address, optional).
 

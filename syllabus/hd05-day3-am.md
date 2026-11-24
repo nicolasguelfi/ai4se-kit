@@ -40,7 +40,7 @@ git push mine --all && git push mine --tags
 gh repo view --web
 ```
 
-Write the repository address in the tracking sheet. The repository is public: no key, no password.
+Send the repository address to the trainer by a Teams direct message to the trainer or an e-mail to nicolas.guelfi@ros.lu (with your GitHub account name). The repository is public: no key, no password.
 
 ## CCSET09 — Software engineering concepts, defining your GenSEM
 

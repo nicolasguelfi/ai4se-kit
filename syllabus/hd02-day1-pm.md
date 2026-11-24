@@ -67,7 +67,7 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    node --version && npm --version
    ```
    *Done when* node shows v20 or more and npm a version.
-3. **Your model key** (~10 min). Run `opencode auth login`, type `openrouter` and choose OpenRouter, paste the key when asked. Never put it in a committed file, a prompt, a screenshot or an issue. *Done when* `opencode auth list` shows it.
+3. **Your model key** (~10 min). The trainer sends it to you by Teams direct message or e-mail. Run `opencode auth login`, type `openrouter` and choose OpenRouter, paste the key when asked. Never put it in a committed file, a prompt, a screenshot or an issue. *Done when* `opencode auth list` shows it.
 4. **The course kit** (~5 min).
    ```bash
    git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh

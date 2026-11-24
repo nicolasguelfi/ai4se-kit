@@ -71,7 +71,7 @@ elif printf '%s' "$auth" | grep -Eq '"type": *"env"'; then
 elif [ -s "$DATA_DIR/auth.json" ] && [ "$(tr -d ' \t\r\n' < "$DATA_DIR/auth.json")" != "{}" ]; then
   ok "opencode model provider configured (legacy $DATA_DIR/auth.json)"
 else
-  ko "no model provider configured for opencode" "run: opencode auth login  (paste the key from your paper sheet — never in a file or a chat)"
+  ko "no model provider configured for opencode" "run: opencode auth login  (paste the key the trainer sent you by Teams or e-mail — never in a file or another chat)"
 fi
 
 # 3. GSE-One pinned version (project install first, then machine install)

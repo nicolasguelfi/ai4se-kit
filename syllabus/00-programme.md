@@ -51,6 +51,7 @@ files) are the same in every coding agent: what you learn with opencode transfer
   next step and tells you when to call the trainer. Order when stuck: **tutor window →
   recovery tag → raise your hand.**
 - **Keep the kit fresh.** At the start of every half-day: `~/ai4se/ai4se-kit/tutor update`.
+- **Personal information for the trainer** (your repository addresses, your GitHub account) and your model key travel only by Teams direct message or e-mail (nicolas.guelfi@ros.lu) — never in a public issue.
 - **Feedback any time** as a GitHub issue on `nicolasguelfi/gensem` with the label
   `ai4se-ed2`. The repository is public: never paste a key, a password, client code or
   personal data.
@@ -64,7 +65,7 @@ files) are the same in every coding agent: what you learn with opencode transfer
 | Tool | Role in the course |
 |---|---|
 | **opencode 2** | the terminal coding agent used in every exercise (*plan* and *build* agents, Shift+Tab switches) |
-| **A capped model key** | handed out on paper on day 1; one per learner, with a spending cap; never paste it anywhere |
+| **A capped model key** | sent by the trainer on day 1, by Teams direct message or e-mail; one per learner, with a spending cap; never paste it anywhere else |
 | **GSE-One v0.93.4** (pinned) | the methodology plugin (days 3-6); commands in opencode are `/gse-go`, `/gse-status`, … |
 | **git + GitHub** (`gh`) | safety net from day 2; your work is pushed to GitHub from day 3, before each break and every evening |
 | **Node.js / npm** | runs CalcApp and its tests (Vitest) |
