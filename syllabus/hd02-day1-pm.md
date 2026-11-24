@@ -1,4 +1,4 @@
-# HD02 — Day 1 afternoon: setup in the room, FreeSelfApp, debrief
+# HD02 — Day 1 afternoon: setup in the room, FreeSelfApp, presentations
 
 *AI for Software Engineering (AI4SE), edition 2 — Thursday 26 November 2026, 13:15-17:00.*
 *Content licensed CC BY 4.0. Slide deck: "Hands-on Setup & First Prototype" (opencode 2 + GSE-One v0.93.4).*
@@ -8,11 +8,13 @@ Everything happens in the room: no installation was expected before the course, 
 | Time | Min | Sequence (section of this sheet) |
 |---|--:|---|
 | 13:15 | 75 | Installation in the room |
-| 14:30 | 45 | FreeSelfApp workshop — part 1 |
+| 14:30 | 45 | FreeSelfApp: build, change, present |
 | 15:15 | 15 | Break |
-| 15:30 | 45 | FreeSelfApp workshop — part 2 |
-| 16:15 | 30 | Debrief and hands-up quiz |
-| 16:45 | 15 | Buffer: late installations, questions |
+| 15:30 | 60 | Presentations (6 min each, Google Meet) |
+| 16:30 | 20 | Questions on any project |
+| 16:50 | 10 | Wrap-up and hands-up quiz |
+
+No separate buffer: late installations are finished during the break and the questions.
 
 ## Learning goals
 
@@ -21,7 +23,7 @@ At the end of this half-day you can:
 1. Open a terminal, run opencode 2 with your course key, and know where your files live (`~/ai4se/`).
 2. Open your **tutor window** (a second terminal) and ask it a question about the course.
 3. Build a small web app by prompting only, and save working states with git commits.
-4. Say, from your own notes, what the AI did that you would have done by hand — and what you did not check.
+4. Present your project in 6 minutes, and question any project: what was asked, built and checked — and what was not.
 
 ## Installation in the room
 
@@ -135,11 +137,11 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
 
 Kit habits: at the start of each half-day, `~/ai4se/ai4se-kit/tutor update` (gets the latest syllabus). Check the machine any time: `sh ~/ai4se/ai4se-kit/check-learner.sh`. GSE-One: `~/ai4se/gensem/gse-one-spec.md § 0.1 — Prerequisites`; `§ 1.1 — Coding Agents and Plugin Architecture`. Glossary: terminal, PATH, model key, provider, registry, tutor window.
 
-## FreeSelfApp workshop — part 1
+## FreeSelfApp: build, change, present
 
 ### Key ideas
 
-Your first prototype — **by pure prompting**: 2 × 45 minutes, no rules, no plan, on purpose. This is the VibeCoding of this morning (hd01 § VibeCoding), felt first-hand. Today you feel vibe coding; tomorrow you engineer it.
+Your first prototype — **by pure prompting**: 45 minutes, three iterations, no rules, no plan, on purpose. This is the VibeCoding of this morning (hd01 § VibeCoding), felt first-hand. Today you feel vibe coding; tomorrow you engineer it.
 
 **The core loop with opencode:** (1) *describe* what you want, in plain English; (2) *let it build* — it reads, writes files, runs commands; (3) *run* — open the result in your browser; (4) *react* — say what is wrong, or what is next; and back to 1. That is all you need today. opencode asks before some actions: read the request before you accept.
 
@@ -168,21 +170,23 @@ Your first prototype — **by pure prompting**: 2 × 45 minutes, no rules, no pl
    git init
    opencode
    ```
-2. Paste your first prompt, then iterate with the core loop.
-3. It works? Save it, in another terminal in the same folder:
+2. **Iteration 1 — v1 (14:30).** Paste your first prompt, then iterate with the core loop. It works? Save it, in another terminal in the same folder:
    ```bash
    git add -A && git commit -m "it works"
    ```
-4. Take notes as you build, in `notes.md` in your folder: what surprised you; what broke, and who fixed it (you or the AI?); how many prompts so far; one thing you would have done by hand.
-5. Part 2 (15:30): add one feature you really want; ask the agent to explain one file — do you get it?; commit after each working step; update `notes.md`. At 16:10: last commit, notes ready.
+3. **Iteration 2 — the client wants more (14:45: v1 runs + 1 commit).** The trainer names **one more feature**, the same for everybody. Already there? Pick another from this menu: data survives a page reload · export to a file (CSV or JSON) · search or filter the list · edit an existing item · undo the last action · clear error messages on bad input · a summary: counts or totals · works on a phone screen. Check v1 still works, then commit. **14:55:** feature done + commit.
+4. **Iteration 3 — your presentation.** Ask opencode exactly:
+   ```text
+   Make a 6-minute presentation of my project for a team meeting — one HTML file I open in my browser.
+   ```
+   Open it in your browser. Commit.
+5. Take notes as you build, in `notes.md` in your folder — they feed the questions at 16:30: what surprised you; what broke, and who fixed it (you or the AI?); how many prompts; one thing you would have done by hand.
 
-**Done when:** the app opens in the browser, does one thing you wanted, and `git log` shows 2+ commits.
+**Done when:** v1 and the client's feature both run, `git log` shows 2+ commits, and your presentation opens in the browser.
 
-**Mid-point (15:15):** it opens, and 1 commit.
+**If stuck:** 1. your tutor window 2. rephrase or paste the error to the agent ("this fails with …") 3. raise your hand. Do not worry about code quality today: there is no "right way" — just build.
 
-**If stuck:** rephrase (a smaller, more precise request) → paste the error to the agent ("this fails with …") → your tutor window → raise your hand for technical blockers. Do not worry about code quality today: there is no "right way" — just build.
-
-**Debrief (16:15):** your notes and one example (next section).
+**15:30:** you present 6 min, sharing your screen on Google Meet (link by Teams direct message or e-mail).
 
 ### Frequent errors
 
@@ -191,17 +195,16 @@ Your first prototype — **by pure prompting**: 2 × 45 minutes, no rules, no pl
 - Typing a new instruction while the agent is still working: one instruction at a time.
 - Real data in the app or in prompts (hd01 § EU AI Act and rules for this week).
 
-## FreeSelfApp workshop — part 2
+## Presentations
 
-Same sheet as part 1 (step 5). The point of part 2 is to *notice*: which feature did you get without understanding how? Could you explain the file you asked about?
+- **6 minutes** each — strict.
+- Share your screen on **Google Meet** when the trainer calls you (the link comes by Teams direct message or e-mail). **In the room: microphone and speakers OFF in Meet.**
+- **No questions now** — note yours, on ANY project.
+- All questions together at **16:30**.
 
-## Debrief and hands-up quiz
+## Questions on any project
 
-### Key ideas
-
-**By hand vs AI.** Each of you gives one example in 30 seconds, in two columns: *what I would have done by hand* / *what the AI did*. Example from the slide: "I would have searched how to save data in the browser" / "the AI used localStorage — I never checked how".
-
-**Three questions** (3 minutes with your neighbour, then together):
+Any project you saw — for example:
 
 1. When did the agent surprise you — good or bad?
 2. What broke, and who fixed it?
@@ -210,6 +213,8 @@ Same sheet as part 1 (step 5). The point of part 2 is to *notice*: which feature
 Most answers to question 3 are "no" — and the reasons (no tests, code never read, no idea what it does with data) are exactly the VibeEngineering principles of tomorrow.
 
 **Tomorrow — day 2:** CalcApp, a shared starter project; git first (status, diff, commit, branch); you drive the agent with your plan; AI code review with HIGH / MEDIUM / LOW. Same tools, different discipline. No homework — keep your key.
+
+## Wrap-up and hands-up quiz
 
 ### Back to this morning (cycles 01-03)
 

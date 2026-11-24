@@ -133,10 +133,11 @@ later exercise (no memory, cost, mistakes); know the rules about data and permis
 | Time | Session |
 |---|---|
 | 13:15 | Installation in the room (75 min) |
-| 14:30 | FreeSelfApp workshop, part 1 — a naive prototype by prompting only |
-| 15:30 | FreeSelfApp workshop, part 2 |
-| 16:15 | Debrief: "what I would have done by hand / what the AI did"; hands-up quiz; day 2 preview |
-| 16:45 | Buffer: late installations, questions |
+| 14:30 | FreeSelfApp: a prototype by prompting only — v1, the client's feature, a 6-minute presentation |
+| 15:15 | Break |
+| 15:30 | Presentations: 6 minutes each, screen shared on Google Meet |
+| 16:30 | Questions on any project |
+| 16:50 | Wrap-up and hands-up quiz; day 2 preview |
 
 **Goals.** A working machine (all checks green); feel vibe coding first-hand, so that
 day 2 can show what discipline changes.
@@ -152,12 +153,13 @@ day 2 can show what discipline changes.
 - Installation steps: terminal, Node.js, opencode 2, model key, course kit + tutor,
   GSE-One v0.93.4 in a test folder, GitHub + `gh auth login`, git identity, final check.
 - FreeSelfApp: a small personal web app (ideas: recipe finder, habit tracker, movie
-  watchlist — or your own, with made-up data), "no rules, no plan — on purpose".
-  *Done when:* it opens in the browser, does one thing you wanted, and `git log` shows 2+ commits.
+  watchlist — or your own, with made-up data), "no rules, no plan — on purpose", in three
+  iterations: v1, one more feature the client asks for, a 6-minute presentation made by opencode.
+  *Done when:* v1 and the client's feature both run, `git log` shows 2+ commits, and your presentation opens in the browser.
 
 **Artefacts produced.** `~/ai4se/ai4se-kit`, `~/ai4se/gensem` (v0.93.4),
 `~/.config/ai4se/tutor-paths`, `~/ai4se/gse-check` (test install of GSE-One),
-`~/ai4se/freeselfapp` with 2+ commits, your debrief notes.
+`~/ai4se/freeselfapp` with 2+ commits and your presentation, your notes.
 
 **Commands met.**
 `git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh` ·
