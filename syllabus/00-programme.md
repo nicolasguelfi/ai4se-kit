@@ -38,7 +38,7 @@ files) are the same in every coding agent: what you learn with opencode transfer
 
 ## How the week works
 
-- **Every topic is a cycle** (16 cycles, CCSET01 to CCSET16): theory (the problem, and the
+- **Every topic is a cycle** (16 cycles, CCSET01 to CCSET16; CCSET = Course Concept Set): theory (the problem, and the
   solutions known in research and in practice) → *how GSE-One solves it* (one slide, concept
   only) → exercise → debrief. Days 1-2 by hand with opencode; GSE-One from day 3 afternoon.
 - **Practice right after the theory.** At most 10 minutes of demo, then you do it. Every exercise follows

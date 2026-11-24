@@ -46,6 +46,8 @@ task, never commit directly on `main`. *HD03.*
 **Build agent / Plan agent** — opencode's two default agents: *plan* reads and proposes
 without editing; *build* edits files and runs commands. Switch with Shift+Tab. *HD03.*
 
+**CCSET** — Course Concept Set: one of the 16 cycles of the week (CCSET01-16); each runs theory → how GSE-One solves it → exercise → debrief. *HD01.*
+
 **Checkpoint** — A snapshot of where you are in GSE-One (sprint, activity, pending work),
 saved by `/gse-pause` in `.gse/checkpoints/` and reloaded by `/gse-resume`. *HD08.*
 

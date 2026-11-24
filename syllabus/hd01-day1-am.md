@@ -40,7 +40,7 @@ How we work this week:
 - **Daily buffer.** The last slot of each day is kept free: catch up, ask, finish the exercise.
 - **Hands-up quiz** at the end of each day. No grades — it tells us what to revisit.
 
-**Every topic is a cycle.** The week is built of 16 cycles, CCSET01 to CCSET16. Each runs the same four steps: *theory* (the problem, and the solutions known in research and in practice) → *how GSE-One solves it* (one slide, concept only) → *exercise* (on a sheet: goal, steps, done when, if stuck) → *debrief*. On days 1-2 you work by hand with opencode; from day 3 you use GSE-One.
+**Every topic is a cycle.** The week is built of 16 cycles, CCSET01 to CCSET16 (CCSET = Course Concept Set). Each runs the same four steps: *theory* (the problem, and the solutions known in research and in practice) → *how GSE-One solves it* (one slide, concept only) → *exercise* (on a sheet: goal, steps, done when, if stuck) → *debrief*. On days 1-2 you work by hand with opencode; from day 3 you use GSE-One.
 
 | Day | Cycles |
 |---|---|
