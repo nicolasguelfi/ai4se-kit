@@ -127,6 +127,7 @@ Connexion ensuite avec Windows App : `localhost:3390`, utilisateur `student`, se
 Au quotidien, `bash local-vm/vm.sh` règle les situations courantes sans réfléchir : `status`, `start`,
 `stop`, `restart`, `fix-rdp` (écran gris ou noir dans Windows App), `diag` (diagnostic complet à coller à
 Claude), `ssh`, et les instantanés : `snap [nom]`, `snaps`, `restore <nom>`, `snap-delete <nom>`.
+Aide-mémoire, une commande par bloc à copier : [`local-vm/AIDE-MEMOIRE.md`](local-vm/AIDE-MEMOIRE.md).
 Sauvegarde complète, aussi pour passer la VM sur un autre Mac : `backup [chemin]` (une archive `.tar.gz`
 avec disque, réglages, instantanés et clé SSH ; VM arrêtée pendant la copie) puis, sur l'autre Mac,
 `import <archive>`.
