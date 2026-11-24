@@ -56,12 +56,12 @@ Yesterday: GenAI basics (what an LLM can and cannot do), VibeCoding vs VibeEngin
 
 ```bash
 cd ~/ai4se
-git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
+git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 TAG=j2-start                  # the tag your half-day sheet names
-cd calcapp && git checkout -b mywork "$TAG" && npm ci
+cd calcapp-restart && git checkout -b mywork "$TAG" && npm ci
 ```
 
-Folder `calcapp` already exists? Clone into `~/ai4se/calcapp-restart` instead: your work stays safe. Always clone inside `~/ai4se` so your tutor window can read it.
+Your first copy `~/ai4se/calcapp` stays untouched. Always clone inside `~/ai4se` so your tutor window can read it.
 
 **`npm ci` warnings are normal.** `npm warn deprecated …` and « N moderate severity vulnerabilities » come with the starter's dependencies: do **not** run `npm audit fix` during the course (it rewrites `package-lock.json`). « npm warn install-scripts … esbuild … not yet covered by allowScripts » is harmless too: the tests and the build work. Only if an esbuild error appears one day, run:
 
@@ -384,8 +384,9 @@ Review: correct import paths? accessible queries? the behaviour *you* want? GREE
 **If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup. Only to catch up: a second copy in a new folder; your first copy (`~/ai4se/calcapp`) stays untouched.
 
 ```bash
-git clone https://github.com/nicolasguelfi/calcapp-starter ~/ai4se/calcapp-restart
-cd ~/ai4se/calcapp-restart && git checkout -b mywork j2-start && npm ci
+cd ~/ai4se
+git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
+cd calcapp-restart && git checkout -b mywork j2-start && npm ci
 ```
 
 Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, commit them, restart at step 1. Your old work stays in `~/ai4se/calcapp`; from now on, run opencode in `calcapp-restart`.

@@ -32,8 +32,9 @@ At the end of this half-day you can:
 **Re-orientation (5 min) after lunch:** `cd ~/ai4se/calcapp` → `git status` clean, on `mywork`; `npm test` → part 1 tests still green (`q` quits); `npm run dev` → the app renders in the browser; start opencode, read `@docs/plan.md`: which task is next? One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, first features, tests green):
 
 ```bash
-git clone https://github.com/nicolasguelfi/calcapp-starter ~/ai4se/calcapp-restart
-cd ~/ai4se/calcapp-restart && git checkout -b mywork j2-part1 && npm ci
+cd ~/ai4se
+git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
+cd calcapp-restart && git checkout -b mywork j2-part1 && npm ci
 ```
 
 Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, skip the tasks already done in the tag, continue with the next one. A recovery tag is a safety net, not a failure.
