@@ -192,8 +192,10 @@ case "$cmd" in
     say "Full backup of $VM_NAME → $out"
     was=$(state)
     [ "$was" = running ] && { step "the VM is stopped during the copy, then restarted"; stop_clean; }
-    printf '  - copying %s (a few minutes)…\n' "$(du -sh "$vmdir" | cut -f1)"
-    if tar -czf "$out" -C "$(dirname "$vmdir")" "$(basename "$vmdir")"; then
+    printf '  - copying %s into one compressed file (≈ 1 min per 2 GB; the size below grows every 15 s)…\n' "$(du -sh "$vmdir" | cut -f1)"
+    tar -czf "$out" -C "$(dirname "$vmdir")" "$(basename "$vmdir")" & tpid=$!
+    while kill -0 "$tpid" 2>/dev/null; do sleep 15; kill -0 "$tpid" 2>/dev/null && printf '    … %s written\n' "$(du -h "$out" 2>/dev/null | cut -f1)"; done
+    if wait "$tpid"; then
       step "backup: $out ($(du -h "$out" | cut -f1)) — disk, settings, all snapshots and the SSH key"
     else rm -f "$out"; step "backup FAILED"; fi
     [ "$was" = running ] && start_headless
