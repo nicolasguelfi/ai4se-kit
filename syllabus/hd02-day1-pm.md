@@ -111,6 +111,8 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
 
 **Done when:** the check is all green and your tutor window answers you.
 
+**Then, if time allows (~5 min): the course editor.** Install VSCodium and turn its AI off — [ide-guide § 2](ide-guide.md). In the course VM it is VS Code, already installed: nothing to do. Not done today? Do it tomorrow morning before the first exercise.
+
 **Mid-point (13:50):** step 4 or beyond.
 
 **If stuck — "3 before me":** (1) the slide: reread the step and its "Done when"; (2) your neighbour: two pairs of eyes; (3) your tutor window, once step 8 works; (4) raise your hand for machine, key or lost-work problems. The trainer is alone for about 20 people: the first three solve most problems.

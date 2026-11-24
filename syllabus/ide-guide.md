@@ -3,13 +3,15 @@
 *Content licensed CC BY 4.0.*
 
 **In one sentence:** opencode changes your project; the editor is for **reading** it.
-No step of the course requires an editor, but one makes the code, the changes and the
-documents much easier to read.
+The course editor is **VSCodium** — in the course VM it is **VS Code**, already installed, its AI
+already off. Install it on day 1 if time allows, at the latest on day 2 morning: it makes the code,
+the changes and the documents much easier to read.
 
 ## 1. Which editor, and the one rule
 
-We recommend **[VSCodium](https://vscodium.com)**: the open-source build of VS Code, free, with
-no Copilot account and no Microsoft telemetry.
+The course uses **[VSCodium](https://vscodium.com)**: the open-source build of VS Code, free, with
+no Copilot account and no Microsoft telemetry. In the course VM, **VS Code** plays this role: it is
+already installed and its AI is already off (same setting as below).
 
 > **Rule during the workshops: the editor's AI stays off; only opencode writes to the project.**
 
@@ -32,7 +34,28 @@ Why:
 Then, once: **Settings** (Windows/Linux `Ctrl+,`, macOS `Cmd+,`) → search **`disable AI features`**
 → tick it. In `settings.json` this is `"chat.disableAIFeatures": true` (checked in VSCodium 1.112).
 
-Open your project: **File → Open Folder…** → `~/ai4se/calcapp` (or your mini-project).
+### Open your project in the editor
+
+On macOS or Ubuntu, from the project folder (CalcApp here):
+
+```bash
+cd ~/ai4se/calcapp
+```
+
+```bash
+codium .
+```
+
+In the course VM (VS Code):
+
+```bash
+code .
+```
+
+On Windows: open VSCodium from the Start menu, then **File → Open Folder…**; with WSL, the project
+is at `\\wsl$\Ubuntu\home\` + your Linux user name + `\ai4se\calcapp`.
+
+Without a terminal, on any system: **File → Open Folder…** → `~/ai4se/calcapp` (or your mini-project).
 
 ## 3. Read the code
 
