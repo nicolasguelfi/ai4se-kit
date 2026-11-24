@@ -18,8 +18,15 @@
 #   bash vm.sh snaps                  list the snapshots (* = current)
 #   bash vm.sh restore <name>         power off, restore that snapshot, start again
 #   bash vm.sh snap-delete <name>     delete a snapshot (asks first)
+#   bash vm.sh backup [folder]        full copy of the VM in ONE .tar.gz (disk, settings, ALL snapshots, SSH key),
+#                                     default folder ~/VMs; survives a broken VirtualBox; copy it to another Mac.
+#                                     Stops the VM meanwhile (.ova export fails for Apple Silicon VMs, VBox 7.1.4)
+#   bash vm.sh import <file.tar.gz>   on any Mac: unpack a backup into ~/VMs, register it in VirtualBox, set the
+#                                     Tailscale access for this Mac, start the VM
 #
-# Settings (environment): VM_NAME=ai4se-ubuntu. The VM folder and its SSH key are found from VirtualBox.
+# Settings (environment): VM_NAME=ai4se-ubuntu, VM_BASE=~/VMs (import target). The VM folder and its SSH key
+# are found from VirtualBox. Snapshots protect against what happens INSIDE the VM; backup also protects
+# against VirtualBox losing the VM (snapshots live in the VM's own folder and configuration).
 
 set -uo pipefail
 
@@ -33,10 +40,16 @@ die()  { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
 
 command -v VBoxManage >/dev/null 2>&1 || die "VirtualBox (VBoxManage) is not installed — run setup-mac-vm.sh first"
 info() { VBoxManage showvminfo "$VM_NAME" --machinereadable 2>/dev/null; }
-info >/dev/null || die "no VirtualBox VM named $VM_NAME (VBoxManage list vms) — create it with setup-mac-vm.sh"
+case "${1:-}" in import|-h|--help|help) ;; *)
+  info >/dev/null || die "no VirtualBox VM named $VM_NAME (VBoxManage list vms) — create it with setup-mac-vm.sh, or bash vm.sh import <backup.tar.gz>" ;;
+esac
 state() { info | sed -n 's/^VMState="\(.*\)"/\1/p'; }
 CFG=$(info | sed -n 's/^CfgFile="\(.*\)"/\1/p')
-KEY="$(dirname "$CFG")/vmkey"
+KEY="$(dirname "${CFG:-/nonexistent/x}")/vmkey"
+no_sync() {  # a 10 GB image must not be synchronised
+  case "$1" in *Dropbox*|*"Library/Mobile Documents"*|*"Library/CloudStorage"*|*iCloud*)
+    die "$1 is inside Dropbox or iCloud: choose a folder outside (default ~/VMs), or an external disk" ;; esac
+}
 
 vmssh() {  # plain ssh: no Ghostty wrapper, short timeouts, no known_hosts noise
   /usr/bin/ssh -q -i "$KEY" -p "$SSH_PORT" -o ConnectTimeout=8 -o ServerAliveInterval=5 -o ServerAliveCountMax=3 \
@@ -168,6 +181,42 @@ case "$cmd" in
     printf '  Delete snapshot « %s »? [y/N] ' "$1"; read -r a
     [ "$a" = y ] || [ "$a" = Y ] || { step "cancelled"; exit 0; }
     VBoxManage snapshot "$VM_NAME" delete "$1" && step "deleted" ;;
-  -h|--help|help) sed -n '2,23p' "$0" | sed 's/^# \{0,1\}//' ;;
+  backup)
+    dir="${1:-$HOME/VMs}"; case "$dir" in /*) ;; *) dir="$PWD/$dir" ;; esac
+    no_sync "$dir"; mkdir -p "$dir" || die "cannot create $dir"
+    vmdir=$(dirname "$CFG"); out="$dir/$VM_NAME-$(date +%Y%m%d-%H%M).tar.gz"
+    case "$out" in "$vmdir"/*) die "choose a folder outside the VM's own folder ($vmdir)" ;; esac
+    say "Full backup of $VM_NAME → $out"
+    was=$(state)
+    [ "$was" = running ] && { step "the VM is stopped during the copy, then restarted"; stop_clean; }
+    printf '  - copying %s (a few minutes)…\n' "$(du -sh "$vmdir" | cut -f1)"
+    if tar -czf "$out" -C "$(dirname "$vmdir")" "$(basename "$vmdir")"; then
+      step "backup: $out ($(du -h "$out" | cut -f1)) — disk, settings, all snapshots and the SSH key"
+    else rm -f "$out"; step "backup FAILED"; fi
+    [ "$was" = running ] && start_headless
+    [ -f "$out" ] && printf '\nOn another Mac: copy the file (AirDrop, external disk — not Dropbox), then: bash vm.sh import %s\n' "$(basename "$out")" ;;
+  import)
+    [ $# -ge 1 ] || die "which file? bash vm.sh import <file.tar.gz>"
+    arc="$1"; [ -f "$arc" ] || die "$arc not found"
+    base="${VM_BASE:-$HOME/VMs}"; no_sync "$base"; mkdir -p "$base"
+    top=$(tar -tzf "$arc" | head -n 1 | cut -d/ -f1); [ -n "$top" ] || die "$arc is not a vm.sh backup"
+    vbox=$(tar -tzf "$arc" | grep -E "^$top/[^/]+\.vbox$" | head -n 1); [ -n "$vbox" ] || die "no .vbox settings file in $arc"
+    name=$(basename "$vbox" .vbox)
+    info >/dev/null 2>&1 && [ "$name" = "$VM_NAME" ] && die "a VM named $name is already registered here: VBoxManage unregistervm $name (add --delete to erase it) first"
+    [ -e "$base/$top" ] && die "$base/$top already exists: move it away first"
+    say "Import $arc → $base/$top"
+    printf '  - unpacking (a few minutes)…\n'
+    tar -xzf "$arc" -C "$base" || die "unpack failed"
+    VBoxManage registervm "$base/$vbox" 2>/dev/null || { sleep 20; VBoxManage registervm "$base/$vbox"; } \
+      || die "VirtualBox refused the VM (the same VM is still registered on this Mac?)"
+    VM_NAME="$name"; CFG="$base/$vbox"; KEY="$base/$top/vmkey"
+    step "registered as $name (snapshots: $(VBoxManage snapshot "$name" list 2>/dev/null | grep -c Name:))"
+    VBoxManage modifyvm "$name" --natpf1 delete rdp-tailscale >/dev/null 2>&1 && step "old Tailscale access removed (it pointed to the other Mac)"
+    if command -v tailscale >/dev/null 2>&1 && ts=$(tailscale ip -4 2>/dev/null | head -n 1) && [ -n "$ts" ]; then
+      VBoxManage modifyvm "$name" --natpf1 "rdp-tailscale,tcp,$ts,$RDP_PORT,,3389" && step "Tailscale access for this Mac: $ts:$RDP_PORT"
+    fi
+    start_headless
+    printf '\nConnect with Windows App: localhost:%s, student / student, session Xorg.\n' "$RDP_PORT" ;;
+  -h|--help|help) awk 'NR==1{next} /^#/{sub(/^# ?/,""); print; next} {exit}' "$0" ;;
   *) die "unknown command '$cmd' — bash vm.sh help" ;;
 esac

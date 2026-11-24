@@ -127,5 +127,8 @@ Connexion ensuite avec Windows App : `localhost:3390`, utilisateur `student`, se
 Au quotidien, `bash local-vm/vm.sh` règle les situations courantes sans réfléchir : `status`, `start`,
 `stop`, `restart`, `fix-rdp` (écran gris ou noir dans Windows App), `diag` (diagnostic complet à coller à
 Claude), `ssh`, et les instantanés : `snap [nom]`, `snaps`, `restore <nom>`, `snap-delete <nom>`.
+Sauvegarde complète, aussi pour passer la VM sur un autre Mac : `backup [chemin]` (une archive `.tar.gz`
+avec disque, réglages, instantanés et clé SSH ; VM arrêtée pendant la copie) puis, sur l'autre Mac,
+`import <archive>`.
 Prenez un instantané après chaque étape réussie (`bash local-vm/vm.sh snap apres-etape-4`) : VirtualBox
 sur Mac Apple Silicon reste fragile, et une restauration prend une minute.
