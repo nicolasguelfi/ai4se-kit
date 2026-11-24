@@ -2,6 +2,8 @@
 
 Not used by learners. `setup-learner.sh` and the tutor never read this folder.
 
+**User manual for the trainer as advisor (French):** [`MANUEL-CONSEILLER.md`](MANUEL-CONSEILLER.md).
+
 ## advisor.py — the advisor board
 
 A read-only view of every learner's project, for the trainer: one local HTML page, one row per learner and
