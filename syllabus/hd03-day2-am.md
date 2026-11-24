@@ -44,13 +44,15 @@ Yesterday: GenAI basics (what an LLM can and cannot do), VibeCoding vs VibeEngin
 
 **The artifact chain** — each step feeds the next: (1) *git*, a safety net (commit, branch, restore); (2) *opencode*, `AGENTS.md` + the right context; (3) *plan*, `docs/plan.md` with 5-8 atomic tasks; (4) *build*, tests then code, one branch per task; (5) *review*, a list of problems, ranked HIGH / MEDIUM / LOW; (6) *deliver*, v0.1 merged and tagged. By 17:00: a tested, reviewed, versioned app.
 
+**CalcApp and its starter.** `calcapp-starter` is the course project on GitHub: a minimal React + TypeScript app (Vite, Vitest) that shows « CalcApp » and has one passing test. Everyone clones it once, at 09:15 (Git exercise), into `~/ai4se/calcapp`, and builds CalcApp on it all day. It carries one tag per checkpoint, so anyone can restart from a known state.
+
 **Late or lost? Catch up.** Ask in this order: your tutor window → a recovery tag → raise your hand. A recovery tag is a known state of the public CalcApp starter:
 
 | Tag | State |
 |---|---|
-| `j2-start` | start of the day (09:15) |
-| `j2-part1` | end of the morning build (13:15) |
-| `j2-v0.1` | v0.1 ready for delivery (16:15) |
+| `j2-start` | starter: empty app, 1 test (09:15) |
+| `j2-part1` | first task done (13:15) |
+| `j2-v0.1` | CalcApp v0.1 shipped (16:15) |
 
 ```bash
 cd ~/ai4se
@@ -379,7 +381,7 @@ Do NOT write the component. Run npm run test:run.
 
 Review: correct import paths? accessible queries? the behaviour *you* want? GREEN: same prompt as A. Mutant: remove the `parseFloat` on the amount.
 
-**If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup:
+**If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup. Only to catch up: a second copy in a new folder; your first copy (`~/ai4se/calcapp`) stays untouched.
 
 ```bash
 git clone https://github.com/nicolasguelfi/calcapp-starter ~/ai4se/calcapp-restart
