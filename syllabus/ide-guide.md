@@ -24,12 +24,12 @@ Why:
 
 | System | Command |
 |---|---|
-| macOS | `brew install --cask vscodium` |
 | Windows (also with WSL: install the Windows build, open your WSL files through `\\wsl$`) | `winget install VSCodium.VSCodium` |
 | Ubuntu | `sudo snap install codium --classic` |
 | Other Linux | `flatpak install flathub com.vscodium.codium` (install flatpak first) |
+| macOS | `brew install --cask vscodium` |
 
-Then, once: **Settings** (macOS `Cmd+,`, Windows/Linux `Ctrl+,`) → search **`disable AI features`**
+Then, once: **Settings** (Windows/Linux `Ctrl+,`, macOS `Cmd+,`) → search **`disable AI features`**
 → tick it. In `settings.json` this is `"chat.disableAIFeatures": true` (checked in VSCodium 1.112).
 
 Open your project: **File → Open Folder…** → `~/ai4se/calcapp` (or your mini-project).

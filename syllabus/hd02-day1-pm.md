@@ -39,12 +39,19 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
 
 **Steps:**
 
-0. **Open a terminal** (~5 min). macOS: Cmd + Space → `Terminal` → Enter. Linux: Ctrl + Alt + T. Windows: the Ubuntu (WSL) app or the course VM — not PowerShell. Type `echo $SHELL`. *Done when* it ends in `bash` or `zsh`.
+0. **Open a terminal** (~5 min). Windows: the Ubuntu (WSL) app or the course VM — not PowerShell. Ubuntu: Ctrl + Alt + T. macOS: Cmd + Space → `Terminal` → Enter. Type `echo $SHELL`. *Done when* it ends in `bash` or `zsh`.
 1. **Install opencode 2** (~10 min).
    ```bash
+   # Windows (WSL) | Ubuntu | macOS
    curl -fsSL https://opencode.ai/v2/install | bash
-   brew install anomalyco/tap/opencode-v2   # macOS, alternative
-   npm install -g @opencode/cli             # if you already use Node
+   ```
+   ```bash
+   # or, any system with Node
+   npm install -g @opencode/cli
+   ```
+   ```bash
+   # or, macOS only
+   brew install anomalyco/tap/opencode-v2
    ```
    Then `opencode --version`; only if it says « command not found », reload the terminal with `exec $SHELL` and retry. *Done when* it prints `2.x.y` (e.g. 2.2.6).
 2. **Node.js LTS** (~5 min) — needed tomorrow to run CalcApp (npm). Already ≥ 20? Skip.
@@ -60,7 +67,7 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    node --version && npm --version
    ```
    *Done when* node shows v20 or more and npm a version.
-3. **Your model key** (~10 min). Run `opencode auth login`, choose the provider written on your key sheet, paste the key when asked. Never put it in a committed file, a prompt, a screenshot or an issue. *Done when* `opencode auth list` shows it.
+3. **Your model key** (~10 min). Run `opencode auth login`, type `openrouter` and choose OpenRouter, paste the key when asked. Never put it in a committed file, a prompt, a screenshot or an issue. *Done when* `opencode auth list` shows it.
 4. **The course kit** (~5 min).
    ```bash
    git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh
@@ -76,8 +83,15 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    *Done when* `cat .gse/registry` prints `.opencode`.
 6. **GitHub login and git identity** (~15 min). No account? `github.com/signup` (a personal one is fine).
    ```bash
-   brew install gh         # macOS
-   sudo apt install gh     # Linux / WSL
+   # Windows (WSL) | Ubuntu
+   sudo apt install gh
+   ```
+   ```bash
+   # macOS
+   brew install gh
+   ```
+   ```bash
+   # then, every system
    gh auth login           # GitHub.com, HTTPS, browser
    git config --global user.name  "Your Name"
    git config --global user.email "you@example.com"
