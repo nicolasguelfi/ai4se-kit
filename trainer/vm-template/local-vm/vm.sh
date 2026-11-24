@@ -9,6 +9,7 @@
 #   bash vm.sh reset                  hard reset (like pulling the plug) — last resort
 #   bash vm.sh fix-rdp                grey or black Windows App screen: close the stuck desktop session,
 #                                     unlock, turn off screen lock and idle blanking, restart xrdp
+#   bash vm.sh keyboard               m gives « ; »: re-apply the Mac AZERTY layout now, and on every RDP reconnect
 #   bash vm.sh diag                   full diagnosis (paste it to Claude): disk, memory, services, sessions, logs
 #   bash vm.sh ssh [command]          shell (or one command) in the VM as student — plain /usr/bin/ssh, so
 #                                     Ghostty's terminfo step cannot hang it
@@ -72,6 +73,12 @@ desktop_sessions() {  # the student's xrdp desktop sessions (not the SSH ones)
            [ "$(loginctl show-session "$s" -p Service --value)" = xrdp-sesman ] && echo "$s"; done' 2>/dev/null
 }
 
+KBD_LINE='setxkbmap -layout fr -variant mac  # ai4se: xrdp resets the layout on each reconnect'
+keyboard_fix() {  # now (every desktop display of student) + durable (xrdp reconnect hook), idempotent
+  vmssh "for d in /tmp/.X11-unix/X*; do [ -O \"\$d\" ] && DISPLAY=\":\${d##*X}\" XAUTHORITY=\"\$HOME/.Xauthority\" setxkbmap -layout fr -variant mac; done
+         grep -qF 'ai4se: xrdp resets' /etc/xrdp/reconnectwm.sh || echo \"$KBD_LINE\" | sudo tee -a /etc/xrdp/reconnectwm.sh >/dev/null"
+}
+
 cmd="${1:-status}"; shift 2>/dev/null || true
 case "$cmd" in
   status)
@@ -110,7 +117,12 @@ case "$cmd" in
            gsettings set org.gnome.desktop.session idle-delay 0 2>/dev/null
            gsettings set org.gnome.desktop.lockdown disable-lock-screen true 2>/dev/null
            sudo loginctl unlock-sessions; sudo systemctl restart xrdp-sesman xrdp' && step "screen lock and idle blanking off; xrdp restarted"
+    keyboard_fix && step "Mac AZERTY layout re-applied on every RDP reconnect"
     printf '\nClose every Windows App window of this PC, then connect again (localhost:%s) and wait up to a minute.\n' "$RDP_PORT" ;;
+  keyboard)
+    say "Keyboard (Mac AZERTY)"
+    ssh_ok || die "the VM does not answer on SSH: try 'bash vm.sh restart' first"
+    keyboard_fix && step "applied to the open desktop, and to every future RDP reconnect" ;;
   diag)
     say "Diagnosis of $VM_NAME — $(date '+%Y-%m-%d %H:%M')"
     step "VirtualBox state: $(state)"
@@ -156,6 +168,6 @@ case "$cmd" in
     printf '  Delete snapshot « %s »? [y/N] ' "$1"; read -r a
     [ "$a" = y ] || [ "$a" = Y ] || { step "cancelled"; exit 0; }
     VBoxManage snapshot "$VM_NAME" delete "$1" && step "deleted" ;;
-  -h|--help|help) sed -n '2,22p' "$0" | sed 's/^# \{0,1\}//' ;;
+  -h|--help|help) sed -n '2,23p' "$0" | sed 's/^# \{0,1\}//' ;;
   *) die "unknown command '$cmd' — bash vm.sh help" ;;
 esac

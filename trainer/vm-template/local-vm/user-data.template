@@ -75,6 +75,7 @@ runcmd:
   - mkdir -p /home/student/.config/autostart && cp /etc/skel/.config/autostart/ai4se-first-login.desktop /etc/skel/.config/autostart/keyboard-fr-mac.desktop /home/student/.config/autostart/
   - chown -R student:student /home/student
   - adduser xrdp ssl-cert
+  - echo 'setxkbmap -layout fr -variant mac  # ai4se: xrdp resets the layout on each reconnect' >> /etc/xrdp/reconnectwm.sh
   - apt-get -y purge gnome-initial-setup || true
   - install -d -m 755 /etc/apt/keyrings
   - wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/packages.microsoft.gpg
