@@ -42,7 +42,7 @@ Yesterday: GenAI basics (what an LLM can and cannot do), VibeCoding vs VibeEngin
 | Safety net | None | Git: commit, branch |
 | Plan | In your head | `docs/plan.md`, committed |
 
-**The artifact chain** — each step feeds the next: (1) *git*, a safety net (commit, branch, restore); (2) *opencode*, `AGENTS.md` + the right context; (3) *plan*, `docs/plan.md` with 5-8 atomic tasks; (4) *build*, tests then code, one branch per task; (5) *review*, findings triaged HIGH / MEDIUM / LOW; (6) *deliver*, v0.1 merged and tagged. By 17:00: a tested, reviewed, versioned app.
+**The artifact chain** — each step feeds the next: (1) *git*, a safety net (commit, branch, restore); (2) *opencode*, `AGENTS.md` + the right context; (3) *plan*, `docs/plan.md` with 5-8 atomic tasks; (4) *build*, tests then code, one branch per task; (5) *review*, a list of problems, ranked HIGH / MEDIUM / LOW; (6) *deliver*, v0.1 merged and tagged. By 17:00: a tested, reviewed, versioned app.
 
 **Late or lost? Catch up.** Ask in this order: your tutor window → a recovery tag → raise your hand. A recovery tag is a known state of the public CalcApp starter:
 
