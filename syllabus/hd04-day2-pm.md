@@ -53,9 +53,9 @@ GREEN: Make it pass with react-router (NOT react-router-dom): export `routes`
        One file per page in src/pages/. Do not modify the test.
 ```
 
-*Review checklist:* `react-router` in `package.json`, no `react-router-dom`? navigation with `Link`, not `<a href>` (no full reload)? one file per page in `src/pages/`? test untouched (`git diff -- tests/` shows nothing)? `npm run dev`: click both links, does the back button work? *Trust, but verify* — you will need this habit at 14:30.
+*Review checklist:* `react-router` in `package.json`, no `react-router-dom`? navigation with `Link`, not `<a href>` (no full reload)? one file per page in `src/pages/`? test untouched (`git diff HEAD -- tests/` shows nothing)? `npm run dev`: click both links, does the back button work? *Trust, but verify* — you will need this habit at 14:30.
 
-**Task — data layer.** `Expense` type in `src/types/expense.ts`, storage in `src/utils/storage.ts`; localStorage is enough for v0.1.
+**Task — data layer.** `Expense` type in `src/expense.ts`, storage in `src/storage.ts`; localStorage is enough for v0.1.
 
 ```text
 RED:   Write a failing integration test: `routes` in a memory router at "/add",
@@ -68,7 +68,7 @@ GREEN: Make it pass: Expense type; getExpenses/saveExpenses in storage.ts
        Do not modify the test.
 ```
 
-*Review checklist:* types in `src/types/expense.ts`, no `any`? storage really uses localStorage — not just React state? form inputs controlled (`value` + `onChange`)? after Add, back to `/` with `useNavigate`? refresh the browser: is your expense still there?
+*Review checklist:* types in `src/expense.ts`, no `any`? storage really uses localStorage — not just React state? form inputs controlled (`value` + `onChange`)? after Add, back to `/` with `useNavigate`? refresh the browser: is your expense still there?
 
 **Task — minimal UI (10 min max).** Target: readable and functional, not production-ready. Pure styling has no test: the rule is *the tests stay green*.
 
@@ -136,7 +136,7 @@ The input comes from a user form: empty, negative, huge amounts?
 ```
 
 ```text
-@src/utils/storage.ts What happens if localStorage holds corrupt JSON
+@src/storage.ts What happens if localStorage holds corrupt JSON
 or is full? Classify each finding HIGH / MEDIUM / LOW.
 ```
 
@@ -190,7 +190,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/g
    unvalidated, tests that prove nothing. For each finding: RVW-n,
    HIGH/MEDIUM/LOW, file, why it matters, suggested fix. Edit nothing.
    ```
-   Diff too long? One task at a time: `!git diff j2-start -- src/utils/`.
+   Diff too long? One task at a time: `!git diff j2-start -- src/storage.ts`.
 3. Write the triage in `docs/review.md`.
 4. `git switch -c fix/review`; Shift+Tab back to the *build* agent and fix 2-3 HIGH/MEDIUM findings, test first:
    ```text

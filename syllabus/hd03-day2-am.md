@@ -399,7 +399,7 @@ Before lunch: `git status` must say "nothing to commit".
 ### Frequent errors
 
 - The agent writes test and code in one go: refuse, `git restore` the code, ask for the test only.
-- The agent "fixes" the failing test instead of the code: `git diff -- tests/` must be empty after GREEN.
+- The agent "fixes" the failing test instead of the code: `git diff HEAD -- tests/` must be empty after GREEN (before the feat: commit).
 - `npm test` stays open in watch mode: press `q` to quit, or use `npm run test:run`.
 - Importing from `react-router-dom`: the starter uses `react-router` 7.
 
