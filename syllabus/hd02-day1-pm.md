@@ -97,7 +97,7 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    git config --global user.email "you@example.com"
    git config --global init.defaultBranch main
    ```
-   Use the e-mail of your GitHub account. No browser (WSL, VM)? Copy the code and open the link yourself. *Done when* `gh auth status` says "Logged in" and `git config --global --list` shows your name and e-mail.
+   Use the e-mail of your GitHub account. The one-time code can be typed in **any** browser, even on your own computer: open `github.com/login/device`. On Ubuntu, lines like `update.go:193: cannot change mount namespace …` come from the Firefox snap: harmless — wait, do **not** press Ctrl+C (it stops the login). *Done when* `gh auth status` says "Logged in" and `git config --global --list` shows your name and e-mail.
 7. **Check everything** (~10 min).
    ```bash
    cd ~/ai4se/gse-check && sh ~/ai4se/ai4se-kit/check-learner.sh
@@ -126,6 +126,7 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
 | GSE-One installed before opencode 2 | Install opencode 2, then redo step 5 |
 | node missing, or older than v20 | Redo step 2 |
 | `libatomic.so.1: cannot open shared object file` | `sudo apt-get install -y libatomic1` (Ubuntu / WSL), then `node --version` |
+| `gh auth login` prints `update.go … mount namespace` lines | Harmless (Firefox snap): wait, no Ctrl+C — or type the code at `github.com/login/device` in any browser |
 | The tutor window says a folder is not allowed | Your project is outside `~/ai4se`: move it there, or `~/ai4se/ai4se-kit/tutor add <path>` (list: `~/ai4se/ai4se-kit/tutor paths`) |
 
 ### Links
