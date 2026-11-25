@@ -36,7 +36,7 @@ At the end of this half-day you can:
 3. Run `npm run dev` and open the address it prints. The app must show in the browser.
 4. Start opencode and ask: "Read @docs/plan.md: which task is marked [next]?"
 
-*Or ask opencode:* "Give me the commands to check that git status is clean on mywork and that the tests pass, then run them, and tell me which task of @docs/plan.md is marked [next]." (`npm run dev` stays in a terminal: it does not stop.) One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, first features, tests green):
+*Or ask opencode:* "Give me the commands to check that git status is clean on mywork and that the tests pass, then run them, and tell me which task of @docs/plan.md is marked [next]." (`npm run dev` stays in a terminal: it does not stop.) One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, task T1 done, tests green):
 
 ```bash
 cd ~/ai4se
