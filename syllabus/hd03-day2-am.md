@@ -379,21 +379,30 @@ Live demo (≤ 10 min, build agent): (1) the test + an empty shell of the compon
 
 **Testing rules in `AGENTS.md`** (check them before coding; missing? add, then commit `docs: testing rules`): write the test BEFORE the implementation (an empty shell next to the test is fine: red then fails on the expected value, not on a missing file); Vitest + React Testing Library, tests in `tests/`; use `fireEvent` from `@testing-library/react`; import from `react-router` (NOT `react-router-dom`); never install Jest, never skip, weaken or delete a test; run tests with `npm run test:run` (never watch mode).
 
-**Two prompts per task** (build agent). 1 · RED — test + empty shell:
+**Three prompts per task** (build agent). 1 · RED — test + empty shell. The first line only picks the task; the second says this step is the test only — an opening « build » would read as « write the code »:
 
 ```text
-@docs/plan.md Build only the task marked [next].
-Write a failing test for its Accept: line, in tests/, plus an
-empty shell of the code (exists, does nothing yet): the test must
-fail on its expected value, not on a missing file.
-Do NOT write the implementation. Run npm run test:run, show the failure.
+@docs/plan.md Take the task marked [next]. This step writes its test only.
+Write a failing test for its Accept: line, in tests/, and an empty shell
+of the code the test calls (exists, returns nothing yet), so the test
+fails on its expected value, not on a missing file.
+Do not implement the task. Run npm run test:run and show the failure.
 ```
 
-then, once you have reviewed the test:
+2 · GREEN — once you have reviewed the test:
 
 ```text
-Implement the minimal code that makes the new test in tests/ pass.
-Do not modify the test file. Run npm run test:run.
+Implement the minimal code that makes the new test in tests/ pass,
+for the task marked [next]. Do not modify the test file.
+Run npm run test:run.
+```
+
+3 · REFACTOR — same behaviour, better structure; nothing to improve is a valid result:
+
+```text
+@docs/plan.md Improve the design of the code of the task marked [next],
+same behaviour: e.g. extract a function, rename, remove duplication.
+Do not touch the test. Run npm run test:run.
 ```
 
 In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent would wait.
@@ -410,13 +419,15 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
    *Or ask opencode:* "Give me the git commands to commit only the new test as 'test: …', then run them."
 3. GREEN prompt → `npm test` green → commit `feat: …`
    *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'feat: …' if green; run them."
-4. Mutant check, then undo the sabotage.
-5. `git switch mywork` → `git merge feat/expense-type` (the same name as in step 1). `mywork` is your main line since this morning: every finished task is merged into it.
+4. REFACTOR prompt → `npm run test:run` still green → commit `refactor: …` (nothing to improve? no commit, go on)
+   *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'refactor: …' if green; run them."
+5. Mutant check, then undo the sabotage.
+6. `git switch mywork` → `git merge feat/expense-type` (the same name as in step 1). `mywork` is your main line since this morning: every finished task is merged into it.
    *Or ask opencode:* "Give me the git commands to go back to mywork and merge T1's branch into it, then run them."
-6. In `docs/plan.md`: T1 `[done]`, T2 `[next]` → commit `docs: T1 done`. After lunch the agent is asked which task is `[next]`: if T1 stays `[next]`, it answers T1.
+7. In `docs/plan.md`: T1 `[done]`, T2 `[next]` → commit `docs: T1 done`. After lunch the agent is asked which task is `[next]`: if T1 stays `[next]`, it answers T1.
    *Or ask opencode:* "In docs/plan.md, mark T1 [done] and T2 [next], then commit it as 'docs: T1 done'."
 
-**Done when:** `npm test` shows your new test passing, and `git log --oneline` shows `test:` before `feat:` — two commits, e.g. `test: expense with amount 0 is rejected`, then `feat: add expense validation`: the history shows the test existed (and failed) before the code.
+**Done when:** `npm test` shows your new test passing, and `git log --oneline` shows `test:` before `feat:` (then `refactor:` if any) — at least two commits, e.g. `test: expense with amount 0 is rejected`, then `feat: add expense validation`: the history shows the test existed (and failed) before the code.
 *Or ask opencode:* "Give me the commands to run the tests and show the last commits, then run them."
 
 **Mid-point (12:00):** your RED test is committed. Not yet? Ask now.
