@@ -223,7 +223,7 @@ Check: restart opencode, the sidebar shows context7 *Connected*; in a prompt, sa
 
 ### Exercise — Try it ×3 (5 min each, after a 3-min demo)
 
-**1. Rules.** *Goal:* a rule of yours changes the agent's answer. *Steps:* `git switch mywork`, then `opencode`; ask opencode "How do I run the tests, and where do test files go?"; add to `AGENTS.md`: `Amounts are in euros, 2 decimals: €25.50.`; `/new`, then "Propose formatAmount. Code only, no file."; `git diff AGENTS.md`, then commit it. *Done when:* the proposal shows 25.5 as €25.50 and `git log` shows your `AGENTS.md` commit. *Mid-point (2 min):* the agent named the test command.
+**1. Rules.** *Goal:* a rule of yours changes the agent's answer. *Steps:* `git switch mywork`, then `opencode`; ask opencode "How do I run the tests, and where do test files go?"; add to `AGENTS.md`: `Amounts are in euros, 2 decimals: €25.50.`; `/new`, then "Write a formatAmount function that formats an amount of money. Show the code and the result for 25.5. Do not create or change any file."; `git diff AGENTS.md`, then commit it. *Done when:* the proposal shows 25.5 as €25.50 and `git log` shows your `AGENTS.md` commit. *Mid-point (2 min):* the agent named the test command.
 
 **2. Context.** *Goal:* compare a vague prompt with a precise one. *Steps:* `/new`, "How are tests organised here?" — note the answer; `/new`, "How are tests organised here? Answer from @package.json and @AGENTS.md."; `!npm run test:run` (the `!` runs a shell command; its output joins the conversation); "Summarise the test results in two lines." *Done when:* it quotes the test command and folder from the files. *Mid-point (2 min):* the vague answer is noted.
 
