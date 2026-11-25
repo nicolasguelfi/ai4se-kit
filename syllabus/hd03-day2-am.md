@@ -221,7 +221,7 @@ Check: restart opencode, the sidebar shows context7 *Connected*; in a prompt, sa
 
 **1. Rules.** *Goal:* a rule of yours changes the agent's answer. *Steps:* `git switch mywork`, then `opencode`; ask opencode "How do I run the tests, and where do test files go?"; add to `AGENTS.md`: `Amounts are in euros, 2 decimals: €25.50.`; `/new`, then "Write a formatAmount function that formats an amount of money. Show the code and the result for 25.5. Do not create or change any file."; `git diff AGENTS.md`, then commit it. *Done when:* the proposal shows 25.5 as €25.50 and `git log` shows your `AGENTS.md` commit. *Mid-point (2 min):* the agent named the test command.
 
-**2. Context.** *Goal:* compare a vague prompt with a precise one. *Steps:* `/new`, "How are tests organised here?" — note the answer; `/new`, "How are tests organised here? Answer from @package.json and @AGENTS.md."; `!npm run test:run` (the `!` runs a shell command; its output joins the conversation); "Summarise the test results in two lines." *Done when:* it quotes the test command and folder from the files. *Mid-point (2 min):* the vague answer is noted.
+**2. Context.** *Goal:* compare a vague prompt with a precise one. *Steps:* `/new`, "How are tests organised here?" — note the answer; `/new`, "How are tests organised here? Answer from @package.json." (`AGENTS.md` is loaded in both runs: only `@package.json` makes the difference); `!npm run test:run` (the `!` runs a shell command; its output joins the conversation); "Summarise the test results in two lines." *Done when:* it quotes the test command and folder from the files. *Mid-point (2 min):* the vague answer is noted.
 
 **3. Plan.** *Goal:* a reviewed plan, no code. *Steps:* no context7 yet? `opencode mcp add context7 --url https://mcp.context7.com/mcp` (*or ask opencode, build agent:* "Give me the command to add the Context7 MCP server (https://mcp.context7.com/mcp) to this project, then run it." — read the server address before you allow it); restart opencode (needed either way: servers load at start) (the sidebar shows context7 *Connected*?); Shift+Tab → plan: "Plan a /budgets page. Use context7 for React Router 7. Tests first."; read the plan and its todo list, push back once; **do not build** — your real plan comes at 11:00. *Done when:* the plan names files and tests, and a Context7 call appears. *Mid-point (2 min):* context7 shows as connected.
 
@@ -285,10 +285,11 @@ Branch: feat/expense-storage
 1. 2 minutes on paper: 2-3 features you would want as a user.
 2. `git switch mywork`, `opencode`, Shift+Tab → plan. Adapt and paste the elicitation prompt, answer its questions:
    ```text
-   I'm building CalcApp v0.1, a personal budget tracker (see @AGENTS.md).
+   I'm building CalcApp v0.1, a personal budget tracker.
    v0.1: add an expense (amount, category, date), list expenses with a
-   monthly total, two pages with navigation, data kept in localStorage.
-   My extra ideas: <yours>.
+   monthly total, two pages with navigation, data kept in the browser
+   after closing it (localStorage, no server).
+   My extra ideas: a monthly budget limit, CSV export.
    Ask me 3 clarifying questions first. Then propose 4-6 user stories:
    title, "As a user, I want...", testable acceptance criteria.
    ```
