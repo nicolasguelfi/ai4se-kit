@@ -308,4 +308,4 @@ adds one, to the series of the branch of that scene. `git restore --worktree` pu
 back as on the last photo; `--staged` undoes `git add`. You can have several scenes
 (`git worktree add .worktrees/…`), each with its own branch: the album and the bookmarks are
 shared, and a bookmark sits on one scene at a time. GSE-One gives each task its own scene, so
-your other work stays untouched. *HD03, HD07.*
+your other work stays untouched. Hands-on example: [git-worktree-guide](git-worktree-guide.md). *HD03, HD07.*
