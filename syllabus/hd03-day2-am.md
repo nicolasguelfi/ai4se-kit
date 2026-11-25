@@ -314,6 +314,7 @@ Branch: feat/expense-storage
 ### Frequent errors
 
 - `git diff` shows nothing for the new plan: git diff ignores untracked files — `git add` first, then `git diff --staged`.
+- Plan saved but nothing to commit? The plan agent saves under `~/.opencode/plan/`, never in the project: Shift+Tab → build, then ask it to write `docs/plan.md`.
 - Tasks like "build the UI": not testable, not atomic — split until each has one acceptance test.
 
 ### How GSE-One solves it (CCSET06, concept only)
