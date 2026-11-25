@@ -271,7 +271,7 @@ From a vision to `docs/plan.md`: elicit requirements with the plan agent, split 
 
 Each *Check* is a test: written first (RED), then the code (GREEN). Tasks 1-2 are T1-T2 of the `docs/plan.md` example.
 
-**The `docs/plan.md` format** — 5-8 tasks, each with acceptance criteria, exactly one `[next]`:
+**The `docs/plan.md` format** — 5-8 tasks, each with acceptance criteria. `[next]` Treat exactly one · `[todo]` Later. The label after each title gives the task's state; the brackets are just a label we chose, easy to spot for you and the agent:
 
 ```markdown
 # CalcApp v0.1 - plan
