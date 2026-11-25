@@ -417,8 +417,10 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
    *Or ask opencode:* "Give me the git command to create and switch to T1's branch (Branch: line, @docs/plan.md); run it."
 2. RED prompt → **read the test** → commit `test: …`
    *Or ask opencode:* "Give me the git commands to commit only the new test as 'test: …', then run them."
-3. GREEN prompt → `npm test` green → commit `feat: …`
+3. GREEN prompt → `npm run test:run` green → commit `feat: …`
    *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'feat: …' if green; run them."
+*Then: improve, prove the test, deliver into `mywork`.*
+
 4. REFACTOR prompt → `npm run test:run` still green → commit `refactor: …` (nothing to improve? no commit, go on)
    *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'refactor: …' if green; run them."
 5. Mutant check, then undo the sabotage.
@@ -427,7 +429,7 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
 7. In `docs/plan.md`: T1 `[done]`, T2 `[next]` → commit `docs: T1 done`. After lunch the agent is asked which task is `[next]`: if T1 stays `[next]`, it answers T1.
    *Or ask opencode:* "In docs/plan.md, mark T1 [done] and T2 [next], then commit it as 'docs: T1 done'."
 
-**Done when:** `npm test` shows your new test passing, and `git log --oneline` shows `test:` before `feat:` (then `refactor:` if any) — at least two commits, e.g. `test: expense with amount 0 is rejected`, then `feat: add expense validation`: the history shows the test existed (and failed) before the code.
+**Done when:** `npm run test:run` shows your new test passing, and `git log --oneline` shows `test:` before `feat:` (then `refactor:` if any) — at least two commits, e.g. `test: expense with amount 0 is rejected`, then `feat: add expense validation`: the history shows the test existed (and failed) before the code.
 *Or ask opencode:* "Give me the commands to run the tests and show the last commits, then run them."
 
 **Mid-point (12:00):** your RED test is committed. Not yet? Ask now.
