@@ -258,7 +258,7 @@ GSE-One: `§ 1.1 — Coding Agents and Plugin Architecture` (where `AGENTS.md` f
 
 From a vision to `docs/plan.md`: elicit requirements with the plan agent, split them into atomic, testable tasks, commit the plan that drives your afternoon.
 
-**CalcApp — a budget tracker**: track expenses, set budgets, see what is left; React + TypeScript in the browser, built test-first. Features: add an expense (amount, category, date); list expenses (filter by month and category); set a monthly budget per category (e.g. 300 EUR for groceries); see what is left (warn when close to or over budget). **v0.1 today**: add an expense with validation; list expenses with a monthly total; two pages and a navigation bar; data kept in the browser (localStorage). Later versions: budgets per category, remaining budget and warnings, your own ideas.
+**CalcApp — a budget tracker**: track expenses, set budgets, see what is left; React + TypeScript in the browser, built test-first. Features: add an expense (amount, category, date); list expenses (filter by month and category); set a monthly budget per category (e.g. 300 EUR for groceries); see what is left (warn when close to or over budget). **v0.1 today**: add an expense with validation; list expenses with a monthly total; two pages and a navigation bar; data kept in the browser (localStorage). Later versions: budgets per category, remaining budget and warnings, your own ideas. **2 minutes, on paper:** 2-3 features you would want as a user — you put them in the elicitation prompt.
 
 **Good requirements** are *testable* (✓ "amount 0 or negative → a validation error is shown"; ✗ "the app handles expenses well"), *small* (30-45 min of work with the agent), *independent* (buildable in any order, as far as possible). **Atomic tasks**: one thing, verifiable, ordered; test first, code second in every task. Example — two stories, each with its tasks and their check:
 
@@ -292,7 +292,7 @@ Branch: feat/expense-storage
 **Steps:**
 
 1. `git switch mywork`, `opencode`, Shift+Tab → plan.
-2. Paste the elicitation prompt, answer its questions:
+2. Paste the elicitation prompt (replace the two example ideas with yours, from paper), answer its questions:
    ```text
    I'm building CalcApp v0.1, a personal budget tracker.
    v0.1: add an expense (amount, category, date), list expenses with a
