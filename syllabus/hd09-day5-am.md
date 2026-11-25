@@ -153,7 +153,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.8 — Deployment`; the activity `~
 
 **Done when:** The grid is filled for both models and the version you keep is noted in the tracking sheet.
 
-**If stuck:** `/models` does not show the model? Type part of its name to filter the list. Then your tutor window → raise your hand.
+**If stuck:** `/models` does not show the model? Type part of its name to filter the list. A "Select variant" screen appears? Keep Default (Esc). Then your tutor window → raise your hand.
 
 **Debrief:** Which model asked the better questions? Did the cheaper run lose anything that matters? Compare the structure, not the words.
 
