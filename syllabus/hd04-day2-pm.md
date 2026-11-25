@@ -48,7 +48,7 @@ Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`. In your `docs/p
 
 **Same loop, every task:**
 
-1. Create the branch named under the task in `docs/plan.md` (the line that starts with `Branch:`), e.g. `git switch -c feat/routing`
+1. Create the branch named under the task in `docs/plan.md` (the line that starts with `Branch:`), e.g. `git switch -c feat/routing`. Your name may differ: ask opencode "Create the branch of the [next] task in @docs/plan.md."
 2. RED: ask for the test only. You read it, then commit it alone (`test: …`).
 3. GREEN: ask for the minimal code, without changing the test. Commit it (`feat: …`).
 4. REFACTOR: ask to improve the design, same behaviour; the tests must still pass. Commit it (`refactor: …`). Nothing to improve? Skip this step.
@@ -104,7 +104,7 @@ No animations, no CSS library. Keep all tests green.
 
 **Steps:**
 
-1. Create the branch of the task marked `[next]`. Its name is in `docs/plan.md`, on the line that starts with `Branch:` under that task. Example: `git switch -c feat/routing`
+1. Create the branch of the task marked `[next]`. Its name is in `docs/plan.md`, on the line that starts with `Branch:` under that task. Example: `git switch -c feat/routing` (your name may differ: use the line below)
    *Or ask opencode:* "Give me the git command to create and switch to the [next] task's branch (Branch: line, @docs/plan.md); run it."
 2. Paste the RED prompt. Read the test, then commit it alone, with a message that starts with `test:`
    *Or ask opencode:* "Give me the git commands to commit only the new test as 'test: …', then run them."
@@ -120,7 +120,7 @@ No animations, no CSS library. Keep all tests green.
 
 Your plan's wording is unclear? Use the ready-made prompts above.
 
-**Done when:** `npm run test:run` shows 4+ passing tests; the app has two pages; an added expense survives a browser refresh.
+**Done when:** `npm run test:run` shows at least 4 passing tests; the app has two pages; an added expense survives a browser refresh.
 *Or ask opencode:* "Give me the command to run the tests and count the passing ones, then run it." (the two pages and the refresh: check them in the browser)
 
 **Mid-point (13:55):** your routing task is merged into `mywork`. Not yet? Ask now.

@@ -417,7 +417,7 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
 
 **Steps:**
 
-1. Create the branch for T1. Its name is written in `docs/plan.md`, on the line that starts with `Branch:` under T1. Example: `git switch -c feat/expense-type`
+1. Create the branch for T1. Its name is written in `docs/plan.md`, on the line that starts with `Branch:` under T1. Example: `git switch -c feat/expense-type` (your name may differ: use the line below)
    *Or ask opencode:* "Give me the git command to create and switch to the branch named under T1 in @docs/plan.md; run it."
 2. Paste the RED prompt. Read the test the agent wrote. Then commit the test alone, with a message that starts with `test:`
    *Or ask opencode:* "Give me the git commands to commit only the new test as 'test: …', then run them."
@@ -429,7 +429,7 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
 4. Paste the REFACTOR prompt. Run `npm run test:run`: the tests must still pass. Commit with a message that starts with `refactor:`. Nothing to improve? No commit, go on.
    *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'refactor: …' if green; run them."
 5. Mutant check: break the code on purpose; a test must fail. Then undo your change.
-6. Go back to your main line and bring T1 into it: `git switch mywork`, then `git merge feat/expense-type` (the name of your T1 branch).
+6. Go back to your main line and bring T1 into it: `git switch mywork`, then `git merge feat/expense-type` (your name may differ: use the line below).
    *Or ask opencode:* "Give me the git commands to go back to mywork and merge T1's branch into it, then run them."
 7. In `docs/plan.md`, change the label of T1 to `[done]` and the label of T2 to `[next]`. Commit with the message `docs: T1 done`. (After lunch the agent is asked which task is `[next]`: if T1 stays `[next]`, it answers T1.)
    *Or ask opencode:* "In docs/plan.md, mark T1 [done] and T2 [next], then commit it as 'docs: T1 done'."
