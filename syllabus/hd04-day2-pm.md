@@ -191,6 +191,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/g
 **Steps:**
 
 1. `git switch mywork` → `git diff j2-start --stat`.
+   *Or ask opencode (build):* "Give me the git commands to go back to mywork and show how much changed since j2-start, then run them."
 2. Shift+Tab → *plan* agent (no file edits). First put the diff into the conversation (`!` runs a shell command): `!git diff j2-start`. Then:
    ```text
    Review this diff of CalcApp v0.1 against @docs/plan.md. Focus: bugs and
@@ -201,15 +202,18 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/g
    Diff too long? One task at a time: `!git diff j2-start -- src/storage.ts`.
 3. Write the triage in `docs/review.md`.
 4. `git switch -c fix/review`; Shift+Tab back to the *build* agent and fix 2-3 HIGH/MEDIUM findings, test first:
+   *Or ask opencode (build):* "Give me the git command to create and switch to the branch fix/review, then run it."
    ```text
    Fix RVW-1 from docs/review.md. First write a failing test that exposes
    it and run npm run test:run (RED), then fix the code (GREEN).
    Change nothing else.
    ```
    Read the diff: did it touch anything else? `npm test` green → commit `fix: RVW-1 …`; in `docs/review.md`: RVW-1 → fixed.
+   Reading the diff stays yours. *Or ask opencode:* "Give me the commands to run the tests, then commit as 'fix: RVW-1 …' if green; run them."
 5. Refuse at least one finding, with a written reason.
 
 **Done when:** `docs/review.md` lists your findings with severities; 2+ are fixed with a test; 1+ is refused with a reason; `npm test` is green on `fix/review`.
+*Or ask opencode:* "Give me the commands to switch to fix/review and run the tests, then run them."
 
 **Mid-point (15:35):** triage written. Not yet? Review one task's diff only.
 
@@ -289,7 +293,7 @@ Same loop, same severities — and GSE-One will not deliver over an open HIGH wi
 
 **Next: day 3 (Thursday 3 December 2026).** GSE-One drives the loop you ran by hand today; start with `/gse-go` inside your project; CalcApp continues (recovery tag `p3-start`); your work goes to GitHub, pushed before each break and every evening. Keep your laptop as it is: opencode, model key, GSE-One v0.93.4, the course kit.
 
-**Buffer (17:00 → 17:30):** finish the exercise you missed (its sheet is in this syllabus), questions to the trainer, your tutor window for anything about today's steps, feedback as an issue on `nicolasguelfi/gensem` with label `ai4se-ed2` (public — no confidential data). Before leaving: `git status` clean, `git tag` shows `v0.1`, and `git branch -v` shows `main` and `mywork` on the same commit.
+**Buffer (17:00 → 17:30):** finish the exercise you missed (its sheet is in this syllabus), questions to the trainer, your tutor window for anything about today's steps, feedback as an issue on `nicolasguelfi/gensem` with label `ai4se-ed2` (public — no confidential data). Before leaving: `git status` clean, `git tag` shows `v0.1`, and `git branch -v` shows `main` and `mywork` on the same commit (*or ask opencode:* "Give me the git commands to check that the tree is clean, that the tag v0.1 exists, and that main and mywork are on the same commit, then run them.").
 
 ### Links
 
