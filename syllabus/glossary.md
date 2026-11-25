@@ -293,5 +293,12 @@ Validation: "did we build the right thing?" (traced to requirements). *HD07.*
 **Vibe coding / Vibe engineering** — Vibe coding: accept AI-generated code without
 reading it. Vibe engineering: the same tools with plans, tests, reviews and git. *HD01.*
 
-**Worktree** — A separate working folder for one git branch (`.worktrees/…`), so GSE-One
-can work on a task without touching your other work. *HD07.*
+**Worktree** — The folder where your files are laid out so you can edit them. Picture a
+photo album: each commit is a complete photo of all your files; a branch is a bookmark on
+the latest photo of a series, and moves forward with each commit; a worktree is a work
+table where one photo is laid out. Laying a photo on a table creates no photo — only
+`git commit` adds one, to the series of the branch on that table. `git restore --worktree`
+puts the table back; `--staged` undoes `git add`. You can have several tables
+(`git worktree add .worktrees/…`): the album and the bookmarks are shared, each table shows
+one branch, and a bookmark sits on one table at a time. Bringing one series into another is
+a merge. GSE-One gives each task its own table, so your other work stays untouched. *HD03, HD07.*
