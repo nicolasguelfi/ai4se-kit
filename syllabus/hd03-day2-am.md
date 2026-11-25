@@ -291,8 +291,8 @@ Branch: feat/expense-storage
 
 **Steps:**
 
-1. 2 minutes on paper: 2-3 features you would want as a user.
-2. `git switch mywork`, `opencode`, Shift+Tab → plan. Adapt and paste the elicitation prompt, answer its questions:
+1. `git switch mywork`, `opencode`, Shift+Tab → plan.
+2. Paste the elicitation prompt, answer its questions:
    ```text
    I'm building CalcApp v0.1, a personal budget tracker.
    v0.1: add an expense (amount, category, date), list expenses with a
@@ -304,17 +304,22 @@ Branch: feat/expense-storage
    ```
    *User story* = one need seen by the user: "As a user, I want …" + acceptance criteria (how we check it is done).
    Read critically. Ask back: errors? fixed or free categories? currency?
-3. "Split into 5-8 atomic tasks, tests first, with acceptance criteria." Push back at least once: too big? not testable?
-4. Shift+Tab → build: "Write docs/plan.md in the slide format."
-5. Edit it, mark T1 `[next]`, `git add` it, `git diff --staged`, `git commit -m "docs: v0.1 plan"`.
-   *Or ask opencode:* "Give me the git commands to stage docs/plan.md and show what will be committed, then run them." — then "Give me the git command to commit docs/plan.md as 'docs: v0.1 plan', then run it."
+3. "Split the user stories into 5-8 atomic development tasks, test first, each with its acceptance criteria."
+4. Push back at least once: too big? not testable?
+5. Shift+Tab → build: "Write the development tasks from this conversation to docs/plan.md. Use @docs/plan-example.md only for its format, not for its tasks."
+   Why « only for its format »: `docs/plan-example.md` is a complete fallback plan with its own 7 development tasks; told « use its format », an agent may copy those tasks instead of the ones agreed with you.
+6. Open `docs/plan.md` and correct it: T1 is the only task marked `[next]`.
+7. `git add docs/plan.md`, then `git diff --staged`.
+   *Or ask opencode:* "Give me the git commands to stage docs/plan.md and show what will be committed, then run them."
+8. `git commit -m "docs: v0.1 plan"`.
+   *Or ask opencode:* "Give me the git command to commit docs/plan.md as 'docs: v0.1 plan', then run it."
 
 *Or ask opencode* needs the **build** agent here: plan may not write `docs/plan.md`.
 
-**Done when:** `git log --oneline` on `mywork` shows "docs: v0.1 plan"; `docs/plan.md` has 5-8 tasks, one `[next]`.
-*Or ask opencode:* "Give me the git commands to show the last commits on mywork, and check that docs/plan.md has 5-8 tasks with exactly one [next]. Then run them and show me the result."
+**Done when:** `git log --oneline` on `mywork` shows "docs: v0.1 plan"; `docs/plan.md` has 5-8 development tasks, only T1 marked `[next]`.
+*Or ask opencode:* "Give me the git commands to show the last commits on mywork, and check that docs/plan.md has 5-8 development tasks, only T1 marked [next]. Then run them and show me the result."
 
-**Check:** is anything missing for the app to work end to end (wiring, entry point, assembly of the parts)? If so, add that task.
+**Check:** is anything missing for the app to work end to end (wiring, entry point, assembly of the parts)? If so, add that development task.
 
 **Mid-point (11:15):** your user stories have testable acceptance criteria; you are splitting them.
 
