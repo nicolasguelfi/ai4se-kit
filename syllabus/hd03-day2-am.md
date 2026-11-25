@@ -184,7 +184,7 @@ Give the agent what a new colleague would need. *You hire a talented junior: no 
 
 **Structure = first prompt.** For "Add sign-up with email validation", a flat project (`app.ts`, `helpers.ts`, `stuff.ts`, `test.ts`) makes the agent guess; a structured one (`src/routes/auth.routes.ts`, `src/services/auth.service.ts`, `src/validators/auth.validator.ts`, `tests/services/auth.service.test.ts`, `docs/architecture.md`, `README.md`) shows the pattern: right folder, same names, tests mirrored. Five habits: descriptive folders (`components/`, `pages/`, `utils/`); tests mirror `src/` (same path, `.test` suffix); a README (purpose, stack, commands); a short `docs/architecture.md`; small files, one concern each.
 
-**Project rules = `AGENTS.md`.** Plain Markdown at the project root, read at every start; `/init` drafts one from your project; commit it so everyone has the same rules. Personal rules: `~/.config/opencode/AGENTS.md`; extra files: `instructions` in `opencode.json`. The CalcApp starter already ships one — read it before your first prompt. Excerpt: stack pinned (React 19 + React Router 7, TypeScript 5.9, Vite 7, Vitest 4); layout (`src/App.tsx` = routes, `src/pages/` = one component per route, `tests/` mirrors `src/`, `docs/` = your plan and documentation); rules (TDD: failing test first, never weaken a test; `npm run test:run` and `npm run lint` pass before a commit; one branch per task, never commit directly to main; never commit secrets — `.env*` stays out of git).
+**Project rules = `AGENTS.md`.** Plain Markdown at the project root, read at every start, and again when it changes; `/init` drafts one from your project; commit it so everyone has the same rules. Personal rules: `~/.config/opencode/AGENTS.md`; extra files: `instructions` in `opencode.json`. The CalcApp starter already ships one — read it before your first prompt. Excerpt: stack pinned (React 19 + React Router 7, TypeScript 5.9, Vite 7, Vitest 4); layout (`src/App.tsx` = routes, `src/pages/` = one component per route, `tests/` mirrors `src/`, `docs/` = your plan and documentation); rules (TDD: failing test first, never weaken a test; `npm run test:run` and `npm run lint` pass before a commit; one branch per task, never commit directly to main; never commit secrets — `.env*` stays out of git).
 
 **The context window** holds the rules (`AGENTS.md`), your prompt, the files you `@mention` or that it reads, the conversation history and tool results (commands, tests, MCP). All of it is sent to the model **every turn**; the window has a fixed size; too full, early details get lost. `/compact` summarises, `/new` starts clean.
 
@@ -233,7 +233,6 @@ Check: restart opencode, the sidebar shows context7 *Connected*; in a prompt, sa
 
 ### Frequent errors
 
-- Editing `AGENTS.md` and expecting the current session to change: start a new one (`/new`).
 - Asking the *plan* agent to "do it": it cannot edit files — Shift+Tab to *build*.
 - Context7 not connected: `opencode mcp add` was run outside the project folder, or opencode was not restarted. A hand-written `"mcp": {"context7": …}` (without `servers`) is the old format: opencode 2 ignores it.
 

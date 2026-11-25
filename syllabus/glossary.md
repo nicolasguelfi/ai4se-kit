@@ -18,7 +18,7 @@ GitHub issue labelled `gse-advisor`, without touching your files. When you open 
 (read a file, edit, run a command), the result goes back to the model. opencode is one. *HD01.*
 
 **AGENTS.md** — A file at the project root with standing instructions the agent reads at
-every session (conventions, commands, rules). `/init` drafts one. *HD03.*
+every start, and again when it changes (conventions, commands, rules). `/init` drafts one. *HD03.*
 
 **AI Act** — The EU regulation on artificial intelligence: obligations depend on the risk
 category of the system. Applied to your own project on day 6. *HD01, HD11.*
