@@ -5,6 +5,10 @@
 **In one sentence:** a branch is another line of commits; a worktree is another folder where
 one branch is checked out — so you can see and work on two branches at the same time.
 
+**What you build:** a program that says hello in English, then French on a branch, German in a
+worktree — and at the end, after two merges (one with a conflict), one program on `main` that
+says hello in all three languages.
+
 Checked with git 2.54. Every command below runs as written. It works in a throwaway folder,
 `~/hello-demo`, that you delete at the end.
 
@@ -22,6 +26,8 @@ The course uses one picture for git (day 2, « Where Your Changes Live »):
 | a branch | a **bookmark** on the latest photo of a series |
 | `git switch` | **rearrange the same scene** as on the latest photo of another series |
 | a worktree | **one more scene**, in its own folder, for another series |
+| a merge | one new photo with the retouches of two series |
+| a conflict | both series retouched the same spot: you choose, or combine |
 
 - **Branch only:** one scene. To go to another series, you rearrange it. What you have not
   photographed (not committed) stays on the scene and follows you into the other series.
@@ -74,10 +80,10 @@ Create the branch `french` and switch to it:
 git switch -c french
 ```
 
-Change the program, **without committing**:
+Add a French line to the program, **without committing**:
 
 ```bash
-echo 'print("Bonjour")' > hello.py
+echo 'print("Bonjour")' >> hello.py
 ```
 
 Go back to `main`:
@@ -90,8 +96,8 @@ git switch main
 python3 hello.py
 ```
 
-It prints **`Bonjour`**: the uncommitted change followed you onto `main`. Git only moves what
-is in photos; what is still on the scene stays there.
+It prints `Hello` **and `Bonjour`**: the uncommitted line followed you onto `main`. Git only
+moves what is in photos; what is still on the scene stays there.
 
 Go back to `french` and take the photo:
 
@@ -99,20 +105,20 @@ Go back to `french` and take the photo:
 git switch french && git commit -am "hello in French"
 ```
 
-Now `main` is English again:
+Now `main` says only `Hello`:
 
 ```bash
 git switch main && python3 hello.py
 ```
 
-And `french` is French:
+And `french` says `Hello` and `Bonjour`:
 
 ```bash
 git switch french && python3 hello.py
 ```
 
-**What you saw:** one scene — English *or* French, never both at once; and an uncommitted
-change travels with you when you switch.
+**What you saw:** one scene — the English version *or* the French one, never both at once;
+and an uncommitted change travels with you when you switch.
 
 Back to `main` for the next part:
 
@@ -128,10 +134,10 @@ A second scene in `.worktrees/german`, on a new branch `german` that starts from
 git worktree add -b german .worktrees/german main
 ```
 
-Change the program **in that scene**, without committing:
+Add a German line **in that scene**, without committing:
 
 ```bash
-echo 'print("Hallo")' > .worktrees/german/hello.py
+echo 'print("Hallo")' >> .worktrees/german/hello.py
 ```
 
 Run both scenes:
@@ -144,9 +150,9 @@ python3 hello.py
 python3 .worktrees/german/hello.py
 ```
 
-The first prints `Hello`, the second `Hallo`: **two branches at the same time**.
+The first prints `Hello`, the second `Hello` and `Hallo`: **two branches at the same time**.
 
-The main scene is untouched — the German change stays in its own scene:
+The main scene is untouched — the German line stays in its own scene:
 
 ```bash
 git status --short
@@ -160,15 +166,17 @@ cd .worktrees/german && git commit -am "hello in German" && cd ~/hello-demo
 
 ## 5. One album, three series
 
+Your commit ids (the 7 characters) will differ from the ones shown here.
+
 ```bash
 git log --oneline --all --graph
 ```
 
 ```text
-* 4a2a712 hello in French
-| * 3a05de0 hello in German
+* 7f550b1 hello in German
+| * ed8bc38 hello in French
 |/
-* 07c7d43 hello in English
+* 435ae49 hello in English
 ```
 
 The two scenes and their bookmarks:
@@ -187,28 +195,117 @@ git switch german
 fatal: 'german' is already used by worktree at '…/hello-demo/.worktrees/german'
 ```
 
-To work on `german`, go to its folder instead of switching.
+To work on `german`, go to its folder instead of switching. To use it on `main`, merge it.
 
-## 6. Bring a series into another: merge
+## 6. First merge: French, no conflict
 
-Bring the German change into `main` (in the picture: one new photo with both retouches):
+You are on `main`, in the main scene. Bring the French series in:
+
+```bash
+git merge french
+```
+
+```text
+Fast-forward
+```
+
+`main` had no new photo since `french` started, so git just moves the `main` bookmark forward
+to the French photo:
+
+```bash
+python3 hello.py
+```
+
+It prints `Hello` and `Bonjour`.
+
+## 7. Second merge: German, a conflict
+
+Now bring the German series in:
 
 ```bash
 git merge german
 ```
 
-`python3 hello.py` now prints `Hallo` on `main`.
+```text
+CONFLICT (content): Merge conflict in hello.py
+Automatic merge failed; fix conflicts and then commit the result.
+```
 
-## 7. Clean up
+Both series retouched **the same spot** — the line after `Hello`: French put `Bonjour` there,
+German put `Hallo`. Git cannot choose. It writes both versions into the file, between markers:
 
-Remove the second scene (its folder), then the branch:
+```bash
+cat hello.py
+```
+
+```text
+print("Hello")
+<<<<<<< HEAD
+print("Bonjour")
+=======
+print("Hallo")
+>>>>>>> german
+```
+
+`HEAD` is what `main` has (French); `german` is what comes in. Here both are right: you
+**combine** them. Write the file as you want it — no markers left:
+
+```bash
+printf 'print("Hello")\nprint("Bonjour")\nprint("Hallo")\n' > hello.py
+```
+
+In a real project you edit the file in your editor (VSCodium shows « Accept Both Changes »),
+or ask opencode: « Resolve the conflict in hello.py: keep both lines. Show me the file. »
+
+Tell git the conflict is solved, and take the merge photo:
+
+```bash
+git add hello.py && git commit -m "merge german: hello in three languages"
+```
+
+## 8. The result
+
+```bash
+python3 hello.py
+```
+
+```text
+Hello
+Bonjour
+Hallo
+```
+
+The album: two series that split after the English photo, joined by the merge photo:
+
+```bash
+git log --oneline --all --graph
+```
+
+```text
+*   7266797 merge german: hello in three languages
+|\
+| * 7f550b1 hello in German
+* | ed8bc38 hello in French
+|/
+* 435ae49 hello in English
+```
+
+## 9. Clean up
+
+Both series are in `main`: remove the second scene (its folder), then the two bookmarks:
 
 ```bash
 git worktree remove .worktrees/german
 ```
 
 ```bash
-git branch -d german
+git branch -d french german
+```
+
+Only `main` is left, in one scene:
+
+```bash
+git branch && git worktree list
 ```
 
 Delete the whole example:
@@ -217,7 +314,7 @@ Delete the whole example:
 cd ~ && rm -rf ~/hello-demo
 ```
 
-## 8. When to use which
+## 10. When to use which
 
 | | Branch only | Worktree per task |
 |---|---|---|
@@ -227,10 +324,13 @@ cd ~ && rm -rf ~/hello-demo
 | disk space | one copy of the files | one copy per worktree (+ its own `npm ci`) |
 | commands | anywhere in the project | in the right folder: a command at the root acts on the root's branch |
 
+Branches or worktrees, the merge is the same: the work of each series comes back to `main`,
+and a conflict appears when two series changed the same spot.
+
 One task at a time, no interruptions: a branch is enough. Interruptions, parallel work, an agent
 working while you review: a worktree per task — what GSE-One does from day 3 (`.worktrees/…`,
-one per task). Small projects can turn it off with `git.strategy: branch-only` in
-`.gse/config.yaml`.
+one per task, merged after your decision). Small projects can turn it off with
+`git.strategy: branch-only` in `.gse/config.yaml`.
 
 See also: [glossary](glossary.md) (Branch, Commit, Merge, Worktree),
 [opencode-guide](opencode-guide.md), [gse-guide](gse-guide.md).

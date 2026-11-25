@@ -10,7 +10,7 @@ It contains:
   own opencode window, read-only, and helps you when you are stuck or lost;
 - **the syllabus** (`syllabus/`) — the programme of the 12 half-days, one written sheet per
   half-day (published as the course goes), a GSE-One guide, a glossary, a FAQ, recovery
-  procedures, a mini guide and cheat sheet for opencode (`syllabus/opencode-guide.md`) a mini guide for an editor next to opencode (`syllabus/ide-guide.md`, VSCodium) and a hello.py example of branch versus worktree (`syllabus/git-worktree-guide.md`);
+  procedures, a mini guide and cheat sheet for opencode (`syllabus/opencode-guide.md`) a mini guide for an editor next to opencode (`syllabus/ide-guide.md`, VSCodium) and a hello.py example of branch versus worktree, up to merging everything into main (`syllabus/git-worktree-guide.md`);
 - two scripts: `setup-learner.sh` (installation) and `check-learner.sh` (green/red checklist).
 
 ## Commands
