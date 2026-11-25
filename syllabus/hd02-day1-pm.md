@@ -65,7 +65,7 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    node --version && npm --version
    ```
    *Done when* node shows v20 or more and npm a version.
-3. **Your model key** (~10 min). The trainer sends it to you by Teams direct message or e-mail. Run `opencode auth login`, type `openrouter` and choose OpenRouter, paste the key when asked. Never put it in a committed file, a prompt, a screenshot or an issue. *Done when* `opencode auth list` shows it.
+3. **Your model key** (~10 min). The trainer sends it to you by Teams direct message or e-mail. Run `opencode auth login`, type `openrouter` and choose OpenRouter, paste the key when asked. Never put it in a committed file, a prompt, a screenshot or an issue. If you choose a model: take the line « DeepSeek V4.1 Flash · OpenRouter », not a « … Free » line marked OpenCode (served by OpenCode Zen: your key is not used, it needs a Zen account, and the data may be used to improve the model); on the « Select variant » screen keep Default (Esc, or Enter on Default) — a variant is the same model with another reasoning setting (none / low / high / max), and more reasoning is slower and uses more of your OpenRouter credit. *Done when* `opencode auth list` shows it.
 4. **The course kit** (~5 min).
    ```bash
    git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh

@@ -168,4 +168,6 @@ sh ~/ai4se/ai4se-kit/setup-learner.sh
 | It edited the wrong files | Ctrl+X then U, or `!git restore --staged --worktree .` to drop every uncommitted change (final; only files never added with `git add` stay) |
 | The window does not answer | Esc; still frozen: Ctrl+X then Q, then `opencode --continue` |
 | Lost after a break | `/gse-resume` (from day 3), or `opencode --continue` |
+| « Select variant » after choosing a model | a variant is the same model with another reasoning setting (none / low / high / max; Default = the provider's setting). More reasoning is slower and uses more of your credit: keep Default (Esc, or Enter on Default). ctrl+t switches from one variant to the next |
+| A « … Free » model marked OpenCode | served by OpenCode Zen, not OpenRouter: your key is not used, it needs a Zen account, free for a limited time, the data may be used to improve the model. Choose « DeepSeek V4.1 Flash · OpenRouter » |
 | Plan « saved » but nothing in the project | the plan agent saves under `~/.opencode/plan/`: Shift+Tab → build, then « Write docs/plan.md » |
