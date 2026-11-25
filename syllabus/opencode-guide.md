@@ -165,6 +165,6 @@ sh ~/ai4se/ai4se-kit/setup-learner.sh
 | `opencode: command not found` | reload the terminal: `exec $SHELL` |
 | « 401 », « invalid API key » | redo `opencode auth login` with the key the trainer sent |
 | The agent loops or goes off track | Esc, then a shorter, more precise request; or Ctrl+X then U to undo it |
-| It edited the wrong files | Ctrl+X then U, or `!git restore .` to drop uncommitted changes (final) |
+| It edited the wrong files | Ctrl+X then U, or `!git restore --staged --worktree .` to drop every uncommitted change (final; only files never added with `git add` stay) |
 | The window does not answer | Esc; still frozen: Ctrl+X then Q, then `opencode --continue` |
 | Lost after a break | `/gse-resume` (from day 3), or `opencode --continue` |
