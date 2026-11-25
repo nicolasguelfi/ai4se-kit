@@ -29,7 +29,7 @@ At the end of this half-day you can:
 
 ### Key ideas
 
-**Re-orientation (5 min) after lunch:** `cd ~/ai4se/calcapp` → `git status` clean, on `mywork`; `npm test` → part 1 tests still green (`q` quits); `npm run dev` → the app renders in the browser; start opencode, read `@docs/plan.md`: which task is next? One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, first features, tests green):
+**Re-orientation (5 min) after lunch:** `cd ~/ai4se/calcapp` → `git status` clean, on `mywork`; `npm test` → part 1 tests still green (`q` quits); `npm run dev` → the app renders in the browser; start opencode, read `@docs/plan.md`: which task is next? (*Or ask opencode:* "Give me the commands to check that git status is clean on mywork and that the tests pass, then run them, and tell me which task of @docs/plan.md is next." — `npm run dev` stays in a terminal: it does not stop.) One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, first features, tests green):
 
 ```bash
 cd ~/ai4se
@@ -86,7 +86,14 @@ No animations, no CSS library. Keep all tests green.
 
 **Steps:** one task = one branch, `feat/` + the task's name (e.g. `feat/routing`); RED → review → commit `test: …`; GREEN → review checklist → commit `feat: …`; merge into `mywork` when green, next task. Your plan's wording is unclear? Use the prompts above.
 
+*Or ask opencode*, step by step:
+1. "Give me the git command to create and switch to a branch for my task (e.g. feat/routing), then run it."
+2. "Give me the git commands to commit only the new test as 'test: …', then run them."
+3. "Give me the commands to run the tests, then commit the code as 'feat: …' if green; run them."
+4. "Give me the git commands to merge my task branch into mywork, then run them."
+
 **Done when:** `npm test` shows 4+ passing tests; the app has two pages; an added expense survives a browser refresh.
+*Or ask opencode:* "Give me the command to run the tests and count the passing ones, then run it." (the two pages and the refresh: check them in the browser)
 
 **Mid-point (13:55):** routing merged into `mywork`. Not there? Ask now.
 
@@ -94,7 +101,7 @@ No animations, no CSS library. Keep all tests green.
 
 **Ahead?** Delete an expense (`onDelete`) — same loop.
 
-**Did not finish?** v0.1 need not be complete to be reviewed: you review what you have. Merge what is green; leave a red branch aside. App broken? Catch up with `j2-part1`, or `j2-v0.1` to review the reference code. Then `npm test` and `npm run dev` must work. Being behind on code must never block the learning: 14:30 is about review.
+**Did not finish?** v0.1 need not be complete to be reviewed: you review what you have. Merge what is green; leave a red branch aside (*or ask opencode:* "Give me the git commands to merge into mywork only my task branches whose tests pass, then run them."). App broken? Catch up with `j2-part1`, or `j2-v0.1` to review the reference code. Then `npm test` and `npm run dev` must work (*or ask opencode:* "Give me the command to run the tests, then run it."). Being behind on code must never block the learning: 14:30 is about review.
 
 **Debrief (14:20 → 14:30):** Where did the agent change a test, or do more than you asked? Which review-checklist item caught something real? Compare with your neighbour: same task, same code? Why not?
 
