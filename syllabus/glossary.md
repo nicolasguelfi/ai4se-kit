@@ -30,6 +30,9 @@ In GSE-One, "artefacts are everything" (P3): what is not written down does not e
 (Given / When / Then) become tests written and seen failing before the code; the step is a
 feature, not a tiny behaviour. GSE-One's default for code tasks (`testing.strategy`). *HD03, HD07.*
 
+**Atomic task** — One thing to build, verifiable by a test, buildable in one prompt on one branch.
+A user story splits into a few atomic tasks; day 2 lists 5-8 of them in `docs/plan.md`. *HD03.*
+
 **Auto / Inform / Gate** — GSE-One's three decision tiers: the agent decides silently
 (Auto), decides and tells you in one line (Inform), or must wait for your validation (Gate).
 *HD05, HD06.*

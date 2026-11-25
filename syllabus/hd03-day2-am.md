@@ -260,7 +260,16 @@ From a vision to `docs/plan.md`: elicit requirements with the plan agent, split 
 
 **CalcApp — a budget tracker**: track expenses, set budgets, see what is left; React + TypeScript in the browser, built test-first. Features: add an expense (amount, category, date); list expenses (filter by month and category); set a monthly budget per category (e.g. 300 EUR for groceries); see what is left (warn when close to or over budget). **v0.1 today**: add an expense with validation; list expenses with a monthly total; two pages and a navigation bar; data kept in the browser (localStorage). Later versions: budgets per category, remaining budget and warnings, your own ideas.
 
-**Good requirements** are *testable* (✓ "amount 0 or negative → a validation error is shown"; ✗ "the app handles expenses well"), *small* (30-45 min of work with the agent), *independent* (buildable in any order, as far as possible). **Atomic tasks**: one thing, verifiable, ordered; test first, code second in every task. Example: expense type + test (an amount ≤ 0 is rejected); a saved expense is loaded back from localStorage; the list shows items and the monthly total; routes `/` and `/add` with a navigation bar.
+**Good requirements** are *testable* (✓ "amount 0 or negative → a validation error is shown"; ✗ "the app handles expenses well"), *small* (30-45 min of work with the agent), *independent* (buildable in any order, as far as possible). **Atomic tasks**: one thing, verifiable, ordered; test first, code second in every task. Example — two stories, each with its tasks and their check:
+
+- **Story 1** — "As a user, I want to record an expense and still find it tomorrow." *Accepted when:* an amount of 0 or less is refused; after closing the browser, the expense is still there.
+  1. Check the expense data — *Check:* a test refuses an amount of 0 or less.
+  2. Save it in the browser — *Check:* a test saves an expense and reads it back.
+- **Story 2** — "As a user, I want to see this month's expenses and their total." *Accepted when:* the list shows my expenses and the right monthly total.
+  3. Show the list and the total — *Check:* 2 expenses → both listed, with their sum.
+  4. Two pages and a menu — *Check:* a test goes from the Add page to the list.
+
+Each *Check* is a test: written first (RED), then the code (GREEN). Tasks 1-2 are T1-T2 of the `docs/plan.md` example.
 
 **The `docs/plan.md` format** — 5-8 tasks, each with acceptance criteria, exactly one `[next]`:
 
