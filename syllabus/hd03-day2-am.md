@@ -365,7 +365,7 @@ Live demo (≤ 10 min, build agent): the test + an empty shell of the component 
 
 **The mutant test trick.** After GREEN, sabotage your own code and run the tests. One fails → the test is real, undo the sabotage. None fails → the test proves nothing, fix the test. Example: `amount.toFixed(2)` → `amount.toFixed(0)` turns "€25.50" into "€26": the test must go red. Ten seconds of sabotage saves hours of false confidence.
 
-**Testing rules in `AGENTS.md`** (check them before coding; missing? add, then commit `docs: testing rules`): write the test file BEFORE the implementation file; Vitest + React Testing Library, tests in `tests/`; use `fireEvent` from `@testing-library/react`; import from `react-router` (NOT `react-router-dom`); never install Jest, never skip, weaken or delete a test; run tests with `npm run test:run` (never watch mode).
+**Testing rules in `AGENTS.md`** (check them before coding; missing? add, then commit `docs: testing rules`): write the test BEFORE the implementation (an empty shell next to the test is fine: red then fails on the expected value, not on a missing file); Vitest + React Testing Library, tests in `tests/`; use `fireEvent` from `@testing-library/react`; import from `react-router` (NOT `react-router-dom`); never install Jest, never skip, weaken or delete a test; run tests with `npm run test:run` (never watch mode).
 
 **Two prompts per task** (build agent). 1 · RED — test + empty shell:
 
