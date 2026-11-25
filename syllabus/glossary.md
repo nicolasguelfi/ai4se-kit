@@ -108,6 +108,11 @@ before committing and what an AI review should look at. *HD03, HD04.*
 **Dockerfile** — A recipe to build a container image of the app (install, build, run).
 The CalcApp starter ships a tested one; `/gse-deploy` writes one only if it is missing. *HD09.*
 
+**Empty shell** — The function or component exists but does nothing yet (e.g. returns `null`).
+Written with the RED test so the test runs and fails on its expected value, not on a missing
+file: red then proves the test checks the behaviour. Not an *empty stub*: the shell lives only
+until GREEN, and its failing test says so. *HD03.*
+
 **Empty stub** — Code that looks finished but does nothing (placeholder, `TODO`, fake
 data). Hunted on day 6 before the demo. *HD11.*
 
@@ -321,6 +326,10 @@ Validation: "did we build the right thing?" (traced to requirements). *HD07.*
 
 **Vibe coding / Vibe engineering** — Vibe coding: accept AI-generated code without
 reading it. Vibe engineering: the same tools with plans, tests, reviews and git. *HD01.*
+
+**Vitest** — The test framework of CalcApp, already installed (`devDependencies` in
+`package.json`). Test files in `tests/`, named `*.test.ts(x)`; `npm run test:run` (= `vitest run`)
+runs them once and shows ✓/✗ per test, with expected and received values. *HD03.*
 
 **Worktree** — The folder where your files are laid out so you can edit them: in the photo
 picture (see *Commit*), the scene. Setting up a scene creates no photo — only `git commit`

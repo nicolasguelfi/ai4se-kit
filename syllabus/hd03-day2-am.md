@@ -355,7 +355,11 @@ GSE-One: `§ 3.5 — Discovery & Planning` (`/gse-plan`); `§ 3.6 — Engineerin
 
 You have a plan; now build it, one task at a time. **Why start with tests?** The number-one risk with a coding agent is *losing control*: code arrives fast, but does it work? Clicking through the app is not a proof; a test answers in milliseconds, yes or no. **You** set the specification (the test); the **agent** writes the implementation. Tests = control; no tests = hope.
 
-**TDD in one picture:** RED — write a test that fails; GREEN — the minimal code that passes; REFACTOR — clean up, tests stay green. A failing test *before* the code is the expected start, not a problem. Live demo (≤ 10 min, build agent): ask for the test only → read it → `npm test` → RED (the component does not exist) → ask for the minimal code, do not touch the test → GREEN → break the code on purpose, a test must fail → two commits, `test: …` first, then `feat: …`. Demo feature: ExpenseItem shows "Lunch" and "€25.50". Here the failing test comes from the task's acceptance criteria: this is *acceptance-test-driven development* (ATDD) at the scale of one task. Textbook TDD (Beck) goes further: many tiny steps driven by unit tests, and a refactor step after each green.
+**TDD in one picture:** Tests live in `tests/` · Vitest runs them · `npm run test:run` → green or red. RED — a test that fails on the expected value; GREEN — the minimal code that passes; REFACTOR — clean up, tests stay green. A failing test *before* the code is the expected start, not a problem. The test framework is Vitest, already installed in CalcApp (`devDependencies` in `package.json`): the agent does not add one. Test files go in `tests/`, named `*.test.ts(x)`; `npm run test:run` (= `vitest run`) runs them once and shows ✓/✗ per test, with the expected and the received value.
+
+**Why an empty shell.** With « do not write the code » alone, red only says « cannot find module ». With an empty shell — the function or component exists and returns nothing, e.g. `export default function ExpenseItem() { return null }` — the test runs and fails on the expected value: red proves the test checks the behaviour.
+
+Live demo (≤ 10 min, build agent): the test + an empty shell of the component → read the test → `npm run test:run` → RED on the expected value, not a missing file → ask for the minimal code, do not touch the test → GREEN → break the code on purpose, a test must fail → two commits, `test: …` first, then `feat: …`. Demo feature: ExpenseItem shows "Lunch" and "€25.50". Here the failing test comes from the task's acceptance criteria: this is *acceptance-test-driven development* (ATDD) at the scale of one task. Textbook TDD (Beck) goes further: many tiny steps driven by unit tests, and a refactor step after each green.
 
 **The golden rule:** RED — you + agent: the agent drafts the test, *you review it: it is your spec*; GREEN — agent: minimal code, the test is not touched; REFACTOR — you decide, tests stay green. **Never let the agent write the test and the code without your review in between** — otherwise the test mirrors what the agent meant to write and proves nothing.
 
@@ -363,12 +367,14 @@ You have a plan; now build it, one task at a time. **Why start with tests?** The
 
 **Testing rules in `AGENTS.md`** (check them before coding; missing? add, then commit `docs: testing rules`): write the test file BEFORE the implementation file; Vitest + React Testing Library, tests in `tests/`; use `fireEvent` from `@testing-library/react`; import from `react-router` (NOT `react-router-dom`); never install Jest, never skip, weaken or delete a test; run tests with `npm run test:run` (never watch mode).
 
-**Two prompts per task** (build agent):
+**Two prompts per task** (build agent). 1 · RED — test + empty shell:
 
 ```text
 @docs/plan.md Build only the task marked [next].
-Write a failing test for its Accept: line, in tests/.
-Do NOT write the implementation. Run npm run test:run and show the failure.
+Write a failing test for its Accept: line, in tests/, plus an
+empty shell of the code (exists, does nothing yet): the test must
+fail on its expected value, not on a missing file.
+Do NOT write the implementation. Run npm run test:run, show the failure.
 ```
 
 then, once you have reviewed the test:
@@ -410,7 +416,8 @@ Write a failing Vitest test in tests/components/ExpenseItem.test.tsx.
 ExpenseItem receives an `expense` prop (id, amount, description,
 category, date, createdAt) and an `onDelete` handler. It must show
 the description and the amount in euros: "Lunch" and "€25.50"
-for 25.50. Do NOT write the component. Run npm run test:run.
+for 25.50. Create only an empty ExpenseItem shell (default export
+returning null). Do NOT implement it. Run npm run test:run.
 ```
 
 GREEN: "Implement the minimal ExpenseItem (default export) that passes tests/components/ExpenseItem.test.tsx. Do not modify the test." *B — ExpenseForm:*
@@ -421,7 +428,8 @@ Render ExpenseForm, fill the labelled inputs amount (4.50),
 description (Coffee), category (Food), date (2026-03-01), click
 "Add Expense", and assert onSubmit was called with that data,
 amount as a number. Use getByLabelText / getByRole.
-Do NOT write the component. Run npm run test:run.
+Create only an empty ExpenseForm shell (default export returning null).
+Do NOT implement it. Run npm run test:run.
 ```
 
 Review: correct import paths? accessible queries? the behaviour *you* want? GREEN: "Implement the minimal ExpenseForm (default export) that passes tests/components/ExpenseForm.test.tsx. Do not modify the test." Mutant: remove the `parseFloat` on the amount.
