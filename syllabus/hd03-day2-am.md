@@ -439,7 +439,7 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
 
 **Mid-point (12:00):** your RED test is committed. Not yet? Ask now.
 
-**Plan unclear or empty?** Use the fallback prompts (canonical first features). *A — ExpenseItem:*
+**Plan unclear?** Use the ready-made prompts below: ExpenseItem first, then ExpenseForm. *A — ExpenseItem:*
 
 ```text
 Write a failing Vitest test in tests/components/ExpenseItem.test.tsx.
@@ -462,7 +462,7 @@ Create only an empty ExpenseForm shell (default export returning null).
 Do NOT implement it. Run npm run test:run.
 ```
 
-Review: correct import paths? accessible queries? the behaviour *you* want? GREEN: "Implement the minimal ExpenseForm (default export) that passes tests/components/ExpenseForm.test.tsx. Do not modify the test." Mutant: remove the `parseFloat` on the amount.
+Review the test: are the import paths correct? Does it find the inputs by their label? Does it check the behaviour you want? GREEN: "Implement the minimal ExpenseForm (default export) that passes tests/components/ExpenseForm.test.tsx. Do not modify the test." Mutant: remove the `parseFloat` on the amount.
 
 **If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup. Only to catch up: a second copy in a new folder; your first copy (`~/ai4se/calcapp`) stays untouched.
 
@@ -474,7 +474,7 @@ cd calcapp-restart && git checkout -b mywork j2-start && npm ci
 
 Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, commit them, restart at step 1. Your old work stays in `~/ai4se/calcapp`; from now on, run opencode in `calcapp-restart`.
 
-**Ahead?** Task 2 of your plan, same loop.
+**Finished early?** Start task 2 of your plan, with the same steps.
 
 **Debrief (12:10 → 12:15):** Did the agent respect "test only"? If not, what did you do? Did your mutant check reveal a test that proved nothing? Show each other your `git log --oneline`.
 
