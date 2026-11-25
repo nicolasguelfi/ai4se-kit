@@ -364,7 +364,11 @@ You have a plan; now build it, one task at a time. **Why start with tests?** The
 | REFACTOR | Improve the design, same behaviour | You decide, agent applies | ✓ still passes |
 
 1. **Where:** tests live in `tests/` (named `*.test.ts(x)`); Vitest runs them — already installed in CalcApp (`devDependencies` in `package.json`), the agent does not add one; `npm run test:run` (= `vitest run`) runs them once → ✓ / ✗ per test, with the expected and the received value.
-2. **Fail for the right reason:** an empty shell first, so the test fails on the value, not on a missing file.
+2. **Red for the right reason** — two real messages from `npm run test:run`:
+   - ✗ "ExpenseItem not found" → wrong red: nothing is checked (the test cannot even run).
+   - ✗ "Expected €25.50, got nothing" → right red: the test runs and checks the behaviour, which is missing.
+
+   How to get the right red: first an ExpenseItem that shows nothing yet (empty shell, returns `null`) — see the live demo.
 3. **Refactor = change the structure, not the behaviour:** remove duplication, extract a function, rename. *Refactoring* (Fowler): "a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior".
 
 A failing test *before* the code is the expected start, not a problem.
