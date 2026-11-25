@@ -355,13 +355,25 @@ GSE-One: `§ 3.5 — Discovery & Planning` (`/gse-plan`); `§ 3.6 — Engineerin
 
 You have a plan; now build it, one task at a time. **Why start with tests?** The number-one risk with a coding agent is *losing control*: code arrives fast, but does it work? Clicking through the app is not a proof; a test answers in milliseconds, yes or no. **You** set the specification (the test); the **agent** writes the implementation. Tests = control; no tests = hope.
 
-**TDD in one picture:** Tests live in `tests/` · Vitest runs them · `npm run test:run` → green or red. RED — a test that fails on the expected value; GREEN — the minimal code that passes; REFACTOR — clean up, tests stay green. A failing test *before* the code is the expected start, not a problem. The test framework is Vitest, already installed in CalcApp (`devDependencies` in `package.json`): the agent does not add one. Test files go in `tests/`, named `*.test.ts(x)`; `npm run test:run` (= `vitest run`) runs them once and shows ✓/✗ per test, with the expected and the received value.
+**TDD in one picture** — the cycle, one line per step; every arrow = `npm run test:run`:
+
+| Step | Action | Who | Test result |
+|---|---|---|---|
+| RED | Write a test for the expected behaviour | Agent writes, you review | ✗ fails on the expected value |
+| GREEN | Write the minimal code that passes | Agent writes, test untouched | ✓ passes |
+| REFACTOR | Improve the design, same behaviour | You decide, agent applies | ✓ still passes |
+
+1. **Where:** tests live in `tests/` (named `*.test.ts(x)`); Vitest runs them — already installed in CalcApp (`devDependencies` in `package.json`), the agent does not add one; `npm run test:run` (= `vitest run`) runs them once → ✓ / ✗ per test, with the expected and the received value.
+2. **Fail for the right reason:** an empty shell first, so the test fails on the value, not on a missing file.
+3. **Refactor = change the structure, not the behaviour:** remove duplication, extract a function, rename. *Refactoring* (Fowler): "a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior".
+
+A failing test *before* the code is the expected start, not a problem.
 
 **Why an empty shell.** With « do not write the code » alone, red only says « cannot find module ». With an empty shell — the function or component exists and returns nothing, e.g. `export default function ExpenseItem() { return null }` — the test runs and fails on the expected value: red proves the test checks the behaviour.
 
-Live demo (≤ 10 min, build agent): the test + an empty shell of the component → read the test → `npm run test:run` → RED on the expected value, not a missing file → ask for the minimal code, do not touch the test → GREEN → break the code on purpose, a test must fail → two commits, `test: …` first, then `feat: …`. Demo feature: ExpenseItem shows "Lunch" and "€25.50". Here the failing test comes from the task's acceptance criteria: this is *acceptance-test-driven development* (ATDD) at the scale of one task. Textbook TDD (Beck) goes further: many tiny steps driven by unit tests, and a refactor step after each green.
+Live demo (≤ 10 min, build agent): (1) the test + an empty shell of the component → read the test; (2) `npm run test:run` → RED on the expected value, not a missing file; (3) ask for the minimal code — do not touch the test; (4) `npm run test:run` → GREEN; (5) REFACTOR: "Improve the design of ExpenseItem without changing its behaviour: e.g. extract the euro formatting into a formatAmount function. Do not touch the test. Run npm run test:run." → still GREEN; (6) break the code on purpose → a test must fail; (7) commits: `test: …` first, then `feat: …`, then `refactor: …` (same behaviour, better structure). Demo feature: ExpenseItem shows "Lunch" and "€25.50". Here the failing test comes from the task's acceptance criteria: this is *acceptance-test-driven development* (ATDD) at the scale of one task. Textbook TDD (Beck) goes further: many tiny steps driven by unit tests, and a refactor step after each green.
 
-**The golden rule:** RED — you + agent: the agent drafts the test, *you review it: it is your spec*; GREEN — agent: minimal code, the test is not touched; REFACTOR — you decide, tests stay green. **Never let the agent write the test and the code without your review in between** — otherwise the test mirrors what the agent meant to write and proves nothing.
+**The golden rule:** RED — you + agent: the agent drafts the test, *you review it: it is your spec*; GREEN — agent: minimal code, the test is not touched; REFACTOR — improve the design — same behaviour, tests stay green; you decide, the agent applies. **Never let the agent write the test and the code without your review in between** — otherwise the test mirrors what the agent meant to write and proves nothing.
 
 **The mutant test trick.** After GREEN, sabotage your own code and run the tests. One fails → the test is real, undo the sabotage. None fails → the test proves nothing, fix the test. Example: `amount.toFixed(2)` → `amount.toFixed(0)` turns "€25.50" into "€26": the test must go red. Ten seconds of sabotage saves hours of false confidence.
 

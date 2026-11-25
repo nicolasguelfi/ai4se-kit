@@ -270,6 +270,11 @@ about them; on GitHub a pull request shows the diff, the comments and the checks
 **Recovery tag** — A tag of the public CalcApp starter (`j2-start`, `j2-part1`, `j2-v0.1`,
 `p3-start`, …) to restart an exercise from a known state in a new folder. *HD03; see recovery.md.*
 
+**Refactoring** — Improve the design, same behaviour, tests stay green: remove duplication,
+extract a function, rename. Fowler: "a change made to the internal structure of software to make
+it easier to understand and cheaper to modify without changing its observable behavior". Commit
+prefix `refactor:`. *HD03.*
+
 **REQ-NNN (requirement)** — A requirement with testable acceptance criteria, in
 `docs/sprints/sprint-NN/reqs.md`. No production without one (Full and Lightweight). *HD06.*
 
@@ -303,7 +308,7 @@ with its recovery tags. *HD03.*
 **TASK-NNN** — One work item of the GSE-One backlog, tracked from idea to delivery. *HD06.*
 
 **TDD (test-driven development)** — Write a failing unit test first (red), make it pass (green),
-then clean up, in many tiny steps. With an AI: you decide or review the test, the agent writes the code.
+then improve the design (same behaviour), in many tiny steps. With an AI: you decide or review the test, the agent writes the code.
 GSE-One applies the same idea at the level of acceptance tests: see ATDD. *HD03.*
 
 **Token** — The unit of text a model reads and writes; every token sent and received
