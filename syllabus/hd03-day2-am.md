@@ -293,6 +293,7 @@ Branch: feat/expense-storage
    Ask me 3 clarifying questions first. Then propose 4-6 user stories:
    title, "As a user, I want...", testable acceptance criteria.
    ```
+   *User story* = one need seen by the user: "As a user, I want …" + acceptance criteria (how we check it is done).
    Read critically. Ask back: errors? fixed or free categories? currency?
 3. "Split into 5-8 atomic tasks, tests first, with acceptance criteria." Push back at least once: too big? not testable?
 4. Shift+Tab → build: "Write docs/plan.md in the slide format."

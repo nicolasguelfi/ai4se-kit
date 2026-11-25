@@ -297,6 +297,10 @@ costs money. *HD01.*
 an AI prepared by the trainer, read-only, which answers from the syllabus and GSE-One and
 tells you when to call the trainer. Stuck? → tutor window → recovery tag → raise your hand. *HD02.*
 
+**User story** — One need seen by the user: "As a user, I want …" plus acceptance
+criteria (how we check it is done). From agile methods (XP, then Scrum). Day 2 uses it lightly (no
+backlog, no estimates); day 3 adds the full notion (INVEST, backlog). *HD03.*
+
 **Verification / Validation** — Verification: "did we build it right?" (traced to design).
 Validation: "did we build the right thing?" (traced to requirements). *HD07.*
 
