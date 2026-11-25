@@ -105,7 +105,8 @@ After the agent worked: never `git add .` without checking the diff.
 git add -A && git commit -m "chore: checkpoint before refactor"
 # ... let the agent work ...
 git diff          # happy? test and commit.   not happy?
-git restore --staged --worktree .   # back to the checkpoint: every change since is lost (only files never added with git add stay)
+git restore --staged --worktree .   # back to the checkpoint:
+#   every change since is lost (never-added files stay)
 ```
 
 **Pattern 3 — one branch per task:** `git switch -c feat/add-history` (name it after your task) — works? merge it back; doesn't? delete it: nothing is lost.
