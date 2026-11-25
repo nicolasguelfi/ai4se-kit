@@ -140,6 +140,11 @@ GitHub account. *HD02.*
 
 **git** — The version control system used from day 2 as a safety net. *HD03.*
 
+**Given / When / Then** — The three fixed parts of an acceptance criterion: Given = the starting
+situation (what is already true before the action); When = the one action the user does; Then = the
+result we can observe and check. One criterion = one concrete scenario (from BDD, behaviour-driven
+development); each scenario becomes one acceptance test. *HD03.*
+
 **GSE-One** — "Generative Software Engineering One": the methodology plugin (v0.93.4 in
 the course) that turns the coding agent into an orchestrator of a structured lifecycle
 with 24 commands. *HD04 (bridge), HD05.*

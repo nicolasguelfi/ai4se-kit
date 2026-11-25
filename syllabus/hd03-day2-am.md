@@ -334,6 +334,7 @@ Branch: feat/expense-storage
 *The problem:* a vague request gives a vague result. Without a written plan of small, testable tasks, the agent decides the scope for you.
 
 - `/gse-reqs` starts with a conversation, then writes requirements with testable acceptance criteria (Given / When / Then).
+  *Given / When / Then* is the same idea as your « Accepted when », written in three fixed parts: **Given** = the starting situation (what is already true before the action); **When** = the one action the user does; **Then** = the result we can observe and check. One acceptance criterion = one concrete scenario (from BDD); each scenario becomes one acceptance test. CalcApp task 1: « Given the Add page is open and no expense is saved, When I enter an amount of 0 and click Add, Then an error message is shown and the list stays empty. » Valid case: « Given the Add page is open, When I enter 25.50 in Food and click Add, Then the list shows one expense of 25.50. »
 - `/gse-plan` turns them into a sprint of tasks, each sized in complexity points, within a budget.
 - The plan is a Gate: nothing is built before you validate it.
 - Ideas that do not fit go to the backlog, not into the code.
