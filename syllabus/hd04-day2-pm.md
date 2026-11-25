@@ -29,7 +29,7 @@ At the end of this half-day you can:
 
 ### Key ideas
 
-**Re-orientation (5 min) after lunch:** `cd ~/ai4se/calcapp` → `git status` clean, on `mywork`; `npm test` → part 1 tests still green (`q` quits); `npm run dev` → the app renders in the browser; start opencode, read `@docs/plan.md`: which task is next? (*Or ask opencode:* "Give me the commands to check that git status is clean on mywork and that the tests pass, then run them, and tell me which task of @docs/plan.md is next." — `npm run dev` stays in a terminal: it does not stop.) One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, first features, tests green):
+**Re-orientation (5 min) after lunch:** `cd ~/ai4se/calcapp` → `git status` clean, on `mywork`; `npm test` → part 1 tests still green (`q` quits); `npm run dev` → the app renders in the browser; start opencode, read `@docs/plan.md`: which task is marked `[next]`? (*Or ask opencode:* "Give me the commands to check that git status is clean on mywork and that the tests pass, then run them, and tell me which task of @docs/plan.md is marked [next]." — `npm run dev` stays in a terminal: it does not stop.) One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, first features, tests green):
 
 ```bash
 cd ~/ai4se
@@ -37,7 +37,7 @@ git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 cd calcapp-restart && git checkout -b mywork j2-part1 && npm ci
 ```
 
-Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, skip the tasks already done in the tag, continue with the next one. A recovery tag is a safety net, not a failure.
+Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`. In your `docs/plan.md`, mark `[done]` the tasks `git log --oneline` already shows, mark the first one left `[next]`, continue with it. A recovery tag is a safety net, not a failure.
 
 **Same loop, every task:** branch `git switch -c feat/routing` (named after the task) → RED: test only → *you* review → commit `test: …` → GREEN: minimal code, test untouched → commit `feat: …` → mutant check → undo → review the agent's code (checklists below) → merge into `mywork` only when green. Typical order: routing → data → UI; follow your plan's order.
 
@@ -56,12 +56,13 @@ GREEN: Make it pass with react-router (NOT react-router-dom): export `routes`
 
 *Review checklist:* `react-router` in `package.json`, no `react-router-dom`? navigation with `Link`, not `<a href>` (no full reload)? one file per page in `src/pages/`? test untouched (`git diff HEAD -- tests/` shows nothing)? `npm run dev`: click both links, does the back button work? *Trust, but verify* — you will need this habit at 14:30.
 
-**Task — data layer.** `Expense` type in `src/expense.ts`, storage in `src/storage.ts`; localStorage is enough for v0.1.
+**Task — data layer.** `Expense` type in `src/expense.ts`, storage in `src/storage.ts`; localStorage is enough for v0.1. The RED test is an *integration test*: several parts tested together (router, pages, storage), unlike the morning's one-component test.
 
 ```text
 RED:   Write a failing integration test: `routes` in a memory router at "/add",
        fill amount 42.50, category Food, description Lunch (fireEvent),
-       click Add, then expect the Dashboard to contain "42.50" and "Food".
+       click the form's "Add Expense" button, then expect the Dashboard to
+       contain "42.50" and "Food".
        Clear localStorage before each test. Test only.
 GREEN: Make it pass: Expense type; getExpenses/saveExpenses in storage.ts
        (localStorage key "calcapp-data"); Dashboard lists the expenses with
@@ -82,15 +83,15 @@ No animations, no CSS library. Keep all tests green.
 
 ### Exercise — Your next tasks (13:30 → 14:20, 50 min)
 
-**Goal:** deliver your plan's next tasks (routing, data, UI), one branch each, test first.
+**Goal:** deliver your plan's next tasks, one branch each, test first.
 
-**Steps:** one task = one branch, `feat/` + the task's name (e.g. `feat/routing`); RED → review → commit `test: …`; GREEN → review checklist → commit `feat: …`; merge into `mywork` when green, next task. Your plan's wording is unclear? Use the prompts above.
+**Steps:** one task = one branch: the `[next]` task's `Branch:` line (e.g. `feat/routing`); RED → review → commit `test: …`; GREEN → review checklist → commit `feat: …`; green: merge into `mywork`; this task `[done]`, the next one `[next]`. Your plan's wording is unclear? Use the prompts above.
 
 *Or ask opencode*, step by step:
-1. "Give me the git command to create and switch to a branch for my task (e.g. feat/routing), then run it."
+1. "Give me the git command to create and switch to the [next] task's branch (Branch: line, @docs/plan.md); run it."
 2. "Give me the git commands to commit only the new test as 'test: …', then run them."
 3. "Give me the commands to run the tests, then commit the code as 'feat: …' if green; run them."
-4. "Give me the git commands to merge my task branch into mywork, then run them."
+4. "Merge the [next] task's branch into mywork; in docs/plan.md mark it [done], the next one [next]; commit as 'docs: update plan labels'."
 
 **Done when:** `npm test` shows 4+ passing tests; the app has two pages; an added expense survives a browser refresh.
 *Or ask opencode:* "Give me the command to run the tests and count the passing ones, then run it." (the two pages and the refresh: check them in the browser)
@@ -101,7 +102,7 @@ No animations, no CSS library. Keep all tests green.
 
 **Ahead?** Delete an expense (`onDelete`) — same loop.
 
-**Did not finish?** v0.1 need not be complete to be reviewed: you review what you have. Merge what is green; leave a red branch aside (*or ask opencode:* "Give me the git commands to merge into mywork only my task branches whose tests pass, then run them."). App broken? Catch up with `j2-part1`, or `j2-v0.1` to review the reference code. Then `npm test` and `npm run dev` must work (*or ask opencode:* "Give me the command to run the tests, then run it."). Being behind on code must never block the learning: 14:30 is about review.
+**Did not finish?** v0.1 need not be complete to be reviewed: you review what you have. Merge what is green; leave a red branch aside (*or ask opencode:* "Give me the git commands to merge into mywork only my task branches whose tests pass, then run them."). App broken? Catch up with `j2-part1`, or `j2-v0.1` to review the reference code. Then `npm run test:run` and `npm run dev` must work (*or ask opencode:* "Give me the command to run the tests, then run it."). Being behind on code must never block the learning: 14:30 is about review.
 
 **Debrief (14:20 → 14:30):** Where did the agent change a test, or do more than you asked? Which review-checklist item caught something real? Compare with your neighbour: same task, same code? Why not?
 
@@ -118,7 +119,7 @@ No animations, no CSS library. Keep all tests green.
 
 Your code works. Is it good? How do you know?
 
-**The speed paradox.** Typing by hand was a natural throttle on bugs; an agent removes it — code comes faster, and so do bugs. AI-co-authored pull requests had **1.7×** more issues per PR (10.83 vs 6.45) on 470 open-source PRs (CodeRabbit, *State of AI vs. Human Code Generation*, 2025). A vendor study on a small sample — but the direction is clear: review matters MORE with AI.
+**The speed paradox.** Typing by hand was a natural throttle on bugs; an agent removes it — code comes faster, and so do bugs. AI-co-authored pull requests (a pull request = a proposed change submitted for review before it is merged) had **1.7×** more issues per PR (10.83 vs 6.45) on 470 open-source PRs (CodeRabbit, *State of AI vs. Human Code Generation*, 2025). A vendor study on a small sample — but the direction is clear: review matters MORE with AI.
 
 **Review at scale.** **60 million** Copilot code reviews by March 2026 — more than 1 in 5 code reviews on GitHub (GitHub blog, *60 Million Copilot Code Reviews and Counting*, 2026). Someone — or something — must check all generated code. Speed without review is just faster failure.
 
@@ -192,7 +193,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/g
 
 1. `git switch mywork` → `git diff j2-start --stat`.
    *Or ask opencode (build):* "Give me the git commands to go back to mywork and show how much changed since j2-start, then run them."
-2. Shift+Tab → *plan* agent (no file edits). First put the diff into the conversation (`!` runs a shell command): `!git diff j2-start`. Then:
+2. Shift+Tab → *plan* agent (it reads and proposes; it cannot edit your project files). First put the diff into the conversation (`!` runs a shell command): `!git diff j2-start`. Then:
    ```text
    Review this diff of CalcApp v0.1 against @docs/plan.md. Focus: bugs and
    runtime errors, missing error handling, user input reaching storage
@@ -200,12 +201,14 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/g
    HIGH/MEDIUM/LOW, file, why it matters, suggested fix. Edit nothing.
    ```
    Diff too long? One task at a time: `!git diff j2-start -- src/storage.ts`.
-3. Write the triage in `docs/review.md`.
+3. Write the triage in `docs/review.md` (your editor, or Shift+Tab → build).
+   *Or ask opencode (build):* "Write the findings above to docs/review.md, one line each: RVW-n, severity, file, problem, then my decision FIX / DEFER / REFUSED and its reason (ask me for them)."
 4. `git switch -c fix/review`; Shift+Tab back to the *build* agent and fix 2-3 HIGH/MEDIUM findings, test first:
    *Or ask opencode (build):* "Give me the git command to create and switch to the branch fix/review, then run it."
    ```text
-   Fix RVW-1 from docs/review.md. First write a failing test that exposes
-   it and run npm run test:run (RED), then fix the code (GREEN).
+   Fix the first finding marked FIX in @docs/review.md (e.g. RVW-1). First
+   write a failing test that exposes it and run npm run test:run (RED), then
+   fix the code (GREEN).
    Change nothing else.
    ```
    Read the diff: did it touch anything else? `npm test` green → commit `fix: RVW-1 …`; in `docs/review.md`: RVW-1 → fixed.
@@ -261,7 +264,7 @@ git switch -C main mywork     # main = your v0.1 (it held only the starter)
 git log --oneline --graph --decorate -10
 ```
 
-**Why main:** from tomorrow, the methodology plugin treats `main` as the reference. Git says `main` and `origin/main` have diverged: normal, do not pull (`origin` is the starter); you push to your own repository tomorrow morning.
+**Why main:** from tomorrow, GSE-One treats `main` as the reference. Git says `main` and `origin/main` have diverged: normal, do not pull (`origin` is the starter); you push to your own repository tomorrow morning.
 
 **Done when:** `git tag` lists `v0.1`, on a commit where the tests are green, and `main` is on that same commit (`git branch -v`).
 
@@ -284,7 +287,7 @@ Today you ran the loop by hand. From day 3, GSE-One drives the same loop:
 | Plan → tasks in `docs/plan.md` | `/gse-plan` |
 | Test first (from the acceptance criteria), one branch per task | `/gse-produce` (acceptance test first; `/gse-tests` plans the tests in Full mode) |
 | Review, triage HIGH / MEDIUM / LOW | `/gse-review` |
-| Fix on a branch, regression test first | `/gse-fix` |
+| Fix on a branch, a failing test that exposes the finding first | `/gse-fix` |
 | Merge + tag `v0.1` | `/gse-deliver` |
 
 Same loop, same severities — and GSE-One will not deliver over an open HIGH without your explicit decision. GSE-One shows you each failing acceptance test before it writes the code: read it, that is your golden rule; say stop to change it (a beginner profile is asked to confirm it).

@@ -270,7 +270,7 @@ From a vision to `docs/plan.md`: elicit requirements with the plan agent, split 
 
 Each *Check* is a test: written first (RED), then the code (GREEN). Tasks 1-2 are T1-T2 of the `docs/plan.md` example.
 
-**The `docs/plan.md` format** — 5-8 tasks, each with acceptance criteria. `[next]` Treat exactly one · `[todo]` Later. The label after each title gives the task's state; the brackets are just a label we chose, easy to spot for you and the agent:
+**The `docs/plan.md` format** — 5-8 tasks, each with acceptance criteria. `[next]` Treat exactly one · `[todo]` Later · `[done]` Merged (into `mywork`). The label after each title gives the task's state; the brackets are just a label we chose, easy to spot for you and the agent:
 
 ```markdown
 # CalcApp v0.1 - plan
@@ -325,7 +325,7 @@ Branch: feat/expense-storage
 **If stuck:** (1) your tutor window; (2) start from `docs/plan-example.md` (copy it to `docs/plan.md`, adapt it); (3) raise your hand.
 *Or ask opencode:* "Give me the command to copy docs/plan-example.md to docs/plan.md. Then run it."
 
-**Debrief (5 min):** What did the plan agent ask or propose that you had not thought of? Which task did you split or rewrite — and why? Compare with your neighbour: different plans are normal — are both testable?
+**Debrief (5 min):** What did the plan agent ask or propose that you had not thought of? Which user story did you split, or which development task did you rewrite — and why? Compare with your neighbour: different plans are normal — are both testable?
 
 ### Frequent errors
 
@@ -366,7 +366,8 @@ You have a plan; now build it, one task at a time. **Why start with tests?** The
 **Two prompts per task** (build agent):
 
 ```text
-@docs/plan.md Task 1 only. Write the failing test first, in tests/.
+@docs/plan.md Build only the task marked [next].
+Write a failing test for its Accept: line, in tests/.
 Do NOT write the implementation. Run npm run test:run and show the failure.
 ```
 
@@ -385,15 +386,17 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
 
 **Steps:**
 
-1. `git switch -c feat/task-1` (or a name after your task)
-   *Or ask opencode:* "Give me the git command to create and switch to the branch feat/task-1, then run it."
+1. T1's `Branch:` line, e.g. `git switch -c feat/expense-type`
+   *Or ask opencode:* "Give me the git command to create and switch to T1's branch (Branch: line, @docs/plan.md); run it."
 2. RED prompt → **read the test** → commit `test: …`
    *Or ask opencode:* "Give me the git commands to commit only the new test as 'test: …', then run them."
 3. GREEN prompt → `npm test` green → commit `feat: …`
    *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'feat: …' if green; run them."
 4. Mutant check, then undo the sabotage.
-5. `git switch mywork` → `git merge feat/task-1` (the same name as in step 1). `mywork` is your main line since this morning: every finished task is merged into it.
-   *Or ask opencode:* "Give me the git commands to go back to mywork and merge feat/task-1 into it, then run them."
+5. `git switch mywork` → `git merge feat/expense-type` (the same name as in step 1). `mywork` is your main line since this morning: every finished task is merged into it.
+   *Or ask opencode:* "Give me the git commands to go back to mywork and merge T1's branch into it, then run them."
+6. In `docs/plan.md`: T1 `[done]`, T2 `[next]` → commit `docs: T1 done`. After lunch the agent is asked which task is `[next]`: if T1 stays `[next]`, it answers T1.
+   *Or ask opencode:* "In docs/plan.md, mark T1 [done] and T2 [next], then commit it as 'docs: T1 done'."
 
 **Done when:** `npm test` shows your new test passing, and `git log --oneline` shows `test:` before `feat:`.
 *Or ask opencode:* "Give me the commands to run the tests and show the last commits, then run them."
@@ -421,7 +424,7 @@ amount as a number. Use getByLabelText / getByRole.
 Do NOT write the component. Run npm run test:run.
 ```
 
-Review: correct import paths? accessible queries? the behaviour *you* want? GREEN: same prompt as A. Mutant: remove the `parseFloat` on the amount.
+Review: correct import paths? accessible queries? the behaviour *you* want? GREEN: "Implement the minimal ExpenseForm (default export) that passes tests/components/ExpenseForm.test.tsx. Do not modify the test." Mutant: remove the `parseFloat` on the amount.
 
 **If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup. Only to catch up: a second copy in a new folder; your first copy (`~/ai4se/calcapp`) stays untouched.
 

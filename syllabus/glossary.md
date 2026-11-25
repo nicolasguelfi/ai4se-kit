@@ -169,6 +169,10 @@ claim. *HD04, HD07.*
 **HUG** — GSE-One's profiling activity (`/gse-hug`, run by `/gse-go` the first time): your
 expertise, language, verbosity, decision involvement… so the agent adapts. *HD05.*
 
+**Integration test** — A test of several parts together (router, pages, storage), unlike a
+test of one component alone. Day 2: the data-layer test adds an expense and finds it on the
+Dashboard. *HD04.*
+
 **Integrity check (minimal)** — In Lightweight mode, the check `/gse-deliver` runs before
 merging (devil's advocate, at most 5 findings); a HIGH finding stops the merge until you
 decide. *HD08, HD11.*
@@ -254,6 +258,9 @@ the top of its README: pitch, how to run it, live address, known limits (day 6).
 
 **Prompt** — What you send to the model. Never put keys, passwords, personal or client
 data in a prompt. *HD01.*
+
+**Pull request** — A proposed change submitted for review before it is merged. Day 2 talks
+about them; on GitHub a pull request shows the diff, the comments and the checks. *HD04.*
 
 **Recovery tag** — A tag of the public CalcApp starter (`j2-start`, `j2-part1`, `j2-v0.1`,
 `p3-start`, …) to restart an exercise from a known state in a new folder. *HD03; see recovery.md.*
