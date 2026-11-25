@@ -31,7 +31,7 @@ opencode
 
 | Agent | Does | When |
 |---|---|---|
-| **plan** | explores and proposes; does not edit your files | understand the code, prepare a change, review |
+| **plan** | explores and proposes; does not edit your files (asked to save a plan, it writes under `~/.opencode/plan/`, outside the project) | understand the code, prepare a change, review |
 | **build** | edits files and runs commands | once you agree with the plan |
 
 Good habit: **plan first** (« what would you change, and why? »), read the answer, then Shift+Tab to
@@ -168,3 +168,4 @@ sh ~/ai4se/ai4se-kit/setup-learner.sh
 | It edited the wrong files | Ctrl+X then U, or `!git restore --staged --worktree .` to drop every uncommitted change (final; only files never added with `git add` stay) |
 | The window does not answer | Esc; still frozen: Ctrl+X then Q, then `opencode --continue` |
 | Lost after a break | `/gse-resume` (from day 3), or `opencode --continue` |
+| Plan « saved » but nothing in the project | the plan agent saves under `~/.opencode/plan/`: Shift+Tab → build, then « Write docs/plan.md » |

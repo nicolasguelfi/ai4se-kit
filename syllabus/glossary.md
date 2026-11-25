@@ -186,7 +186,8 @@ engine inside every coding agent. *HD01.*
 *runtime log*: while the container runs. Read for the first error. *HD09, HD10.*
 
 **MCP (Model Context Protocol)** — A standard to plug external tools and data sources into
-an agent. *HD01, HD03.*
+an agent. Each MCP server lists its tools; the agent sends their descriptions to the model with
+every request, the model chooses one, the agent runs it and returns the result. *HD01, HD03.*
 
 **Merge** — Bringing the commits of one branch into another. In the photo picture: two
 people start from the same photo and each retouches a copy; the merge makes one new photo
