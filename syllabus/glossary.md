@@ -40,8 +40,10 @@ planned) or in a sprint. `/gse-backlog`, file `.gse/backlog.yaml`. *HD06.*
 **Backup tag** — A git tag `gse-backup/…` that GSE-One creates before a risky operation
 (merge, branch deletion) so you can restore the previous state. *HD08; see recovery.md.*
 
-**Branch** — A separate line of commits. Rule of the course: one branch per feature or
-task, never commit directly on `main`. *HD03.*
+**Branch** — A separate line of commits. In the photo picture (see *Commit*): a bookmark on
+the latest photo of a series; it moves forward with each commit. Two series share the photos
+taken before they split. Rule of the course: one branch per feature or task, never commit
+directly on `main`. *HD03.*
 
 **Build agent / Plan agent** — opencode's two default agents: *plan* reads and proposes
 without editing; *build* edits files and runs commands. Switch with Shift+Tab. *HD03.*
@@ -55,7 +57,10 @@ saved by `/gse-pause` in `.gse/checkpoints/` and reloaded by `/gse-resume`. *HD0
 GitHub Actions); gives a green/red signal that does not depend on the agent's word. *HD07.*
 
 **Commit** — A save point of your files in git, with a message. You can always come back
-to it. *HD02, HD03.*
+to it. Picture it as a photo of the scene (your files on disk): `git add` poses the subjects
+you want in the picture, `git commit` clicks the shutter, `git push` uploads the album to the
+cloud (GitHub). Git stores only what changed; the rest is taken from the photo before. Each
+photo notes the one before it, so photos form a series: your history. *HD02, HD03.*
 
 **Complexity budget** — The number of points a sprint can absorb (1 point ≈ one hour of
 work for the AI + you pair). A sprint ends when the budget is used or tasks are delivered. *HD06.*
@@ -183,8 +188,12 @@ engine inside every coding agent. *HD01.*
 **MCP (Model Context Protocol)** — A standard to plug external tools and data sources into
 an agent. *HD01, HD03.*
 
-**Merge** — Bringing the commits of one branch into another. In GSE-One, a merge into
-`main` is a Gate. *HD04, HD08.*
+**Merge** — Bringing the commits of one branch into another. In the photo picture: two
+people start from the same photo and each retouches a copy; the merge makes one new photo
+with both retouches. One retouched the sky, the other the face: git combines them alone.
+Both retouched the same spot — one gave the person two legs, the other three: that is a
+*conflict*, git cannot choose, you do. Often both versions are fine (a red shirt or a blue
+one): you pick one, or combine them. In GSE-One, a merge into `main` is a Gate. *HD04, HD08.*
 
 **Milestone** — A fixed time with a result you can check: the project card (day 4), plan
 and requirements validated (day 5, 16:30), first delivery (day 6, 11:30). *HD08, HD10.*
@@ -293,12 +302,10 @@ Validation: "did we build the right thing?" (traced to requirements). *HD07.*
 **Vibe coding / Vibe engineering** — Vibe coding: accept AI-generated code without
 reading it. Vibe engineering: the same tools with plans, tests, reviews and git. *HD01.*
 
-**Worktree** — The folder where your files are laid out so you can edit them. Picture a
-photo album: each commit is a complete photo of all your files; a branch is a bookmark on
-the latest photo of a series, and moves forward with each commit; a worktree is a work
-table where one photo is laid out. Laying a photo on a table creates no photo — only
-`git commit` adds one, to the series of the branch on that table. `git restore --worktree`
-puts the table back; `--staged` undoes `git add`. You can have several tables
-(`git worktree add .worktrees/…`): the album and the bookmarks are shared, each table shows
-one branch, and a bookmark sits on one table at a time. Bringing one series into another is
-a merge. GSE-One gives each task its own table, so your other work stays untouched. *HD03, HD07.*
+**Worktree** — The folder where your files are laid out so you can edit them: in the photo
+picture (see *Commit*), the scene. Setting up a scene creates no photo — only `git commit`
+adds one, to the series of the branch of that scene. `git restore --worktree` puts the scene
+back as on the last photo; `--staged` undoes `git add`. You can have several scenes
+(`git worktree add .worktrees/…`), each with its own branch: the album and the bookmarks are
+shared, and a bookmark sits on one scene at a time. GSE-One gives each task its own scene, so
+your other work stays untouched. *HD03, HD07.*
