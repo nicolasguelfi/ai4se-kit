@@ -300,20 +300,25 @@ Branch: feat/expense-storage
 3. "Split into 5-8 atomic tasks, tests first, with acceptance criteria." Push back at least once: too big? not testable?
 4. Shift+Tab → build: "Write docs/plan.md in the slide format."
 5. Edit it, mark T1 `[next]`, `git add` it, `git diff --staged`, `git commit -m "docs: v0.1 plan"`.
+   *Or ask opencode:* "Give me the git commands to stage docs/plan.md and show what will be committed, then run them." — then "Give me the git command to commit docs/plan.md as 'docs: v0.1 plan', then run it."
+
+*Or ask opencode* needs the **build** agent here: plan may not write `docs/plan.md`.
 
 **Done when:** `git log --oneline` on `mywork` shows "docs: v0.1 plan"; `docs/plan.md` has 5-8 tasks, one `[next]`.
+*Or ask opencode:* "Give me the git commands to show the last commits on mywork, and check that docs/plan.md has 5-8 tasks with exactly one [next]. Then run them and show me the result."
 
 **Check:** is anything missing for the app to work end to end (wiring, entry point, assembly of the parts)? If so, add that task.
 
 **Mid-point (11:15):** your user stories have testable acceptance criteria; you are splitting them.
 
 **If stuck:** (1) your tutor window; (2) start from `docs/plan-example.md` (copy it to `docs/plan.md`, adapt it); (3) raise your hand.
+*Or ask opencode:* "Give me the command to copy docs/plan-example.md to docs/plan.md. Then run it."
 
 **Debrief (5 min):** What did the plan agent ask or propose that you had not thought of? Which task did you split or rewrite — and why? Compare with your neighbour: different plans are normal — are both testable?
 
 ### Frequent errors
 
-- `git diff` shows nothing for the new plan: git diff ignores untracked files — `git add` first, then `git diff --staged`.
+- `git diff` shows nothing for the new plan: git diff ignores untracked files — `git add` first, then `git diff --staged`. *Or ask opencode:* "Give me the git commands to stage docs/plan.md and show what will be committed. Then run them and show me the result."
 - Plan saved but nothing to commit? The plan agent saves under `~/.opencode/plan/`, never in the project: Shift+Tab → build, then ask it to write `docs/plan.md`.
 - Tasks like "build the UI": not testable, not atomic — split until each has one acceptance test.
 
