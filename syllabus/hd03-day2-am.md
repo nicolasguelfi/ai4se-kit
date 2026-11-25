@@ -491,7 +491,8 @@ Before lunch: `git status` must say "nothing to commit". *Or ask opencode:* "Giv
 *The problem:* an agent can write code that looks right, and tests that prove nothing.
 
 - `/gse-tests` sets a test strategy from the requirements before any code: which levels, which cases, one acceptance (validation) test per Given/When/Then criterion.
-- `/gse-produce` builds each code task on its own branch the way you did today: first the acceptance test, run and seen failing, committed; then the code until it passes. The test results are kept as evidence.
+- `/gse-produce`, for each code task: the acceptance test first, seen failing, then the code — each task on its own branch and in its own folder (worktree); every test run is saved as a report in `docs/sprints/…/test-reports/`.
+  The report is a test campaign `TCP-NNN` (`docs/sprints/sprint-NN/test-reports/campaign-{date}-{TASK-ID}.md`), and the task's `test_evidence` in `backlog.yaml` records status, campaign, date, pass rate, coverage and summary; `/gse-deliver` checks it (spec § 6.3). Worktree by default (`git.strategy: worktree` in `.gse/config.yaml`): each task gets `.worktrees/sprint-NN-type-name` on branch `gse/sprint-NN/type/name`; `branch-only` = a branch without a separate folder; `none` = no branch.
 - Delivery is blocked while a requirement's tests have not been run and passed.
 
 *Concept only — you use GSE-One from day 3.*
