@@ -51,11 +51,7 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
    # or, any system with Node
    npm install -g @opencode/cli
    ```
-   ```bash
-   # or, macOS only
-   brew install anomalyco/tap/opencode-v2
-   ```
-   Then `opencode --version`; only if it says « command not found », reload the terminal with `exec $SHELL` and retry. *Done when* it prints `2.x.y` (e.g. 2.2.6).
+   Then `opencode --version`; only if it says « command not found », reload the terminal with `exec $SHELL` and retry. Still `1.x`? An old opencode 1 in `~/.opencode/bin` comes first: run the `curl` command above, it updates it in place. *Done when* it prints `2.x.y` (e.g. 2.2.6).
 2. **Node.js LTS** (~5 min) — needed tomorrow to run CalcApp (npm). Already ≥ 20? Skip.
    ```bash
    # Windows (WSL) | Ubuntu — nvm

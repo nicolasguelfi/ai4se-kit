@@ -136,12 +136,8 @@ git restore "$BROKEN" && npm run test:run
 ```
 
 **Done when:** `git log --oneline` shows your commit on `feat/hello`, and `git status` is clean.
-*Or ask opencode:* "Give me the git commands to show the last commit on feat/hello and check that the working tree is clean. Then run them and show me the result."
 
 **Mid-point (7 min):** `npm run test:run` is green and `git branch` shows `* feat/hello`.
-*Or ask opencode:* "Give me the commands to run the tests and show which branch I am on. Then run them and show me the result."
-
-*Or ask opencode* needs the **build** agent: opencode shows the commands first, then runs them; allow them if it asks. Already fluent in git? Skip these lines.
 
 **If stuck:** (1) your tutor window; (2) re-clone at `j2-start` in a new folder; (3) raise your hand.
 
@@ -160,7 +156,7 @@ git restore "$BROKEN" && npm run test:run
 
 ### Frequent errors
 
-- Git asks who you are: `git config --global user.name "Your Name"`, then `user.email` (hd02 § Installation in the room, step 6). *Or ask opencode:* "Give me the git commands to set my name and email for all my repositories (ask me for them). Then run them and show me the result."
+- Git asks who you are: `git config --global user.name "Your Name"`, then `user.email` (hd02 § Installation in the room, step 6).
 - `git restore` on a file you never committed: there is nothing to go back to — commit first.
 - Working on `main` or `mywork` directly instead of a `feat/…` branch.
 - Worrying about `npm ci` warnings (deprecated, moderate vulnerabilities, install-scripts esbuild): harmless — see above; no `npm audit fix`.
