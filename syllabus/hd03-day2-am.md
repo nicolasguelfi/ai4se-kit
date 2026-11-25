@@ -374,12 +374,17 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
 **Steps:**
 
 1. `git switch -c feat/task-1` (or a name after your task)
+   *Or ask opencode:* "Give me the git command to create and switch to the branch feat/task-1, then run it."
 2. RED prompt → **read the test** → commit `test: …`
+   *Or ask opencode:* "Give me the git commands to commit only the new test as 'test: …', then run them."
 3. GREEN prompt → `npm test` green → commit `feat: …`
+   *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'feat: …' if green; run them."
 4. Mutant check, then undo the sabotage.
 5. `git switch mywork` → `git merge feat/task-1` (the same name as in step 1). `mywork` is your main line since this morning: every finished task is merged into it.
+   *Or ask opencode:* "Give me the git commands to go back to mywork and merge feat/task-1 into it, then run them."
 
 **Done when:** `npm test` shows your new test passing, and `git log --oneline` shows `test:` before `feat:`.
+*Or ask opencode:* "Give me the commands to run the tests and show the last commits, then run them."
 
 **Mid-point (12:00):** your RED test is committed. Not yet? Ask now.
 
@@ -420,7 +425,7 @@ Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, commit them, re
 
 **Debrief (12:10 → 12:15):** Did the agent respect "test only"? If not, what did you do? Did your mutant check reveal a test that proved nothing? Show each other your `git log --oneline`.
 
-Before lunch: `git status` must say "nothing to commit".
+Before lunch: `git status` must say "nothing to commit". *Or ask opencode:* "Give me the git commands to check that everything is committed and to commit what is left as 'wip: before lunch', then run them."
 
 ### Frequent errors
 
