@@ -68,7 +68,7 @@ RED:   Write a failing test in tests/App.test.tsx: render `routes` from
 GREEN: Make it pass with react-router (NOT react-router-dom): export `routes`
        from src/App.tsx (Layout with nav Links + Outlet; "/" Dashboard,
        "/add" AddExpense); App keeps createBrowserRouter(routes).
-       One file per page in src/pages/. Do not modify the test.
+       One file per page in src/pages/. Do not change what the test checks.
 ```
 
 *Review checklist:* Does `package.json` use `react-router`, and not `react-router-dom`? · Do the pages link with `Link` rather than `<a href>`, so the page does not fully reload? · Is there one file per page in `src/pages/`? · Is the test unchanged? Run `git diff HEAD -- tests/`: it must show nothing. · Run `npm run dev`: do both links work, and does the browser's back button work? *Trust, but verify* — you will need this habit at 14:30.
@@ -84,7 +84,7 @@ RED:   Write a failing integration test: `routes` in a memory router at "/add",
 GREEN: Make it pass: Expense type; getExpenses/saveExpenses in storage.ts
        (localStorage key "calcapp-data"); Dashboard lists the expenses with
        a total; AddExpense saves, then navigates to "/" with useNavigate.
-       Do not modify the test.
+       Do not change what the test checks.
 ```
 
 *Review checklist:* Are the types in `src/expense.ts`, with no `any`? · Does the storage really use localStorage, and not only React state? · Is each form input « controlled »: its value comes from the state and `onChange` updates it? · After Add, does the app go back to `/` with `useNavigate`? · Refresh the browser: is your expense still there?
@@ -131,7 +131,7 @@ Your plan's wording is unclear? Use the ready-made prompts above.
 
 **Did not finish?** v0.1 need not be complete to be reviewed: you review what you have. Merge the branches whose tests pass; leave aside a branch whose tests fail (*or ask opencode:* "Give me the git commands to merge into mywork only my task branches whose tests pass, then run them."). Your app is broken? Restart from the tag `j2-part1` (catch-up above), or from `j2-v0.1` to review the reference code. Then `npm run test:run` and `npm run dev` must both work (*or ask opencode:* "Give me the command to run the tests, then run it."). Being behind on code must never block the learning: 14:30 is about review.
 
-**Debrief (14:20 → 14:30):** Where did the agent change a test, or do more than you asked? Which review-checklist item caught something real? Compare with your neighbour: same task, same code? Why not?
+**Debrief (14:20 → 14:30):** Where did the agent change a test, or do more than you asked? Which review-checklist item caught something real? Which test did you want to change, and was it the requirement or the code? Compare with your neighbour: same task, same code? Why not?
 
 ### Frequent errors
 

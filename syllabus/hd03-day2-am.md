@@ -375,9 +375,9 @@ A failing test *before* the code is the expected start, not a problem.
 
 **Why an empty shell.** With « do not write the code » alone, red only says « cannot find module ». With an empty shell — the function or component exists and returns nothing, e.g. `export default function ExpenseItem() { return null }` — the test runs and fails on the expected value: red proves the test checks the behaviour.
 
-Live demo (≤ 10 min, build agent): (1) the test + an empty shell of the component → read the test; (2) `npm run test:run` → RED on the expected value, not a missing file; (3) ask for the minimal code — do not touch the test; (4) `npm run test:run` → GREEN; (5) REFACTOR: "Move the euro formatting into a named function formatAmount and call it from ExpenseItem. The screen must not change. Do not touch the test. Run npm run test:run." → still GREEN — before: `<span>€{amount.toFixed(2)}</span>`; after: `` function formatAmount(amount: number) { return `€${amount.toFixed(2)}`; } `` … `<span>{formatAmount(amount)}</span>`; nothing removed, the screen still shows €25.50 (if the agent already wrote such a function, nothing to refactor is a valid result); (6) break the code on purpose → a test must fail; (7) three commits: the test alone — the feature code — the refactoring (`test: ExpenseItem shows label and amount`, `feat: add ExpenseItem`, `refactor: extract formatAmount`). Why separate commits: the history shows the test existed (and failed) before the code, and the refactoring stays apart from the feature; the prefix is the type of change (Conventional Commits, this morning). Demo feature: ExpenseItem shows "Lunch" and "€25.50". Here the failing test comes from the task's acceptance criteria: this is *acceptance-test-driven development* (ATDD) at the scale of one task. Textbook TDD (Beck) goes further: many tiny steps driven by unit tests, and a refactor step after each green.
+Live demo (≤ 10 min, build agent): (1) the test + an empty shell of the component → read the test; (2) `npm run test:run` → RED on the expected value, not a missing file; (3) ask for the minimal code — do not change what the test checks; (4) `npm run test:run` → GREEN; (5) REFACTOR: "Move the euro formatting into a named function formatAmount and call it from ExpenseItem. The screen must not change. Do not change what the test checks; if you rename something the test uses, rename it in the test too. Run npm run test:run." → still GREEN — before: `<span>€{amount.toFixed(2)}</span>`; after: `` function formatAmount(amount: number) { return `€${amount.toFixed(2)}`; } `` … `<span>{formatAmount(amount)}</span>`; nothing removed, the screen still shows €25.50 (if the agent already wrote such a function, nothing to refactor is a valid result); (6) break the code on purpose → a test must fail; (7) three commits: the test alone — the feature code — the refactoring (`test: ExpenseItem shows label and amount`, `feat: add ExpenseItem`, `refactor: extract formatAmount`). Why separate commits: the history shows the test existed (and failed) before the code, and the refactoring stays apart from the feature; the prefix is the type of change (Conventional Commits, this morning). Demo feature: ExpenseItem shows "Lunch" and "€25.50". Here the failing test comes from the task's acceptance criteria: this is *acceptance-test-driven development* (ATDD) at the scale of one task. Textbook TDD (Beck) goes further: many tiny steps driven by unit tests, and a refactor step after each green.
 
-**The golden rule:** RED — you + agent: the agent drafts the test, *you review it: it is your spec*; GREEN — agent: minimal code, the test is not touched; REFACTOR — improve the design — same behaviour, tests stay green; you decide, the agent applies. **Never let the agent write the test and the code without your review in between** — otherwise the test mirrors what the agent meant to write and proves nothing.
+**The golden rule:** RED — you + agent: the agent drafts the test, *you review it: it is your spec*; GREEN — agent: minimal code, the test is not touched; REFACTOR — improve the design — same behaviour, tests stay green; you decide, the agent applies. **Never let the agent write the test and the code without your review in between** — otherwise the test mirrors what the agent meant to write and proves nothing. Reviewing the test also validates the names of the interface (component, props, functions): now a change costs nothing; after GREEN it means renaming the code and the test. When the requirement changes: you change the test first (new RED), you review it, commit `test: …`, then the code. Only the agent is forbidden to change a test to make its code pass.
 
 **The mutant test trick.** After GREEN, sabotage your own code and run the tests. One fails → the test is real, undo the sabotage. None fails → the test proves nothing, fix the test. Example: `amount.toFixed(2)` → `amount.toFixed(0)` turns "€25.50" into "€26": the test must go red. Ten seconds of sabotage saves hours of false confidence.
 
@@ -389,7 +389,8 @@ Live demo (≤ 10 min, build agent): (1) the test + an empty shell of the compon
 @docs/plan.md Take the task marked [next]. This step writes its test only.
 Write a failing test for its Accept: line, in tests/, and an empty shell
 of the code the test calls (exists, returns nothing yet), so the test
-fails on its expected value, not on a missing file.
+fails on its expected value, not on a missing file. Test what the user
+sees, not internal names.
 Do not implement the task. Run npm run test:run and show the failure.
 ```
 
@@ -397,7 +398,7 @@ Do not implement the task. Run npm run test:run and show the failure.
 
 ```text
 Implement the minimal code that makes the new test in tests/ pass,
-for the task marked [next]. Do not modify the test file.
+for the task marked [next]. Do not change what the test checks.
 Run npm run test:run.
 ```
 
@@ -406,7 +407,8 @@ Run npm run test:run.
 ```text
 @docs/plan.md Improve the design of the code of the task marked [next],
 same behaviour: e.g. extract a function, rename, remove duplication.
-Do not touch the test. Run npm run test:run.
+Do not change what the test checks; if you rename something the test
+uses, rename it in the test too. Run npm run test:run.
 ```
 
 In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent would wait.
@@ -424,9 +426,9 @@ In prompts, ask for `npm run test:run`: `npm test` watches forever and the agent
 3. Paste the GREEN prompt. Run `npm run test:run` until all tests pass. Then commit the code, with a message that starts with `feat:`
    *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'feat: …' if green; run them."
 
-*Then: improve the code, check that the test really catches a bug, and add T1 to `mywork`.*
+*Then: if time allows, improve the code; check that the test really catches a bug, and add T1 to `mywork`.*
 
-4. Paste the REFACTOR prompt. Run `npm run test:run`: the tests must still pass. Commit with a message that starts with `refactor:`. Nothing to improve? No commit, go on.
+4. If time allows: paste the REFACTOR prompt. Run `npm run test:run`: the tests must still pass. Commit with a message that starts with `refactor:`. Nothing to refactor is a valid result: no commit, go on.
    *Or ask opencode:* "Give me the commands to run the tests, then commit the code as 'refactor: …' if green; run them."
 5. Mutant check: break the code on purpose; a test must fail. Then undo your change.
 6. Go back to your main line and bring T1 into it: `git switch mywork`, then `git merge feat/expense-type` (your name may differ: use the line below).
@@ -450,7 +452,7 @@ for 25.50. Create only an empty ExpenseItem shell (default export
 returning null). Do NOT implement it. Run npm run test:run.
 ```
 
-GREEN: "Implement the minimal ExpenseItem (default export) that passes tests/components/ExpenseItem.test.tsx. Do not modify the test." *B — ExpenseForm:*
+GREEN: "Implement the minimal ExpenseItem (default export) that passes tests/components/ExpenseItem.test.tsx. Do not change what the test checks." *B — ExpenseForm:*
 
 ```text
 Write a failing Vitest test in tests/components/ExpenseForm.test.tsx.
@@ -462,7 +464,7 @@ Create only an empty ExpenseForm shell (default export returning null).
 Do NOT implement it. Run npm run test:run.
 ```
 
-Review the test: are the import paths correct? Does it find the inputs by their label? Does it check the behaviour you want? GREEN: "Implement the minimal ExpenseForm (default export) that passes tests/components/ExpenseForm.test.tsx. Do not modify the test." Mutant: remove the `parseFloat` on the amount.
+Review the test: are the import paths correct? Does it find the inputs by their label? Does it check the behaviour you want? GREEN: "Implement the minimal ExpenseForm (default export) that passes tests/components/ExpenseForm.test.tsx. Do not change what the test checks." Mutant: remove the `parseFloat` on the amount.
 
 **If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup. Only to catch up: a second copy in a new folder; your first copy (`~/ai4se/calcapp`) stays untouched.
 
