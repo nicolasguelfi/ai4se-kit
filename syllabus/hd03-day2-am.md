@@ -194,7 +194,7 @@ Give the agent what a new colleague would need. *You hire a talented junior: no 
 
 **The todo list.** On multi-step work the agent writes a todo list and ticks items as it goes: see where it is, stop it as soon as it drifts (Esc), check nothing was skipped before you commit. Ticked is not done — **done = tests green + diff reviewed**.
 
-**MCP and Context7.** MCP (Model Context Protocol) is an open standard: each server exposes tools the agent calls when needed (docs, database, browser), declared under `mcp.servers` in `opencode.json`. Every tool takes context space: enable few. Context7 gives live documentation instead of stale memory — the model learned old APIs and React Router 7 moves fast. Add it with one command in the project folder (no hand-written JSON):
+**MCP and Context7.** MCP (Model Context Protocol) is an open standard to plug tools into the agent (docs, database, browser). Each server lists its tools; opencode sends their descriptions to the model, the model **chooses** one, opencode runs it (after your permission settings) and returns the result. Servers are declared under `mcp.servers` in `opencode.json`. Every tool description is sent with every request, used or not: enable few. Context7 gives live documentation instead of stale memory — the model learned old APIs and React Router 7 moves fast. Add it with one command in the project folder (no hand-written JSON):
 
 ```bash
 opencode mcp add context7 --url https://mcp.context7.com/mcp
