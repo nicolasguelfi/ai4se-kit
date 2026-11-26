@@ -97,6 +97,17 @@ git restore src/App.tsx     # throw an unwanted change away (one file, e.g.)
 
 After the agent worked: never `git add .` without checking the diff.
 
+**Three versions of every file.** Git keeps three versions of each file: the one **on your disk** (the file you open and edit), the **prepared** one (what `git add` set aside for the next commit; « index » or « staging area » is its technical name), and the one of the **last commit** (saved in the history). Example with `app.ts`: your last commit contains `total = 0`; you change it to `total = 10`, then `git add app.ts` (prepared: `total = 10`); you change it again to `total = 99` without `git add`.
+
+| | On disk | Prepared | Last commit | You lose |
+|---|---|---|---|---|
+| Before the command | `total = 99` | `total = 10` | `total = 0` | — |
+| `git restore --staged .` | `total = 99` | `total = 0` | `total = 0` | nothing |
+| `git restore .` | `total = 10` | `total = 10` | `total = 0` | `total = 99` |
+| `git restore --staged --worktree .` | `total = 0` | `total = 0` | `total = 0` | `total = 10` and `99` |
+
+`--staged` acts on what you prepared with `git add`; `--worktree` acts on the file you see in the editor. Files never added with `git add` are touched by none of them.
+
 **Pattern 1 — review before stage:** `git status` (which files did the agent touch?) → `git diff --stat` (how many lines, in which files? as expected?) → `git diff` (read what is small or risky — today's tasks are small: read all of it) → `git add src/App.tsx` (only what you approve) → `git diff --staged` (last look) → `git commit` (a message that says what and why). You own every change: check its scope, read what matters.
 
 **Pattern 2 — checkpoint commits** ("save the game before the boss fight"), before a big refactor, an approach you doubt, a multi-file change:
