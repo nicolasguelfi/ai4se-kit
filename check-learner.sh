@@ -145,7 +145,7 @@ if has git; then
     ko "git identity not set" "normal before installation step 6; otherwise run: git config --global user.name \"First Last\" && git config --global user.email \"you@example.com\""
   fi
 else
-  ko "git is not installed" "install git (macOS: xcode-select --install; Linux: your package manager; Windows: git-scm.com)"
+  ko "git is not installed" "see installation step 0b (Ubuntu/WSL: sudo apt-get install -y git; macOS: xcode-select --install or the Homebrew installer)"
 fi
 
 # 6. GitHub CLI + login

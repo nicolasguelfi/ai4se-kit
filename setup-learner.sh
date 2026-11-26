@@ -61,7 +61,7 @@ mkdir -p "$AI4SE_HOME"
 step "course folder: $AI4SE_HOME"
 
 # --- 2. GSE-One clone at the course tag ----------------------------------------
-command -v git >/dev/null 2>&1 || die "git is required (macOS: xcode-select --install)"
+command -v git >/dev/null 2>&1 || die "git is required — see installation step 0b (Ubuntu/WSL: sudo apt-get install -y git; macOS: xcode-select --install or the Homebrew installer)"
 if [ -d "$GSE_DIR/.git" ]; then
   t=$(git -C "$GSE_DIR" describe --tags --exact-match 2>/dev/null || printf 'not on a tag')
   if [ "$t" = "$GSE_TAG" ]; then

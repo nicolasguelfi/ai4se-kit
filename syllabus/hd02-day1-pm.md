@@ -42,6 +42,19 @@ The **tutor window** is a second opencode session, opened in the kit folder, sep
 **Steps:**
 
 0. **Open a terminal** (~5 min). Windows: the Ubuntu (WSL) app or the course VM — not PowerShell. Ubuntu: Ctrl + Alt + T. macOS: Cmd + Space → `Terminal` → Enter. Type `echo $SHELL`. *Done when* it ends in `bash` or `zsh`.
+0b. **git and curl** (~5 min) — the next steps need them. Both print a version (macOS: brew too)? Skip to step 1.
+   ```bash
+   # check first — every system (macOS: brew --version too)
+   git --version && curl --version
+   # Windows (WSL) | Ubuntu
+   sudo apt-get update && sudo apt-get install -y git curl
+   # macOS — Homebrew (it also installs git)
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   # macOS, when it has finished — put brew on the PATH (Apple M1 or later)
+   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+   ```
+   *Done when* every check prints a version.
 1. **Install opencode 2** (~10 min).
    ```bash
    # Windows (WSL) | Ubuntu | macOS
