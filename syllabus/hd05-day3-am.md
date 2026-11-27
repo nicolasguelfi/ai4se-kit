@@ -5,6 +5,8 @@
 
 This morning is theory: four cycles (CCSET09 to CCSET12). Each ends with one slide, *How GSE-One solves it* — a concept, not a demo. You use GSE-One for the first time this afternoon (hd06).
 
+Start of the half-day: `~/ai4se/ai4se-kit/tutor update`; if it prints a `fix:` line for the GSE-One clone, run that line; then open your tutor window (`~/ai4se/ai4se-kit/tutor`) in a second terminal.
+
 | Time | Min | Sequence (section of this sheet) |
 |---|--:|---|
 | 09:00 | 15 | Welcome: recall of days 1-2, your CalcApp on GitHub |
