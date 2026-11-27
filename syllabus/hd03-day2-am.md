@@ -253,7 +253,7 @@ Check: restart opencode, the sidebar shows context7 *Connected*; in a prompt, sa
 
 **Debrief (5 min):** What changed in the answers once `AGENTS.md` and `@files` were there? What did the plan agent ask you — and what did you push back on? Compare plans with your neighbour: same files? same tests? why not?
 
-**To remember:** structure + `AGENTS.md` = your standing prompt; context is finite (`@` the right files, no secrets, `/new` per task); Shift+Tab: plan first, build second; todo ticked ≠ done; MCP adds tools, Context7 adds live docs.
+**To remember:** structure + `AGENTS.md` = your standing prompt; context is finite (`@` the right files, no secrets, `/new` per task); Shift+Tab: plan first, build second; the agent's todo ticked ≠ done (opencode's own list, not `docs/plan.md`); MCP adds tools, Context7 adds live docs.
 
 ### Frequent errors
 
