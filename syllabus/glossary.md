@@ -150,7 +150,7 @@ situation (what is already true before the action); When = the one action the us
 result we can observe and check. One criterion = one concrete scenario (from BDD, behaviour-driven
 development); each scenario becomes one acceptance test. *HD03.*
 
-**GSE-One** — "Generative Software Engineering One": the methodology plugin (v0.93.4 in
+**GSE-One** — "Generative Software Engineering One": the methodology plugin (v0.93.5 in
 the course) that turns the coding agent into an orchestrator of a structured lifecycle
 with 24 commands. *HD04 (bridge), HD05.*
 

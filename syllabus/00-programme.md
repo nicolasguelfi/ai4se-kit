@@ -66,7 +66,7 @@ files) are the same in every coding agent: what you learn with opencode transfer
 |---|---|
 | **opencode 2** | the terminal coding agent used in every exercise (*plan* and *build* agents, Shift+Tab switches) |
 | **A capped model key** | sent by the trainer on day 1, by Teams direct message or e-mail; one per learner, with a spending cap; never paste it anywhere else |
-| **GSE-One v0.93.4** (pinned) | the methodology plugin (days 3-6); commands in opencode are `/gse-go`, `/gse-status`, … |
+| **GSE-One v0.93.5** (pinned) | the methodology plugin (days 3-6); commands in opencode are `/gse-go`, `/gse-status`, … |
 | **git + GitHub** (`gh`) | safety net from day 2; your work is pushed to GitHub from day 3, before each break and every evening |
 | **Node.js / npm** | runs CalcApp and its tests (Vitest) |
 | **The course kit** | `~/ai4se/ai4se-kit`: tutor window, this syllabus, `check-learner.sh` |
@@ -79,7 +79,7 @@ sibling repositories, none nested in another:
 | Folder | What it is |
 |---|---|
 | `~/ai4se/ai4se-kit` | this kit: tutor, syllabus (CC BY 4.0), scripts (MIT) |
-| `~/ai4se/gensem` | GSE-One source at tag v0.93.4: spec, design, activities (read-only reference) |
+| `~/ai4se/gensem` | GSE-One source at tag v0.93.5: spec, design, activities (read-only reference) |
 | `~/ai4se/freeselfapp` | your day-1 vibe-coded prototype |
 | `~/ai4se/calcapp` | CalcApp, from the starter to the GSE-One sprints, with its tags (`v0.1`, …) |
 | your mini-project | your own project (may live elsewhere: add it with `~/ai4se/ai4se-kit/tutor add ~/path/to/your-project`) |
@@ -151,20 +151,20 @@ day 2 can show what discipline changes.
 
 **Activities.**
 - Installation steps: terminal, Node.js, opencode 2, model key, course kit + tutor,
-  GSE-One v0.93.4 in a test folder, GitHub + `gh auth login`, git identity, final check.
+  GSE-One v0.93.5 in a test folder, GitHub + `gh auth login`, git identity, final check.
 - FreeSelfApp: a small personal web app (ideas: recipe finder, habit tracker, movie
   watchlist — or your own, with made-up data), "no rules, no plan — on purpose", in three
   iterations: v1, one more feature the client asks for, a 6-minute presentation made by opencode.
   *Done when:* v1 and the client's feature both run, `git log` shows 2+ commits, and your presentation opens in the browser.
 
-**Artefacts produced.** `~/ai4se/ai4se-kit`, `~/ai4se/gensem` (v0.93.4),
+**Artefacts produced.** `~/ai4se/ai4se-kit`, `~/ai4se/gensem` (v0.93.5),
 `~/.config/ai4se/tutor-paths`, `~/ai4se/gse-check` (test install of GSE-One),
 `~/ai4se/freeselfapp` with 2+ commits and your presentation, your notes.
 
 **Commands met.**
 `git clone https://github.com/nicolasguelfi/ai4se-kit ~/ai4se/ai4se-kit && sh ~/ai4se/ai4se-kit/setup-learner.sh` ·
 `opencode --version` · `opencode auth login` · `opencode auth list` ·
-`curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/gensem/v0.93.4/install.sh | GSE_PLATFORM=opencode GSE_VERSION=v0.93.4 sh` ·
+`curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/gensem/v0.93.5/install.sh | GSE_PLATFORM=opencode GSE_VERSION=v0.93.5 sh` ·
 `gh auth login` · `git config --global user.name / user.email` ·
 `sh ~/ai4se/ai4se-kit/check-learner.sh` · `~/ai4se/ai4se-kit/tutor` · `git init` ·
 `git add` · `git commit`.
