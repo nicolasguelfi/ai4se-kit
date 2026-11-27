@@ -122,6 +122,10 @@ git restore --staged --worktree .   # back to the checkpoint:
 
 **Pattern 3 — one branch per task:** `git switch -c feat/add-history` (name it after your task) — works? merge it back; doesn't? delete it: nothing is lost.
 
+**What a branch holds.** One branch = one task of your plan. Plan, red, green, refactor are commits inside that one branch, not branches: `test: …` (red), `feat: …` (green), `refactor: …`, then merge into `mywork`. Branch when one answer is yes: several commits? may fail and be thrown away? may be interrupted? will be reviewed before you keep it? *Alone:* your main line stays green; a failed agent attempt goes with `git branch -D`; a tiny safe change (a typo) and the plan itself (`docs: plan`) can go straight on the main line. *In a team:* mandatory — `main` is usually protected, each branch ends in a pull request reviewed and tested before the merge, and branches live one or two days at most, or conflicts grow.
+
+**One folder, one branch at a time.** A `git switch` leaves no trace in the history: to fix an urgent bug during a task, `git switch mywork`, fix and commit, then `git switch feat/add-history` and go on. To work on two branches really in parallel you need one folder per branch (`git worktree add`, GSE-One from day 3); in a team, the other commits on `main` are your teammates' merges.
+
 **Names that tell the story.** Commits: `type(scope): what changed`, e.g. `feat(expenses): reject negative amounts`, `fix(list): round the monthly total`, `test(form): cover the empty category`, with a trailer `Assisted-by: opencode`. Types: feat, fix, test, refactor, docs, chore. Branches: `mywork` (your main line today), `feat/add-history` (one task of your plan), `fix/rounding` (one bug), `experiment/new-layout` (may be thrown away).
 
 **What you clone: CalcApp at `j2-start`.** A title-only page on route `/`, one green test, `AGENTS.md`, and `docs/plan-example.md` (7 tasks, the fallback plan). React 19 + TypeScript, Vite, Vitest, dependencies locked by `package-lock.json`. Tonight, v0.1: add, list and total expenses.
