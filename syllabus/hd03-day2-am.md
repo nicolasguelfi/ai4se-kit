@@ -21,7 +21,7 @@ At the end of this half-day you can:
 
 1. Use six git commands to review, save, and undo what an agent did, on a branch per task.
 2. Give opencode the context a new colleague would need: structure, `AGENTS.md`, `@file`.
-3. Use the *plan* agent before the *build* agent, follow its todo list, and add live docs with MCP + Context7.
+3. Use the *plan* agent before the *build* agent, check its "done" yourself (tests + diff), and add live docs with MCP + Context7.
 4. Write and commit `docs/plan.md`: 5-8 atomic, testable tasks.
 5. Deliver the first task of your plan test-first: RED, review, GREEN, mutant check.
 
@@ -216,7 +216,7 @@ Give the agent what a new colleague would need. *You hire a talented junior: no 
 
 **Plan agent, then build agent (Shift+Tab switches; opencode shows which is active).** *plan* thinks: reads, analyses, proposes, can ask you questions, does not edit your files. *build* does: all tools enabled, edits files, runs commands, follows the plan you approved. Workflow: Shift+Tab → plan, describe the whole feature and its constraints → review (files, order, tests included?) → push back ("tests first", "split this step") → Shift+Tab → build, "implement step 1 only" → `git diff`, tests, commit, then the next step. Plan first when the task touches 2+ files or needs a where/how decision; a typo? just build.
 
-**The todo list.** On multi-step work the agent writes a todo list and ticks items as it goes: see where it is, stop it as soon as it drifts (Esc), check nothing was skipped before you commit. Ticked is not done — **done = tests green + diff reviewed**.
+**The agent saying done ≠ done.** On multi-step work, watch what the agent does: stop it as soon as it drifts (Esc), and check nothing was skipped before you commit. Its "done" is a claim — **done = tests green + diff reviewed**.
 
 **MCP and Context7.** MCP (Model Context Protocol) is an open standard to plug tools into the agent (docs, database, browser). Each server lists its tools; opencode sends their descriptions to the model, the model **chooses** one, opencode runs it (after your permission settings) and returns the result. Servers are declared under `mcp.servers` in `opencode.json`. Every tool description is sent with every request, used or not: enable few. Context7 gives live documentation instead of stale memory — the model learned old APIs and React Router 7 moves fast. Add it with one command in the project folder (no hand-written JSON):
 
@@ -247,13 +247,13 @@ Check: restart opencode, the sidebar shows context7 *Connected*; in a prompt, sa
 
 **2. Context.** *Goal:* compare a vague prompt with a precise one. *Steps:* `/new`, "How are tests organised here?" — note the answer; `/new`, "How are tests organised here? Answer from @package.json." (`AGENTS.md` is loaded in both runs: only `@package.json` makes the difference); `!npm run test:run` (the `!` runs a shell command; its output joins the conversation); "Summarise the test results in two lines." *Done when:* it quotes the test command and folder from the files. *Mid-point (2 min):* the vague answer is noted.
 
-**3. Plan.** *Goal:* a reviewed plan, no code. *Steps:* no context7 yet? `opencode mcp add context7 --url https://mcp.context7.com/mcp` (*or ask opencode, build agent:* "Give me the command to add the Context7 MCP server (https://mcp.context7.com/mcp) to this project, then run it." — read the server address before you allow it); restart opencode (needed either way: servers load at start) (the sidebar shows context7 *Connected*?); Shift+Tab → plan: "Plan a /budgets page. Use context7 for React Router 7. Tests first."; read the plan and its todo list, push back once; **do not build** — your real plan comes at 11:00. *Done when:* the plan names files and tests, and a Context7 call appears. *Mid-point (2 min):* context7 shows as connected.
+**3. Plan.** *Goal:* a reviewed plan, no code. *Steps:* no context7 yet? `opencode mcp add context7 --url https://mcp.context7.com/mcp` (*or ask opencode, build agent:* "Give me the command to add the Context7 MCP server (https://mcp.context7.com/mcp) to this project, then run it." — read the server address before you allow it); restart opencode (needed either way: servers load at start) (the sidebar shows context7 *Connected*?); Shift+Tab → plan: "Plan a /budgets page. Use context7 for React Router 7. Tests first."; read the plan, push back once; **do not build** — your real plan comes at 11:00. *Done when:* the plan names files and tests, and a Context7 call appears. *Mid-point (2 min):* context7 shows as connected.
 
 **If stuck (all three):** your tutor window, then raise your hand.
 
 **Debrief (5 min):** What changed in the answers once `AGENTS.md` and `@files` were there? What did the plan agent ask you — and what did you push back on? Compare plans with your neighbour: same files? same tests? why not?
 
-**To remember:** structure + `AGENTS.md` = your standing prompt; context is finite (`@` the right files, no secrets, `/new` per task); Shift+Tab: plan first, build second; the agent's todo ticked ≠ done (opencode's own list, not `docs/plan.md`); MCP adds tools, Context7 adds live docs.
+**To remember:** structure + `AGENTS.md` = your standing prompt; context is finite (`@` the right files, no secrets, `/new` per task); Shift+Tab: plan first, build second; the agent saying done ≠ done: run the tests and read the diff; MCP adds tools, Context7 adds live docs.
 
 ### Frequent errors
 
@@ -273,7 +273,7 @@ Check: restart opencode, the sidebar shows context7 *Connected*; in a prompt, sa
 
 ### Links
 
-GSE-One: `§ 1.1 — Coding Agents and Plugin Architecture` (where `AGENTS.md` fits). Glossary: AGENTS.md, context window, `@file`, plan agent, build agent, todo list, MCP, Context7.
+GSE-One: `§ 1.1 — Coding Agents and Plugin Architecture` (where `AGENTS.md` fits). Glossary: AGENTS.md, context window, `@file`, plan agent, build agent, MCP, Context7.
 
 ## Technical planning workshop
 
