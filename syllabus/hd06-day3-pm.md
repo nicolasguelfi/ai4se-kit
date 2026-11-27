@@ -29,6 +29,7 @@ At the end of this half-day you can:
 GSE-One is installed **per project**: the same command as on day 1, run inside your CalcApp folder this time.
 
 ```bash
+~/ai4se/ai4se-kit/tutor update   # it prints a fix: line for GSE-One? run that line first
 cd ~/ai4se/calcapp && git switch -c chore/gse-one main
 curl -fsSL https://raw.githubusercontent.com/nicolasguelfi/gensem/v0.93.5/install.sh \
   | GSE_PLATFORM=opencode GSE_VERSION=v0.93.5 sh
