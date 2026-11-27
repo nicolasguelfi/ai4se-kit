@@ -29,14 +29,14 @@ At the end of this half-day you can:
 
 ### Key ideas
 
-**Re-orientation (13:15) after lunch:**
+**Back from lunch: 4 checks (13:15):**
 
 1. Go to your project and run `cd ~/ai4se/calcapp && git status`. It must say that you are on the branch `mywork` and that there is nothing to commit.
 2. Run `npm run test:run`. The tests of Part 1 must still pass.
 3. Run `npm run dev` and open the address it prints. The app must show in the browser.
 4. Start opencode and ask: "Read @docs/plan.md: which task is marked [next]?"
 
-*Or ask opencode:* "Give me the commands to check that git status is clean on mywork and that the tests pass, then run them, and tell me which task of @docs/plan.md is marked [next]." (`npm run dev` stays in a terminal: it does not stop.) One check fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, task T1 done, tests green):
+*Or ask opencode:* "Give me the commands to check that git status is clean on mywork and that the tests pass, then run them, and tell me which task of @docs/plan.md is marked [next]." (`npm run dev` stays in a terminal: it does not stop.) One of the 4 checks fails and you cannot fix it in 5 minutes? Catch up from the tag `j2-part1` (end of part 1, task T1 done, tests green):
 
 ```bash
 cd ~/ai4se
