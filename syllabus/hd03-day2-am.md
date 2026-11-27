@@ -59,9 +59,10 @@ cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 TAG=j2-start                  # the tag your half-day sheet names
 cd calcapp-restart && git checkout -b mywork "$TAG" && npm ci
+cd ~/ai4se && mv calcapp calcapp-old && mv calcapp-restart calcapp   # opencode closed
 ```
 
-Your first copy `~/ai4se/calcapp` stays untouched. Always clone inside `~/ai4se` so your tutor window can read it.
+Quit opencode first; afterwards every command of the sheets works as written, your old work stays in `~/ai4se/calcapp-old` (second restart: name it `calcapp-old2`). Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode`. Always clone inside `~/ai4se` so your tutor window can read it.
 
 **`npm ci` warnings are normal.** `npm warn deprecated …` and « N moderate severity vulnerabilities » come with the starter's dependencies: do **not** run `npm audit fix` during the course (it rewrites `package-lock.json`). « npm warn install-scripts … esbuild … not yet covered by allowScripts » is harmless too: the tests and the build work. Only if an esbuild error appears one day, run:
 
@@ -494,9 +495,10 @@ Review the test: are the import paths correct? Does it find the inputs by their 
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 cd calcapp-restart && git checkout -b mywork j2-start && git merge origin/main && npm ci
+cd ~/ai4se && mv calcapp calcapp-old && mv calcapp-restart calcapp   # opencode closed
 ```
 
-Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, commit them, restart at step 1. Your old work stays in `~/ai4se/calcapp`; from now on, run opencode in `calcapp-restart`.
+Quit opencode first; afterwards every command of the sheets works as written, your old work stays in `~/ai4se/calcapp-old` (second restart: name it `calcapp-old2`). Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode` and restart at step 1.
 
 **Finished early?** Start task 2 of your plan, with the same steps.
 
