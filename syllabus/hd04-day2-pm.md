@@ -42,10 +42,11 @@ At the end of this half-day you can:
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 cd calcapp-restart && git checkout -b mywork j2-part1 && git merge --no-edit origin/main && npm ci
-cd ~/ai4se && mv calcapp calcapp-old && mv calcapp-restart calcapp   # opencode closed
+# first quit opencode and stop npm run dev, then:
+cd ~/ai4se && test ! -e calcapp-old && mv calcapp calcapp-old && mv calcapp-restart calcapp
 ```
 
-Quit opencode first; afterwards every command of the sheets works as written, your old work stays in `~/ai4se/calcapp-old` (second restart: name it `calcapp-old2`). Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode`. In your `docs/plan.md`, mark `[done]` the tasks `git log --oneline` already shows, mark the first one left `[next]`, continue with it. A recovery tag is a safety net, not a failure.
+Afterwards every command of the sheets works as written, and your old work stays in `~/ai4se/calcapp-old`. If `~/ai4se/calcapp-old` already exists (a second restart), the last line stops without moving anything: raise your hand. Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode`. In your `docs/plan.md`, mark `[done]` the tasks `git log --oneline` already shows, mark the first one left `[next]`, continue with it. A recovery tag is a safety net, not a failure.
 
 **Same loop, every task:**
 

@@ -217,7 +217,7 @@ readable project and precise context; plan before building; build test-first.
 `git restore` · `git log --oneline` · `git branch` · in opencode: Shift+Tab, `@file`, `/init`.
 
 **Recovery tag(s).** `j2-start` (start of the day). Restart:
-`cd ~/ai4se && git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart && cd calcapp-restart && git checkout -b mywork j2-start && git merge origin/main && npm ci && cd ~/ai4se && mv calcapp calcapp-old && mv calcapp-restart calcapp` (opencode closed; your old work stays in `~/ai4se/calcapp-old`).
+`cd ~/ai4se && git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart && cd calcapp-restart && git checkout -b mywork j2-start && git merge origin/main && npm ci && cd ~/ai4se && test ! -e calcapp-old && mv calcapp calcapp-old && mv calcapp-restart calcapp` (first quit opencode and stop `npm run dev`; your old work stays in `~/ai4se/calcapp-old`; if that folder already exists, the line stops: raise your hand).
 If your plan does not work out, the starter has a fallback example: `docs/plan-example.md`.
 
 **Sheet.** [`hd03-day2-am.md`](hd03-day2-am.md) (available).

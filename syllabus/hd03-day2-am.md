@@ -59,10 +59,11 @@ cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 TAG=j2-start                  # the tag your half-day sheet names
 cd calcapp-restart && git checkout -b mywork "$TAG" && npm ci
-cd ~/ai4se && mv calcapp calcapp-old && mv calcapp-restart calcapp   # opencode closed
+# first quit opencode and stop npm run dev, then:
+cd ~/ai4se && test ! -e calcapp-old && mv calcapp calcapp-old && mv calcapp-restart calcapp
 ```
 
-Quit opencode first; afterwards every command of the sheets works as written, your old work stays in `~/ai4se/calcapp-old` (second restart: name it `calcapp-old2`). Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode`. Always clone inside `~/ai4se` so your tutor window can read it.
+Afterwards every command of the sheets works as written, and your old work stays in `~/ai4se/calcapp-old`. If `~/ai4se/calcapp-old` already exists (a second restart), the last line stops without moving anything: raise your hand. Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode`. Always clone inside `~/ai4se` so your tutor window can read it.
 
 **`npm ci` warnings are normal.** `npm warn deprecated …` and « N moderate severity vulnerabilities » come with the starter's dependencies: do **not** run `npm audit fix` during the course (it rewrites `package-lock.json`). « npm warn install-scripts … esbuild … not yet covered by allowScripts » is harmless too: the tests and the build work. Only if an esbuild error appears one day, run:
 
@@ -495,10 +496,11 @@ Review the test: are the import paths correct? Does it find the inputs by their 
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 cd calcapp-restart && git checkout -b mywork j2-start && git merge origin/main && npm ci
-cd ~/ai4se && mv calcapp calcapp-old && mv calcapp-restart calcapp   # opencode closed
+# first quit opencode and stop npm run dev, then:
+cd ~/ai4se && test ! -e calcapp-old && mv calcapp calcapp-old && mv calcapp-restart calcapp
 ```
 
-Quit opencode first; afterwards every command of the sheets works as written, your old work stays in `~/ai4se/calcapp-old` (second restart: name it `calcapp-old2`). Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode` and restart at step 1.
+Afterwards every command of the sheets works as written, and your old work stays in `~/ai4se/calcapp-old`. If `~/ai4se/calcapp-old` already exists (a second restart), the last line stops without moving anything: raise your hand. Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode` and restart at step 1.
 
 **Finished early?** Start task 2 of your plan, with the same steps.
 

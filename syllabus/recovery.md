@@ -18,10 +18,11 @@ git checkout -b mywork j2-part1
 git merge --no-edit origin/main   # j2-start and j2-part1 only: see below
 npm ci
 npm run test:run
-cd ~/ai4se && mv calcapp calcapp-old && mv calcapp-restart calcapp   # opencode closed
+# first quit opencode and stop npm run dev, then:
+cd ~/ai4se && test ! -e calcapp-old && mv calcapp calcapp-old && mv calcapp-restart calcapp
 ```
 
-Quit opencode first; afterwards every command of the sheets works as written, your old work stays in `~/ai4se/calcapp-old` (second restart: name it `calcapp-old2`). Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode`.
+Afterwards every command of the sheets works as written, and your old work stays in `~/ai4se/calcapp-old`. If `~/ai4se/calcapp-old` already exists (a second restart), the last line stops without moving anything: raise your hand. Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp-old`, commit them, then `cd ~/ai4se/calcapp && opencode`.
 
 **Why the tag in `git checkout -b mywork j2-part1`.** Every commit has an identifier (e.g. `6225c63`); a tag is a readable name fixed on one commit (`j2-part1` is `6225c63`, it never moves), while a branch is a name that moves forward with each new commit. Without a starting point, a new branch starts at the current commit (HEAD): right after the clone, the latest commit of `main`, not the checkpoint you need. `git checkout j2-part1` alone (without `-b`) puts you on no branch (« detached HEAD »): commits made there belong to no branch and can be lost. Newer equivalent: `git switch -c mywork j2-part1`.
 
