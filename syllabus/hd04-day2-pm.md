@@ -58,9 +58,11 @@ Afterwards every command of the sheets works as written, and your old work stays
 6. Review the agent's code with the checklists below.
 7. When all the tests pass, merge the branch into `mywork`. In `docs/plan.md`, mark the task `[done]` and the next one `[next]`.
 
-The usual order is routing, then data, then UI — but follow the order of your plan.
+**The next tasks of your plan.** Follow the order of your plan: the task marked `[next]` first. A task missing from your plan? Plan agent (Shift+Tab): add it to `docs/plan.md`, then commit `docs: plan update`.
 
-**Task — routing and navigation.** Two pages: the Dashboard at `/` (the expenses and their total) and Add Expense at `/add` (the form).
+The prompts below are examples, taken from the reference plan (`docs/plan.md` at the tag `j2-v0.1`, tasks T1 to T8): adapt them to the tasks of your own plan.
+
+**Example prompts — two pages (T4).** Two pages: the Dashboard at `/` (the expenses and their total) and Add Expense at `/add` (the form).
 
 ```text
 RED:   Write a failing test in tests/App.test.tsx: render `routes` from
@@ -75,27 +77,25 @@ GREEN: Make it pass with react-router (NOT react-router-dom): export `routes`
 
 *Review checklist:* Does `package.json` use `react-router`, and not `react-router-dom`? · Do the pages link with `Link` rather than `<a href>`, so the page does not fully reload? · Is there one file per page in `src/pages/`? · Is the test unchanged? Run `git diff HEAD -- tests/`: it must show nothing. · Run `npm run dev`: do both links work, and does the browser's back button work? *Trust, but verify* — you will need this habit at 14:30.
 
-**Task — data layer.** The `Expense` type goes in `src/expense.ts`; saving and loading go in `src/storage.ts`. Keeping the data in the browser (localStorage) is enough for v0.1. The RED test is an *integration test*: several parts tested together (router, pages, storage), unlike the morning's one-component test.
+**Example prompts — save and load (T3).** The `Expense` type is in `src/expense.ts`; saving and loading go in `src/storage.ts`. Keeping the data in the browser (localStorage) is enough for v0.1.
 
 ```text
-RED:   Write a failing integration test: `routes` in a memory router at "/add",
-       fill amount 42.50, category Food, description Lunch (fireEvent),
-       click the form's "Add Expense" button, then expect the Dashboard to
-       contain "42.50" and "Food".
-       Clear localStorage before each test. Test only.
-GREEN: Make it pass: Expense type; getExpenses/saveExpenses in storage.ts
-       (localStorage key "calcapp-data"); Dashboard lists the expenses with
-       a total; AddExpense saves, then navigates to "/" with useNavigate.
-       Do not change what the test checks.
+RED:   Write a failing test in tests/storage.test.ts: loadExpenses()
+       returns exactly what saveExpenses() wrote, and [] for a missing key
+       or corrupt JSON. In tests/setup.ts, add an afterEach that clears
+       localStorage and restores mocks. Test only.
+GREEN: Make it pass: saveExpenses / loadExpenses in src/storage.ts, one
+       localStorage key "calcapp.expenses", JSON inside; reuse the Expense
+       type of src/expense.ts. Do not change what the test checks.
 ```
 
-*Review checklist:* Are the types in `src/expense.ts`, with no `any`? · Does the storage really use localStorage, and not only React state? · Is each form input « controlled »: its value comes from the state and `onChange` updates it? · After Add, does the app go back to `/` with `useNavigate`? · Refresh the browser: is your expense still there?
+*Review checklist — storage, form, add flow* (each check names its task of the reference plan): T3 — Are the types in `src/expense.ts`, with no `any`? · T3 — Does the storage really use localStorage, and not only React state? · T5 — Is each form input « controlled »: its value comes from the state and `onChange` updates it? · T6 — After Add, does the app go back to `/` with `useNavigate`? · T6 — Refresh the browser: is your expense still there?
 
-**Task — minimal UI (10 min max).** Target: readable and functional, not production-ready. Pure styling has no test: the rule is *the tests stay green*.
+**Example prompt — styling task** (only if your plan has one; 10 min max). Target: readable and functional, not production-ready. Pure styling has no test: the rule is *the tests stay green*.
 
 ```text
 Add minimal plain CSS in src/App.css: horizontal nav bar, Dashboard
-list (description, category, amount, date) with a total, labelled
+list (category, amount, date) with a total, labelled
 form fields with spacing, centred layout with a max-width.
 No animations, no CSS library. Keep all tests green.
 ```
@@ -120,16 +120,16 @@ No animations, no CSS library. Keep all tests green.
 5. When all tests pass, merge the branch into `mywork`. In `docs/plan.md`, change this task's label to `[done]` and the next task's label to `[next]`.
    *Or ask opencode:* "Merge the [next] task's branch into mywork; in docs/plan.md mark it [done], the next one [next]; commit as 'docs: update plan labels'."
 
-Your plan's wording is unclear? Use the ready-made prompts above.
+Your plan's wording is unclear? Adapt the example prompts above.
 
-**Done when:** `npm run test:run` shows at least 4 passing tests; the app has two pages; an added expense survives a browser refresh.
-*Or ask opencode:* "Give me the command to run the tests and count the passing ones, then run it." (the two pages and the refresh: check them in the browser)
+**Done when:** `npm run test:run` is green; every task you merged is `[done]` in `docs/plan.md` and the next one is `[next]`.
+*Or ask opencode:* "Give me the command to run the tests, then run it; then list the labels of @docs/plan.md."
 
-**Mid-point (13:55):** your routing task is merged into `mywork`. Not yet? Ask now.
+**Mid-point (13:55):** your first Part-2 task is merged into `mywork`. Not yet? Ask now.
 
 **If stuck:** (1) your tutor window; (2) recovery tag `j2-part1`; (3) raise your hand.
 
-**Finished early?** Add one more task — delete an expense (the `onDelete` handler) — with the same steps.
+**Finished early?** Take the next `[todo]` task of your plan, with the same steps.
 
 **Did not finish?** v0.1 need not be complete to be reviewed: you review what you have. Merge the branches whose tests pass; leave aside a branch whose tests fail (*or ask opencode:* "Give me the git commands to merge into mywork only my task branches whose tests pass, then run them."). Your app is broken? Restart from the tag `j2-part1` (catch-up above), or from `j2-v0.1` to review the reference code. Then `npm run test:run` and `npm run dev` must both work (*or ask opencode:* "Give me the command to run the tests, then run it."). Being behind on code must never block the learning: 14:30 is about review.
 
@@ -253,7 +253,7 @@ GSE-One: `~/ai4se/gensem/gse-one-spec.md § 3.7 — Quality` (`/gse-review`, `/g
 
 ### Key ideas — living docs, the 80/20 rule
 
-The agent writes the WHAT (80 %): stack, install and run, scripts, structure, feature list. You write the WHY (20 %): why this design, known limits, trade-offs you accepted. Agent: "saveExpenses stores the list under `calcapp-data`." You: "localStorage on purpose: v0.1 is single-user and offline — no backend until the plan needs one."
+The agent writes the WHAT (80 %): stack, install and run, scripts, structure, feature list. You write the WHY (20 %): why this design, known limits, trade-offs you accepted. Agent: "saveExpenses stores the list under `calcapp.expenses`." You: "localStorage on purpose: v0.1 is single-user and offline — no backend until the plan needs one."
 
 ### Exercise — README 80/20 (15:50 → 16:05, 15 min)
 
@@ -299,7 +299,7 @@ git log --oneline --graph --decorate -10
 
 **If stuck:** (1) your tutor window; (2) tag `j2-v0.1`, then `git tag v0.1` on it; (3) raise your hand.
 
-**v0.1 — what you just built:** two pages with navigation; add an expense — it survives a refresh; 4+ tests, each written *before* its code; a review with triage, fixes and one reasoned refusal; a README with *your* Why; a tag `v0.1`. You drove, the agent typed. That is VibeEngineering.
+**v0.1 — what you just built:** the tasks of your plan, one branch each, every test written *before* its code; a review with triage, fixes and one reasoned refusal; a README with *your* Why; a tag `v0.1`. You drove, the agent typed. That is VibeEngineering.
 
 ### Links
 

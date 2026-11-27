@@ -230,7 +230,7 @@ If your plan does not work out, the starter has a fallback example: `docs/plan-e
 
 | Time | Session |
 |---|---|
-| 13:15 | **CalcApp v0.1, part 2**: next tasks of your plan (navigation, data, UI) |
+| 13:15 | **CalcApp v0.1, part 2**: the next tasks of your plan |
 | 14:30 | **AI code review**: what the AI sees and misses, review size, HIGH / MEDIUM / LOW triage |
 | 15:15 | **Review of the day's diff**: AI review, triage, chosen fixes, README 80/20 |
 | 16:15 | **Ship v0.1**: merge, tag `v0.1` |
