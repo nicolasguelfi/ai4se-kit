@@ -141,7 +141,7 @@ git restore --staged --worktree .   # back to the checkpoint:
 ```bash
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
-cd calcapp && git checkout -b mywork j2-start && npm ci
+cd calcapp && git checkout -b mywork j2-start && git merge origin/main && npm ci
 npm run test:run              # all green?
 git switch -c feat/hello
 # change one line of README.md, then:
@@ -151,6 +151,8 @@ git add README.md && git commit -m "docs: say hello"
 BROKEN=src/App.tsx
 git restore "$BROKEN" && npm run test:run
 ```
+
+`git merge origin/main` adds the starter updates published after the tag (AGENTS.md git rules, quality kit); right after the clone it is a fast-forward.
 
 **Done when:** `git log --oneline` shows your commit on `feat/hello`, and `git status` is clean.
 
@@ -488,7 +490,7 @@ Review the test: are the import paths correct? Does it find the inputs by their 
 ```bash
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
-cd calcapp-restart && git checkout -b mywork j2-start && npm ci
+cd calcapp-restart && git checkout -b mywork j2-start && git merge origin/main && npm ci
 ```
 
 Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`, commit them, restart at step 1. Your old work stays in `~/ai4se/calcapp`; from now on, run opencode in `calcapp-restart`.

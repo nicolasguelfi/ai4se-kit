@@ -15,11 +15,26 @@ cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
 cd calcapp-restart
 git checkout -b mywork j2-part1
+git merge --no-edit origin/main   # j2-start and j2-part1 only: see below
 npm ci
 npm run test:run
 ```
 
 **Why the tag in `git checkout -b mywork j2-part1`.** Every commit has an identifier (e.g. `6225c63`); a tag is a readable name fixed on one commit (`j2-part1` is `6225c63`, it never moves), while a branch is a name that moves forward with each new commit. Without a starting point, a new branch starts at the current commit (HEAD): right after the clone, the latest commit of `main`, not the checkpoint you need. `git checkout j2-part1` alone (without `-b`) puts you on no branch (« detached HEAD »): commits made there belong to no branch and can be lost. Newer equivalent: `git switch -c mywork j2-part1`.
+
+**Already cloned? Get the starter updates and keep your work.** The starter keeps receiving fixes after its tags (for example the git rules of `AGENTS.md`). On day 2 (from `j2-start` or `j2-part1`), merge them into your branch; your own edits, `AGENTS.md` included, are kept:
+
+```sh
+cd ~/ai4se/calcapp && git fetch origin && git merge --no-edit origin/main && npm ci && npm run test:run
+```
+
+From `j2-v0.1` and `p3-start`, `README.md` conflicts; keep yours:
+
+```sh
+git checkout --ours README.md && git add README.md && git commit --no-edit
+```
+
+From `p5-start` on (GSE-One installed), **do not merge `origin/main`**: it conflicts on `.gitignore`, `README.md` and `eslint.config.js`, and it would rewrite the GSE-One `AGENTS.md`. Do not use `git checkout origin/main -- AGENTS.md` either: it overwrites your own `AGENTS.md`.
 
 | Tag | Use it to restart… |
 |---|---|

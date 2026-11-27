@@ -41,7 +41,7 @@ At the end of this half-day you can:
 ```bash
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp-restart
-cd calcapp-restart && git checkout -b mywork j2-part1 && npm ci
+cd calcapp-restart && git checkout -b mywork j2-part1 && git merge --no-edit origin/main && npm ci
 ```
 
 Copy back `docs/plan.md` and `AGENTS.md` from `~/ai4se/calcapp`. In your `docs/plan.md`, mark `[done]` the tasks `git log --oneline` already shows, mark the first one left `[next]`, continue with it. A recovery tag is a safety net, not a failure.
