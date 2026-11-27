@@ -489,7 +489,7 @@ Do NOT implement it. Run npm run test:run.
 
 Review the test: are the import paths correct? Does it find the inputs by their label? Does it check the behaviour you want? GREEN: "Implement the minimal ExpenseForm (default export) that passes tests/components/ExpenseForm.test.tsx. Do not change what the test checks." Mutant: remove the `parseFloat` on the amount.
 
-**If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup. Only to catch up: a second copy in a new folder; your first copy (`~/ai4se/calcapp`) stays untouched.
+**If stuck:** (1) your tutor window; (2) recovery tag `j2-start`; (3) raise your hand. **Lost 15+ minutes? Rescue** — don't fight a broken setup. Only to catch up: a fresh copy that becomes `~/ai4se/calcapp`; your first copy is kept as `~/ai4se/calcapp-old`.
 
 ```bash
 cd ~/ai4se
