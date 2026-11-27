@@ -139,6 +139,7 @@ git restore --staged --worktree .   # back to the checkpoint:
 **Steps:**
 
 ```bash
+~/ai4se/ai4se-kit/tutor update   # first: today's notes; then reopen the tutor window
 cd ~/ai4se
 git clone https://github.com/nicolasguelfi/calcapp-starter calcapp
 cd calcapp && git checkout -b mywork j2-start && git merge origin/main && npm ci
@@ -151,6 +152,8 @@ git add README.md && git commit -m "docs: say hello"
 BROKEN=src/App.tsx
 git restore "$BROKEN" && npm run test:run
 ```
+
+Then close the tutor window (`/exit` or Ctrl+C) and open it again with `~/ai4se/ai4se-kit/tutor`: opencode reads the notes when a session starts; without it, the tutor gives yesterday's recipes.
 
 `git merge origin/main` adds the starter updates published after the tag (AGENTS.md git rules, quality kit); right after the clone it is a fast-forward.
 
